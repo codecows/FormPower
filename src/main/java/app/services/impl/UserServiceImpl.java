@@ -17,8 +17,10 @@ public class UserServiceImpl implements UserService {
     @Resource
     private UserConverter userConverter;
 
-    public User getUser() {
-        return null;
+    public User getUser(String userId) {
+        UserEntity userEntities = userMappper.get(userId);
+        User user = userConverter.convert2Model(userEntities);
+        return user;
     }
 
     public List<User> getUsers() {
@@ -27,19 +29,22 @@ public class UserServiceImpl implements UserService {
         return users;
     }
 
+    //分页集合
     public List<User> getUsersByPage(int pageSize, int pageNum) {
         return null;
     }
 
     public void AddUser(User user) {
-
+        UserEntity userEntity = userConverter.convert2Entity(user);
+        userMappper.add(userEntity);
     }
 
     public void DelUser(String userId) {
-
+        userMappper.delete(userId);
     }
 
     public void UpdateUser(User user) {
-
+        UserEntity userEntity = userConverter.convert2Entity(user);
+        userMappper.udpate(userEntity);
     }
 }

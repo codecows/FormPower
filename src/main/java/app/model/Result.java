@@ -9,6 +9,18 @@ public class Result<T> {
 
     private T data;
 
+    public Result() {
+    }
+
+    public Result(ResponseCode code) {
+        this(code, code.getMessage());
+    }
+
+    public Result(ResponseCode code, String message) {
+        this.code = code;
+        this.message = message;
+    }
+
     public ResponseCode getCode() {
         return code;
     }

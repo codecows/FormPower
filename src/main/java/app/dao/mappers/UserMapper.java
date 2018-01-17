@@ -1,9 +1,7 @@
 package app.dao.mappers;
 
 import app.dao.entities.UserEntity;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -22,5 +20,14 @@ public interface UserMapper {
             @Result(property = "uname", column = "uname"),
 
     })
-    List<UserEntity> get(String userId);
+    UserEntity get(String userId);
+
+    @Insert("INSERT INTO users (uid,uname) VALUES (${uid},${uname})")
+    void add(UserEntity userEntity);
+
+    @Update("UPDATE users SET uid=#{uid},uname=#{uname} WHERE uid=#{uid};")
+    void udpate(UserEntity userEntity);
+
+    @Delete("DELETE FROM users WHERE uid=#{userId};")
+    void delete(String userId);
 }

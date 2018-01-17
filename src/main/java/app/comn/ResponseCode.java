@@ -12,21 +12,13 @@ public enum ResponseCode {
     private String message;
     private int code;
 
-    public String getName() {
+    public String getMessage() {
         return message;
     }
 
-    public void setName(String name) {
-        this.message = name;
-    }
-
     @JsonValue
-    public int getValue() {
+    public int getCode() {
         return code;
-    }
-
-    public void setValue(int value) {
-        this.code = value;
     }
 
     // 构造方法
@@ -36,9 +28,9 @@ public enum ResponseCode {
     }
 
     // 普通方法
-    public static String getName(int value) {
+    public static String getMessage(int value) {
         for (ResponseCode p : ResponseCode.values()) {
-            if (p.getValue() == value) {
+            if (p.getCode() == value) {
                 return p.message;
             }
         }

@@ -5,7 +5,7 @@ import app.model.User;
 import java.util.List;
 
 public interface UserService {
-    User getUser();
+    User getUser(String userId);
 
     List<User> getUsers();
 
