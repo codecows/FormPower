@@ -6,7 +6,8 @@ public enum ResponseCode {
 
     Success(200,"成功"),
     Unauthorized(300,"没有权限"),
-    Etc(900,"其它原因"),;
+    UserExist(1000, "用户已经存在"),
+    Etc(9999,"其它原因"),;
 
     // 成员变量
     private String message;

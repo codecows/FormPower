@@ -1,5 +1,6 @@
 package app.services;
 
+import app.comn.ServiceException;
 import app.model.User;
 
 import java.util.List;
@@ -11,9 +12,11 @@ public interface UserService {
 
     List<User> getUsersByPage(int pageSize, int pageNum);
 
-    void AddUser(User user);
+    void addUser(User user) throws ServiceException;
 
-    void DelUser(String userId);
+    void delUser(String userId);
 
-    void UpdateUser(User user);
+    void updateUser(User user);
+
+    boolean exist(String userId);
 }

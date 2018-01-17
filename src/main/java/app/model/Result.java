@@ -17,8 +17,17 @@ public class Result<T> {
     }
 
     public Result(ResponseCode code, String message) {
+        this(code, code.getMessage(), null);
+    }
+
+    public Result(ResponseCode code, T data) {
+        this(code, code.getMessage(), data);
+    }
+
+    public Result(ResponseCode code, String message, T data) {
         this.code = code;
         this.message = message;
+        this.data = data;
     }
 
     public ResponseCode getCode() {

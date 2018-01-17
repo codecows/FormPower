@@ -22,7 +22,7 @@ public interface UserMapper {
     })
     UserEntity get(String userId);
 
-    @Insert("INSERT INTO users (uid,uname) VALUES (${uid},${uname})")
+    @Insert("INSERT INTO users (uid,uname) VALUES (#{uid},#{uname})")
     void add(UserEntity userEntity);
 
     @Update("UPDATE users SET uid=#{uid},uname=#{uname} WHERE uid=#{uid};")

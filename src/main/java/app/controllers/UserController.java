@@ -1,6 +1,8 @@
 package app.controllers;
 
 import app.comn.ResponseCode;
+import app.comn.ServiceException;
+import app.comn.TestConstant;
 import app.model.Result;
 import app.model.User;
 import app.services.UserService;
@@ -34,34 +36,31 @@ public class UserController {
             response = User.class)
     @RequestMapping(path = "getUsers", method = GET)
     public Result<List<User>> getUsers() {
-        Result<List<User>> result = new Result<>(ResponseCode.Success);
-        result.setData(userService.getUsers());
-        return result;
+        return new Result<>(ResponseCode.Success, userService.getUsers());
     }
 
     @ApiOperation(value = "新增用户", notes = "新增用户")
     @RequestMapping(path = "addUser", method = POST)
     public Result<Integer> addUser(@RequestBody User user) {
-        Result<Integer> result = new Result<>(ResponseCode.Success);
-        result.setMessage(ResponseCode.Success.getMessage());
-        userService.AddUser(user);
-        return result;
+        try {
+            userService.addUser(user);
+        } catch (ServiceException e) {
+            return new Result<>(e.getResponseCode());
+        }
+        return new Result<>(ResponseCode.Success);
     }
 
     @ApiOperation(value = "修改用户信息", notes = "修改用户信息")
     @RequestMapping(path = "updateUser", method = PUT)
     public Result<Integer> updateUser(@RequestBody User user) {
-        Result<Integer> result = new Result<>(ResponseCode.Success);
-        result.setMessage(ResponseCode.Success.getMessage());
-        //TODO 未完
-        return result;
+        userService.updateUser(user);
+        return new Result<>(ResponseCode.Success);
     }
 
     @ApiOperation(value = "删除用户", notes = "删除用户")
     @RequestMapping(path = "delUser", method = DELETE)
     public Result<Integer> delUser(@RequestBody String userId) {
-        Result<Integer> result = new Result<>(ResponseCode.Success);
-        result.setMessage(ResponseCode.Success.getMessage());
-        return result;
+        userService.delUser(userId);
+        return new Result<>(ResponseCode.Success);
     }
 }
