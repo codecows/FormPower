@@ -26,8 +26,8 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping(path = "getUser/{userId}", method = GET)
-    public List<User> getUser(@PathVariable String userId) {
-        return userService.getUsers();
+    public Result<User> getUser(@PathVariable String userId) {
+        return new Result<>(ResponseCode.Success, userService.getUser(userId));
     }
 
     @ApiOperation(value = "获取所有用户",
