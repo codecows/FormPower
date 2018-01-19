@@ -26,8 +26,7 @@ public class UserController {
     private UserService userService;
 
     @ApiOperation(value = "按UID查找用户信息",
-                            notes = "按UID查找用户信息",
-            response = User.class)
+                            notes = "按UID查找用户信息")
     @RequestMapping(path = "getUser/{userId}", method = GET)
     public Result<User> getUser(@PathVariable String userId) {
         return new Result<>(ResponseCode.Success, userService.getUser(userId));
