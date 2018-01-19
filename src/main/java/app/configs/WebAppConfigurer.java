@@ -9,17 +9,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 public class WebAppConfigurer extends WebMvcConfigurerAdapter {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        // 多个拦截器组成一个拦截器链
-        // addPathPatterns 用于添加拦截规则
-        // excludePathPatterns 用户排除拦截
-//        registry.addInterceptor(new CustomerInterceptor())
-//                .addPathPatterns("/**")
-//                .excludePathPatterns("/user/**")
-//                .excludePathPatterns("/test/**")
-//                .excludePathPatterns("/error/**");
         registry.addInterceptor(new CustomerInterceptor())
                 .addPathPatterns("/**")
-                .excludePathPatterns("/swagger-resources/**");;
+                .excludePathPatterns("/error/**")
+                .excludePathPatterns("/swagger-resources/**");
         super.addInterceptors(registry);
     }
 
