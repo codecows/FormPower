@@ -10,6 +10,11 @@ public class User {
     @ApiModelProperty("用户名")
     private String uname;
 
+    @ApiModelProperty("部门名称")
+    private String department;
+    @ApiModelProperty("描述信息")
+    private String comment;
+
     public String getUid() {
         return uid;
     }
@@ -24,5 +29,21 @@ public class User {
 
     public void setUname(String uname) {
         this.uname = uname;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 }

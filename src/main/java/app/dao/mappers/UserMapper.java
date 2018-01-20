@@ -6,19 +6,21 @@ import org.apache.ibatis.annotations.*;
 import java.util.List;
 
 public interface UserMapper {
-    @Select("SELECT uid,uname FROM users")
+    @Select("SELECT uid,uname,department,comment FROM users")
     @Results({
             @Result(property = "uid", column = "uid"),
             @Result(property = "uname", column = "uname"),
-
+            @Result(property = "department",column = "department"),
+            @Result(property = "comment",column = "comment"),
     })
     List<UserEntity> getList();
 
-    @Select("SELECT uid,uname FROM users WHERE uid=#{userId};")
+    @Select("SELECT uid,uname,department,comment FROM users WHERE uid=#{userId};")
     @Results({
             @Result(property = "uid", column = "uid"),
             @Result(property = "uname", column = "uname"),
-
+            @Result(property = "department",column = "department"),
+            @Result(property = "comment",column = "comment"),
     })
     UserEntity get(String userId);
 
