@@ -33,15 +33,13 @@ public class SwaggerConfig {
                 .modelRef(new ModelRef("string"))
                 .parameterType("header")
                 .required(true)
-                .defaultValue(TestConstant.TEST_USER_ID)
-                .build();
+                .defaultValue(TestConstant.TEST_USER_ID);
         tokenPar.name("x-access-token")
                 .description("令牌")
                 .modelRef(new ModelRef("string"))
                 .parameterType("header")
                 .required(true)
-                .defaultValue(JwtUtil.getToken(TestConstant.TEST_USER_ID))
-                .build();
+                .defaultValue(JwtUtil.getToken(TestConstant.TEST_USER_ID));
         pars.add(tokenPar.build());
         pars.add(userPar.build());
 
