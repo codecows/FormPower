@@ -23,7 +23,7 @@ public interface UserMapper {
             @Result(property = "comment",column = "comment"),
     })
     UserEntity get(String userId);
-
+//TODO 有BUG
     @Insert("INSERT INTO users (uid,uname) VALUES (#{uid},#{uname})")
     void add(UserEntity userEntity);
 
