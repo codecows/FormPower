@@ -4,6 +4,7 @@ import app.dao.entities.SysMenus;
 import app.dao.entities.SysMenusExample;
 import app.dao.mappers.SysMenusMapper;
 import app.model.User;
+import app.services.MenuService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,5 +31,16 @@ public class MenuController {
 
         List<SysMenus> sysMenus = sysMenusMapper.selectByExample(new SysMenusExample());
         return sysMenus;
+    }
+
+    @Resource
+    private MenuService menuService;
+
+    //TODO 测试事务处理i
+    @RequestMapping(path = "addMenus", method = GET)
+    public int addMenuTest() {
+
+        int i = menuService.addMenu();
+        return i;
     }
 }
