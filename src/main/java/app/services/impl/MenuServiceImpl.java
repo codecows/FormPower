@@ -7,9 +7,6 @@ import app.services.MenuService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -19,13 +16,6 @@ public class MenuServiceImpl<Menu>  implements MenuService<Menu> {
     private final static Logger logger = LoggerFactory.getLogger(MenuServiceImpl.class);
     @Resource
     private SysMenusMapper menusMapper;
-
-    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT, timeout = 36000, rollbackFor = Exception.class)
-    @Override
-    public int addMenu() {
-
-        return 1;
-    }
 
     @Override
     public Menu getItem(String key) {
@@ -92,4 +82,5 @@ public class MenuServiceImpl<Menu>  implements MenuService<Menu> {
     public boolean exist(String key) {
         return false;
     }
+
 }
