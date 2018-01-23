@@ -1,5 +1,5 @@
 package app.services;
 
-public interface MenuService {
+public interface MenuService<Menu> extends BaseService<Menu> {
     int addMenu();
 }
