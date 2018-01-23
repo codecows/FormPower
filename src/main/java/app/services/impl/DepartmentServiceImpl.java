@@ -22,8 +22,6 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Resource
     private DepartmentConverter departmentConverter;
 
-    @Resource
-    private SysDepartmentExample sysDepartmentExample;
 
     @Override
     public List<Department> getDepts() {
@@ -61,7 +59,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public boolean exist(String departmentId) {
         //todo 未完成，需要学习example传参
-        sysDepartmentMapper.countByExample(sysDepartmentExample);
+//        sysDepartmentMapper.countByExample(null);
         return false;
     }
 }
