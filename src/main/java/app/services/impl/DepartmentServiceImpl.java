@@ -22,8 +22,11 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Resource
     private DepartmentConverter departmentConverter;
 
+<<<<<<< HEAD
     //@Resource todo 没有 @Component 注解的 不能 用自动注入标签 需要new
     private SysDepartmentExample sysDepartmentExample;
+=======
+>>>>>>> b7d98b4f901523cd5ef93479003e66c58bafbe4c
 
     @Override
     public List<Department> getDepts() {
@@ -61,7 +64,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public boolean exist(String departmentId) {
         //todo 未完成，需要学习example传参
-        sysDepartmentMapper.countByExample(sysDepartmentExample);
+//        sysDepartmentMapper.countByExample(null);
         return false;
     }
 }

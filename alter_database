@@ -480,11 +480,11 @@ comment on column sys_user_role_rel.type is
 
 create table sys_menus
 (
-	menuid 								varchar(20) not null,
-	menuname 							varchar(20),
-	url 									varchar(200),
-	isenabled 						varchar(1),
-	constraint sys_menus_pkey	primary key(menuid)
+   menuid 								varchar(20) not null,
+   menuname 							varchar(20),
+   url 									varchar(200),
+   isenabled 						varchar(1),
+   constraint sys_menus_pkey	primary key(menuid)
 );
 
 comment on table sys_menus is
