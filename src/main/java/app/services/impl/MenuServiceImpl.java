@@ -1,27 +1,40 @@
 package app.services.impl;
 
+import app.comn.ServiceException;
 import app.dao.entities.SysMenus;
 import app.dao.mappers.SysMenusMapper;
 import app.services.MenuService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.sql.SQLException;
+import java.util.List;
 
 @Service
-public class MenuServiceImpl implements MenuService {
+public class MenuServiceImpl<Menu>  implements MenuService<Menu> {
     private final static Logger logger = LoggerFactory.getLogger(MenuServiceImpl.class);
     @Resource
     private SysMenusMapper menusMapper;
 
-    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT, timeout = 36000, rollbackFor = Exception.class)
     @Override
-    public int addMenu() {
+    public Menu getItem(String key) {
+        return null;
+    }
+
+    @Override
+    public List<Menu> getItems() {
+        return null;
+    }
+
+    @Override
+    public List<Menu> getItemsByPage(int pageSize, int pageNum) {
+        return null;
+    }
+
+    @Override
+    public void addItem(Menu item) throws ServiceException {
+
         for (int i = 0; i < 10; i++) {
             SysMenus menu = new SysMenus();
 
@@ -38,6 +51,36 @@ public class MenuServiceImpl implements MenuService {
 
         }
 
-        return 1;
     }
+
+    @Override
+    public void delItem(String key) throws ServiceException {
+
+    }
+
+    @Override
+    public void updateItem(Menu item) throws ServiceException {
+
+    }
+
+    @Override
+    public void addItems(List<Menu> items) throws ServiceException {
+
+    }
+
+    @Override
+    public void delItems(List<String> keys) throws ServiceException {
+
+    }
+
+    @Override
+    public void updateItems(List<Menu> items) throws ServiceException {
+
+    }
+
+    @Override
+    public boolean exist(String key) {
+        return false;
+    }
+
 }

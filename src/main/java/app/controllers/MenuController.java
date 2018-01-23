@@ -1,8 +1,10 @@
 package app.controllers;
 
+import app.comn.ServiceException;
 import app.dao.entities.SysMenus;
 import app.dao.entities.SysMenusExample;
 import app.dao.mappers.SysMenusMapper;
+import app.model.Menu;
 import app.model.User;
 import app.services.MenuService;
 import io.swagger.annotations.Api;
@@ -34,13 +36,18 @@ public class MenuController {
     }
 
     @Resource
-    private MenuService menuService;
+    private MenuService<Menu> menuService;
 
     //TODO 测试事务处理i
     @RequestMapping(path = "addMenus", method = GET)
     public int addMenuTest() {
 
-        int i = menuService.addMenu();
+        int i = 0;
+        try {
+            menuService.addItem(null);
+        } catch (ServiceException e) {
+            e.printStackTrace();
+        }
         return i;
     }
 }
