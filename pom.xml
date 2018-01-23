@@ -68,6 +68,7 @@
         <version.springboot-admin>1.5.5</version.springboot-admin>
         <version.jwt>0.7.0</version.jwt>
         <version.postgresql>42.1.4</version.postgresql>
+        <version.pagehelper>1.2.3</version.pagehelper>
     </properties>
     <dependencies>
         <dependency>
@@ -80,6 +81,13 @@
             <artifactId>mybatis-spring-boot-starter</artifactId>
             <version>${version.mybatis}</version>
         </dependency>
+        <!--分页插件-->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>${version.pagehelper}</version>
+        </dependency>
+
         <!--<dependency>-->
         <!--<groupId>mysql</groupId>-->
         <!--<artifactId>mysql-connector-java</artifactId>-->

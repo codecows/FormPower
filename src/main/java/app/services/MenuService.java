@@ -1,4 +1,6 @@
 package app.services;
 
-public interface MenuService<Menu> extends BaseService<Menu> {
+import app.model.Menu;
+
+public interface MenuService extends BaseService<Menu> {
 }

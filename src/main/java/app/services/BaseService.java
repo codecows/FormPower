@@ -1,6 +1,8 @@
 package app.services;
 
 import app.comn.ServiceException;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageInfo;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,7 +14,7 @@ public interface BaseService<T> {
 
     List<T> getItems();
 
-    List<T> getItemsByPage(int pageSize, int pageNum);
+    PageInfo<T> getItemsByPage(int pageNum, int pageSize);
 
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT, timeout = 36000, rollbackFor = Exception.class)
     void addItem(T item) throws ServiceException;

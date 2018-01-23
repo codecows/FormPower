@@ -22,7 +22,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Resource
     private DepartmentConverter departmentConverter;
 
-    @Resource
+    //@Resource todo 没有 @Component 注解的 不能 用自动注入标签 需要new
     private SysDepartmentExample sysDepartmentExample;
 
     @Override

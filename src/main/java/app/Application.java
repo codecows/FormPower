@@ -11,9 +11,24 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 public class Application {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
-        System.out.printf("                               +---------------------------------------------+" + System.getProperty("line.separator"));
-        System.out.printf("                               |           ---       启动成功     ---         |" + System.getProperty("line.separator"));
-        System.out.printf("                               +---------------------------------------------+" + System.getProperty("line.separator"));
+        System.out.printf("                                     \n" +
+                "                                        /~~~~~\\        /~~~~~\\\n" +
+                "                                       |    (~'        ~~~)   |\n" +
+                "                                        \\    \\__________/    /\n" +
+                "                                        /~::::::::         ~\\\n" +
+                "                             /~~~~~~~-_| ::::::::             |_-~~~~~~~\\\n" +
+                "                            \\ ======= /|  ::A::;      A     :|\\ ====== /\n" +
+                "                             ~-_____-~ |  _----------------_::| ~-____-~\n" +
+                "                                       |/~                  ~\\|\n" +
+                "                                       /                      \\\n" +
+                "                                      (        ()    ()        )\n" +
+                "                                       `\\                   ./'\n" +
+                "                                         ~-_______________-~\n" +
+                "                                               /~~~~\\\n" +
+                "                                              |      |\n" +
+                "                                              |      |\n" +
+                "                                             (________)    \n" +
+                "                                                 ()              " + System.getProperty("line.separator"));
 
     }
 }
