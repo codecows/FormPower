@@ -48,7 +48,7 @@
                     <overwrite>true</overwrite>
                     <!-- 自动生成的配置 -->
                     <configurationFile>
-                        src/main/resources/mybatis-generator.xml</configurationFile>
+                        src/main/resources/config/mybatis-generator.xml</configurationFile>
                 </configuration>
             </plugin>
         </plugins>

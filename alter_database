@@ -1,3 +1,500 @@
-ALTER TABLE "public"."users"
-  ADD COLUMN "department" varchar(255),
-  ADD COLUMN "comment" varchar(255);
+/*==============================================================*/
+/* load tools:uuid-ossp                                         */
+/*==============================================================*/
+create extension "uuid-ossp";
+
+
+/*==============================================================*/
+/* create tables                                                */
+/*==============================================================*/
+
+drop table if exists sys_authority;
+
+drop table if exists sys_company;
+
+drop table if exists sys_department;
+
+drop table if exists sys_group;
+
+drop table if exists sys_group_auth_rel;
+
+drop table if exists sys_group_role_rel;
+
+drop table if exists sys_role;
+
+drop table if exists sys_role_auth_rel;
+
+drop table if exists sys_user;
+
+drop table if exists sys_user_auth_rel;
+
+drop table if exists sys_user_department_rel;
+
+drop table if exists sys_user_group_rel;
+
+drop table if exists sys_user_role_rel;
+
+drop table if exists sys_menus;
+
+/*==============================================================*/
+/* Table: sys_authority                                         */
+/*==============================================================*/
+create table sys_authority (
+   auth_id              VARCHAR(36)          not null,
+   parent_id            VARCHAR(36)          null,
+   authority_name       VARCHAR(100)         null,
+   descripthon          VARCHAR(400)         null,
+   status               VARCHAR(2)           null,
+   constraint PK_SYS_AUTHORITY primary key (auth_id)
+);
+
+comment on table sys_authority is
+'权限表';
+
+comment on column sys_authority.auth_id is
+'权限ID';
+
+comment on column sys_authority.parent_id is
+'上级ID';
+
+comment on column sys_authority.authority_name is
+'权限名称';
+
+comment on column sys_authority.descripthon is
+'描述';
+
+comment on column sys_authority.status is
+'状态';
+
+/*==============================================================*/
+/* Table: sys_company                                           */
+/*==============================================================*/
+create table sys_company (
+   company_id           VARCHAR(36)          not null,
+   company_name         VARCHAR(400)         null,
+   com_short_name       VARCHAR(50)          null,
+   company_level        VARCHAR(10)          null,
+   company_code         VARCHAR(100)         null,
+   corporation          VARCHAR(100)         null,
+   address              VARCHAR(400)         null,
+   telephone            VARCHAR(20)          null,
+   create_date          DATE                 null,
+   status               VARCHAR(2)           null,
+   constraint PK_SYS_COMPANY primary key (company_id)
+);
+
+comment on table sys_company is
+'公司表';
+
+comment on column sys_company.company_id is
+'公司ID';
+
+comment on column sys_company.company_name is
+'公司名称';
+
+comment on column sys_company.com_short_name is
+'公司简称';
+
+comment on column sys_company.company_level is
+'层级';
+
+comment on column sys_company.company_code is
+'公司代码';
+
+comment on column sys_company.corporation is
+'法人代表';
+
+comment on column sys_company.address is
+'地址';
+
+comment on column sys_company.telephone is
+'电话';
+
+comment on column sys_company.create_date is
+'创建时间';
+
+comment on column sys_company.status is
+'状态';
+
+/*==============================================================*/
+/* Table: sys_department                                        */
+/*==============================================================*/
+create table sys_department (
+   department_id        VARCHAR(36)          not null,
+   parent_id            VARCHAR(36)          null,
+   department_name      VARCHAR(400)         null,
+   short_name           VARCHAR(50)          null,
+   department_code      VARCHAR(50)          null,
+   department_level     VARCHAR(2)           null,
+   department_type      VARCHAR(36)          null,
+   create_date          DATE                 null,
+   status               VARCHAR(2)           null,
+   constraint PK_SYS_DEPARTMENT primary key (department_id)
+);
+
+comment on table sys_department is
+'部门表';
+
+comment on column sys_department.department_id is
+'部门ID';
+
+comment on column sys_department.parent_id is
+'上级ID';
+
+comment on column sys_department.department_name is
+'部门名称';
+
+comment on column sys_department.short_name is
+'部门简称';
+
+comment on column sys_department.department_code is
+'部门编码';
+
+comment on column sys_department.department_level is
+'部门等级';
+
+comment on column sys_department.department_type is
+'部门类型';
+
+comment on column sys_department.create_date is
+'创建时间';
+
+comment on column sys_department.status is
+'状态';
+
+/*==============================================================*/
+/* Table: sys_group                                             */
+/*==============================================================*/
+create table sys_group (
+   group_id             VARCHAR(36)          not null,
+   parent_id            VARCHAR(36)          null,
+   group_name           VARCHAR(100)         null,
+   create_date          DATE                 null,
+   status               VARCHAR(2)           null,
+   constraint PK_SYS_GROUP primary key (group_id)
+);
+
+comment on table sys_group is
+'用户组表';
+
+comment on column sys_group.group_id is
+'组ID';
+
+comment on column sys_group.parent_id is
+'上级组ID';
+
+comment on column sys_group.group_name is
+'组名称';
+
+comment on column sys_group.create_date is
+'创建时间';
+
+comment on column sys_group.status is
+'状态';
+
+/*==============================================================*/
+/* Table: sys_group_auth_rel                                    */
+/*==============================================================*/
+create table sys_group_auth_rel (
+   guid                 VARCHAR(36)          not null,
+   group_id             VARCHAR(36)          null,
+   auth_id              VARCHAR(36)          null,
+   type                 VARCHAR(10)          null,
+   constraint PK_SYS_GROUP_AUTH_REL primary key (guid)
+);
+
+comment on table sys_group_auth_rel is
+'组权限关系表';
+
+comment on column sys_group_auth_rel.guid is
+'关系ID';
+
+comment on column sys_group_auth_rel.group_id is
+'组ID';
+
+comment on column sys_group_auth_rel.auth_id is
+'权限ID';
+
+comment on column sys_group_auth_rel.type is
+'类型';
+
+/*==============================================================*/
+/* Table: sys_group_role_rel                                    */
+/*==============================================================*/
+create table sys_group_role_rel (
+   guid                 VARCHAR(36)          not null,
+   group_id             VARCHAR(36)          null,
+   role_id              VARCHAR(36)          null,
+   type                 VARCHAR(10)          null,
+   constraint PK_SYS_GROUP_ROLE_REL primary key (guid)
+);
+
+comment on table sys_group_role_rel is
+'组角色关系表';
+
+comment on column sys_group_role_rel.guid is
+'关系ID';
+
+comment on column sys_group_role_rel.group_id is
+'组ID';
+
+comment on column sys_group_role_rel.role_id is
+'角色ID';
+
+comment on column sys_group_role_rel.type is
+'类型';
+
+/*==============================================================*/
+/* Table: sys_role                                              */
+/*==============================================================*/
+create table sys_role (
+   role_id              VARCHAR(36)          not null,
+   parent_id            VARCHAR(36)          null,
+   role_name            VARCHAR(100)         null,
+   create_date          DATE                 null,
+   description          VARCHAR(400)         null,
+   status               VARCHAR(2)           null,
+   constraint PK_SYS_ROLE primary key (role_id)
+);
+
+comment on table sys_role is
+'角色表';
+
+comment on column sys_role.role_id is
+'角色ID';
+
+comment on column sys_role.parent_id is
+'上级角色';
+
+comment on column sys_role.role_name is
+'角色名称';
+
+comment on column sys_role.create_date is
+'创建时间';
+
+comment on column sys_role.description is
+'描述';
+
+comment on column sys_role.status is
+'状态';
+
+/*==============================================================*/
+/* Table: sys_role_auth_rel                                     */
+/*==============================================================*/
+create table sys_role_auth_rel (
+   guid                 VARCHAR(36)          not null,
+   role_id              VARCHAR(36)          null,
+   auth_id              VARCHAR(36)          null,
+   type                 VARCHAR(10)          null,
+   constraint PK_SYS_ROLE_AUTH_REL primary key (guid)
+);
+
+comment on table sys_role_auth_rel is
+'角色权限关系表';
+
+comment on column sys_role_auth_rel.guid is
+'关系ID';
+
+comment on column sys_role_auth_rel.role_id is
+'角色ID';
+
+comment on column sys_role_auth_rel.auth_id is
+'权限ID';
+
+comment on column sys_role_auth_rel.type is
+'类型';
+
+/*==============================================================*/
+/* Table: sys_user                                              */
+/*==============================================================*/
+create table sys_user (
+   user_id              VARCHAR(36)          not null,
+   user_name            VARCHAR(64)          null,
+   password             VARCHAR(100)         null,
+   question             VARCHAR(100)         null,
+   answer               VARCHAR(100)         null,
+   persion_name         VARCHAR(10)          null,
+   persion_sex          VARCHAR(2)           null,
+   mobile               VARCHAR(50)          null,
+   telephone            VARCHAR(50)          null,
+   email                VARCHAR(100)         null,
+   user_position        VARCHAR(50)          null,
+   img_url              VARCHAR(100)         null,
+   create_time          DATE                 null,
+   status               VARCHAR(2)           null,
+   constraint PK_SYS_USER primary key (user_id)
+);
+
+comment on table sys_user is
+'系统用户表';
+
+comment on column sys_user.user_id is
+'用户ID';
+
+comment on column sys_user.user_name is
+'登录名称';
+
+comment on column sys_user.password is
+'密码';
+
+comment on column sys_user.question is
+'重置密码问题';
+
+comment on column sys_user.answer is
+'重置密码答案';
+
+comment on column sys_user.persion_name is
+'用户姓名';
+
+comment on column sys_user.persion_sex is
+'用户性别';
+
+comment on column sys_user.mobile is
+'移动电话';
+
+comment on column sys_user.telephone is
+'办公电话';
+
+comment on column sys_user.email is
+'电子邮箱';
+
+comment on column sys_user.user_position is
+'职位名称';
+
+comment on column sys_user.img_url is
+'头像';
+
+comment on column sys_user.create_time is
+'创建时间';
+
+comment on column sys_user.status is
+'状态';
+
+/*==============================================================*/
+/* Table: sys_user_auth_rel                                     */
+/*==============================================================*/
+create table sys_user_auth_rel (
+   guid                 VARCHAR(36)          not null,
+   user_id              VARCHAR(36)          null,
+   auth_id              VARCHAR(36)          null,
+   type                 VARCHAR(10)          null,
+   constraint PK_SYS_USER_AUTH_REL primary key (guid)
+);
+
+comment on table sys_user_auth_rel is
+'用户权限关系表';
+
+comment on column sys_user_auth_rel.guid is
+'关系ID';
+
+comment on column sys_user_auth_rel.user_id is
+'组ID';
+
+comment on column sys_user_auth_rel.auth_id is
+'权限ID';
+
+comment on column sys_user_auth_rel.type is
+'类型';
+
+/*==============================================================*/
+/* Table: sys_user_department_rel                               */
+/*==============================================================*/
+create table sys_user_department_rel (
+   guid                 VARCHAR(36)          not null,
+   user_id              VARCHAR(36)          null,
+   department_id        VARCHAR(36)          null,
+   type                 VARCHAR(10)          null,
+   constraint PK_SYS_USER_DEPARTMENT_REL primary key (guid)
+);
+
+comment on table sys_user_department_rel is
+'用户部门关系表';
+
+comment on column sys_user_department_rel.guid is
+'关系ID';
+
+comment on column sys_user_department_rel.user_id is
+'组ID';
+
+comment on column sys_user_department_rel.department_id is
+'部门ID';
+
+comment on column sys_user_department_rel.type is
+'类型';
+
+/*==============================================================*/
+/* Table: sys_user_group_rel                                    */
+/*==============================================================*/
+create table sys_user_group_rel (
+   guid                 VARCHAR(36)          not null,
+   user_id              VARCHAR(36)          null,
+   group_id             VARCHAR(36)          null,
+   type                 VARCHAR(10)          null,
+   constraint PK_SYS_USER_GROUP_REL primary key (guid)
+);
+
+comment on table sys_user_group_rel is
+'用户组关系表';
+
+comment on column sys_user_group_rel.guid is
+'关系ID';
+
+comment on column sys_user_group_rel.user_id is
+'组ID';
+
+comment on column sys_user_group_rel.group_id is
+'组ID';
+
+comment on column sys_user_group_rel.type is
+'类型';
+
+/*==============================================================*/
+/* Table: sys_user_role_rel                                     */
+/*==============================================================*/
+create table sys_user_role_rel (
+   guid                 VARCHAR(36)          not null,
+   user_id              VARCHAR(36)          null,
+   role_id              VARCHAR(36)          null,
+   type                 VARCHAR(10)          null,
+   constraint PK_SYS_USER_ROLE_REL primary key (guid)
+);
+
+comment on table sys_user_role_rel is
+'用户角色关系表';
+
+comment on column sys_user_role_rel.guid is
+'关系ID';
+
+comment on column sys_user_role_rel.user_id is
+'组ID';
+
+comment on column sys_user_role_rel.role_id is
+'权限ID';
+
+comment on column sys_user_role_rel.type is
+'类型';
+
+/*==============================================================*/
+/* Table: sys_menus                                     */
+/*==============================================================*/
+
+create table sys_menus
+(
+	menuid 								varchar(20) not null,
+	menuname 							varchar(20),
+	url 									varchar(200),
+	isenabled 						varchar(1),
+	constraint sys_menus_pkey	primary key(menuid)
+);
+
+comment on table sys_menus is
+'菜单表';
+
+comment on column sys_menus.menuid is
+'菜单id';
+comment on column sys_menus.menuname is
+'菜单名称';
+comment on column sys_menus.url is
+'utl';
+comment on column sys_menus.isenabled is
+'是否有效';

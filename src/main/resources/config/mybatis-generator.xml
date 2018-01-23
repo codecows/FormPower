@@ -42,5 +42,6 @@
                <!--enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
                <!--selectByExampleQueryId="false"></table>-->
         <table tableName="sys_menus"></table>
+        <table tableName="sys_department"></table>
     </context>
 </generatorConfiguration>

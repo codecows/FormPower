@@ -4,22 +4,21 @@ import app.comn.ResponseCode;
 import app.comn.ServiceException;
 import app.model.Department;
 import app.model.Result;
-import app.model.User;
 import app.services.DepartmentService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
-@Api(description = "用户接口")
+@Api(description = "部门管理接口")
 @RestController
 @RequestMapping("dept")
 public class DepartmentController {
@@ -27,25 +26,30 @@ public class DepartmentController {
     private DepartmentService departmentService;
 
 
-    @ApiOperation(value = "获取所有用户",
-            notes = "获取所有用户,返回List",
+    @ApiOperation(value = "获取所有部门信息",
+            notes = "获取所有部门信息,返回List",
             responseContainer = "List",
-            response = User.class)
+            response = Department.class)
     @RequestMapping(path = "getDepts", method = GET)
-    public Result<List<User>> getDepts() {
-        departmentService.getDepts();
-
-        return null;
+    public Result<List<Department>> getDepts() {
+        return new Result<>(ResponseCode.Success,departmentService.getDepts());
     }
 
-    @ApiOperation(value = "新增用户", notes = "新增用户")
-    @RequestMapping(path = "addUser", method = POST)
-    public Result<Integer> addDept(@RequestBody User user) {
-//        try {
-//            userService.addUser(user);
-//        } catch (ServiceException e) {
-//            return new Result<>(e.getResponseCode());
-//        }
+    @ApiOperation(value = "按departmentid查找部门信息",
+            notes = "按departmentid查找部门信息")
+    @RequestMapping(path = "getDept/{depaId}", method = GET)
+    public Result<Department> getDept(@PathVariable String depaId) {
+        return new Result<>(ResponseCode.Success, departmentService.getDept(depaId));
+    }
+
+    @ApiOperation(value = "新增部门信息", notes = "新增部门信息")
+    @RequestMapping(path = "addDept", method = POST)
+    public Result<Integer> addDept(@RequestBody Department department) {
+        try {
+            departmentService.addDept(department);
+        } catch (ServiceException e) {
+            return new Result<>(e.getResponseCode());
+        }
         return new Result<>(ResponseCode.Success);
     }
 }
