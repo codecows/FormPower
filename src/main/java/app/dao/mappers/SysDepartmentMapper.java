@@ -3,6 +3,8 @@ package app.dao.mappers;
 import app.dao.entities.SysDepartment;
 import app.dao.entities.SysDepartmentExample;
 import java.util.List;
+
+import app.model.Department;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.DeleteProvider;
 import org.apache.ibatis.annotations.Insert;
