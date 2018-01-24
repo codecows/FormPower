@@ -2,13 +2,13 @@ package app.converter;
 
 import java.util.List;
 
-public interface Converter<T, K> {
+public interface Converter<T, D> {
 
-    T convert2Model(K k);
+    T convert2Model(D d);
 
-    K convert2Entity(T t);
+    D convert2Entity(T t);
 
-    List<T> convert2ModelList(List<K> kList);
+    List<T> convert2ModelList(List<D> dList);
 
-    List<K> convert2EntityList(List<T> tList);
+    List<D> convert2EntityList(List<T> tList);
 }
