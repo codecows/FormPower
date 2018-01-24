@@ -35,5 +35,5 @@ public interface BaseService<T> {
     void updateItems(List<T> items) throws ServiceException;
 
 
-    boolean exist(String key);
+    long recordCount(String key);
 }

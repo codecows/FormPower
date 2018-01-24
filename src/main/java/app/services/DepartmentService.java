@@ -1,20 +1,9 @@
 package app.services;
 
-import app.comn.ServiceException;
+
 import app.model.Department;
 
-import java.util.List;
 
-public interface DepartmentService {
-    List<Department> getDepts();
+public interface DepartmentService extends BaseService<Department> {
 
-    Department getDept(String departmentId);
-
-    void addDept(Department department) throws ServiceException;
-
-    void delDept(String departmentId);
-
-    void updateDept(Department department) throws ServiceException;
-
-    long deptCount(String departmentId);
 }
