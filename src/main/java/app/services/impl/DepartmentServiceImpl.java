@@ -42,8 +42,8 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public void addDept(Department department) throws ServiceException {
-        if (exist(department.getDepartmentId())){
-            throw new ServiceException(ResponseCode.DertExist);
+        if (deptCount(department.getDepartmentId())>0){
+            throw new ServiceException(ResponseCode.InformationExist);
         }
         SysDepartment sysDepartment = departmentConverter.convert2Entity(department);
         sysDepartmentMapper.insert(sysDepartment);
@@ -51,18 +51,29 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public void delDept(String departmentId) {
+        SysDepartmentExample sysDepartmentExample = new SysDepartmentExample();
+        SysDepartmentExample.Criteria criteria = sysDepartmentExample.createCriteria();
+        criteria.andDepartmentIdEqualTo(departmentId);
+        sysDepartmentMapper.deleteByExample(sysDepartmentExample);
+    }
+
+    @Override
+    public void updateDept(Department department)  throws ServiceException{
+        if (deptCount(department.getDepartmentId())==0){
+            throw new ServiceException(ResponseCode.InformationUnexist);
+        }
+        SysDepartment sysDepartment = departmentConverter.convert2Entity(department);
+        sysDepartmentMapper.updateByPrimaryKey(sysDepartment);
 
     }
 
     @Override
-    public void updateDept(Department department) {
-
+    public long deptCount(String departmentId) {
+        SysDepartmentExample sysDepartmentExample = new SysDepartmentExample();
+        SysDepartmentExample.Criteria criteria = sysDepartmentExample.createCriteria();
+        criteria.andDepartmentIdEqualTo(departmentId);
+        long l = sysDepartmentMapper.countByExample(sysDepartmentExample);
+        return l;
     }
 
-    @Override
-    public boolean exist(String departmentId) {
-        //todo 未完成，需要学习example传参
-//        sysDepartmentMapper.countByExample(null);
-        return false;
-    }
 }

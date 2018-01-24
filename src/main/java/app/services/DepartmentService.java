@@ -14,7 +14,7 @@ public interface DepartmentService {
 
     void delDept(String departmentId);
 
-    void updateDept(Department department);
+    void updateDept(Department department) throws ServiceException;
 
-    boolean exist(String departmentId);
+    long deptCount(String departmentId);
 }
