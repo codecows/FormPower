@@ -87,7 +87,8 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
-    public boolean exist(String key) {
-        return false;
+    public long recordCount(String key) {
+        return 0;
     }
+
 }

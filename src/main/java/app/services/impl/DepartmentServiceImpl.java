@@ -8,6 +8,10 @@ import app.dao.entities.SysDepartmentExample;
 import app.dao.mappers.SysDepartmentMapper;
 import app.model.Department;
 import app.services.DepartmentService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -15,54 +19,94 @@ import java.util.List;
 
 @Service
 public class DepartmentServiceImpl implements DepartmentService {
-
+    private final static Logger logger = LoggerFactory.getLogger(DepartmentServiceImpl.class);
     @Resource
     private SysDepartmentMapper sysDepartmentMapper;
 
     @Resource
     private DepartmentConverter departmentConverter;
 
-    //@Resource todo 没有 @Component 注解的 不能 用自动注入标签 需要new
-    private SysDepartmentExample sysDepartmentExample;
+
+
+
 
 
     @Override
-    public List<Department> getDepts() {
+    public Department getItem(String key) {
+        SysDepartment sysDepartment = sysDepartmentMapper.selectByPrimaryKey(key);
+        Department department = departmentConverter.convert2Model(sysDepartment);
+        return department;
+    }
+
+    @Override
+    public List<Department> getItems() {
         List<SysDepartment> sysDepartments = sysDepartmentMapper.selectByExample(null);
         List<Department> departments = departmentConverter.convert2ModelList(sysDepartments);
         return departments;
     }
 
     @Override
-    public Department getDept(String departmentId) {
-        SysDepartment sysDepartment = sysDepartmentMapper.selectByPrimaryKey(departmentId);
-        Department department = departmentConverter.convert2Model(sysDepartment);
-        return department;
+    public PageInfo<Department> getItemsByPage(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        SysDepartmentExample sysDepartmentExample = new SysDepartmentExample();
+        List<SysDepartment> sysDepartments = sysDepartmentMapper.selectByExample(sysDepartmentExample);
+        List<Department> departments = departmentConverter.convert2ModelList(sysDepartments);
+        PageInfo<Department> departmentPageInfo = new PageInfo<>(departments);
+        return departmentPageInfo;
     }
 
     @Override
-    public void addDept(Department department) throws ServiceException {
-        if (exist(department.getDepartmentId())){
-            throw new ServiceException(ResponseCode.DertExist);
+    public void addItem(Department item) throws ServiceException {
+        if (recordCount(item.getDepartmentId())>0){
+            throw new ServiceException(ResponseCode.InformationExist);
         }
-        SysDepartment sysDepartment = departmentConverter.convert2Entity(department);
+        SysDepartment sysDepartment = departmentConverter.convert2Entity(item);
         sysDepartmentMapper.insert(sysDepartment);
     }
 
     @Override
-    public void delDept(String departmentId) {
+    public void delItem(String key) throws ServiceException {
+        if (recordCount(key)==0){
+            throw new ServiceException(ResponseCode.InformationUnexist);
+        }
+        SysDepartmentExample sysDepartmentExample = new SysDepartmentExample();
+        SysDepartmentExample.Criteria criteria = sysDepartmentExample.createCriteria();
+        criteria.andDepartmentIdEqualTo(key);
+        sysDepartmentMapper.deleteByExample(sysDepartmentExample);
+    }
+
+    @Override
+    public void updateItem(Department item) throws ServiceException {
+        if (recordCount(item.getDepartmentId())==0){
+            throw new ServiceException(ResponseCode.InformationUnexist);
+        }
+        SysDepartment sysDepartment = departmentConverter.convert2Entity(item);
+        sysDepartmentMapper.updateByPrimaryKey(sysDepartment);
 
     }
 
     @Override
-    public void updateDept(Department department) {
+    public void addItems(List<Department> items) throws ServiceException {
 
     }
 
     @Override
-    public boolean exist(String departmentId) {
-        //todo 未完成，需要学习example传参
-//        sysDepartmentMapper.countByExample(null);
-        return false;
+    public void delItems(List<String> keys) throws ServiceException {
+
     }
+
+    @Override
+    public void updateItems(List<Department> items) throws ServiceException {
+
+    }
+
+    @Override
+    public long recordCount(String key) {
+        SysDepartmentExample sysDepartmentExample = new SysDepartmentExample();
+        SysDepartmentExample.Criteria criteria = sysDepartmentExample.createCriteria();
+        criteria.andDepartmentIdEqualTo(key);
+        long l = sysDepartmentMapper.countByExample(sysDepartmentExample);
+        return l;
+    }
+
 }

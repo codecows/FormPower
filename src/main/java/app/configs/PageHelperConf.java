@@ -15,7 +15,7 @@ public class PageHelperConf {
         properties.setProperty("offsetAsPageNum","true");
         properties.setProperty("rowBoundsWithCount","true");
         properties.setProperty("reasonable","true");
-        properties.setProperty("dialect","postgresql");    //配置mysql数据库的方言
+        properties.setProperty("dialect","postgresql");    //配置数据库的方言
         pageHelper.setProperties(properties);
         return pageHelper;
     }
