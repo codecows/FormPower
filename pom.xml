@@ -58,28 +58,33 @@
     <version>1.0</version>
 
     <properties>
-        <!--<maven-plugin.version>1.3.5.RELEASE</maven-plugin.version>-->
-        <version.websocket>1.5.7.RELEASE</version.websocket>
         <version.swagger>2.7.0</version.swagger>
         <version.mybatis>1.3.1</version.mybatis>
-        <version.mysql>5.1.17</version.mysql>
-        <version.spring-aop>5.0.1.RELEASE</version.spring-aop>
         <version.springboot-maven-plugin.>1.4.0.RELEASE</version.springboot-maven-plugin.>
         <version.springboot-admin>1.5.5</version.springboot-admin>
         <version.jwt>0.7.0</version.jwt>
         <version.postgresql>42.1.4</version.postgresql>
         <version.pagehelper>1.2.3</version.pagehelper>
     </properties>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.9.RELEASE</version>
+    </parent>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-websocket</artifactId>
-            <version>${version.websocket}</version>
         </dependency>
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
             <version>${version.mybatis}</version>
+        </dependency>
+        <dependency>
+            <groupId>de.codecentric</groupId>
+            <artifactId>spring-boot-admin-starter-client</artifactId>
+            <version>${version.springboot-admin}</version>
         </dependency>
         <!--分页插件-->
         <dependency>
@@ -87,18 +92,11 @@
             <artifactId>pagehelper-spring-boot-starter</artifactId>
             <version>${version.pagehelper}</version>
         </dependency>
-
-        <!--<dependency>-->
-        <!--<groupId>mysql</groupId>-->
-        <!--<artifactId>mysql-connector-java</artifactId>-->
-        <!--<version>${mysql.version}</version>-->
-        <!--</dependency>-->
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>${version.postgresql}</version>
         </dependency>
-
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
@@ -109,21 +107,10 @@
             <artifactId>springfox-swagger-ui</artifactId>
             <version>${version.swagger}</version>
         </dependency>
-        <!-- swagger依赖 -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-aop</artifactId>
-            <version>${version.spring-aop}</version>
-        </dependency>
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>
             <version>${version.jwt}</version>
-        </dependency>
-        <dependency>
-            <groupId>de.codecentric</groupId>
-            <artifactId>spring-boot-admin-starter-client</artifactId>
-            <version>${version.springboot-admin}</version>
         </dependency>
     </dependencies>
 </project>
