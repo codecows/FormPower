@@ -1,5 +1,6 @@
 package app.services.impl;
 
+import app.comn.ConstantPage;
 import app.comn.PageModel;
 import app.comn.ResponseCode;
 import app.comn.ServiceException;
@@ -29,8 +30,6 @@ public class DepartmentServiceImpl implements DepartmentService {
     private DepartmentConverter departmentConverter;
 
 
-
-
     @Override
     public Department getItem(String key) {
         SysDepartment sysDepartment = sysDepartmentMapper.selectByPrimaryKey(key);
@@ -47,7 +46,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public PageModel<Department> getItemsByPage(int pageNum, int pageSize) {
-        PageHelper.startPage(pageNum,pageSize);
+        PageHelper.startPage(pageNum, pageSize);
         SysDepartmentExample sysDepartmentExample = new SysDepartmentExample();
 
         //执行查询
@@ -55,7 +54,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 
         List<Department> departments = departmentConverter.convert2ModelList(departments1);
 
-        PageModel<Department> departmentPageModel = new PageModel<>(departments, 8,
+        PageModel<Department> departmentPageModel = new PageModel<>(departments, ConstantPage.NAVIGATE_SIZE,
                 departments1.getPageNum(),
                 departments1.getPageSize(),
                 departments1.getPages(),
@@ -67,7 +66,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public void addItem(Department item) throws ServiceException {
-        if (recordCount(item.getDepartmentId())>0){
+        if (recordCount(item.getDepartmentId()) > 0) {
             throw new ServiceException(ResponseCode.InformationExist);
         }
         SysDepartment sysDepartment = departmentConverter.convert2Entity(item);
@@ -76,7 +75,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public void delItem(String key) throws ServiceException {
-        if (recordCount(key)==0){
+        if (recordCount(key) == 0) {
             throw new ServiceException(ResponseCode.InformationUnexist);
         }
         SysDepartmentExample sysDepartmentExample = new SysDepartmentExample();
@@ -87,7 +86,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public void updateItem(Department item) throws ServiceException {
-        if (recordCount(item.getDepartmentId())==0){
+        if (recordCount(item.getDepartmentId()) == 0) {
             throw new ServiceException(ResponseCode.InformationUnexist);
         }
         SysDepartment sysDepartment = departmentConverter.convert2Entity(item);
@@ -98,7 +97,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public void addItems(List<Department> items) throws ServiceException {
 
-        for(Department dep:items){
+        for (Department dep : items) {
             addItem(dep);
         }
     }
@@ -106,7 +105,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public void delItems(List<String> keys) throws ServiceException {
 
-        for(String k:keys){
+        for (String k : keys) {
             delItem(k);
         }
 
@@ -115,7 +114,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public void updateItems(List<Department> items) throws ServiceException {
 
-        for (Department dept:items){
+        for (Department dept : items) {
             updateItem(dept);
         }
 
