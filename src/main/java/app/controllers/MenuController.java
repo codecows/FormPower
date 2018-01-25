@@ -1,5 +1,6 @@
 package app.controllers;
 
+import app.comn.PageModel;
 import app.comn.ServiceException;
 import app.dao.entities.SysMenus;
 import app.dao.entities.SysMenusExample;
@@ -49,8 +50,8 @@ public class MenuController {
             responseContainer = "List",
             response = User.class)
     @RequestMapping(path = "getMenusByPage/{pageNum}/{pageSize}", method = GET)
-    public PageInfo<Menu> getMenusByPage(@PathVariable int pageNum, @PathVariable int pageSize) {
-        PageInfo<Menu> itemsByPage = menuService.getItemsByPage(pageNum, pageSize);
+    public PageModel<Menu> getMenusByPage(@PathVariable int pageNum, @PathVariable int pageSize) {
+        PageModel<Menu> itemsByPage = menuService.getItemsByPage(pageNum, pageSize);
         return itemsByPage;
     }
 

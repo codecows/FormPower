@@ -1,5 +1,6 @@
 package app.services.impl;
 
+import app.comn.PageModel;
 import app.comn.ServiceException;
 import app.converter.MenuConverter;
 import app.dao.entities.SysMenus;
@@ -9,7 +10,6 @@ import app.model.Menu;
 import app.services.MenuService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -37,19 +37,23 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
-    public PageInfo<Menu> getItemsByPage(int pageNum, int pageSize) {
+    public PageModel<Menu> getItemsByPage(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
         SysMenusExample exam = new SysMenusExample();
-        List<SysMenus> sysMenus = menusMapper.selectByExample(exam);
-        PageInfo<SysMenus> pageInfo1= new PageInfo<>(sysMenus);
-        //TODO 转换器需要兼容PageInfo
-        List<Menu> menus = menuConverter.convert2ModelList(sysMenus);
-
-
-
-        PageInfo<Menu> pageInfo= new PageInfo<>(menus);
-
-        return pageInfo;
+        //查询条件
+        exam.createCriteria().andIsenabledIsNull();
+        //执行查询
+        Page<SysMenus> page = (Page<SysMenus>) menusMapper.selectByExample(exam);
+        List<Menu> menus = menuConverter.convert2ModelList(page);
+        PageModel<Menu> pageModel = new PageModel<>(menus, 8,
+                page.getPageNum(),
+                page.getPageSize(),
+                page.getPages(),
+                page.size(),
+                page.getTotal(),
+                page.getStartRow()
+        );
+        return pageModel;
     }
 
     @Override

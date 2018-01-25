@@ -1,5 +1,6 @@
 package app.services;
 
+import app.comn.PageModel;
 import app.comn.ServiceException;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
@@ -14,7 +15,7 @@ public interface BaseService<T> {
 
     List<T> getItems();
 
-    PageInfo<T> getItemsByPage(int pageNum, int pageSize);
+    PageModel<T> getItemsByPage(int pageNum, int pageSize);
 
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT, timeout = 36000, rollbackFor = Exception.class)
     void addItem(T item) throws ServiceException;

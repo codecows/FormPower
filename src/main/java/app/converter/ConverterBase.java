@@ -5,27 +5,29 @@ import org.springframework.util.CollectionUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class ConverterBase<T, K> implements Converter<T, K> {
+public abstract class ConverterBase<T, D> implements Converter<T, D> {
 
-    public abstract T convert2Model(K k);
+    public abstract T convert2Model(D d);
 
-    public abstract K convert2Entity(T t);
+    public abstract D convert2Entity(T t);
 
-    public final List<T> convert2ModelList(List<K> kList) {
+    public final List<T> convert2ModelList(List<D> dList) {
         ArrayList<T> ts = new ArrayList<>();
-        if (CollectionUtils.isEmpty(kList)) {
+        if (CollectionUtils.isEmpty(dList)) {
             return ts;
         }
-        kList.forEach(p -> ts.add(convert2Model(p)));
+        dList.forEach(p -> ts.add(convert2Model(p)));
         return ts;
     }
 
-    public final List<K> convert2EntityList(List<T> tList) {
-        ArrayList<K> ts = new ArrayList<>();
+    public final List<D> convert2EntityList(List<T> tList) {
+        ArrayList<D> ts = new ArrayList<>();
         if (CollectionUtils.isEmpty(tList)) {
             return ts;
         }
         tList.forEach(p -> ts.add(convert2Entity(p)));
         return ts;
     }
+
+
 }
