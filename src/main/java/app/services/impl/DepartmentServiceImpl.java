@@ -106,10 +106,18 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public void delItems(List<String> keys) throws ServiceException {
 
+        for(String k:keys){
+            delItem(k);
+        }
+
     }
 
     @Override
     public void updateItems(List<Department> items) throws ServiceException {
+
+        for (Department dept:items){
+            updateItem(dept);
+        }
 
     }
 
