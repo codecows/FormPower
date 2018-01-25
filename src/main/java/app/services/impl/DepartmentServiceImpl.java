@@ -29,8 +29,6 @@ public class DepartmentServiceImpl implements DepartmentService {
 
 
 
-
-
     @Override
     public Department getItem(String key) {
         SysDepartment sysDepartment = sysDepartmentMapper.selectByPrimaryKey(key);
@@ -88,6 +86,9 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public void addItems(List<Department> items) throws ServiceException {
 
+        for(Department dep:items){
+            addItem(dep);
+        }
     }
 
     @Override
