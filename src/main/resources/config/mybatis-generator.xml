@@ -41,8 +41,9 @@
         <!--<table tableName="stockTheme" domainObjectName="StockTheme" enableCountByExample="false"-->
         <!--enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
         <!--selectByExampleQueryId="false"></table>-->
-
-        <table tableName="sys_department"></table>
-        <table tableName="sys_user"></table>
+         <!--系统表-->
+        <!--<table tableName="sys_department"></table>-->
+        <!--<table tableName="sys_user"></table>-->
+        <!--<table tableName="sys_authority"></table>-->
     </context>
 </generatorConfiguration>
