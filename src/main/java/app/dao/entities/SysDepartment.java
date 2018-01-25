@@ -17,9 +17,11 @@ public class SysDepartment {
 
     private String departmentType;
 
-    private Date createDate;
+    private String remark;
 
     private String status;
+
+    private Date createDate;
 
     public String getDepartmentId() {
         return departmentId;
@@ -77,12 +79,12 @@ public class SysDepartment {
         this.departmentType = departmentType == null ? null : departmentType.trim();
     }
 
-    public Date getCreateDate() {
-        return createDate;
+    public String getRemark() {
+        return remark;
     }
 
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
+    public void setRemark(String remark) {
+        this.remark = remark == null ? null : remark.trim();
     }
 
     public String getStatus() {
@@ -91,5 +93,13 @@ public class SysDepartment {
 
     public void setStatus(String status) {
         this.status = status == null ? null : status.trim();
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 }

@@ -3,8 +3,6 @@ package app.dao.mappers;
 import app.dao.entities.SysDepartment;
 import app.dao.entities.SysDepartmentExample;
 import java.util.List;
-
-import app.model.Department;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.DeleteProvider;
 import org.apache.ibatis.annotations.Insert;
@@ -35,13 +33,13 @@ public interface SysDepartmentMapper {
         "insert into sys_department (department_id, parent_id, ",
         "department_name, short_name, ",
         "department_code, department_level, ",
-        "department_type, create_date, ",
-        "status)",
+        "department_type, remark, ",
+        "status, create_date)",
         "values (#{departmentId,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, ",
         "#{departmentName,jdbcType=VARCHAR}, #{shortName,jdbcType=VARCHAR}, ",
         "#{departmentCode,jdbcType=VARCHAR}, #{departmentLevel,jdbcType=VARCHAR}, ",
-        "#{departmentType,jdbcType=VARCHAR}, #{createDate,jdbcType=DATE}, ",
-        "#{status,jdbcType=VARCHAR})"
+        "#{departmentType,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, ",
+        "#{status,jdbcType=VARCHAR}, #{createDate,jdbcType=DATE})"
     })
     int insert(SysDepartment record);
 
@@ -57,15 +55,16 @@ public interface SysDepartmentMapper {
         @Result(column="department_code", property="departmentCode", jdbcType=JdbcType.VARCHAR),
         @Result(column="department_level", property="departmentLevel", jdbcType=JdbcType.VARCHAR),
         @Result(column="department_type", property="departmentType", jdbcType=JdbcType.VARCHAR),
-        @Result(column="create_date", property="createDate", jdbcType=JdbcType.DATE),
-        @Result(column="status", property="status", jdbcType=JdbcType.VARCHAR)
+        @Result(column="remark", property="remark", jdbcType=JdbcType.VARCHAR),
+        @Result(column="status", property="status", jdbcType=JdbcType.VARCHAR),
+        @Result(column="create_date", property="createDate", jdbcType=JdbcType.DATE)
     })
     List<SysDepartment> selectByExample(SysDepartmentExample example);
 
     @Select({
         "select",
         "department_id, parent_id, department_name, short_name, department_code, department_level, ",
-        "department_type, create_date, status",
+        "department_type, remark, status, create_date",
         "from sys_department",
         "where department_id = #{departmentId,jdbcType=VARCHAR}"
     })
@@ -77,8 +76,9 @@ public interface SysDepartmentMapper {
         @Result(column="department_code", property="departmentCode", jdbcType=JdbcType.VARCHAR),
         @Result(column="department_level", property="departmentLevel", jdbcType=JdbcType.VARCHAR),
         @Result(column="department_type", property="departmentType", jdbcType=JdbcType.VARCHAR),
-        @Result(column="create_date", property="createDate", jdbcType=JdbcType.DATE),
-        @Result(column="status", property="status", jdbcType=JdbcType.VARCHAR)
+        @Result(column="remark", property="remark", jdbcType=JdbcType.VARCHAR),
+        @Result(column="status", property="status", jdbcType=JdbcType.VARCHAR),
+        @Result(column="create_date", property="createDate", jdbcType=JdbcType.DATE)
     })
     SysDepartment selectByPrimaryKey(String departmentId);
 
@@ -99,8 +99,9 @@ public interface SysDepartmentMapper {
           "department_code = #{departmentCode,jdbcType=VARCHAR},",
           "department_level = #{departmentLevel,jdbcType=VARCHAR},",
           "department_type = #{departmentType,jdbcType=VARCHAR},",
-          "create_date = #{createDate,jdbcType=DATE},",
-          "status = #{status,jdbcType=VARCHAR}",
+          "remark = #{remark,jdbcType=VARCHAR},",
+          "status = #{status,jdbcType=VARCHAR},",
+          "create_date = #{createDate,jdbcType=DATE}",
         "where department_id = #{departmentId,jdbcType=VARCHAR}"
     })
     int updateByPrimaryKey(SysDepartment record);

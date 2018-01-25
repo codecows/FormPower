@@ -31,6 +31,10 @@ public class Department {
     @ApiModelProperty("部门类型")
     private String departmentType;
 
+    @ApiModelProperty("备注")
+
+    private String remark;
+
     @ApiModelProperty("创建时间")
     private Date createDate;
 
@@ -109,4 +113,14 @@ public class Department {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+
 }

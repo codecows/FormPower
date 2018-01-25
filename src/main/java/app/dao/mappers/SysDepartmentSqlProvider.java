@@ -56,12 +56,16 @@ public class SysDepartmentSqlProvider {
             sql.VALUES("department_type", "#{departmentType,jdbcType=VARCHAR}");
         }
         
-        if (record.getCreateDate() != null) {
-            sql.VALUES("create_date", "#{createDate,jdbcType=DATE}");
+        if (record.getRemark() != null) {
+            sql.VALUES("remark", "#{remark,jdbcType=VARCHAR}");
         }
         
         if (record.getStatus() != null) {
             sql.VALUES("status", "#{status,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getCreateDate() != null) {
+            sql.VALUES("create_date", "#{createDate,jdbcType=DATE}");
         }
         
         return sql.toString();
@@ -80,8 +84,9 @@ public class SysDepartmentSqlProvider {
         sql.SELECT("department_code");
         sql.SELECT("department_level");
         sql.SELECT("department_type");
-        sql.SELECT("create_date");
+        sql.SELECT("remark");
         sql.SELECT("status");
+        sql.SELECT("create_date");
         sql.FROM("sys_department");
         applyWhere(sql, example, false);
         
@@ -127,12 +132,16 @@ public class SysDepartmentSqlProvider {
             sql.SET("department_type = #{record.departmentType,jdbcType=VARCHAR}");
         }
         
-        if (record.getCreateDate() != null) {
-            sql.SET("create_date = #{record.createDate,jdbcType=DATE}");
+        if (record.getRemark() != null) {
+            sql.SET("remark = #{record.remark,jdbcType=VARCHAR}");
         }
         
         if (record.getStatus() != null) {
             sql.SET("status = #{record.status,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getCreateDate() != null) {
+            sql.SET("create_date = #{record.createDate,jdbcType=DATE}");
         }
         
         applyWhere(sql, example, true);
@@ -150,8 +159,9 @@ public class SysDepartmentSqlProvider {
         sql.SET("department_code = #{record.departmentCode,jdbcType=VARCHAR}");
         sql.SET("department_level = #{record.departmentLevel,jdbcType=VARCHAR}");
         sql.SET("department_type = #{record.departmentType,jdbcType=VARCHAR}");
-        sql.SET("create_date = #{record.createDate,jdbcType=DATE}");
+        sql.SET("remark = #{record.remark,jdbcType=VARCHAR}");
         sql.SET("status = #{record.status,jdbcType=VARCHAR}");
+        sql.SET("create_date = #{record.createDate,jdbcType=DATE}");
         
         SysDepartmentExample example = (SysDepartmentExample) parameter.get("example");
         applyWhere(sql, example, true);
@@ -186,12 +196,16 @@ public class SysDepartmentSqlProvider {
             sql.SET("department_type = #{departmentType,jdbcType=VARCHAR}");
         }
         
-        if (record.getCreateDate() != null) {
-            sql.SET("create_date = #{createDate,jdbcType=DATE}");
+        if (record.getRemark() != null) {
+            sql.SET("remark = #{remark,jdbcType=VARCHAR}");
         }
         
         if (record.getStatus() != null) {
             sql.SET("status = #{status,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getCreateDate() != null) {
+            sql.SET("create_date = #{createDate,jdbcType=DATE}");
         }
         
         sql.WHERE("department_id = #{departmentId,jdbcType=VARCHAR}");

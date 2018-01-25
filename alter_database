@@ -34,7 +34,9 @@ drop table if exists sys_user_group_rel;
 
 drop table if exists sys_user_role_rel;
 
-drop table if exists sys_menus;
+drop table if exists sys_menu;
+
+drop table if exists sys_auth_menu_rel;
 
 /*==============================================================*/
 /* Table: sys_authority                                         */
@@ -44,7 +46,9 @@ create table sys_authority (
    parent_id            VARCHAR(36)          null,
    authority_name       VARCHAR(100)         null,
    descripthon          VARCHAR(400)         null,
+   remark               TEXT                 null,
    status               VARCHAR(2)           null,
+   create_date          DATE                 null,
    constraint PK_SYS_AUTHORITY primary key (auth_id)
 );
 
@@ -63,8 +67,15 @@ comment on column sys_authority.authority_name is
 comment on column sys_authority.descripthon is
 '描述';
 
+comment on column sys_authority.remark is
+'备注';
+
 comment on column sys_authority.status is
 '状态';
+
+comment on column sys_authority.create_date is
+'创建时间';
+
 
 /*==============================================================*/
 /* Table: sys_company                                           */
@@ -78,8 +89,9 @@ create table sys_company (
    corporation          VARCHAR(100)         null,
    address              VARCHAR(400)         null,
    telephone            VARCHAR(20)          null,
-   create_date          DATE                 null,
+   remark               TEXT                 null,
    status               VARCHAR(2)           null,
+   create_date          DATE                 null,
    constraint PK_SYS_COMPANY primary key (company_id)
 );
 
@@ -110,11 +122,14 @@ comment on column sys_company.address is
 comment on column sys_company.telephone is
 '电话';
 
-comment on column sys_company.create_date is
-'创建时间';
+comment on column sys_company.remark is
+'备注';
 
 comment on column sys_company.status is
 '状态';
+
+comment on column sys_company.create_date is
+'创建时间';
 
 /*==============================================================*/
 /* Table: sys_department                                        */
@@ -127,8 +142,9 @@ create table sys_department (
    department_code      VARCHAR(50)          null,
    department_level     VARCHAR(2)           null,
    department_type      VARCHAR(36)          null,
-   create_date          DATE                 null,
+   remark               TEXT                 null,
    status               VARCHAR(2)           null,
+   create_date          DATE                 null,
    constraint PK_SYS_DEPARTMENT primary key (department_id)
 );
 
@@ -156,11 +172,15 @@ comment on column sys_department.department_level is
 comment on column sys_department.department_type is
 '部门类型';
 
-comment on column sys_department.create_date is
-'创建时间';
+comment on column sys_department.remark is
+'备注';
 
 comment on column sys_department.status is
 '状态';
+
+comment on column sys_department.create_date is
+'创建时间';
+
 
 /*==============================================================*/
 /* Table: sys_group                                             */
@@ -169,8 +189,9 @@ create table sys_group (
    group_id             VARCHAR(36)          not null,
    parent_id            VARCHAR(36)          null,
    group_name           VARCHAR(100)         null,
-   create_date          DATE                 null,
+   remark               TEXT                 null,
    status               VARCHAR(2)           null,
+   create_date          DATE                 null,
    constraint PK_SYS_GROUP primary key (group_id)
 );
 
@@ -186,11 +207,14 @@ comment on column sys_group.parent_id is
 comment on column sys_group.group_name is
 '组名称';
 
-comment on column sys_group.create_date is
-'创建时间';
+comment on column sys_group.remark is
+'备注';
 
 comment on column sys_group.status is
 '状态';
+
+comment on column sys_group.create_date is
+'创建时间';
 
 /*==============================================================*/
 /* Table: sys_group_auth_rel                                    */
@@ -251,9 +275,10 @@ create table sys_role (
    role_id              VARCHAR(36)          not null,
    parent_id            VARCHAR(36)          null,
    role_name            VARCHAR(100)         null,
-   create_date          DATE                 null,
    description          VARCHAR(400)         null,
+   remark               TEXT                 null,
    status               VARCHAR(2)           null,
+   create_date          DATE                 null,
    constraint PK_SYS_ROLE primary key (role_id)
 );
 
@@ -269,14 +294,18 @@ comment on column sys_role.parent_id is
 comment on column sys_role.role_name is
 '角色名称';
 
-comment on column sys_role.create_date is
-'创建时间';
-
 comment on column sys_role.description is
 '描述';
 
+comment on column sys_role.remark is
+'备注';
+
 comment on column sys_role.status is
 '状态';
+
+comment on column sys_role.create_date is
+'创建时间';
+
 
 /*==============================================================*/
 /* Table: sys_role_auth_rel                                     */
@@ -320,8 +349,9 @@ create table sys_user (
    email                VARCHAR(100)         null,
    user_position        VARCHAR(50)          null,
    img_url              VARCHAR(100)         null,
-   create_time          DATE                 null,
+   remark               TEXT                 null,
    status               VARCHAR(2)           null,
+   create_time          DATE                 null,
    constraint PK_SYS_USER primary key (user_id)
 );
 
@@ -364,11 +394,15 @@ comment on column sys_user.user_position is
 comment on column sys_user.img_url is
 '头像';
 
-comment on column sys_user.create_time is
-'创建时间';
+comment on column sys_user.remark is
+'备注';
 
 comment on column sys_user.status is
 '状态';
+
+comment on column sys_user.create_time is
+'创建时间';
+
 
 /*==============================================================*/
 /* Table: sys_user_auth_rel                                     */
@@ -475,26 +509,81 @@ comment on column sys_user_role_rel.type is
 '类型';
 
 /*==============================================================*/
-/* Table: sys_menus                                     */
+/* Table: sys_menu                                              */
 /*==============================================================*/
-
-create table sys_menus
-(
-   menuid 								varchar(20) not null,
-   menuname 							varchar(20),
-   url 									varchar(200),
-   isenabled 						varchar(1),
-   constraint sys_menus_pkey	primary key(menuid)
+create table sys_menu (
+   menu_id              VARCHAR(36)          not null,
+   parent_id            VARCHAR(36)          null,
+   menu_type            VARCHAR(2)           null,
+   menu_level           VARCHAR(2)           null,
+   menu_name            VARCHAR(100)         null,
+   menu_code            VARCHAR(50)          null,
+   menu_path            VARCHAR(400)         null,
+   menu_url             VARCHAR(400)         null,
+   remark               TEXT                 null,
+   status               VARCHAR(2)           null,
+   create_date          DATE                 null,
+   constraint PK_SYS_MENU primary key (menu_id)
 );
 
-comment on table sys_menus is
-'菜单表';
+comment on table sys_menu is
+'系统菜单表';
 
-comment on column sys_menus.menuid is
-'菜单id';
-comment on column sys_menus.menuname is
+comment on column sys_menu.menu_id is
+'菜单ID';
+
+comment on column sys_menu.parent_id is
+'上级菜单ID';
+
+comment on column sys_menu.menu_type is
+'菜单类型：1系统，2模块，3菜单';
+
+comment on column sys_menu.menu_level is
+'菜单级别';
+
+comment on column sys_menu.menu_name is
 '菜单名称';
-comment on column sys_menus.url is
-'utl';
-comment on column sys_menus.isenabled is
-'是否有效';
+
+comment on column sys_menu.menu_code is
+'菜单编码';
+
+comment on column sys_menu.menu_path is
+'菜单路径:上级菜单路径+本级菜单编码';
+
+comment on column sys_menu.menu_url is
+'对应URL';
+
+comment on column sys_menu.remark is
+'备注';
+
+comment on column sys_menu.status is
+'状态';
+
+comment on column sys_menu.create_date is
+'创建时间';
+
+/*==============================================================*/
+/* Table: sys_auth_menu_rel                                     */
+/*==============================================================*/
+create table sys_auth_menu_rel (
+   guid                 VARCHAR(36)          not null,
+   auth_id              VARCHAR(36)          null,
+   menu_id              VARCHAR(36)          null,
+   type                 VARCHAR(10)          null,
+   constraint PK_SYS_AUTH_MENU_REL primary key (guid)
+);
+
+comment on table sys_auth_menu_rel is
+'权限菜单关联表';
+
+comment on column sys_auth_menu_rel.guid is
+'关系ID';
+
+comment on column sys_auth_menu_rel.auth_id is
+'权限ID';
+
+comment on column sys_auth_menu_rel.menu_id is
+'菜单ID';
+
+comment on column sys_auth_menu_rel.type is
+'类型';
