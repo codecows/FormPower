@@ -43,5 +43,6 @@
         <!--selectByExampleQueryId="false"></table>-->
 
         <table tableName="sys_department"></table>
+        <table tableName="sys_user"></table>
     </context>
 </generatorConfiguration>

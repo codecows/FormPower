@@ -1,24 +1,24 @@
 package app.converter;
 
-import app.dao.entities.UserEntity;
+import app.dao.entities.SysUser;
 import app.model.User;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UserConverter extends ConverterBase<User, UserEntity> {
+public class UserConverter extends ConverterBase<User, SysUser> {
     @Override
-    public User convert2Model(UserEntity userEntity) {
+    public User convert2Model(SysUser sysUser) {
         User user = new User();
-        BeanUtils.copyProperties(userEntity, user);
+        BeanUtils.copyProperties(sysUser, user);
         return user;
     }
 
     @Override
-    public UserEntity convert2Entity(User user) {
-        UserEntity userEntity = new UserEntity();
-        BeanUtils.copyProperties(user, userEntity);
-        return userEntity;
+    public SysUser convert2Entity(User user) {
+        SysUser sysUser = new SysUser();
+        BeanUtils.copyProperties(user, sysUser);
+        return sysUser;
     }
 
 }

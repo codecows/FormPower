@@ -1,12 +1,18 @@
 package app.services.impl;
 
+import app.comn.ConstantPage;
+import app.comn.PageModel;
 import app.comn.ResponseCode;
 import app.comn.ServiceException;
 import app.converter.UserConverter;
-import app.dao.entities.UserEntity;
-import app.dao.mappers.UserMapper;
+import app.dao.entities.SysUser;
+import app.dao.entities.SysUserExample;
+import app.dao.mappers.SysUserMapper;
 import app.model.User;
 import app.services.UserService;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -15,48 +21,118 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
     @Resource
-    private UserMapper userMappper;
+    private SysUserMapper sysUserMapper;
     @Resource
     private UserConverter userConverter;
 
-    public User getUser(String userId) {
-        UserEntity userEntities = userMappper.get(userId);
-        User user = userConverter.convert2Model(userEntities);
+    @Override
+    public User getItem(String key) {
+        SysUser sysUser = sysUserMapper.selectByPrimaryKey(key);
+        User user = userConverter.convert2Model(sysUser);
+
         return user;
     }
 
-    public List<User> getUsers() {
-        List<UserEntity> userEntities = userMappper.getList();
-        List<User> users = userConverter.convert2ModelList(userEntities);
+    @Override
+    public List<User> getItems() {
+        List<SysUser> sysUsers = sysUserMapper.selectByExample(null);
+        List<User> users = userConverter.convert2ModelList(sysUsers);
         return users;
     }
 
-    //分页集合
-    public List<User> getUsersByPage(int pageSize, int pageNum) {
-        //TODO 未实现
-        return null;
-    }
+    @Override
+    public PageModel<User> getItemsByPage(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        SysUserExample sysUserExample = new SysUserExample();
 
-    public void addUser(User user) throws ServiceException {
-        if (exist(user.getUid())) {
-            throw new ServiceException(ResponseCode.UserExist);
-        }
-        UserEntity userEntity = userConverter.convert2Entity(user);
-        userMappper.add(userEntity);
-    }
+        Page<SysUser> sysUsers = (Page<SysUser>) sysUserMapper.selectByExample(sysUserExample);
+        List<User> users = userConverter.convert2ModelList(sysUsers);
 
-    public void delUser(String userId) {
-        userMappper.delete(userId);
-    }
+        PageModel<User> userPageModel = new PageModel<>(users, ConstantPage.NAVIGATE_SIZE,
+                sysUsers.getPageNum(),
+                sysUsers.getPageSize(),
+                sysUsers.getPages(),
+                sysUsers.size(),
+                sysUsers.getTotal(),
+                sysUsers.getStartRow());
 
-    public void updateUser(User user) {
-        UserEntity userEntity = userConverter.convert2Entity(user);
-        userMappper.udpate(userEntity);
+        return userPageModel;
     }
 
     @Override
-    public boolean exist(String userId) {
-        //TODO 未实现
-        return false;
+    public void addItem(User item) throws ServiceException {
+        if (recordCount(item.getUserId()) > 0) {
+            throw new ServiceException(ResponseCode.InformationExist);
+        }
+        SysUser sysUser = userConverter.convert2Entity(item);
+        try {
+            sysUserMapper.insert(sysUser);
+        } catch (DataAccessException e) {
+            throw new ServiceException(ResponseCode.UnknowSqlException);
+        }
+
+    }
+
+    @Override
+    public void delItem(String key) throws ServiceException {
+        if (recordCount(key) == 0) {
+            throw new ServiceException(ResponseCode.InformationUnexist);
+        }
+        SysUserExample sysUserExample = new SysUserExample();
+        sysUserExample.createCriteria().andUserIdEqualTo(key);
+
+        try {
+            sysUserMapper.deleteByExample(sysUserExample);
+        } catch (DataAccessException e) {
+            throw new ServiceException(ResponseCode.UnknowSqlException);
+        }
+
+    }
+
+    @Override
+    public void updateItem(User item) throws ServiceException {
+        if (recordCount(item.getUserId()) == 0) {
+            throw new ServiceException(ResponseCode.InformationUnexist);
+        }
+        SysUser sysUser = userConverter.convert2Entity(item);
+
+        try {
+            sysUserMapper.updateByPrimaryKey(sysUser);
+        } catch (DataAccessException e) {
+            throw new ServiceException(ResponseCode.UnknowSqlException);
+        }
+
+    }
+
+    @Override
+    public void addItems(List<User> items) throws ServiceException {
+        for (User user : items) {
+            addItem(user);
+        }
+
+    }
+
+    @Override
+    public void delItems(List<String> keys) throws ServiceException {
+        for (String k : keys) {
+            delItem(k);
+        }
+
+    }
+
+    @Override
+    public void updateItems(List<User> items) throws ServiceException {
+        for (User user : items) {
+            updateItem(user);
+        }
+
+    }
+
+    @Override
+    public long recordCount(String key) {
+        SysUserExample sysUserExample = new SysUserExample();
+        sysUserExample.createCriteria().andUserIdEqualTo(key);
+        long l = sysUserMapper.countByExample(sysUserExample);
+        return l;
     }
 }
