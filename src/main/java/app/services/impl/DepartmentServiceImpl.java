@@ -9,6 +9,7 @@ import app.dao.entities.SysDepartmentExample;
 import app.dao.mappers.SysDepartmentMapper;
 import app.model.Department;
 import app.services.DepartmentService;
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
@@ -26,8 +27,6 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Resource
     private DepartmentConverter departmentConverter;
-
-
 
 
 
@@ -50,10 +49,20 @@ public class DepartmentServiceImpl implements DepartmentService {
     public PageModel<Department> getItemsByPage(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum,pageSize);
         SysDepartmentExample sysDepartmentExample = new SysDepartmentExample();
-        List<SysDepartment> sysDepartments = sysDepartmentMapper.selectByExample(sysDepartmentExample);
-        List<Department> departments = departmentConverter.convert2ModelList(sysDepartments);
-        PageModel<Department> departmentPageInfo = new PageModel<>(departments);
-        return departmentPageInfo;
+
+        //执行查询
+        Page<SysDepartment> departments1 = (Page<SysDepartment>) sysDepartmentMapper.selectByExample(sysDepartmentExample);
+
+        List<Department> departments = departmentConverter.convert2ModelList(departments1);
+
+        PageModel<Department> departmentPageModel = new PageModel<>(departments, 8,
+                departments1.getPageNum(),
+                departments1.getPageSize(),
+                departments1.getPages(),
+                departments1.size(),
+                departments1.getTotal(),
+                departments1.getStartRow());
+        return departmentPageModel;
     }
 
     @Override
@@ -89,15 +98,26 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public void addItems(List<Department> items) throws ServiceException {
 
+        for(Department dep:items){
+            addItem(dep);
+        }
     }
 
     @Override
     public void delItems(List<String> keys) throws ServiceException {
 
+        for(String k:keys){
+            delItem(k);
+        }
+
     }
 
     @Override
     public void updateItems(List<Department> items) throws ServiceException {
+
+        for (Department dept:items){
+            updateItem(dept);
+        }
 
     }
 
