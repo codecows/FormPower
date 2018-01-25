@@ -1,17 +1,16 @@
 package app.controllers;
 
+import app.comn.PageModel;
 import app.comn.ResponseCode;
 import app.comn.ServiceException;
 import app.model.Department;
 import app.model.Result;
 import app.services.DepartmentService;
-import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.xml.ws.Response;
 import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
@@ -38,8 +37,8 @@ public class DepartmentController {
             responseContainer = "List",
             response = Department.class)
     @RequestMapping(path = "getDeptsByPage", method = GET)
-    public PageInfo<Department> getDeptsByPage(@RequestParam int pageNum, @RequestParam int pageSize) {
-        PageInfo<Department> itemsByPage = departmentService.getItemsByPage(pageNum, pageSize);
+    public PageModel<Department> getDeptsByPage(@RequestParam int pageNum, @RequestParam int pageSize) {
+        PageModel<Department> itemsByPage = departmentService.getItemsByPage(pageNum, pageSize);
         return itemsByPage;
     }
 

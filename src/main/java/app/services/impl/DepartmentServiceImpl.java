@@ -1,5 +1,6 @@
 package app.services.impl;
 
+import app.comn.PageModel;
 import app.comn.ResponseCode;
 import app.comn.ServiceException;
 import app.converter.DepartmentConverter;
@@ -46,12 +47,12 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public PageInfo<Department> getItemsByPage(int pageNum, int pageSize) {
+    public PageModel<Department> getItemsByPage(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum,pageSize);
         SysDepartmentExample sysDepartmentExample = new SysDepartmentExample();
         List<SysDepartment> sysDepartments = sysDepartmentMapper.selectByExample(sysDepartmentExample);
         List<Department> departments = departmentConverter.convert2ModelList(sysDepartments);
-        PageInfo<Department> departmentPageInfo = new PageInfo<>(departments);
+        PageModel<Department> departmentPageInfo = new PageModel<>(departments);
         return departmentPageInfo;
     }
 
