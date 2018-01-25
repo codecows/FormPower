@@ -13,11 +13,14 @@ import app.services.DepartmentService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.postgresql.util.PSQLException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.sql.SQLException;
 import java.util.List;
 
 @Service
@@ -70,7 +73,12 @@ public class DepartmentServiceImpl implements DepartmentService {
             throw new ServiceException(ResponseCode.InformationExist);
         }
         SysDepartment sysDepartment = departmentConverter.convert2Entity(item);
-        sysDepartmentMapper.insert(sysDepartment);
+        try {
+            sysDepartmentMapper.insert(sysDepartment);
+        } catch (DataAccessException e) {
+            throw new ServiceException(ResponseCode.UnknowSqlException);
+        }
+
     }
 
     @Override

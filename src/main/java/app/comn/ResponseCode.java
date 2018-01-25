@@ -9,6 +9,7 @@ public enum ResponseCode {
     UserExist(1000, "用户已经存在"),
     InformationExist(1001,"信息已存在"),
     InformationUnexist(1002,"信息不存在"),
+    UnknowSqlException(8999,"未知数据库异常"),
     Etc(9999,"其它原因");
 
     // 成员变量
