@@ -1,11 +1,12 @@
 package app.services.impl;
 
+import app.comn.ConstantPage;
 import app.comn.PageModel;
 import app.comn.ServiceException;
 import app.converter.MenuConverter;
-import app.dao.entities.SysMenus;
-import app.dao.entities.SysMenusExample;
-import app.dao.mappers.SysMenusMapper;
+import app.dao.entities.SysMenu;
+import app.dao.entities.SysMenuExample;
+import app.dao.mappers.SysMenuMapper;
 import app.model.Menu;
 import app.services.MenuService;
 import com.github.pagehelper.Page;
@@ -21,7 +22,7 @@ import java.util.List;
 public class MenuServiceImpl implements MenuService {
     private final static Logger logger = LoggerFactory.getLogger(MenuServiceImpl.class);
     @Resource
-    private SysMenusMapper menusMapper;
+    private SysMenuMapper menusMapper;
     @Resource
     private MenuConverter menuConverter;
 
@@ -39,13 +40,13 @@ public class MenuServiceImpl implements MenuService {
     @Override
     public PageModel<Menu> getItemsByPage(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
-        SysMenusExample exam = new SysMenusExample();
+        SysMenuExample exam = new SysMenuExample();
         //查询条件
-        exam.createCriteria().andIsenabledIsNull();
+        exam.createCriteria().andStatusEqualTo("1");
         //执行查询
-        Page<SysMenus> page = (Page<SysMenus>) menusMapper.selectByExample(exam);
+        Page<SysMenu> page = (Page<SysMenu>) menusMapper.selectByExample(exam);
         List<Menu> menus = menuConverter.convert2ModelList(page);
-        PageModel<Menu> pageModel = new PageModel<>(menus, 8,
+        PageModel<Menu> pageModel = new PageModel<>(menus, ConstantPage.NAVIGATE_SIZE,
                 page.getPageNum(),
                 page.getPageSize(),
                 page.getPages(),

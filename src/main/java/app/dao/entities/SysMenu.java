@@ -1,62 +1,39 @@
-package app.model;
-
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+package app.dao.entities;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
-
-/**
- * Created by Fan on 2018/1/23.
- */
-
-@ApiModel("菜单列表实体")
-public class Menu {
-
-    @ApiModelProperty("菜单ID")
+public class SysMenu {
     private String menuId;
 
-    @ApiModelProperty("上级ID")
     private String parentId;
 
-    @ApiModelProperty("菜单类型")
     private String menuType;
 
-    @ApiModelProperty("菜单等级")
     private String menuLevel;
 
-    @ApiModelProperty("菜单名称")
     private String menuName;
 
-    @ApiModelProperty("菜单编码")
     private String menuCode;
 
-    @ApiModelProperty("菜单路径")
     private String menuPath;
 
-    @ApiModelProperty("URL")
     private String menuUrl;
 
-    @ApiModelProperty("备注")
     private String remark;
 
-    @ApiModelProperty("排序号")
     private BigDecimal orderNum;
 
-    @ApiModelProperty("状态")
     private String status;
 
-    @ApiModelProperty("更新时间")
     private Date createDate;
-
 
     public String getMenuId() {
         return menuId;
     }
 
     public void setMenuId(String menuId) {
-        this.menuId = menuId;
+        this.menuId = menuId == null ? null : menuId.trim();
     }
 
     public String getParentId() {
@@ -64,7 +41,7 @@ public class Menu {
     }
 
     public void setParentId(String parentId) {
-        this.parentId = parentId;
+        this.parentId = parentId == null ? null : parentId.trim();
     }
 
     public String getMenuType() {
@@ -72,7 +49,7 @@ public class Menu {
     }
 
     public void setMenuType(String menuType) {
-        this.menuType = menuType;
+        this.menuType = menuType == null ? null : menuType.trim();
     }
 
     public String getMenuLevel() {
@@ -80,7 +57,7 @@ public class Menu {
     }
 
     public void setMenuLevel(String menuLevel) {
-        this.menuLevel = menuLevel;
+        this.menuLevel = menuLevel == null ? null : menuLevel.trim();
     }
 
     public String getMenuName() {
@@ -88,7 +65,7 @@ public class Menu {
     }
 
     public void setMenuName(String menuName) {
-        this.menuName = menuName;
+        this.menuName = menuName == null ? null : menuName.trim();
     }
 
     public String getMenuCode() {
@@ -96,7 +73,7 @@ public class Menu {
     }
 
     public void setMenuCode(String menuCode) {
-        this.menuCode = menuCode;
+        this.menuCode = menuCode == null ? null : menuCode.trim();
     }
 
     public String getMenuPath() {
@@ -104,7 +81,7 @@ public class Menu {
     }
 
     public void setMenuPath(String menuPath) {
-        this.menuPath = menuPath;
+        this.menuPath = menuPath == null ? null : menuPath.trim();
     }
 
     public String getMenuUrl() {
@@ -112,7 +89,7 @@ public class Menu {
     }
 
     public void setMenuUrl(String menuUrl) {
-        this.menuUrl = menuUrl;
+        this.menuUrl = menuUrl == null ? null : menuUrl.trim();
     }
 
     public String getRemark() {
@@ -120,7 +97,7 @@ public class Menu {
     }
 
     public void setRemark(String remark) {
-        this.remark = remark;
+        this.remark = remark == null ? null : remark.trim();
     }
 
     public BigDecimal getOrderNum() {
@@ -136,7 +113,7 @@ public class Menu {
     }
 
     public void setStatus(String status) {
-        this.status = status;
+        this.status = status == null ? null : status.trim();
     }
 
     public Date getCreateDate() {

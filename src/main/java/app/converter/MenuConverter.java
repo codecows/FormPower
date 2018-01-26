@@ -1,23 +1,23 @@
 package app.converter;
 
-import app.dao.entities.SysMenus;
+import app.dao.entities.SysMenu;
 import app.model.Menu;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MenuConverter extends ConverterBase<Menu, SysMenus> {
+public class MenuConverter extends ConverterBase<Menu, SysMenu> {
 
     @Override
-    public Menu convert2Model(SysMenus sysMenus) {
+    public Menu convert2Model(SysMenu sysMenu) {
         Menu menu = new Menu();
-        BeanUtils.copyProperties(sysMenus, menu);
+        BeanUtils.copyProperties(sysMenu, menu);
         return menu;
     }
 
     @Override
-    public SysMenus convert2Entity(Menu menu) {
-        SysMenus sysMenu = new SysMenus();
+    public SysMenu convert2Entity(Menu menu) {
+        SysMenu sysMenu = new SysMenu();
         BeanUtils.copyProperties(menu, sysMenu);
         return sysMenu;
     }

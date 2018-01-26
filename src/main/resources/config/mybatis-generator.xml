@@ -45,5 +45,6 @@
         <!--<table tableName="sys_department"></table>-->
         <!--<table tableName="sys_user"></table>-->
         <!--<table tableName="sys_authority"></table>-->
+        <!--<table tableName="sys_menu"></table>-->
     </context>
 </generatorConfiguration>
