@@ -86,7 +86,6 @@ public class DepartmentServiceImpl implements DepartmentService {
         SysDepartmentExample sysDepartmentExample = new SysDepartmentExample();
         SysDepartmentExample.Criteria criteria = sysDepartmentExample.createCriteria();
         criteria.andDepartmentIdEqualTo(key);
-
         try {
             sysDepartmentMapper.deleteByExample(sysDepartmentExample);
         } catch (DataAccessException e) {

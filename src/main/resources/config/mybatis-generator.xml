@@ -44,7 +44,8 @@
          <!--系统表-->
         <!--<table tableName="sys_department"></table>-->
         <!--<table tableName="sys_user"></table>-->
-        <!--<table tableName="sys_authority"></table>-->
-        <!--<table tableName="sys_menu"></table>-->
+        <table tableName="test_users"></table>
+        <table tableName="test_dept"></table>
+        <table tableName="test_menus"></table>
     </context>
 </generatorConfiguration>
