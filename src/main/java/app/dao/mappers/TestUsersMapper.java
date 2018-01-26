@@ -31,7 +31,7 @@ public interface TestUsersMapper {
 
     @Insert({
         "insert into test_users (uid, uname, ",
-        "deptId)",
+        "deptid)",
         "values (#{uid,jdbcType=VARCHAR}, #{uname,jdbcType=VARCHAR}, ",
         "#{deptid,jdbcType=VARCHAR})"
     })
@@ -44,20 +44,20 @@ public interface TestUsersMapper {
     @Results({
         @Result(column="uid", property="uid", jdbcType=JdbcType.VARCHAR, id=true),
         @Result(column="uname", property="uname", jdbcType=JdbcType.VARCHAR),
-        @Result(column="deptId", property="deptid", jdbcType=JdbcType.VARCHAR)
+        @Result(column="deptid", property="deptid", jdbcType=JdbcType.VARCHAR)
     })
     List<TestUsers> selectByExample(TestUsersExample example);
 
     @Select({
         "select",
-        "uid, uname, deptId",
+        "uid, uname, deptid",
         "from test_users",
         "where uid = #{uid,jdbcType=VARCHAR}"
     })
     @Results({
         @Result(column="uid", property="uid", jdbcType=JdbcType.VARCHAR, id=true),
         @Result(column="uname", property="uname", jdbcType=JdbcType.VARCHAR),
-        @Result(column="deptId", property="deptid", jdbcType=JdbcType.VARCHAR)
+        @Result(column="deptid", property="deptid", jdbcType=JdbcType.VARCHAR)
     })
     TestUsers selectByPrimaryKey(String uid);
 
@@ -73,7 +73,7 @@ public interface TestUsersMapper {
     @Update({
         "update test_users",
         "set uname = #{uname,jdbcType=VARCHAR},",
-          "deptId = #{deptid,jdbcType=VARCHAR}",
+          "deptid = #{deptid,jdbcType=VARCHAR}",
         "where uid = #{uid,jdbcType=VARCHAR}"
     })
     int updateByPrimaryKey(TestUsers record);

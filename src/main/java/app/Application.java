@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
 @EnableTransactionManagement
-@MapperScan("app.dao.mappers")
+@MapperScan(value = {"app.dao.mappers", "app.dao.complex"})
 public class Application {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);

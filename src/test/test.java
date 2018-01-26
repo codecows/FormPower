@@ -1,4 +1,6 @@
 import app.Application;
+import app.dao.complex.DemoEntity;
+import app.dao.complex.DemoMapper;
 import app.dao.entities.TestDept;
 import app.dao.mappers.TestDeptMapper;
 import org.junit.Assert;
@@ -14,11 +16,11 @@ import java.util.List;
 @SpringBootTest(classes = Application.class)
 public class test {
     @Resource
-    private TestDeptMapper testDeptMapper;
+    private DemoMapper demoMapper;
 
     @Test
     public void test1() {
-        List<TestDept> testDepts = testDeptMapper.selectByExample(null);
-        assert testDepts.size() < 0 : "集合size应该大于0";
+        List<DemoEntity> userInfos = demoMapper.getUserInfos();
+        assert userInfos.size() > 0 : "集合size应该大于0";
     }
 }

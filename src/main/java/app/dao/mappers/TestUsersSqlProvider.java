@@ -37,7 +37,7 @@ public class TestUsersSqlProvider {
         }
         
         if (record.getDeptid() != null) {
-            sql.VALUES("deptId", "#{deptid,jdbcType=VARCHAR}");
+            sql.VALUES("deptid", "#{deptid,jdbcType=VARCHAR}");
         }
         
         return sql.toString();
@@ -51,7 +51,7 @@ public class TestUsersSqlProvider {
             sql.SELECT("uid");
         }
         sql.SELECT("uname");
-        sql.SELECT("deptId");
+        sql.SELECT("deptid");
         sql.FROM("test_users");
         applyWhere(sql, example, false);
         
@@ -78,7 +78,7 @@ public class TestUsersSqlProvider {
         }
         
         if (record.getDeptid() != null) {
-            sql.SET("deptId = #{record.deptid,jdbcType=VARCHAR}");
+            sql.SET("deptid = #{record.deptid,jdbcType=VARCHAR}");
         }
         
         applyWhere(sql, example, true);
@@ -91,7 +91,7 @@ public class TestUsersSqlProvider {
         
         sql.SET("uid = #{record.uid,jdbcType=VARCHAR}");
         sql.SET("uname = #{record.uname,jdbcType=VARCHAR}");
-        sql.SET("deptId = #{record.deptid,jdbcType=VARCHAR}");
+        sql.SET("deptid = #{record.deptid,jdbcType=VARCHAR}");
         
         TestUsersExample example = (TestUsersExample) parameter.get("example");
         applyWhere(sql, example, true);
@@ -107,7 +107,7 @@ public class TestUsersSqlProvider {
         }
         
         if (record.getDeptid() != null) {
-            sql.SET("deptId = #{deptid,jdbcType=VARCHAR}");
+            sql.SET("deptid = #{deptid,jdbcType=VARCHAR}");
         }
         
         sql.WHERE("uid = #{uid,jdbcType=VARCHAR}");

@@ -245,72 +245,72 @@ public class TestUsersExample {
         }
 
         public Criteria andDeptidIsNull() {
-            addCriterion("deptId is null");
+            addCriterion("deptid is null");
             return (Criteria) this;
         }
 
         public Criteria andDeptidIsNotNull() {
-            addCriterion("deptId is not null");
+            addCriterion("deptid is not null");
             return (Criteria) this;
         }
 
         public Criteria andDeptidEqualTo(String value) {
-            addCriterion("deptId =", value, "deptid");
+            addCriterion("deptid =", value, "deptid");
             return (Criteria) this;
         }
 
         public Criteria andDeptidNotEqualTo(String value) {
-            addCriterion("deptId <>", value, "deptid");
+            addCriterion("deptid <>", value, "deptid");
             return (Criteria) this;
         }
 
         public Criteria andDeptidGreaterThan(String value) {
-            addCriterion("deptId >", value, "deptid");
+            addCriterion("deptid >", value, "deptid");
             return (Criteria) this;
         }
 
         public Criteria andDeptidGreaterThanOrEqualTo(String value) {
-            addCriterion("deptId >=", value, "deptid");
+            addCriterion("deptid >=", value, "deptid");
             return (Criteria) this;
         }
 
         public Criteria andDeptidLessThan(String value) {
-            addCriterion("deptId <", value, "deptid");
+            addCriterion("deptid <", value, "deptid");
             return (Criteria) this;
         }
 
         public Criteria andDeptidLessThanOrEqualTo(String value) {
-            addCriterion("deptId <=", value, "deptid");
+            addCriterion("deptid <=", value, "deptid");
             return (Criteria) this;
         }
 
         public Criteria andDeptidLike(String value) {
-            addCriterion("deptId like", value, "deptid");
+            addCriterion("deptid like", value, "deptid");
             return (Criteria) this;
         }
 
         public Criteria andDeptidNotLike(String value) {
-            addCriterion("deptId not like", value, "deptid");
+            addCriterion("deptid not like", value, "deptid");
             return (Criteria) this;
         }
 
         public Criteria andDeptidIn(List<String> values) {
-            addCriterion("deptId in", values, "deptid");
+            addCriterion("deptid in", values, "deptid");
             return (Criteria) this;
         }
 
         public Criteria andDeptidNotIn(List<String> values) {
-            addCriterion("deptId not in", values, "deptid");
+            addCriterion("deptid not in", values, "deptid");
             return (Criteria) this;
         }
 
         public Criteria andDeptidBetween(String value1, String value2) {
-            addCriterion("deptId between", value1, value2, "deptid");
+            addCriterion("deptid between", value1, value2, "deptid");
             return (Criteria) this;
         }
 
         public Criteria andDeptidNotBetween(String value1, String value2) {
-            addCriterion("deptId not between", value1, value2, "deptid");
+            addCriterion("deptid not between", value1, value2, "deptid");
             return (Criteria) this;
         }
     }
