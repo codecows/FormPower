@@ -1,9 +1,6 @@
 import app.Application;
 import app.dao.complex.DemoEntity;
 import app.dao.complex.DemoMapper;
-import app.dao.entities.TestDept;
-import app.dao.mappers.TestDeptMapper;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
