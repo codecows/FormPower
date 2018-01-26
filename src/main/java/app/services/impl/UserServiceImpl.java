@@ -66,7 +66,7 @@ public class UserServiceImpl implements UserService {
         }
         SysUser sysUser = userConverter.convert2Entity(item);
         try {
-            sysUserMapper.insert(sysUser);
+            sysUserMapper.insertSelective(sysUser);
         } catch (DataAccessException e) {
             throw new ServiceException(ResponseCode.UnknowSqlException);
         }
@@ -97,7 +97,7 @@ public class UserServiceImpl implements UserService {
         SysUser sysUser = userConverter.convert2Entity(item);
 
         try {
-            sysUserMapper.updateByPrimaryKey(sysUser);
+            sysUserMapper.updateByPrimaryKeySelective(sysUser);
         } catch (DataAccessException e) {
             throw new ServiceException(ResponseCode.UnknowSqlException);
         }

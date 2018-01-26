@@ -1,12 +1,13 @@
 package app.dao.mappers;
 
 import app.dao.entities.SysAuthority;
+import app.dao.entities.SysAuthorityExample;
 import app.dao.entities.SysAuthorityExample.Criteria;
 import app.dao.entities.SysAuthorityExample.Criterion;
-import app.dao.entities.SysAuthorityExample;
+import org.apache.ibatis.jdbc.SQL;
+
 import java.util.List;
 import java.util.Map;
-import org.apache.ibatis.jdbc.SQL;
 
 public class SysAuthoritySqlProvider {
 
@@ -47,6 +48,10 @@ public class SysAuthoritySqlProvider {
         if (record.getRemark() != null) {
             sql.VALUES("remark", "#{remark,jdbcType=VARCHAR}");
         }
+
+        if (record.getOrderNum() != null) {
+            sql.VALUES("order_num", "#{orderNum,jdbcType=NUMERIC}");
+        }
         
         if (record.getStatus() != null) {
             sql.VALUES("status", "#{status,jdbcType=VARCHAR}");
@@ -70,6 +75,7 @@ public class SysAuthoritySqlProvider {
         sql.SELECT("authority_name");
         sql.SELECT("descripthon");
         sql.SELECT("remark");
+        sql.SELECT("order_num");
         sql.SELECT("status");
         sql.SELECT("create_date");
         sql.FROM("sys_authority");
@@ -108,6 +114,10 @@ public class SysAuthoritySqlProvider {
         if (record.getRemark() != null) {
             sql.SET("remark = #{record.remark,jdbcType=VARCHAR}");
         }
+
+        if (record.getOrderNum() != null) {
+            sql.SET("order_num = #{record.orderNum,jdbcType=NUMERIC}");
+        }
         
         if (record.getStatus() != null) {
             sql.SET("status = #{record.status,jdbcType=VARCHAR}");
@@ -130,6 +140,7 @@ public class SysAuthoritySqlProvider {
         sql.SET("authority_name = #{record.authorityName,jdbcType=VARCHAR}");
         sql.SET("descripthon = #{record.descripthon,jdbcType=VARCHAR}");
         sql.SET("remark = #{record.remark,jdbcType=VARCHAR}");
+        sql.SET("order_num = #{record.orderNum,jdbcType=NUMERIC}");
         sql.SET("status = #{record.status,jdbcType=VARCHAR}");
         sql.SET("create_date = #{record.createDate,jdbcType=DATE}");
         
@@ -156,6 +167,10 @@ public class SysAuthoritySqlProvider {
         
         if (record.getRemark() != null) {
             sql.SET("remark = #{remark,jdbcType=VARCHAR}");
+        }
+
+        if (record.getOrderNum() != null) {
+            sql.SET("order_num = #{orderNum,jdbcType=NUMERIC}");
         }
         
         if (record.getStatus() != null) {

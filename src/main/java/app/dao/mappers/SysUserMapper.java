@@ -2,19 +2,10 @@ package app.dao.mappers;
 
 import app.dao.entities.SysUser;
 import app.dao.entities.SysUserExample;
-import java.util.List;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.DeleteProvider;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.InsertProvider;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.SelectProvider;
-import org.apache.ibatis.annotations.Update;
-import org.apache.ibatis.annotations.UpdateProvider;
+import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.type.JdbcType;
+
+import java.util.List;
 
 public interface SysUserMapper {
     @SelectProvider(type=SysUserSqlProvider.class, method="countByExample")
@@ -36,16 +27,16 @@ public interface SysUserMapper {
         "persion_sex, mobile, ",
         "telephone, email, ",
         "user_position, img_url, ",
-        "remark, status, ",
-        "create_time)",
+            "remark, order_num, ",
+            "status, create_time)",
         "values (#{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, ",
         "#{password,jdbcType=VARCHAR}, #{question,jdbcType=VARCHAR}, ",
         "#{answer,jdbcType=VARCHAR}, #{persionName,jdbcType=VARCHAR}, ",
         "#{persionSex,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, ",
         "#{telephone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, ",
         "#{userPosition,jdbcType=VARCHAR}, #{imgUrl,jdbcType=VARCHAR}, ",
-        "#{remark,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, ",
-        "#{createTime,jdbcType=DATE})"
+            "#{remark,jdbcType=VARCHAR}, #{orderNum,jdbcType=NUMERIC}, ",
+            "#{status,jdbcType=VARCHAR}, #{createTime,jdbcType=DATE})"
     })
     int insert(SysUser record);
 
@@ -67,6 +58,7 @@ public interface SysUserMapper {
         @Result(column="user_position", property="userPosition", jdbcType=JdbcType.VARCHAR),
         @Result(column="img_url", property="imgUrl", jdbcType=JdbcType.VARCHAR),
         @Result(column="remark", property="remark", jdbcType=JdbcType.VARCHAR),
+            @Result(column = "order_num", property = "orderNum", jdbcType = JdbcType.NUMERIC),
         @Result(column="status", property="status", jdbcType=JdbcType.VARCHAR),
         @Result(column="create_time", property="createTime", jdbcType=JdbcType.DATE)
     })
@@ -75,7 +67,7 @@ public interface SysUserMapper {
     @Select({
         "select",
         "user_id, user_name, password, question, answer, persion_name, persion_sex, mobile, ",
-        "telephone, email, user_position, img_url, remark, status, create_time",
+            "telephone, email, user_position, img_url, remark, order_num, status, create_time",
         "from sys_user",
         "where user_id = #{userId,jdbcType=VARCHAR}"
     })
@@ -93,6 +85,7 @@ public interface SysUserMapper {
         @Result(column="user_position", property="userPosition", jdbcType=JdbcType.VARCHAR),
         @Result(column="img_url", property="imgUrl", jdbcType=JdbcType.VARCHAR),
         @Result(column="remark", property="remark", jdbcType=JdbcType.VARCHAR),
+            @Result(column = "order_num", property = "orderNum", jdbcType = JdbcType.NUMERIC),
         @Result(column="status", property="status", jdbcType=JdbcType.VARCHAR),
         @Result(column="create_time", property="createTime", jdbcType=JdbcType.DATE)
     })
@@ -121,6 +114,7 @@ public interface SysUserMapper {
           "user_position = #{userPosition,jdbcType=VARCHAR},",
           "img_url = #{imgUrl,jdbcType=VARCHAR},",
           "remark = #{remark,jdbcType=VARCHAR},",
+            "order_num = #{orderNum,jdbcType=NUMERIC},",
           "status = #{status,jdbcType=VARCHAR},",
           "create_time = #{createTime,jdbcType=DATE}",
         "where user_id = #{userId,jdbcType=VARCHAR}"

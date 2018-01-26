@@ -76,7 +76,7 @@ public class AuthorityServiceImpl implements AuthorityService {
         }
         SysAuthority sysAuthority = authorityConverter.convert2Entity(item);
         try {
-            sysAuthorityMapper.insert(sysAuthority);
+            sysAuthorityMapper.insertSelective(sysAuthority);
         } catch (DataAccessException e) {
             throw new ServiceException(ResponseCode.UnknowSqlException);
         }
@@ -107,7 +107,7 @@ public class AuthorityServiceImpl implements AuthorityService {
         SysAuthority sysAuthority = authorityConverter.convert2Entity(item);
 
         try {
-            sysAuthorityMapper.updateByPrimaryKey(sysAuthority);
+            sysAuthorityMapper.updateByPrimaryKeySelective(sysAuthority);
         } catch (DataAccessException e) {
             throw new ServiceException(ResponseCode.UnknowSqlException);
         }

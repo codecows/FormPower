@@ -1,5 +1,6 @@
 package app.dao.entities;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class SysDepartment {
@@ -18,6 +19,8 @@ public class SysDepartment {
     private String departmentType;
 
     private String remark;
+
+    private BigDecimal orderNum;
 
     private String status;
 
@@ -85,6 +88,14 @@ public class SysDepartment {
 
     public void setRemark(String remark) {
         this.remark = remark == null ? null : remark.trim();
+    }
+
+    public BigDecimal getOrderNum() {
+        return orderNum;
+    }
+
+    public void setOrderNum(BigDecimal orderNum) {
+        this.orderNum = orderNum;
     }
 
     public String getStatus() {

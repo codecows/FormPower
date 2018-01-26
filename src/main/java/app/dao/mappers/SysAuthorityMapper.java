@@ -2,19 +2,10 @@ package app.dao.mappers;
 
 import app.dao.entities.SysAuthority;
 import app.dao.entities.SysAuthorityExample;
-import java.util.List;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.DeleteProvider;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.InsertProvider;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.SelectProvider;
-import org.apache.ibatis.annotations.Update;
-import org.apache.ibatis.annotations.UpdateProvider;
+import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.type.JdbcType;
+
+import java.util.List;
 
 public interface SysAuthorityMapper {
     @SelectProvider(type=SysAuthoritySqlProvider.class, method="countByExample")
@@ -32,12 +23,12 @@ public interface SysAuthorityMapper {
     @Insert({
         "insert into sys_authority (auth_id, parent_id, ",
         "authority_name, descripthon, ",
-        "remark, status, ",
-        "create_date)",
+            "remark, order_num, ",
+            "status, create_date)",
         "values (#{authId,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, ",
         "#{authorityName,jdbcType=VARCHAR}, #{descripthon,jdbcType=VARCHAR}, ",
-        "#{remark,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, ",
-        "#{createDate,jdbcType=DATE})"
+            "#{remark,jdbcType=VARCHAR}, #{orderNum,jdbcType=NUMERIC}, ",
+            "#{status,jdbcType=VARCHAR}, #{createDate,jdbcType=DATE})"
     })
     int insert(SysAuthority record);
 
@@ -51,6 +42,7 @@ public interface SysAuthorityMapper {
         @Result(column="authority_name", property="authorityName", jdbcType=JdbcType.VARCHAR),
         @Result(column="descripthon", property="descripthon", jdbcType=JdbcType.VARCHAR),
         @Result(column="remark", property="remark", jdbcType=JdbcType.VARCHAR),
+            @Result(column = "order_num", property = "orderNum", jdbcType = JdbcType.NUMERIC),
         @Result(column="status", property="status", jdbcType=JdbcType.VARCHAR),
         @Result(column="create_date", property="createDate", jdbcType=JdbcType.DATE)
     })
@@ -58,7 +50,8 @@ public interface SysAuthorityMapper {
 
     @Select({
         "select",
-        "auth_id, parent_id, authority_name, descripthon, remark, status, create_date",
+            "auth_id, parent_id, authority_name, descripthon, remark, order_num, status, ",
+            "create_date",
         "from sys_authority",
         "where auth_id = #{authId,jdbcType=VARCHAR}"
     })
@@ -68,6 +61,7 @@ public interface SysAuthorityMapper {
         @Result(column="authority_name", property="authorityName", jdbcType=JdbcType.VARCHAR),
         @Result(column="descripthon", property="descripthon", jdbcType=JdbcType.VARCHAR),
         @Result(column="remark", property="remark", jdbcType=JdbcType.VARCHAR),
+            @Result(column = "order_num", property = "orderNum", jdbcType = JdbcType.NUMERIC),
         @Result(column="status", property="status", jdbcType=JdbcType.VARCHAR),
         @Result(column="create_date", property="createDate", jdbcType=JdbcType.DATE)
     })
@@ -88,6 +82,7 @@ public interface SysAuthorityMapper {
           "authority_name = #{authorityName,jdbcType=VARCHAR},",
           "descripthon = #{descripthon,jdbcType=VARCHAR},",
           "remark = #{remark,jdbcType=VARCHAR},",
+            "order_num = #{orderNum,jdbcType=NUMERIC},",
           "status = #{status,jdbcType=VARCHAR},",
           "create_date = #{createDate,jdbcType=DATE}",
         "where auth_id = #{authId,jdbcType=VARCHAR}"

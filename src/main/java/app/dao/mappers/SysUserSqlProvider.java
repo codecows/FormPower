@@ -1,12 +1,13 @@
 package app.dao.mappers;
 
 import app.dao.entities.SysUser;
+import app.dao.entities.SysUserExample;
 import app.dao.entities.SysUserExample.Criteria;
 import app.dao.entities.SysUserExample.Criterion;
-import app.dao.entities.SysUserExample;
+import org.apache.ibatis.jdbc.SQL;
+
 import java.util.List;
 import java.util.Map;
-import org.apache.ibatis.jdbc.SQL;
 
 public class SysUserSqlProvider {
 
@@ -79,6 +80,10 @@ public class SysUserSqlProvider {
         if (record.getRemark() != null) {
             sql.VALUES("remark", "#{remark,jdbcType=VARCHAR}");
         }
+
+        if (record.getOrderNum() != null) {
+            sql.VALUES("order_num", "#{orderNum,jdbcType=NUMERIC}");
+        }
         
         if (record.getStatus() != null) {
             sql.VALUES("status", "#{status,jdbcType=VARCHAR}");
@@ -110,6 +115,7 @@ public class SysUserSqlProvider {
         sql.SELECT("user_position");
         sql.SELECT("img_url");
         sql.SELECT("remark");
+        sql.SELECT("order_num");
         sql.SELECT("status");
         sql.SELECT("create_time");
         sql.FROM("sys_user");
@@ -180,6 +186,10 @@ public class SysUserSqlProvider {
         if (record.getRemark() != null) {
             sql.SET("remark = #{record.remark,jdbcType=VARCHAR}");
         }
+
+        if (record.getOrderNum() != null) {
+            sql.SET("order_num = #{record.orderNum,jdbcType=NUMERIC}");
+        }
         
         if (record.getStatus() != null) {
             sql.SET("status = #{record.status,jdbcType=VARCHAR}");
@@ -210,6 +220,7 @@ public class SysUserSqlProvider {
         sql.SET("user_position = #{record.userPosition,jdbcType=VARCHAR}");
         sql.SET("img_url = #{record.imgUrl,jdbcType=VARCHAR}");
         sql.SET("remark = #{record.remark,jdbcType=VARCHAR}");
+        sql.SET("order_num = #{record.orderNum,jdbcType=NUMERIC}");
         sql.SET("status = #{record.status,jdbcType=VARCHAR}");
         sql.SET("create_time = #{record.createTime,jdbcType=DATE}");
         
@@ -268,6 +279,10 @@ public class SysUserSqlProvider {
         
         if (record.getRemark() != null) {
             sql.SET("remark = #{remark,jdbcType=VARCHAR}");
+        }
+
+        if (record.getOrderNum() != null) {
+            sql.SET("order_num = #{orderNum,jdbcType=NUMERIC}");
         }
         
         if (record.getStatus() != null) {
