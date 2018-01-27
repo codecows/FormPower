@@ -20,7 +20,7 @@ public interface DemoMapper {
             @Result(column = "uid", property = "uid", jdbcType = JdbcType.VARCHAR, id = true),
             @Result(column = "uname", property = "uname", jdbcType = JdbcType.VARCHAR),
             @Result(column = "deptid", property = "testDept", jdbcType = JdbcType.VARCHAR,
-                    one = @One(select = "app.dao.mappers.TestDeptMapper.selectByPrimaryKey", fetchType = FetchType.EAGER)
+                    one = @One(select = "app.dao.mapper.TestDeptMapper.selectByPrimaryKey", fetchType = FetchType.EAGER)
             )
             ,
             @Result(column = "uid", property = "testMenus", jdbcType = JdbcType.VARCHAR,
