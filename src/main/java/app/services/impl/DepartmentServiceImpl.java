@@ -71,7 +71,7 @@ public class DepartmentServiceImpl implements DepartmentService {
         }
         SysDepartment sysDepartment = departmentConverter.convert2Entity(item);
         try {
-            sysDepartmentMapper.insertSelective(sysDepartment);
+            sysDepartmentMapper.insert(sysDepartment);
         } catch (DataAccessException e) {
             throw new ServiceException(ResponseCode.UnknowSqlException);
         }

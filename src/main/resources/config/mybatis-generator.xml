@@ -30,7 +30,7 @@
                 type="MIXEDMAPPER",生成基于注解的Java Model 和相应的Mapper对象
                 type="XMLMAPPER",生成SQLMap XML文件和独立的Mapper接口
         -->
-        <javaClientGenerator type="ANNOTATEDMAPPER" targetPackage="app.dao.mappers"
+        <javaClientGenerator type="XMLMAPPER" targetPackage="app.dao.mappers"
                              targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
@@ -42,9 +42,9 @@
         <!--enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
         <!--selectByExampleQueryId="false"></table>-->
          <!--系统表-->
-        <!--<table tableName="sys_department"></table>-->
-        <!--<table tableName="sys_user"></table>-->
-        <!--<table tableName="sys_authority"></table>-->
+        <table tableName="sys_department"></table>
+        <table tableName="sys_user"></table>
+        <table tableName="sys_authority"></table>
         <!--<table tableName="sys_menu"></table>-->
     </context>
 </generatorConfiguration>
