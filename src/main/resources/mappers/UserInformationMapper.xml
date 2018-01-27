@@ -2,22 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="app.dao.mappers.UserInformationMapper">
     <resultMap id="BaseResultMap" type="app.dao.entities.UserInformation">
-        <id column="userId" jdbcType="VARCHAR" property="userId"/>
-        <result column="userName" jdbcType="VARCHAR" property="userName"/>
+        <id column="user_id" jdbcType="VARCHAR" property="userId"/>
+        <result column="user_name" jdbcType="VARCHAR" property="userName"/>
         <collection property="sysRoles" javaType="java.util.List" ofType="app.dao.entities.SysRole">
-            <id column="roleId" jdbcType="VARCHAR" property="roleId"/>
-            <result column="roleName" jdbcType="VARCHAR" property="roleName"/>
-            <result column="orderNum" jdbcType="NUMERIC" property="orderNum"/>
+            <id column="role_id" jdbcType="VARCHAR" property="roleId"/>
+            <result column="role_name" jdbcType="VARCHAR" property="roleName"/>
+            <!--<result column="order_num" jdbcType="NUMERIC" property="orderNum"/>-->
         </collection>
     </resultMap>
-
+    <!--t3.order_num   TODO 我这没这字段-->
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         SELECT
             t1.user_id,
             t1.user_name,
             t3.role_id,
-            t3.role_name,
-            t3.order_num
+            t3.role_name
+
         FROM
             sys_user t1
             LEFT OUTER JOIN sys_user_role_rel t2 ON t1.user_id = t2.user_id
