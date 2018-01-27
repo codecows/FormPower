@@ -12,6 +12,8 @@
         <jdbcConnection driverClass="org.postgresql.Driver" connectionURL="jdbc:postgresql://localhost:5432/fp"
                         userId="postgres" password="postgres">
         </jdbcConnection>
+
+
         <javaTypeResolver>
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
@@ -30,7 +32,12 @@
                 type="MIXEDMAPPER",生成基于注解的Java Model 和相应的Mapper对象
                 type="XMLMAPPER",生成SQLMap XML文件和独立的Mapper接口
         -->
-        <javaClientGenerator type="ANNOTATEDMAPPER" targetPackage="app.dao.mappers"
+        <!--<javaClientGenerator type="ANNOTATEDMAPPER" targetPackage="app.dao.mappers"-->
+                             <!--targetProject="src/main/java">-->
+            <!--<property name="enableSubPackages" value="true"/>-->
+        <!--</javaClientGenerator>-->
+
+        <javaClientGenerator type="XMLMAPPER" targetPackage="app.dao.mappers"
                              targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
@@ -45,6 +52,6 @@
         <!--<table tableName="sys_department"></table>-->
         <!--<table tableName="sys_user"></table>-->
         <!--<table tableName="sys_authority"></table>-->
-        <!--<table tableName="sys_menu"></table>-->
+        <table tableName="sys_menu"></table>
     </context>
 </generatorConfiguration>
