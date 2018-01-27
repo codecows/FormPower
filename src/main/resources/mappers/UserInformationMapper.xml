@@ -2,12 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="app.dao.mappers.UserInformationMapper">
     <resultMap id="BaseResultMap" type="app.dao.entities.UserInformation">
-        <id column="userId" jdbcType="VARCHAR" property="userId"/>
-        <result column="userName" jdbcType="VARCHAR" property="userName"/>
+        <id column="user_id" jdbcType="VARCHAR" property="userId"/>
+        <result column="user_name" jdbcType="VARCHAR" property="userName"/>
         <collection property="sysRoles" javaType="java.util.List" ofType="app.dao.entities.SysRole">
-            <id column="roleId" jdbcType="VARCHAR" property="roleId"/>
-            <result column="roleName" jdbcType="VARCHAR" property="roleName"/>
-            <result column="orderNum" jdbcType="NUMERIC" property="orderNum"/>
+            <id column="role_id" jdbcType="VARCHAR" property="roleId"/>
+            <result column="role_name" jdbcType="VARCHAR" property="roleName"/>
+            <result column="order_num" jdbcType="NUMERIC" property="orderNum"/>
         </collection>
     </resultMap>
 
