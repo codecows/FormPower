@@ -1,6 +1,8 @@
 import app.Application;
 import app.dao.complex.DemoEntity;
 import app.dao.complex.DemoMapper;
+import app.dao.entities.UserInformation;
+import app.dao.mappers.UserInformationMapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
@@ -28,5 +30,14 @@ public class test {
             e.printStackTrace();
         }
         assert userInfo != null : "集合size应该大于0";
+    }
+
+    @Resource
+    private UserInformationMapper userInformationMapper;
+
+    @Test
+    public void test2() {
+        UserInformation userInformation = userInformationMapper.selectByPrimaryKey("001");
+        assert userInformation != null : "userInformation不能为空";
     }
 }
