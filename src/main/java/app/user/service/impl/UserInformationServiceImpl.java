@@ -1,16 +1,12 @@
-package app.services.impl;
+package app.user.service.impl;
 
-import app.comn.ConstantPage;
 import app.comn.PageModel;
-import app.comn.ResponseCode;
 import app.comn.ServiceException;
-import app.converter.UserInformationConverter;
+import app.user.converter.UserInformationConverter;
 import app.dao.entities.UserInformation;
 import app.dao.mappers.UserInformationMapper;
-import app.model.UserInfo;
-import app.services.UserInformationService;
-import com.github.pagehelper.PageHelper;
-import org.springframework.dao.DataAccessException;
+import app.user.model.UserInfo;
+import app.user.service.UserInformationService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

@@ -1,10 +1,10 @@
-package app.services.impl;
+package app.role.service.impl;
 
 import app.comn.PageModel;
 import app.comn.ServiceException;
 import app.dao.mappers.SysRoleMapper;
-import app.model.Role;
-import app.services.RoleService;
+import app.role.model.Role;
+import app.role.service.RoleService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

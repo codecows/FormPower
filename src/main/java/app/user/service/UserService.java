@@ -1,4 +1,4 @@
-package app.user.service.impl;
+package app.user.service;
 
 
 import app.user.model.User;

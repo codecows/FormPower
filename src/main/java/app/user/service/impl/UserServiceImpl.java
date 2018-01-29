@@ -1,4 +1,4 @@
-package app.user.service;
+package app.user.service.impl;
 
 import app.comn.ConstantPage;
 import app.comn.PageModel;
@@ -9,7 +9,7 @@ import app.dao.entities.SysUser;
 import app.dao.entities.SysUserExample;
 import app.dao.mappers.SysUserMapper;
 import app.user.model.User;
-import app.user.service.impl.UserService;
+import app.user.service.UserService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import org.springframework.dao.DataAccessException;

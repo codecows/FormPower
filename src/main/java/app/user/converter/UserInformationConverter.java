@@ -1,9 +1,8 @@
-package app.converter;
+package app.user.converter;
 
-import app.dao.entities.SysUser;
+import app.base.converter.ConverterBase;
 import app.dao.entities.UserInformation;
-import app.model.User;
-import app.model.UserInfo;
+import app.user.model.UserInfo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 

@@ -5,7 +5,7 @@ import app.comn.ResponseCode;
 import app.comn.ServiceException;
 import app.base.Result;
 import app.user.model.User;
-import app.user.service.impl.UserService;
+import app.user.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.RequestBody;

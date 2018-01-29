@@ -1,13 +1,11 @@
-package app.controllers;
+package app.user.controller;
 
+import app.base.Result;
 import app.comn.PageModel;
 import app.comn.ResponseCode;
 import app.comn.ServiceException;
-import app.model.Result;
-import app.model.User;
-import app.model.UserInfo;
-import app.services.UserInformationService;
-import app.services.UserService;
+import app.user.model.UserInfo;
+import app.user.service.UserInformationService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.RequestBody;

@@ -1,6 +1,7 @@
-package app.services;
+package app.role.service;
 
-import app.model.Role;
+import app.role.model.Role;
+import app.base.service.BaseService;
 
 /**
  * Created by real on 2018/1/25.

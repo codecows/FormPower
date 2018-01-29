@@ -1,4 +1,4 @@
-package app.model;
+package app.user.model;
 
 import app.dao.entities.SysRole;
 import com.fasterxml.jackson.annotation.JsonIgnore;

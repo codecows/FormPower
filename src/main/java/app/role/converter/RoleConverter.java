@@ -1,7 +1,8 @@
-package app.converter;
+package app.role.converter;
 
+import app.base.converter.ConverterBase;
 import app.dao.entities.SysRole;
-import app.model.Role;
+import app.role.model.Role;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
