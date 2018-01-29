@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="app.dao.mappers.SysCodeMapper">
+    <resultMap id="BaseResultMap" type="app.dao.entities.SysCode">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="code_num" jdbcType="VARCHAR" property="codeNum"/>
+        <result column="code_name" jdbcType="VARCHAR" property="codeName"/>
+        <result column="parent_num" jdbcType="VARCHAR" property="parentNum"/>
+        <result column="c_type" jdbcType="VARCHAR" property="cType"/>
+        <result column="c_type_name" jdbcType="VARCHAR" property="cTypeName"/>
+        <result column="order_num" jdbcType="NUMERIC" property="orderNum"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, code_num, code_name, parent_num, c_type, c_type_name, order_num
+  </sql>
+    <select id="selectByExample" parameterType="app.dao.entities.SysCodeExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from sys_code
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_code
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sys_code
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <delete id="deleteByExample" parameterType="app.dao.entities.SysCodeExample">
+        delete from sys_code
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="app.dao.entities.SysCode">
+    insert into sys_code (id, code_num, code_name, 
+      parent_num, c_type, c_type_name, 
+      order_num)
+    values (#{id,jdbcType=VARCHAR}, #{codeNum,jdbcType=VARCHAR}, #{codeName,jdbcType=VARCHAR}, 
+      #{parentNum,jdbcType=VARCHAR}, #{cType,jdbcType=VARCHAR}, #{cTypeName,jdbcType=VARCHAR}, 
+      #{orderNum,jdbcType=NUMERIC})
+  </insert>
+    <insert id="insertSelective" parameterType="app.dao.entities.SysCode">
+        insert into sys_code
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="codeNum != null">
+                code_num,
+            </if>
+            <if test="codeName != null">
+                code_name,
+            </if>
+            <if test="parentNum != null">
+                parent_num,
+            </if>
+            <if test="cType != null">
+                c_type,
+            </if>
+            <if test="cTypeName != null">
+                c_type_name,
+            </if>
+            <if test="orderNum != null">
+                order_num,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="codeNum != null">
+                #{codeNum,jdbcType=VARCHAR},
+            </if>
+            <if test="codeName != null">
+                #{codeName,jdbcType=VARCHAR},
+            </if>
+            <if test="parentNum != null">
+                #{parentNum,jdbcType=VARCHAR},
+            </if>
+            <if test="cType != null">
+                #{cType,jdbcType=VARCHAR},
+            </if>
+            <if test="cTypeName != null">
+                #{cTypeName,jdbcType=VARCHAR},
+            </if>
+            <if test="orderNum != null">
+                #{orderNum,jdbcType=NUMERIC},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="app.dao.entities.SysCodeExample" resultType="java.lang.Long">
+        select count(*) from sys_code
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update sys_code
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=VARCHAR},
+            </if>
+            <if test="record.codeNum != null">
+                code_num = #{record.codeNum,jdbcType=VARCHAR},
+            </if>
+            <if test="record.codeName != null">
+                code_name = #{record.codeName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.parentNum != null">
+                parent_num = #{record.parentNum,jdbcType=VARCHAR},
+            </if>
+            <if test="record.cType != null">
+                c_type = #{record.cType,jdbcType=VARCHAR},
+            </if>
+            <if test="record.cTypeName != null">
+                c_type_name = #{record.cTypeName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.orderNum != null">
+                order_num = #{record.orderNum,jdbcType=NUMERIC},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update sys_code
+        set id = #{record.id,jdbcType=VARCHAR},
+        code_num = #{record.codeNum,jdbcType=VARCHAR},
+        code_name = #{record.codeName,jdbcType=VARCHAR},
+        parent_num = #{record.parentNum,jdbcType=VARCHAR},
+        c_type = #{record.cType,jdbcType=VARCHAR},
+        c_type_name = #{record.cTypeName,jdbcType=VARCHAR},
+        order_num = #{record.orderNum,jdbcType=NUMERIC}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="app.dao.entities.SysCode">
+        update sys_code
+        <set>
+            <if test="codeNum != null">
+                code_num = #{codeNum,jdbcType=VARCHAR},
+            </if>
+            <if test="codeName != null">
+                code_name = #{codeName,jdbcType=VARCHAR},
+            </if>
+            <if test="parentNum != null">
+                parent_num = #{parentNum,jdbcType=VARCHAR},
+            </if>
+            <if test="cType != null">
+                c_type = #{cType,jdbcType=VARCHAR},
+            </if>
+            <if test="cTypeName != null">
+                c_type_name = #{cTypeName,jdbcType=VARCHAR},
+            </if>
+            <if test="orderNum != null">
+                order_num = #{orderNum,jdbcType=NUMERIC},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="app.dao.entities.SysCode">
+    update sys_code
+    set code_num = #{codeNum,jdbcType=VARCHAR},
+      code_name = #{codeName,jdbcType=VARCHAR},
+      parent_num = #{parentNum,jdbcType=VARCHAR},
+      c_type = #{cType,jdbcType=VARCHAR},
+      c_type_name = #{cTypeName,jdbcType=VARCHAR},
+      order_num = #{orderNum,jdbcType=NUMERIC}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

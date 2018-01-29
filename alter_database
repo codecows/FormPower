@@ -38,6 +38,10 @@ drop table if exists sys_menu;
 
 drop table if exists sys_auth_menu_rel;
 
+DROP TABLE IF EXISTS sys_company_dept_rel;
+
+DROP TABLE IF EXISTS sys_code;
+
 /*==============================================================*/
 /* Table: sys_auth_menu_rel                                     */
 /*==============================================================*/
@@ -643,3 +647,72 @@ COMMENT ON COLUMN sys_user_role_rel.status IS
 
 COMMENT ON COLUMN sys_user_role_rel.operation_date IS
 '操作时间';
+
+/*==============================================================*/
+/* Table: sys_company_dept_rel                                  */
+/*==============================================================*/
+CREATE TABLE sys_company_dept_rel (
+   guid           VARCHAR(36) NOT NULL DEFAULT uuid_generate_v4(),
+   company_id     VARCHAR(36) NULL,
+   department_id  VARCHAR(36) NULL,
+   status         VARCHAR(2)  NULL,
+   operation_date DATE        NULL,
+   CONSTRAINT PK_SYS_COMPANY_DEPT_REL PRIMARY KEY (guid)
+);
+
+COMMENT ON TABLE sys_company_dept_rel IS
+'公司部门关联表';
+
+COMMENT ON COLUMN sys_company_dept_rel.guid IS
+'关系ID';
+
+COMMENT ON COLUMN sys_company_dept_rel.company_id IS
+'公司ID';
+
+COMMENT ON COLUMN sys_company_dept_rel.department_id IS
+'部门ID';
+
+COMMENT ON COLUMN sys_company_dept_rel.status IS
+'状态';
+
+COMMENT ON COLUMN sys_company_dept_rel.operation_date IS
+'操作时间';
+
+
+/*==============================================================*/
+/* Table: sys_code                                              */
+/*==============================================================*/
+CREATE TABLE sys_code (
+   id          VARCHAR(36)  NOT NULL DEFAULT uuid_generate_v4(),
+   code_num    VARCHAR(36)  NULL,
+   code_name   VARCHAR(100) NULL,
+   parent_num  VARCHAR(36)  NULL,
+   c_type      VARCHAR(50)  NULL,
+   c_type_name VARCHAR(36)  NULL,
+   order_num   NUMERIC      NULL,
+   CONSTRAINT PK_SYS_CODE PRIMARY KEY (id)
+);
+
+COMMENT ON TABLE sys_code IS
+'系统公共代码表';
+
+COMMENT ON COLUMN sys_code.id IS
+'唯一ID';
+
+COMMENT ON COLUMN sys_code.code_num IS
+'代码编号';
+
+COMMENT ON COLUMN sys_code.code_name IS
+'代码名称';
+
+COMMENT ON COLUMN sys_code.parent_num IS
+'上级编号';
+
+COMMENT ON COLUMN sys_code.c_type IS
+'代码类型编号';
+
+COMMENT ON COLUMN sys_code.c_type_name IS
+'代码类型名称';
+
+COMMENT ON COLUMN sys_code.order_num IS
+'排序号';
