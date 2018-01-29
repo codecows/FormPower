@@ -1,5 +1,6 @@
 package app.user.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -14,6 +15,7 @@ public class User {
     private String userName;
 
     @ApiModelProperty("密码")
+    @JsonIgnore
     private String password;
 
     @ApiModelProperty("密码提示问题")
