@@ -71,8 +71,8 @@
         </where>
     </sql>
     <sql id="Base_Column_List">
-        group_id, parent_id, group_name, remark, order_num, status, create_date
-    </sql>
+    group_id, parent_id, group_name, remark, order_num, status, create_date
+  </sql>
     <select id="selectByExample" parameterType="app.dao.entities.SysGroupExample" resultMap="BaseResultMap">
         select
         <if test="distinct">
@@ -94,9 +94,9 @@
         where group_id = #{groupId,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-        delete from sys_group
-        where group_id = #{groupId,jdbcType=VARCHAR}
-    </delete>
+    delete from sys_group
+    where group_id = #{groupId,jdbcType=VARCHAR}
+  </delete>
     <delete id="deleteByExample" parameterType="app.dao.entities.SysGroupExample">
         delete from sys_group
         <if test="_parameter != null">
@@ -104,13 +104,13 @@
         </if>
     </delete>
     <insert id="insert" parameterType="app.dao.entities.SysGroup">
-        insert into sys_group (group_id, parent_id, group_name,
-        remark, order_num, status,
-        create_date)
-        values (#{groupId,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, #{groupName,jdbcType=VARCHAR},
-        #{remark,jdbcType=VARCHAR}, #{orderNum,jdbcType=NUMERIC}, #{status,jdbcType=VARCHAR},
-        #{createDate,jdbcType=DATE})
-    </insert>
+    insert into sys_group (group_id, parent_id, group_name, 
+      remark, order_num, status, 
+      create_date)
+    values (#{groupId,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, #{groupName,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{orderNum,jdbcType=NUMERIC}, #{status,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=DATE})
+  </insert>
     <insert id="insertSelective" parameterType="app.dao.entities.SysGroup">
         insert into sys_group
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -233,13 +233,13 @@
         where group_id = #{groupId,jdbcType=VARCHAR}
     </update>
     <update id="updateByPrimaryKey" parameterType="app.dao.entities.SysGroup">
-        update sys_group
-        set parent_id = #{parentId,jdbcType=VARCHAR},
-        group_name = #{groupName,jdbcType=VARCHAR},
-        remark = #{remark,jdbcType=VARCHAR},
-        order_num = #{orderNum,jdbcType=NUMERIC},
-        status = #{status,jdbcType=VARCHAR},
-        create_date = #{createDate,jdbcType=DATE}
-        where group_id = #{groupId,jdbcType=VARCHAR}
-    </update>
+    update sys_group
+    set parent_id = #{parentId,jdbcType=VARCHAR},
+      group_name = #{groupName,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      order_num = #{orderNum,jdbcType=NUMERIC},
+      status = #{status,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=DATE}
+    where group_id = #{groupId,jdbcType=VARCHAR}
+  </update>
 </mapper>

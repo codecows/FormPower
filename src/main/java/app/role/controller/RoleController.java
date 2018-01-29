@@ -4,8 +4,6 @@ import app.base.Result;
 import app.comn.PageModel;
 import app.comn.ResponseCode;
 import app.comn.ServiceException;
-import app.menu.model.Menu;
-import app.menu.service.MenuService;
 import app.role.model.Role;
 import app.role.service.RoleService;
 import io.swagger.annotations.Api;
@@ -92,7 +90,7 @@ public class RoleController {
 
 
     @ApiOperation(value = "批量删除角色信息", notes = "批量删除角色信息")
-    @RequestMapping(path = "delMenus", method = DELETE)
+    @RequestMapping(path = "delRoles", method = DELETE)
     public Result<Integer> delRoles(@RequestParam List<String> depaIds) {
         try {
             roleService.delItems(depaIds);
@@ -104,7 +102,7 @@ public class RoleController {
 
 
     @ApiOperation(value = "修改角色信息", notes = "修改角色信息")
-    @RequestMapping(path = "updateMenu", method = PUT)
+    @RequestMapping(path = "updateRole", method = PUT)
     public Result<Integer> updateRole(@RequestBody Role role) {
         try {
             roleService.updateItem(role);
@@ -115,7 +113,7 @@ public class RoleController {
     }
 
     @ApiOperation(value = "批量修改角色信息", notes = "批量修改角色信息")
-    @RequestMapping(path = "updateMenus", method = PUT)
+    @RequestMapping(path = "updateRoles", method = PUT)
     public Result<Integer> updateRoles(@RequestBody List<Role> dlist) {
         try {
             roleService.updateItems(dlist);

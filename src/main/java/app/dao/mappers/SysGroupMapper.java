@@ -2,10 +2,9 @@ package app.dao.mappers;
 
 import app.dao.entities.SysGroup;
 import app.dao.entities.SysGroupExample;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-
-import org.apache.ibatis.annotations.Param;
 
 public interface SysGroupMapper {
     long countByExample(SysGroupExample example);

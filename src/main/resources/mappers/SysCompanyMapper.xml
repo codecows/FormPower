@@ -76,9 +76,9 @@
         </where>
     </sql>
     <sql id="Base_Column_List">
-        company_id, company_name, com_short_name, company_level, company_code, corporation,
-        address, telephone, remark, order_num, status, create_date
-    </sql>
+    company_id, company_name, com_short_name, company_level, company_code, corporation, 
+    address, telephone, remark, order_num, status, create_date
+  </sql>
     <select id="selectByExample" parameterType="app.dao.entities.SysCompanyExample" resultMap="BaseResultMap">
         select
         <if test="distinct">
@@ -100,9 +100,9 @@
         where company_id = #{companyId,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-        delete from sys_company
-        where company_id = #{companyId,jdbcType=VARCHAR}
-    </delete>
+    delete from sys_company
+    where company_id = #{companyId,jdbcType=VARCHAR}
+  </delete>
     <delete id="deleteByExample" parameterType="app.dao.entities.SysCompanyExample">
         delete from sys_company
         <if test="_parameter != null">
@@ -110,17 +110,17 @@
         </if>
     </delete>
     <insert id="insert" parameterType="app.dao.entities.SysCompany">
-        insert into sys_company (company_id, company_name, com_short_name,
-        company_level, company_code, corporation,
-        address, telephone, remark,
-        order_num, status, create_date
-        )
-        values (#{companyId,jdbcType=VARCHAR}, #{companyName,jdbcType=VARCHAR}, #{comShortName,jdbcType=VARCHAR},
-        #{companyLevel,jdbcType=VARCHAR}, #{companyCode,jdbcType=VARCHAR}, #{corporation,jdbcType=VARCHAR},
-        #{address,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR},
-        #{orderNum,jdbcType=NUMERIC}, #{status,jdbcType=VARCHAR}, #{createDate,jdbcType=DATE}
-        )
-    </insert>
+    insert into sys_company (company_id, company_name, com_short_name, 
+      company_level, company_code, corporation, 
+      address, telephone, remark, 
+      order_num, status, create_date
+      )
+    values (#{companyId,jdbcType=VARCHAR}, #{companyName,jdbcType=VARCHAR}, #{comShortName,jdbcType=VARCHAR}, 
+      #{companyLevel,jdbcType=VARCHAR}, #{companyCode,jdbcType=VARCHAR}, #{corporation,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{orderNum,jdbcType=NUMERIC}, #{status,jdbcType=VARCHAR}, #{createDate,jdbcType=DATE}
+      )
+  </insert>
     <insert id="insertSelective" parameterType="app.dao.entities.SysCompany">
         insert into sys_company
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -308,18 +308,18 @@
         where company_id = #{companyId,jdbcType=VARCHAR}
     </update>
     <update id="updateByPrimaryKey" parameterType="app.dao.entities.SysCompany">
-        update sys_company
-        set company_name = #{companyName,jdbcType=VARCHAR},
-        com_short_name = #{comShortName,jdbcType=VARCHAR},
-        company_level = #{companyLevel,jdbcType=VARCHAR},
-        company_code = #{companyCode,jdbcType=VARCHAR},
-        corporation = #{corporation,jdbcType=VARCHAR},
-        address = #{address,jdbcType=VARCHAR},
-        telephone = #{telephone,jdbcType=VARCHAR},
-        remark = #{remark,jdbcType=VARCHAR},
-        order_num = #{orderNum,jdbcType=NUMERIC},
-        status = #{status,jdbcType=VARCHAR},
-        create_date = #{createDate,jdbcType=DATE}
-        where company_id = #{companyId,jdbcType=VARCHAR}
-    </update>
+    update sys_company
+    set company_name = #{companyName,jdbcType=VARCHAR},
+      com_short_name = #{comShortName,jdbcType=VARCHAR},
+      company_level = #{companyLevel,jdbcType=VARCHAR},
+      company_code = #{companyCode,jdbcType=VARCHAR},
+      corporation = #{corporation,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      telephone = #{telephone,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      order_num = #{orderNum,jdbcType=NUMERIC},
+      status = #{status,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=DATE}
+    where company_id = #{companyId,jdbcType=VARCHAR}
+  </update>
 </mapper>

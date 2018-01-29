@@ -54,7 +54,7 @@
         <!--<table tableName="sys_user_department_rel"></table>-->
         <!--<table tableName="sys_user_group_rel"></table>-->
         <!--<table tableName="sys_user_role_rel"></table>-->
-        <!--<table tableName="sys_role_auth_rel"></table>-->
+        <!--<table tableName="sys_user_auth_rel"></table>-->
         <!--<table tableName="sys_group_auth_rel"></table>-->
         <!--<table tableName="sys_group_role_rel"></table>-->
         <!--<table tableName="sys_auth_menu_rel"></table>-->

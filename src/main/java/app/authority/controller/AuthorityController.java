@@ -2,10 +2,10 @@ package app.authority.controller;
 
 import app.authority.model.Authority;
 import app.authority.service.AuthorityService;
+import app.base.Result;
 import app.comn.PageModel;
 import app.comn.ResponseCode;
 import app.comn.ServiceException;
-import app.base.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -48,8 +48,8 @@ public class AuthorityController {
     @ApiOperation(value = "按id查找权限信息",
             notes = "按id查找权限信息")
     @RequestMapping(path = "getAuth", method = GET)
-    public Result<Authority> getAuth(@RequestParam String depaId) {
-        return new Result<>(ResponseCode.Success, authorityService.getItem(depaId));
+    public Result<Authority> getAuth(@RequestParam String authId) {
+        return new Result<>(ResponseCode.Success, authorityService.getItem(authId));
     }
 
     @ApiOperation(value = "新增权限信息", notes = "新增权限信息")

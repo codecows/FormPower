@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="app.dao.mappers.SysRoleAuthRelMapper">
-    <resultMap id="BaseResultMap" type="app.dao.entities.SysRoleAuthRel">
+<mapper namespace="app.dao.mappers.SysUserAuthRelMapper">
+    <resultMap id="BaseResultMap" type="app.dao.entities.SysUserAuthRel">
         <id column="guid" jdbcType="VARCHAR" property="guid"/>
-        <result column="role_id" jdbcType="VARCHAR" property="roleId"/>
+        <result column="user_id" jdbcType="VARCHAR" property="userId"/>
         <result column="auth_id" jdbcType="VARCHAR" property="authId"/>
         <result column="status" jdbcType="VARCHAR" property="status"/>
         <result column="operation_date" jdbcType="DATE" property="operationDate"/>
@@ -69,15 +69,15 @@
         </where>
     </sql>
     <sql id="Base_Column_List">
-    guid, role_id, auth_id, status, operation_date
+    guid, user_id, auth_id, status, operation_date
   </sql>
-    <select id="selectByExample" parameterType="app.dao.entities.SysRoleAuthRelExample" resultMap="BaseResultMap">
+    <select id="selectByExample" parameterType="app.dao.entities.SysUserAuthRelExample" resultMap="BaseResultMap">
         select
         <if test="distinct">
             distinct
         </if>
         <include refid="Base_Column_List"/>
-        from sys_role_auth_rel
+        from sys_user_auth_rel
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
@@ -88,33 +88,33 @@
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from sys_role_auth_rel
+        from sys_user_auth_rel
         where guid = #{guid,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from sys_role_auth_rel
+    delete from sys_user_auth_rel
     where guid = #{guid,jdbcType=VARCHAR}
   </delete>
-    <delete id="deleteByExample" parameterType="app.dao.entities.SysRoleAuthRelExample">
-        delete from sys_role_auth_rel
+    <delete id="deleteByExample" parameterType="app.dao.entities.SysUserAuthRelExample">
+        delete from sys_user_auth_rel
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
     </delete>
-    <insert id="insert" parameterType="app.dao.entities.SysRoleAuthRel">
-    insert into sys_role_auth_rel (guid, role_id, auth_id, 
+    <insert id="insert" parameterType="app.dao.entities.SysUserAuthRel">
+    insert into sys_user_auth_rel (guid, user_id, auth_id, 
       status, operation_date)
-    values (#{guid,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR}, #{authId,jdbcType=VARCHAR}, 
+    values (#{guid,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{authId,jdbcType=VARCHAR}, 
       #{status,jdbcType=VARCHAR}, #{operationDate,jdbcType=DATE})
   </insert>
-    <insert id="insertSelective" parameterType="app.dao.entities.SysRoleAuthRel">
-        insert into sys_role_auth_rel
+    <insert id="insertSelective" parameterType="app.dao.entities.SysUserAuthRel">
+        insert into sys_user_auth_rel
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="guid != null">
                 guid,
             </if>
-            <if test="roleId != null">
-                role_id,
+            <if test="userId != null">
+                user_id,
             </if>
             <if test="authId != null">
                 auth_id,
@@ -130,8 +130,8 @@
             <if test="guid != null">
                 #{guid,jdbcType=VARCHAR},
             </if>
-            <if test="roleId != null">
-                #{roleId,jdbcType=VARCHAR},
+            <if test="userId != null">
+                #{userId,jdbcType=VARCHAR},
             </if>
             <if test="authId != null">
                 #{authId,jdbcType=VARCHAR},
@@ -144,20 +144,20 @@
             </if>
         </trim>
     </insert>
-    <select id="countByExample" parameterType="app.dao.entities.SysRoleAuthRelExample" resultType="java.lang.Long">
-        select count(*) from sys_role_auth_rel
+    <select id="countByExample" parameterType="app.dao.entities.SysUserAuthRelExample" resultType="java.lang.Long">
+        select count(*) from sys_user_auth_rel
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
     </select>
     <update id="updateByExampleSelective" parameterType="map">
-        update sys_role_auth_rel
+        update sys_user_auth_rel
         <set>
             <if test="record.guid != null">
                 guid = #{record.guid,jdbcType=VARCHAR},
             </if>
-            <if test="record.roleId != null">
-                role_id = #{record.roleId,jdbcType=VARCHAR},
+            <if test="record.userId != null">
+                user_id = #{record.userId,jdbcType=VARCHAR},
             </if>
             <if test="record.authId != null">
                 auth_id = #{record.authId,jdbcType=VARCHAR},
@@ -174,9 +174,9 @@
         </if>
     </update>
     <update id="updateByExample" parameterType="map">
-        update sys_role_auth_rel
+        update sys_user_auth_rel
         set guid = #{record.guid,jdbcType=VARCHAR},
-        role_id = #{record.roleId,jdbcType=VARCHAR},
+        user_id = #{record.userId,jdbcType=VARCHAR},
         auth_id = #{record.authId,jdbcType=VARCHAR},
         status = #{record.status,jdbcType=VARCHAR},
         operation_date = #{record.operationDate,jdbcType=DATE}
@@ -184,11 +184,11 @@
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
     </update>
-    <update id="updateByPrimaryKeySelective" parameterType="app.dao.entities.SysRoleAuthRel">
-        update sys_role_auth_rel
+    <update id="updateByPrimaryKeySelective" parameterType="app.dao.entities.SysUserAuthRel">
+        update sys_user_auth_rel
         <set>
-            <if test="roleId != null">
-                role_id = #{roleId,jdbcType=VARCHAR},
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=VARCHAR},
             </if>
             <if test="authId != null">
                 auth_id = #{authId,jdbcType=VARCHAR},
@@ -202,9 +202,9 @@
         </set>
         where guid = #{guid,jdbcType=VARCHAR}
     </update>
-    <update id="updateByPrimaryKey" parameterType="app.dao.entities.SysRoleAuthRel">
-    update sys_role_auth_rel
-    set role_id = #{roleId,jdbcType=VARCHAR},
+    <update id="updateByPrimaryKey" parameterType="app.dao.entities.SysUserAuthRel">
+    update sys_user_auth_rel
+    set user_id = #{userId,jdbcType=VARCHAR},
       auth_id = #{authId,jdbcType=VARCHAR},
       status = #{status,jdbcType=VARCHAR},
       operation_date = #{operationDate,jdbcType=DATE}

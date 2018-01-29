@@ -2,10 +2,9 @@ package app.dao.mappers;
 
 import app.dao.entities.SysCompany;
 import app.dao.entities.SysCompanyExample;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-
-import org.apache.ibatis.annotations.Param;
 
 public interface SysCompanyMapper {
     long countByExample(SysCompanyExample example);
