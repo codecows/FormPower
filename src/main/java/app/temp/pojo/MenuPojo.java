@@ -13,8 +13,37 @@ public class MenuPojo {
     private String parName;
     private String groupId;
     private String groupName;
+    @ApiParam("菜单类型 S 可不更改; 系统 U 用户")
+    private String menuType;
+    @ApiParam("表单ID")
+    private String formId;
+    private String url;
     @ApiParam("Y 可用 N 不可用")
     private String status;
+
+    public String getMenuType() {
+        return menuType;
+    }
+
+    public void setMenuType(String menuType) {
+        this.menuType = menuType;
+    }
+
+    public String getFormId() {
+        return formId;
+    }
+
+    public void setFormId(String formId) {
+        this.formId = formId;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
     public String getGroupName() {
         return groupName;

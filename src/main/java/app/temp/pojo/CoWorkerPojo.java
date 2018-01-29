@@ -2,7 +2,7 @@ package app.temp.pojo;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-@ApiModel("同事")
+@ApiModel("同事-预留")
 public class CoWorkerPojo {
     private String workerId;
     private String workerNmae;
