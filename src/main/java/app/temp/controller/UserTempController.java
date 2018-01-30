@@ -96,7 +96,7 @@ public class UserTempController {
         menuPojo1.setMenuId("1001");
         menuPojo1.setMenuName("用户");
         menuPojo1.setStatus("Y");
-        menuPojo1.setMenuType("S");
+        menuPojo1.setMenuType("3");
         menuPojo1.setUrl("sys/user");
         menuPojo1.setGroupId(menuGroupPojo1.getGroupId());
         menuPojo1.setGroupName(menuGroupPojo1.getGroupName());
@@ -106,7 +106,7 @@ public class UserTempController {
         menuPojo2.setMenuId("1002");
         menuPojo2.setMenuName("部门");
         menuPojo2.setStatus("Y");
-        menuPojo2.setMenuType("S");
+        menuPojo2.setMenuType("3");
         menuPojo2.setUrl("sys/dept");
         menuPojo2.setGroupId(menuGroupPojo1.getGroupId());
         menuPojo2.setGroupName(menuGroupPojo1.getGroupName());
@@ -117,8 +117,8 @@ public class UserTempController {
         menuPojo3.setMenuId("1003");
         menuPojo3.setMenuName("表单定义");
         menuPojo3.setStatus("Y");
-        menuPojo3.setMenuType("S");
-        menuPojo3.setUrl("sys/dept");
+        menuPojo3.setMenuType("3");
+        menuPojo3.setUrl("sys/form");
         menuPojo3.setGroupId(menuGroupPojo3.getGroupId());
         menuPojo3.setGroupName(menuGroupPojo3.getGroupName());
         menuPojo3.setSceneId(menuScenePojo2.getSceneId());
@@ -140,8 +140,8 @@ public class UserTempController {
         UserPojo userPojo = new UserPojo();
 
         userPojo.setUserId("10000");
-        userPojo.setUserName("张三三");
-        userPojo.setNickName("小三");
+        userPojo.setUserName("zhangsansan");
+        userPojo.setPersionName("张三三");
         userPojo.setDeptPojo(deptPojo);
         userPojo.setRolePojos(rolePojos);
         userPojo.setStatus("Y");

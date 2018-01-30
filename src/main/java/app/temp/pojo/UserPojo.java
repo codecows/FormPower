@@ -11,8 +11,6 @@ public class UserPojo {
     @ApiModelProperty("用户名称")
     private String userName;
 
-    @ApiModelProperty("昵称")
-    private String nickName;
 
     @ApiModelProperty("姓名")
     private String persionName;
@@ -57,14 +55,6 @@ public class UserPojo {
 
     public void setUserName(String userName) {
         this.userName = userName;
-    }
-
-    public String getNickName() {
-        return nickName;
-    }
-
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
     }
 
     public String getPersionName() {
