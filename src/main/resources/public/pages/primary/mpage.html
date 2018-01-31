@@ -67,6 +67,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- DOC: Apply "page-sidebar-reversed" class to put the sidebar on the right side -->
 <!-- DOC: Apply "page-full-width" class to the body element to have full width page without the sidebar menu -->
 <body class="page-header-fixed page-quick-sidebar-over-content page-sidebar-closed-hide-logo">
+
 <!-- BEGIN HEADER -->
 <div class="page-header navbar navbar-fixed-top">
     <!-- BEGIN HEADER INNER -->
@@ -487,31 +488,31 @@ License: You must have a valid license purchased only from themeforest(the above
             <!-- DOC: Set data-keep-expand="true" to keep the submenues expanded -->
             <!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
             <ul class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
-                <!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
-                <li>
-                    <a href="javascript:;">
-                        <i class="icon-home"></i>
-                        <span class="title">系统</span>
+                    <!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
+                    <li>
+                        <a href="javascript:;">
+                            <i class="icon-home"></i>
+                            <span class="title">系统</span>
 
-                        <span class="arrow open"></span>
-                    </a>
-                    <ul class="sub-menu">
-                        <li>
-                            <a href="../../index.html">
-                                <i class="icon-bar-chart"></i>
-                                设置</a>
-                        </li>
-                        <li>
-                            <a href="index_2.html">
-                                <i class="icon-bulb"></i>
-                                初始化</a>
-                        </li>
-                        <li>
-                            <a href="index_3.html">
-                                <i class="icon-graph"></i>
-                                用户</a>
-                        </li>
-                    </ul>
+                            <span class="arrow open"></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a href="../../index.html">
+                                    <i class="icon-bar-chart"></i>
+                                    设置</a>
+                            </li>
+                            <li>
+                                <a href="index_2.html">
+                                    <i class="icon-bulb"></i>
+                                    初始化</a>
+                            </li>
+                            <li>
+                                <a href="index_3.html">
+                                    <i class="icon-graph"></i>
+                                    用户</a>
+                            </li>
+                        </ul>
                 </li>
                 <li class="start active open">
                     <a href="javascript:;">
@@ -583,60 +584,10 @@ License: You must have a valid license purchased only from themeforest(the above
     <!-- END SIDEBAR -->
     <!-- BEGIN CONTENT -->
     <div class="page-content-wrapper">
-        <div class="page-content">
-            <div class="full-height-content full-height-content-scrollable">
-                <div class="full-height-content-body">
-                    <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
-                    <div class="modal fade" id="portlet-config" tabindex="-1" role="dialog"
-                         aria-labelledby="myModalLabel"
-                         aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal"
-                                            aria-hidden="true"></button>
-                                    <h4 class="modal-title">Modal title</h4>
-                                </div>
-                                <div class="modal-body">
-                                    Widget settings form goes here
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn blue">Save changes</button>
-                                    <button type="button" class="btn default" data-dismiss="modal">Close</button>
-                                </div>
-                            </div>
-                            <!-- /.modal-content -->
-                        </div>
-                        <!-- /.modal-dialog -->
-                    </div>
-                    <div>111111请求</div>
-                    <div>111111请求</div>
-                    <div>111111请求</div>
-                    <div>111111请求</div>
-                    <div>111111请求</div>
-                    <div>111111请求</div>
-                    <div>111111请求</div>
-                    <div>111111请求</div>
-                    <div>111111请求</div>
-                    <div>111111请求</div>
-                    <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/>
-                    br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/>
-                    br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/>
-                    br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/>
-                    <div>111111请求</div>
-                    <div>111111请求</div>
-                    <div>111111请求</div>
-                    <div>111111请求</div>
-                    <div>111111请求</div>
-                    <div>111111请求</div>
-                    <div>111111请求</div>
-                    <div>111111请求</div>
-                    <div>111111请求</div>
+        <div class="page-content embed-responsive embed-responsive-16by9">
+            <!--<div class="embed-responsive embed-responsive-16by9">-->
+                <iframe class="embed-responsive-item" src="indexdemo.html"></iframe>
 
-                    <div>111111请求</div>
-                    <div>111111请求</div>
-                </div>
-            </div>
         </div>
     </div>
     <!-- END CONTENT -->
@@ -1345,15 +1296,12 @@ License: You must have a valid license purchased only from themeforest(the above
 <script src="../../assets/global/scripts/metronic.js" type="text/javascript"></script>
 <script src="../../assets/admin/layout/scripts/layout.js" type="text/javascript"></script>
 <script src="../../assets/admin/layout/scripts/quick-sidebar.js" type="text/javascript"></script>
-<script src="../../assets/admin/layout/scripts/demo.js" type="text/javascript"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
 <script>
     jQuery(document).ready(function () {
         Metronic.init(); // init metronic core componets
         Layout.init(); // init layout
         QuickSidebar.init(); // init quick sidebar
-        Demo.init(); // init demo features
-
     });
 </script>
 <!-- END JAVASCRIPTS -->
