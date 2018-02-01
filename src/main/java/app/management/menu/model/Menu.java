@@ -35,6 +35,9 @@ public class Menu {
     @ApiModelProperty("菜单路径")
     private String menuPath;
 
+    @ApiModelProperty("表单ID")
+    private String formId;
+
     @ApiModelProperty("URL")
     private String menuUrl;
 
@@ -105,6 +108,14 @@ public class Menu {
 
     public void setMenuPath(String menuPath) {
         this.menuPath = menuPath;
+    }
+
+    public String getFormId() {
+        return formId;
+    }
+
+    public void setFormId(String formId) {
+        this.formId = formId;
     }
 
     public String getMenuUrl() {

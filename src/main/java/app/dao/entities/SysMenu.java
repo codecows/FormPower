@@ -18,6 +18,8 @@ public class SysMenu {
 
     private String menuPath;
 
+    private String formId;
+
     private String menuUrl;
 
     private String remark;
@@ -82,6 +84,14 @@ public class SysMenu {
 
     public void setMenuPath(String menuPath) {
         this.menuPath = menuPath == null ? null : menuPath.trim();
+    }
+
+    public String getFormId() {
+        return formId;
+    }
+
+    public void setFormId(String formId) {
+        this.formId = formId == null ? null : formId.trim();
     }
 
     public String getMenuUrl() {

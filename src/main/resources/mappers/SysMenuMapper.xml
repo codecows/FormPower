@@ -9,6 +9,7 @@
     <result column="menu_name" jdbcType="VARCHAR" property="menuName" />
     <result column="menu_code" jdbcType="VARCHAR" property="menuCode" />
     <result column="menu_path" jdbcType="VARCHAR" property="menuPath" />
+      <result column="form_id" jdbcType="VARCHAR" property="formId"/>
     <result column="menu_url" jdbcType="VARCHAR" property="menuUrl" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
     <result column="order_num" jdbcType="NUMERIC" property="orderNum" />
@@ -74,8 +75,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    menu_id, parent_id, menu_type, menu_level, menu_name, menu_code, menu_path, menu_url, 
-    remark, order_num, status, create_date
+      menu_id, parent_id, menu_type, menu_level, menu_name, menu_code, menu_path, form_id,
+      menu_url, remark, order_num, status, create_date
   </sql>
   <select id="selectByExample" parameterType="app.dao.entities.SysMenuExample" resultMap="BaseResultMap">
     select
@@ -109,15 +110,15 @@
   </delete>
   <insert id="insert" parameterType="app.dao.entities.SysMenu">
     insert into sys_menu (menu_id, parent_id, menu_type, 
-      menu_level, menu_name, menu_code, 
-      menu_path, menu_url, remark, 
-      order_num, status, create_date
-      )
+      menu_level, menu_name, menu_code,
+      menu_path, form_id, menu_url,
+      remark, order_num, status,
+      create_date)
     values (#{menuId,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, #{menuType,jdbcType=VARCHAR}, 
-      #{menuLevel,jdbcType=VARCHAR}, #{menuName,jdbcType=VARCHAR}, #{menuCode,jdbcType=VARCHAR}, 
-      #{menuPath,jdbcType=VARCHAR}, #{menuUrl,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
-      #{orderNum,jdbcType=NUMERIC}, #{status,jdbcType=VARCHAR}, #{createDate,jdbcType=DATE}
-      )
+      #{menuLevel,jdbcType=VARCHAR}, #{menuName,jdbcType=VARCHAR}, #{menuCode,jdbcType=VARCHAR},
+      #{menuPath,jdbcType=VARCHAR}, #{formId,jdbcType=VARCHAR}, #{menuUrl,jdbcType=VARCHAR},
+      #{remark,jdbcType=VARCHAR}, #{orderNum,jdbcType=NUMERIC}, #{status,jdbcType=VARCHAR},
+      #{createDate,jdbcType=DATE})
   </insert>
   <insert id="insertSelective" parameterType="app.dao.entities.SysMenu">
     insert into sys_menu
@@ -143,6 +144,9 @@
       <if test="menuPath != null">
         menu_path,
       </if>
+        <if test="formId != null">
+            form_id,
+        </if>
       <if test="menuUrl != null">
         menu_url,
       </if>
@@ -181,6 +185,9 @@
       <if test="menuPath != null">
         #{menuPath,jdbcType=VARCHAR},
       </if>
+        <if test="formId != null">
+            #{formId,jdbcType=VARCHAR},
+        </if>
       <if test="menuUrl != null">
         #{menuUrl,jdbcType=VARCHAR},
       </if>
@@ -228,6 +235,9 @@
       <if test="record.menuPath != null">
         menu_path = #{record.menuPath,jdbcType=VARCHAR},
       </if>
+        <if test="record.formId != null">
+            form_id = #{record.formId,jdbcType=VARCHAR},
+        </if>
       <if test="record.menuUrl != null">
         menu_url = #{record.menuUrl,jdbcType=VARCHAR},
       </if>
@@ -257,6 +267,7 @@
       menu_name = #{record.menuName,jdbcType=VARCHAR},
       menu_code = #{record.menuCode,jdbcType=VARCHAR},
       menu_path = #{record.menuPath,jdbcType=VARCHAR},
+      form_id = #{record.formId,jdbcType=VARCHAR},
       menu_url = #{record.menuUrl,jdbcType=VARCHAR},
       remark = #{record.remark,jdbcType=VARCHAR},
       order_num = #{record.orderNum,jdbcType=NUMERIC},
@@ -287,6 +298,9 @@
       <if test="menuPath != null">
         menu_path = #{menuPath,jdbcType=VARCHAR},
       </if>
+        <if test="formId != null">
+            form_id = #{formId,jdbcType=VARCHAR},
+        </if>
       <if test="menuUrl != null">
         menu_url = #{menuUrl,jdbcType=VARCHAR},
       </if>
@@ -313,6 +327,7 @@
       menu_name = #{menuName,jdbcType=VARCHAR},
       menu_code = #{menuCode,jdbcType=VARCHAR},
       menu_path = #{menuPath,jdbcType=VARCHAR},
+      form_id = #{formId,jdbcType=VARCHAR},
       menu_url = #{menuUrl,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
       order_num = #{orderNum,jdbcType=NUMERIC},

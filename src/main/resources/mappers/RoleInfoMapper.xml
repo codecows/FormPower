@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="app.management.roleinfo.mappers.RoleInfoMapper">
+    <resultMap id="BaseResultMap" type="app.management.roleinfo.entities.RoleInfoEntity">
+        <id column="role_id" jdbcType="VARCHAR" property="roleId"/>
+        <result column="r_parent_id" jdbcType="VARCHAR" property="parentId"/>
+        <result column="role_name" jdbcType="VARCHAR" property="roleName"/>
+        <result column="r_description" jdbcType="VARCHAR" property="description"/>
+        <result column="r_remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="r_order_num" jdbcType="NUMERIC" property="orderNum"/>
+        <result column="r_status" jdbcType="VARCHAR" property="status"/>
+        <result column="r_create_date" jdbcType="DATE" property="createDate"/>
+        <collection property="authInfo" ofType="app.management.roleinfo.entities.AuthInfoEntity">
+            <id column="auth_id" jdbcType="VARCHAR" property="authId"/>
+            <result column="a_parent_id" jdbcType="VARCHAR" property="parentId"/>
+            <result column="authority_name" jdbcType="VARCHAR" property="authorityName"/>
+            <result column="a_descripthon" jdbcType="VARCHAR" property="descripthon"/>
+            <result column="a_remark" jdbcType="VARCHAR" property="remark"/>
+            <result column="a_status" jdbcType="VARCHAR" property="status"/>
+            <result column="a_create_date" jdbcType="DATE" property="createDate"/>
+            <collection property="menu" ofType="app.dao.entities.SysMenu">
+                <id column="menu_id" jdbcType="VARCHAR" property="menuId"/>
+                <result column="parent_id" jdbcType="VARCHAR" property="parentId"/>
+                <result column="menu_type" jdbcType="VARCHAR" property="menuType"/>
+                <result column="menu_level" jdbcType="VARCHAR" property="menuLevel"/>
+                <result column="menu_name" jdbcType="VARCHAR" property="menuName"/>
+                <result column="menu_code" jdbcType="VARCHAR" property="menuCode"/>
+                <result column="menu_path" jdbcType="VARCHAR" property="menuPath"/>
+                <result column="form_id" jdbcType="VARCHAR" property="formId"/>
+                <result column="menu_url" jdbcType="VARCHAR" property="menuUrl"/>
+                <result column="remark" jdbcType="VARCHAR" property="remark"/>
+                <result column="order_num" jdbcType="NUMERIC" property="orderNum"/>
+                <result column="status" jdbcType="VARCHAR" property="status"/>
+                <result column="create_date" jdbcType="DATE" property="createDate"/>
+            </collection>
+        </collection>
+    </resultMap>
+
+
+    <sql id="Base_Column_List">
+        r.role_id,
+        r.parent_id r_parent_id,
+        r.role_name,
+        r.description r_description,
+        r.remark r_remark,
+        r.order_num r_order_num,
+        r.status r_status,
+        r.create_date r_create_date,
+        A.auth_id,
+        A.parent_id a_parent_id,
+        A.authority_name,
+        A.descripthon a_descripthon,
+        A.remark a_remark,
+        A.status a_status,
+        A.create_date a_create_date,
+        M.menu_id,
+        M.parent_id m_parent_id,
+        M.menu_type,
+        M.menu_level,
+        M.menu_name,
+        M.menu_code,
+        M.menu_path,
+        M.form_id,
+        M.menu_url,
+        M.remark m_remark,
+        M.order_num m_order_num,
+        M.status m_status,
+        M.create_date m_create_date
+    </sql>
+    <select id="selectAllRecord" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        FROM
+        sys_role r
+        LEFT OUTER JOIN sys_role_auth_rel ra ON r.role_id = ra.role_id
+        LEFT OUTER JOIN sys_authority A ON ra.auth_id = A.auth_id
+        LEFT OUTER JOIN sys_auth_menu_rel am ON A.auth_id = am.auth_id
+        LEFT OUTER JOIN sys_menu M ON am.menu_id = M.menu_id
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        FROM
+        sys_role r
+        LEFT OUTER JOIN sys_role_auth_rel ra ON r.role_id = ra.role_id
+        LEFT OUTER JOIN sys_authority A ON ra.auth_id = A.auth_id
+        LEFT OUTER JOIN sys_auth_menu_rel am ON A.auth_id = am.auth_id
+        LEFT OUTER JOIN sys_menu M ON am.menu_id = M.menu_id
+        where r.role_id = #{roleId,jdbcType=VARCHAR}
+    </select>
+
+
+</mapper>
