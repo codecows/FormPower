@@ -1,0 +1,37 @@
+SELECT *
+-- 	u.user_id,
+-- 	u.user_name,
+-- 	u.persion_name,
+-- 	u.persion_sex,
+-- 	u.mobile,
+-- 	u.telephone,
+-- 	u.email,
+-- 	u.user_position,
+-- 	u.img_url,
+-- 	u.remark,
+-- 	u.status,
+-- 	d.department_id,
+-- 	d.department_name,
+-- 	d.parent_id,
+-- 	d.status,
+-- 	r.role_id,
+-- 	r.role_name,
+-- 	r.parent_id,
+-- 	r.status,
+-- 	s.menu_id,
+-- 	s.menu_name,
+-- 	s.status,
+-- 	g.menu_id,
+-- 	g.menu_name,
+-- 	g.status
+FROM
+	sys_user u
+	LEFT OUTER JOIN sys_user_role_rel ul ON u.user_id = ul.user_id
+	LEFT OUTER JOIN sys_user_department_rel ud on u.user_id = ud.user_id
+	LEFT OUTER JOIN sys_department d on ud.department_id = d.department_id
+	LEFT OUTER JOIN sys_role r on ul.role_id = r.role_id
+	LEFT OUTER JOIN sys_role_auth_rel ra on r.role_id = ra.role_id
+	LEFT OUTER JOIN sys_authority a on ra.auth_id = a.auth_id
+	LEFT OUTER JOIN sys_auth_menu_rel am on a.auth_id = am.auth_id
+	LEFT OUTER JOIN sys_menu s on am.menu_id = s.menu_id and s.menu_type = 's'
+	LEFT OUTER JOIN sys_menu g on am.menu_id = g.menu_id and s.menu_type = 'g'

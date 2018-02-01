@@ -329,6 +329,7 @@ CREATE TABLE sys_menu (
   menu_name   VARCHAR(100) NULL,
   menu_code   VARCHAR(50)  NULL,
   menu_path   VARCHAR(400) NULL,
+  form_id     VARCHAR(36)  NULL,
   menu_url    VARCHAR(400) NULL,
   remark      TEXT         NULL,
   order_num   NUMERIC      NULL,
@@ -360,6 +361,9 @@ COMMENT ON COLUMN sys_menu.menu_code IS
 
 COMMENT ON COLUMN sys_menu.menu_path IS
 '菜单路径:上级菜单路径+本级菜单编码';
+
+COMMENT ON COLUMN sys_menu.form_id IS
+'表单ID';
 
 COMMENT ON COLUMN sys_menu.menu_url IS
 '对应URL';
