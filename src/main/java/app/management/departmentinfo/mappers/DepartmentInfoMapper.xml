@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="app.management.departmentinfo.mappers.DepartmentInfoMapper">
+    <resultMap id="BaseResultMap" type="app.management.departmentinfo.entities.DepartmentInfoEntity">
+        <id column="department_id1" jdbcType="VARCHAR" property="departmentId"/>
+        <result column="parent_id1" jdbcType="VARCHAR" property="parentId"/>
+        <result column="department_name1" jdbcType="VARCHAR" property="departmentName"/>
+        <result column="short_name1" jdbcType="VARCHAR" property="shortName"/>
+        <result column="department_code1" jdbcType="VARCHAR" property="departmentCode"/>
+        <result column="department_level1" jdbcType="NUMERIC" property="departmentLevel"/>
+        <result column="department_type1" jdbcType="VARCHAR" property="departmentType"/>
+        <result column="remark1" jdbcType="VARCHAR" property="remark"/>
+        <result column="create_date1" jdbcType="DATE" property="createDate"/>
+        <result column="STATUS1" jdbcType="VARCHAR" property="status"/>
+        <collection property="departments" ofType="app.management.departmentinfo.entities.DepartmentInfoEntity">
+            <id column="department_id2" jdbcType="VARCHAR" property="departmentId"/>
+            <result column="parent_id2" jdbcType="VARCHAR" property="parentId"/>
+            <result column="department_name2" jdbcType="VARCHAR" property="departmentName"/>
+            <result column="short_name2" jdbcType="VARCHAR" property="shortName"/>
+            <result column="department_code2" jdbcType="VARCHAR" property="departmentCode"/>
+            <result column="department_level2" jdbcType="NUMERIC" property="departmentLevel"/>
+            <result column="department_type2" jdbcType="VARCHAR" property="departmentType"/>
+            <result column="remark2" jdbcType="VARCHAR" property="remark"/>
+            <result column="create_date2" jdbcType="DATE" property="createDate"/>
+            <result column="STATUS2" jdbcType="VARCHAR" property="status"/>
+            <collection property="departments" ofType="app.management.departmentinfo.entities.DepartmentInfoEntity">
+                <id column="department_id3" jdbcType="VARCHAR" property="departmentId"/>
+                <result column="parent_id3" jdbcType="VARCHAR" property="parentId"/>
+                <result column="department_name3" jdbcType="VARCHAR" property="departmentName"/>
+                <result column="short_name3" jdbcType="VARCHAR" property="shortName"/>
+                <result column="department_code3" jdbcType="VARCHAR" property="departmentCode"/>
+                <result column="department_level3" jdbcType="NUMERIC" property="departmentLevel"/>
+                <result column="department_type3" jdbcType="VARCHAR" property="departmentType"/>
+                <result column="remark3" jdbcType="VARCHAR" property="remark"/>
+                <result column="create_date3" jdbcType="DATE" property="createDate"/>
+                <result column="STATUS3" jdbcType="VARCHAR" property="status"/>
+            </collection>
+        </collection>
+    </resultMap>
+
+
+    <sql id="Base_Column_List">
+        	t3.department_id department_id1,
+	t3.parent_id parent_id1,
+	t3.department_name department_name1,
+	t3.short_name short_name1,
+	t3.department_code department_code1,
+	t3.department_level department_level1,
+	t3.department_type department_type1,
+	t3.remark remark1,
+	t3.create_date create_date1,
+	t3.STATUS STATUS1,
+	t2.department_id department_id2,
+	t2.parent_id parent_id2,
+	t2.department_name department_name2,
+	t2.short_name short_name2,
+	t2.department_code department_code2,
+	t2.department_level department_level2,
+	t2.department_type department_type2,
+	t2.remark remark2,
+	t2.create_date create_date2,
+	t2.STATUS STATUS2,
+	t.department_id department_id3,
+	t.parent_id parent_id3,
+	t.department_name department_name3,
+	t.short_name short_name3,
+	t.department_code department_code3,
+	t.department_level department_level3,
+	t.department_type department_type3,
+	t.remark remark3,
+	t.create_date create_date3,
+	t.STATUS  STATUS3
+    </sql>
+    <select id="selectAllRecord" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        sys_department t
+        INNER JOIN sys_user_department_rel ud ON t.department_id = ud.department_id
+        INNER JOIN sys_department t2 ON t.parent_id = t2.department_id
+        INNER JOIN sys_department t3 ON t2.parent_id = t3.department_id
+    </select>
+    <select id="selectByUserId" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        FROM
+        sys_department t
+        INNER JOIN sys_user_department_rel ud ON t.department_id = ud.department_id
+        INNER JOIN sys_department t2 ON t.parent_id = t2.department_id
+        INNER JOIN sys_department t3 ON t2.parent_id = t3.department_id
+        WHERE
+        ud.user_id = #{userId,jdbcType=VARCHAR}
+    </select>
+
+
+</mapper>

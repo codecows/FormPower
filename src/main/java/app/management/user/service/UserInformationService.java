@@ -2,7 +2,7 @@ package app.management.user.service;
 
 
 import app.base.service.BaseService;
-import app.management.user.model.UserInfo;
+import app.management.userinfo.model.UserInfo;
 
 
 

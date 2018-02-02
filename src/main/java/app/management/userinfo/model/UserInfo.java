@@ -1,10 +1,13 @@
-package app.temp.pojo;
+package app.management.userinfo.model;
 
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.util.List;
 
-public class UserPojo {
+@ApiModel("用户连表查询业务实体")
+public class UserInfo {
+
     @ApiModelProperty("用户ID")
     private String userId;
 
@@ -37,9 +40,14 @@ public class UserPojo {
     @ApiModelProperty("状态")
     private String status;
 
-    private DeptPojo deptPojo;
+    @ApiModelProperty("部门列表")
+    private List<DeptPojo> deptPojos;
+
+    @ApiModelProperty("权限列表")
     private List<RolePojo> rolePojos;
-    private List<CoWorkerPojo> coWorkers;
+
+    @ApiModelProperty("三层菜单列表")
+    private List<MenuSystemPojo> menuSystemPojos;
 
     public String getUserId() {
         return userId;
@@ -129,12 +137,12 @@ public class UserPojo {
         this.status = status;
     }
 
-    public DeptPojo getDeptPojo() {
-        return deptPojo;
+    public List<DeptPojo> getDeptPojos() {
+        return deptPojos;
     }
 
-    public void setDeptPojo(DeptPojo deptPojo) {
-        this.deptPojo = deptPojo;
+    public void setDeptPojos(List<DeptPojo> deptPojos) {
+        this.deptPojos = deptPojos;
     }
 
     public List<RolePojo> getRolePojos() {
@@ -145,11 +153,11 @@ public class UserPojo {
         this.rolePojos = rolePojos;
     }
 
-    public List<CoWorkerPojo> getCoWorkers() {
-        return coWorkers;
+    public List<MenuSystemPojo> getMenuSystemPojos() {
+        return menuSystemPojos;
     }
 
-    public void setCoWorkers(List<CoWorkerPojo> coWorkers) {
-        this.coWorkers = coWorkers;
+    public void setMenuSystemPojos(List<MenuSystemPojo> menuSystemPojos) {
+        this.menuSystemPojos = menuSystemPojos;
     }
 }

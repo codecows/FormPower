@@ -2,11 +2,11 @@ package app.management.user.service.impl;
 
 import app.comn.PageModel;
 import app.comn.ServiceException;
-import app.management.user.converter.UserInformationConverter;
 import app.dao.entities.UserInformation;
 import app.dao.mappers.UserInformationMapper;
-import app.management.user.model.UserInfo;
+import app.management.user.converter.UserInformationConverter;
 import app.management.user.service.UserInformationService;
+import app.management.userinfo.model.UserInfo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

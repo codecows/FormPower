@@ -2,7 +2,7 @@ package app.management.user.converter;
 
 import app.base.converter.ConverterBase;
 import app.dao.entities.UserInformation;
-import app.management.user.model.UserInfo;
+import app.management.userinfo.model.UserInfo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 

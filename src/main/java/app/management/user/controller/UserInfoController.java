@@ -2,8 +2,8 @@ package app.management.user.controller;
 
 import app.base.Result;
 import app.comn.ResponseCode;
-import app.management.user.model.UserInfo;
 import app.management.user.service.UserInformationService;
+import app.management.userinfo.model.UserInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.RequestMapping;

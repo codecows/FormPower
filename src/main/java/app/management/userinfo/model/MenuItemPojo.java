@@ -1,18 +1,18 @@
-package app.temp.pojo;
+package app.management.userinfo.model;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiParam;
 
-@ApiModel("菜单")
-public class MenuPojo {
+@ApiModel("三层结构菜单Item")
+public class MenuItemPojo {
     private String menuId;
     private String menuName;
-    private String sceneId;
-    private String sceneName;
-    private String parId;
-    private String parName;
+    private String systemId;
+    private String systemName;
     private String groupId;
     private String groupName;
+    private String parId;
+    private String parName;
     @ApiParam("菜单类型 S 可不更改; 系统 U 用户")
     private String menuType;
     @ApiParam("表单ID")
@@ -69,20 +69,20 @@ public class MenuPojo {
         this.menuName = menuName;
     }
 
-    public String getSceneId() {
-        return sceneId;
+    public String getSystemId() {
+        return systemId;
     }
 
-    public void setSceneId(String sceneId) {
-        this.sceneId = sceneId;
+    public void setSystemId(String systemId) {
+        this.systemId = systemId;
     }
 
-    public String getSceneName() {
-        return sceneName;
+    public String getSystemName() {
+        return systemName;
     }
 
-    public void setSceneName(String sceneName) {
-        this.sceneName = sceneName;
+    public void setSystemName(String systemName) {
+        this.systemName = systemName;
     }
 
     public String getParId() {
