@@ -115,4 +115,34 @@
     </select>
 
 
+    <select id="selectByUserId" parameterType="java.lang.String" resultMap="BaseResultMap">
+        WITH menu_base AS (
+        SELECT
+        *
+        FROM
+        sys_menu
+        WHERE
+        menu_id IN (
+        SELECT
+        M.menu_id
+        FROM
+        sys_user u
+        INNER JOIN sys_user_role_rel ur ON u.user_id = ur.user_id
+        INNER JOIN sys_role_auth_rel ra ON ur.role_id = ra.role_id
+        INNER JOIN sys_auth_menu_rel am ON ra.auth_id = am.auth_id
+        INNER JOIN sys_menu M ON am.menu_id = M.menu_id
+        WHERE
+        u.user_id = #{userId,jdbcType=VARCHAR}
+        )
+        ) SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        menu_base t1
+        LEFT OUTER JOIN menu_base t2 ON T1.menu_id = t2.parent_id
+        LEFT OUTER JOIN menu_base t3 ON T2.menu_id = t3.parent_id
+        WHERE
+        t1.menu_level = '1'
+    </select>
+
+
 </mapper>

@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 
+import java.util.List;
+
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @Api(description = "部门综合查询接口")
@@ -44,7 +46,7 @@ public class DepartmentInfoController {
     @ApiOperation(value = "查找用户所在部门信息",
             notes = "查找用户所在部门信息")
     @RequestMapping(path = "getDeptInfo", method = GET)
-    public Result<DepartmentInfo> getDept(@RequestParam String userId) {
+    public Result<List<DepartmentInfo>> getDept(@RequestParam String userId) {
         return new Result<>(ResponseCode.Success, departmentInfoService.getItem(userId));
     }
 

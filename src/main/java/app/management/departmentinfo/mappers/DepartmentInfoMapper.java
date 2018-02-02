@@ -11,5 +11,5 @@ public interface DepartmentInfoMapper {
 
     List<DepartmentInfoEntity> selectAllRecord();
 
-    DepartmentInfoEntity selectByUserId(String userId);
+    List<DepartmentInfoEntity> selectByUserId(String userId);
 }

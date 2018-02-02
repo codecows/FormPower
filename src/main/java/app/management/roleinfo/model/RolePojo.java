@@ -1,4 +1,4 @@
-package app.management.userinfo.model;
+package app.management.roleinfo.model;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

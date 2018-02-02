@@ -1,6 +1,7 @@
 package app.management.roleinfo.mappers;
 
 import app.management.roleinfo.entities.RoleInfoEntity;
+import app.management.roleinfo.entities.RolePojoEntity;
 
 import java.util.List;
 
@@ -12,4 +13,6 @@ public interface RoleInfoMapper {
     List<RoleInfoEntity> selectAllRecord();
 
     RoleInfoEntity selectByPrimaryKey(String roleId);
+
+    List<RolePojoEntity> selectByUserId(String userId);
 }

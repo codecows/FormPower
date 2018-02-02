@@ -35,7 +35,16 @@
             </collection>
         </collection>
     </resultMap>
-
+    <resultMap id="RoleListForUser" type="app.management.roleinfo.entities.RolePojoEntity">
+        <id column="role_id" jdbcType="VARCHAR" property="roleId"/>
+        <result column="parent_id" jdbcType="VARCHAR" property="parentId"/>
+        <result column="role_name" jdbcType="VARCHAR" property="roleName"/>
+        <result column="description" jdbcType="VARCHAR" property="description"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="order_num" jdbcType="NUMERIC" property="orderNum"/>
+        <result column="status" jdbcType="VARCHAR" property="status"/>
+        <result column="create_date" jdbcType="DATE" property="createDate"/>
+    </resultMap>
 
     <sql id="Base_Column_List">
         r.role_id,
@@ -88,6 +97,21 @@
         LEFT OUTER JOIN sys_menu M ON am.menu_id = M.menu_id
         where r.role_id = #{roleId,jdbcType=VARCHAR}
     </select>
-
+    <select id="selectByUserId" parameterType="java.lang.String" resultMap="RoleListForUser">
+        SELECT
+            r.role_id,
+            r.parent_id,
+            r.role_name,
+            r.description,
+            r.remark,
+            r.order_num,
+            r.status,
+            r.create_date
+        FROM
+            sys_user u
+            INNER JOIN sys_user_role_rel ur ON u.user_id = ur.user_id
+            INNER JOIN sys_role r ON ur.role_id = r.role_id
+        WHERE u.user_id = #{userId,jdbcType=VARCHAR}
+    </select>
 
 </mapper>

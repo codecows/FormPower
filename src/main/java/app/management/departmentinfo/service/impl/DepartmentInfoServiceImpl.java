@@ -8,6 +8,7 @@ import app.management.departmentinfo.service.DepartmentInfoService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created by Fan on 2018/2/2.
@@ -23,9 +24,9 @@ public class DepartmentInfoServiceImpl implements DepartmentInfoService {
     private DepartmentInfoConverter departmentInfoConverter;
 
     @Override
-    public DepartmentInfo getItem(String userId) {
-        DepartmentInfoEntity departmentInfoEntity = departmentInfoMapper.selectByUserId(userId);
-        DepartmentInfo departmentInfo = departmentInfoConverter.convert2Model(departmentInfoEntity);
-        return departmentInfo;
+    public List<DepartmentInfo> getItem(String userId) {
+        List<DepartmentInfoEntity> departmentInfoEntities = departmentInfoMapper.selectByUserId(userId);
+        List<DepartmentInfo> departmentInfos = departmentInfoConverter.convert2ModelList(departmentInfoEntities);
+        return departmentInfos;
     }
 }

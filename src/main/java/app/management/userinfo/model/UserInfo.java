@@ -1,5 +1,8 @@
 package app.management.userinfo.model;
 
+import app.management.departmentinfo.model.DepartmentInfo;
+import app.management.menu.model.MenuLevel;
+import app.management.roleinfo.model.RolePojo;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -41,13 +44,13 @@ public class UserInfo {
     private String status;
 
     @ApiModelProperty("部门列表")
-    private List<DeptPojo> deptPojos;
+    private List<DepartmentInfo> departmentInfos;
 
     @ApiModelProperty("权限列表")
     private List<RolePojo> rolePojos;
 
     @ApiModelProperty("三层菜单列表")
-    private List<MenuSystemPojo> menuSystemPojos;
+    private List<MenuLevel> menuLevels;
 
     public String getUserId() {
         return userId;
@@ -137,12 +140,12 @@ public class UserInfo {
         this.status = status;
     }
 
-    public List<DeptPojo> getDeptPojos() {
-        return deptPojos;
+    public List<DepartmentInfo> getDepartmentInfos() {
+        return departmentInfos;
     }
 
-    public void setDeptPojos(List<DeptPojo> deptPojos) {
-        this.deptPojos = deptPojos;
+    public void setDepartmentInfos(List<DepartmentInfo> departmentInfos) {
+        this.departmentInfos = departmentInfos;
     }
 
     public List<RolePojo> getRolePojos() {
@@ -153,11 +156,11 @@ public class UserInfo {
         this.rolePojos = rolePojos;
     }
 
-    public List<MenuSystemPojo> getMenuSystemPojos() {
-        return menuSystemPojos;
+    public List<MenuLevel> getMenuLevels() {
+        return menuLevels;
     }
 
-    public void setMenuSystemPojos(List<MenuSystemPojo> menuSystemPojos) {
-        this.menuSystemPojos = menuSystemPojos;
+    public void setMenuLevels(List<MenuLevel> menuLevels) {
+        this.menuLevels = menuLevels;
     }
 }

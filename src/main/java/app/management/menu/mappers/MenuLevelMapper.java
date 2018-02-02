@@ -12,4 +12,6 @@ public interface MenuLevelMapper {
     List<MenuLevelEntity> selectAllRecord();
 
     MenuLevelEntity selectByPrimaryKey(String roleId);
+
+    List<MenuLevelEntity> selectByUserId(String userId);
 }

@@ -1,9 +1,10 @@
-package app.management.user.controller;
+package app.management.userinfo.controller;
 
 import app.base.Result;
 import app.comn.ResponseCode;
 import app.management.user.service.UserInformationService;
 import app.management.userinfo.model.UserInfo;
+import app.management.userinfo.service.UserInfoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,18 +15,18 @@ import javax.annotation.Resource;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
-@Api(description = "用户角色列表接口")
+@Api(description = "用户综合信息列表接口")
 @RestController
 @RequestMapping("management/userInfo")
 public class UserInfoController {
     @Resource
-    private UserInformationService userInformationService;
+    private UserInfoService userInfoService;
 
-    @ApiOperation(value = "按ID查找用户角色列表",
-            notes = "按ID查找用户角色列表")
+    @ApiOperation(value = "按ID查找用户综合信息列表",
+            notes = "按ID查找用户综合信息列表")
     @RequestMapping(path = "getUserInfo", method = GET)
     public Result<UserInfo> getUserInfo(@RequestParam String userId) {
-        return new Result<>(ResponseCode.Success, userInformationService.getItem(userId));
+        return new Result<>(ResponseCode.Success, userInfoService.getItem(userId));
     }
 
 //    @ApiOperation(value = "获取所有用户信息",
