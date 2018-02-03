@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>拖放</title>
+    <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <!-- jsDelivr :: Sortable :: Latest (https://www.jsdelivr.com/package/npm/sortablejs) -->
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+    <script src="public/dragula/dragula.min.js"></script>
+
+
+</head>
+<script>
+    $(function () {
+        $("#msg").text("loaded");
+//
+//        var el = document.getElementById('items');
+//        var sortable = Sortable.create(el);
+
+        dragula([document.getElementById("group1"), document.getElementById("group2")]);
+    });
+
+
+</script>
+<body>
+
+<!--<div id="group1">-->
+<!--<div class="item" draggable="true">1</div>-->
+<!--<div class="item" draggable="true">2</div>-->
+<!--<div class="item" draggable="true">3</div>-->
+<!--</div>-->
+<!--<br>-->
+<!--<div id="group2">-->
+<!--<div class="item" draggable="true">4</div>-->
+<!--<div class="item" draggable="true">5</div>-->
+<!--<div class="item" draggable="true">6</div>-->
+<!--</div>-->
+
+<ul id="items">
+    <li>item 1</li>
+    <li>item 2</li>
+    <li>item 3</li>
+</ul>
+
+<ul id="group1">
+    <li>item 1</li>
+    <li>item 2</li>
+    <li>item 3</li>
+</ul>
+
+<ul id="group2">
+    <li>item 111</li>
+    <li>item 22</li>
+    <li>item 13</li>
+</ul>
+
+<br>
+<div id="msg"></div>
+
+
+</body>
+</html>
+<style>
+
+    #group1 {
+        width: 200px;
+        border: 1px solid #0c0c0c;
+        padding: 10px;
+    }
+
+    #group1 #group2 li {
+        width: 400px;
+        border: 1px solid #0c0c0c;
+        padding: 10px;
+    }
+
+    #items li {
+
+        margin: 10px;
+        border: 1px solid #ff7302;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+
+</style>
