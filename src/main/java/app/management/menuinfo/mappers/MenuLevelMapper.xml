@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="app.management.menu.mappers.MenuLevelMapper">
-    <resultMap id="BaseResultMap" type="app.management.menu.entities.MenuLevelEntity">
+<mapper namespace="app.management.menuinfo.mappers.MenuLevelMapper">
+    <resultMap id="BaseResultMap" type="app.management.menuinfo.entities.MenuLevelEntity">
         <id column="menu_id" jdbcType="VARCHAR" property="menuId"/>
         <result column="parent_id" jdbcType="VARCHAR" property="parentId"/>
         <result column="menu_type" jdbcType="VARCHAR" property="menuType"/>
@@ -15,7 +15,7 @@
         <result column="order_num" jdbcType="NUMERIC" property="orderNum"/>
         <result column="status" jdbcType="VARCHAR" property="status"/>
         <result column="create_date" jdbcType="DATE" property="createDate"/>
-        <collection property="menuLevels" ofType="app.management.menu.entities.MenuLevelEntity">
+        <collection property="menuLevels" ofType="app.management.menuinfo.entities.MenuLevelEntity">
             <id column="menu_id2" jdbcType="VARCHAR" property="menuId"/>
             <result column="parent_id2" jdbcType="VARCHAR" property="parentId"/>
             <result column="menu_type2" jdbcType="VARCHAR" property="menuType"/>
@@ -29,7 +29,7 @@
             <result column="order_num2" jdbcType="NUMERIC" property="orderNum"/>
             <result column="status2" jdbcType="VARCHAR" property="status"/>
             <result column="create_date2" jdbcType="DATE" property="createDate"/>
-            <collection property="menuLevels" ofType="app.management.menu.entities.MenuLevelEntity">
+            <collection property="menuLevels" ofType="app.management.menuinfo.entities.MenuLevelEntity">
                 <id column="menu_id3" jdbcType="VARCHAR" property="menuId"/>
                 <result column="parent_id3" jdbcType="VARCHAR" property="parentId"/>
                 <result column="menu_type3" jdbcType="VARCHAR" property="menuType"/>
@@ -47,6 +47,21 @@
         </collection>
     </resultMap>
 
+    <resultMap id="menuPojoResult" type="app.management.menuinfo.entities.MenuPojoEntity">
+        <id column="menu_id" jdbcType="VARCHAR" property="menuId"/>
+        <result column="parent_id" jdbcType="VARCHAR" property="parentId"/>
+        <result column="menu_type" jdbcType="VARCHAR" property="menuType"/>
+        <result column="menu_level" jdbcType="VARCHAR" property="menuLevel"/>
+        <result column="menu_name" jdbcType="VARCHAR" property="menuName"/>
+        <result column="menu_code" jdbcType="VARCHAR" property="menuCode"/>
+        <result column="menu_path" jdbcType="VARCHAR" property="menuPath"/>
+        <result column="form_id" jdbcType="VARCHAR" property="formId"/>
+        <result column="menu_url" jdbcType="VARCHAR" property="menuUrl"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="order_num" jdbcType="NUMERIC" property="orderNum"/>
+        <result column="status" jdbcType="VARCHAR" property="status"/>
+        <result column="create_date" jdbcType="DATE" property="createDate"/>
+    </resultMap>
 
     <sql id="Base_Column_List">
     t1.menu_id,
@@ -89,10 +104,25 @@
 	t3.status status3,
 	t3.create_date create_date3
     </sql>
-    <select id="selectAllRecord" resultMap="BaseResultMap">
-        with menu_base as (select * from sys_menu
 
-        )
+    <sql id="menupojosql">
+        t1.menu_id,
+        t1.parent_id,
+        t1.menu_type,
+        t1.menu_level,
+        t1.menu_name,
+        t1.menu_code,
+        t1.menu_path,
+        t1.form_id,
+        t1.menu_url,
+        t1.remark,
+        t1.order_num,
+        t1.status,
+        t1.create_date
+    </sql>
+
+    <select id="selectAllRecord" resultMap="BaseResultMap">
+        with menu_base as (select * from sys_menu)
         SELECT
         <include refid="Base_Column_List"/>
         FROM
@@ -113,7 +143,6 @@
         LEFT OUTER JOIN sys_menu M ON am.menu_id = M.menu_id
         where r.role_id = #{roleId,jdbcType=VARCHAR}
     </select>
-
 
     <select id="selectByUserId" parameterType="java.lang.String" resultMap="BaseResultMap">
         WITH menu_base AS (
@@ -144,5 +173,10 @@
         t1.menu_level = '1'
     </select>
 
-
+    <select id="selectByMenuTpye" parameterType="java.lang.String" resultMap="menuPojoResult">
+        select
+        <include refid="menupojosql"/>
+        from sys_menu t1
+        where t1.menu_type = #{menuType,jdbcType=VARCHAR}
+    </select>
 </mapper>

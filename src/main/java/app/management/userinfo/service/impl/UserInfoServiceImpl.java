@@ -6,15 +6,19 @@ import app.management.departmentinfo.converter.DepartmentInfoConverter;
 import app.management.departmentinfo.entities.DepartmentInfoEntity;
 import app.management.departmentinfo.mappers.DepartmentInfoMapper;
 import app.management.departmentinfo.model.DepartmentInfo;
-import app.management.menu.converter.MenuLevelConverter;
-import app.management.menu.entities.MenuLevelEntity;
-import app.management.menu.mappers.MenuLevelMapper;
-import app.management.menu.model.MenuLevel;
+import app.management.menuinfo.converter.MenuLevelConverter;
+import app.management.menuinfo.entities.MenuLevelEntity;
+import app.management.menuinfo.mappers.MenuLevelMapper;
+import app.management.menuinfo.model.MenuLevel;
 import app.management.roleinfo.converter.RolePojoConverter;
 import app.management.roleinfo.entities.RolePojoEntity;
 import app.management.roleinfo.mappers.RoleInfoMapper;
 import app.management.roleinfo.model.RolePojo;
+import app.management.userinfo.converter.UserPojoConverter;
+import app.management.userinfo.entities.UserPojoEntity;
+import app.management.userinfo.mappers.UserPojoMapper;
 import app.management.userinfo.model.UserInfo;
+import app.management.userinfo.model.UserPojo;
 import app.management.userinfo.service.UserInfoService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -49,6 +53,12 @@ public class UserInfoServiceImpl implements UserInfoService {
     @Resource
     private MenuLevelConverter menuLevelConverter;
 
+    @Resource
+    private UserPojoMapper userPojoMapper;
+
+    @Resource
+    private UserPojoConverter userPojoConverter;
+
     @Override
     public UserInfo getItem(String userId) {
 
@@ -77,5 +87,21 @@ public class UserInfoServiceImpl implements UserInfoService {
         userInfo.setMenuLevels(menuLevels);
 
         return userInfo;
+    }
+
+    @Override
+    public List<UserPojo> getItemsByDepartmentId(String deptId) {
+        List<UserPojoEntity> userPojoEntities = userPojoMapper.selectByDeptId(deptId);
+
+        List<UserPojo> userPojos = userPojoConverter.convert2ModelList(userPojoEntities);
+        return userPojos;
+    }
+
+    @Override
+    public List<UserPojo> getItemByRoleId(String roleId) {
+        List<UserPojoEntity> userPojoEntities = userPojoMapper.selectByRoleId(roleId);
+        List<UserPojo> userPojos = userPojoConverter.convert2ModelList(userPojoEntities);
+
+        return userPojos;
     }
 }

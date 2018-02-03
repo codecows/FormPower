@@ -1,8 +1,8 @@
-package app.management.menu.converter;
+package app.management.menuinfo.converter;
 
 import app.base.converter.ConverterBase;
-import app.management.menu.entities.MenuLevelEntity;
-import app.management.menu.model.MenuLevel;
+import app.management.menuinfo.entities.MenuLevelEntity;
+import app.management.menuinfo.model.MenuLevel;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 

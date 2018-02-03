@@ -1,4 +1,4 @@
-package app.management.menu.entities;
+package app.management.menuinfo.entities;
 
 
 import java.math.BigDecimal;
