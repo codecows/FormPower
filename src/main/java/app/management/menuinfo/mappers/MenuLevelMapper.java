@@ -1,6 +1,7 @@
-package app.management.menu.mappers;
+package app.management.menuinfo.mappers;
 
-import app.management.menu.entities.MenuLevelEntity;
+import app.management.menuinfo.entities.MenuLevelEntity;
+import app.management.menuinfo.entities.MenuPojoEntity;
 
 import java.util.List;
 
@@ -14,4 +15,6 @@ public interface MenuLevelMapper {
     MenuLevelEntity selectByPrimaryKey(String roleId);
 
     List<MenuLevelEntity> selectByUserId(String userId);
+
+    List<MenuPojoEntity> selectByMenuTpye(String menuType);
 }

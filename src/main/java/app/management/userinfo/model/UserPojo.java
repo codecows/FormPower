@@ -1,22 +1,28 @@
 package app.management.userinfo.model;
 
-import app.management.departmentinfo.model.DepartmentInfo;
-import app.management.menuinfo.model.MenuLevel;
-import app.management.roleinfo.model.RolePojo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-import java.util.List;
+import java.util.Date;
 
-@ApiModel("用户连表查询业务实体")
-public class UserInfo {
-
+@ApiModel("用户信息实体")
+public class UserPojo {
     @ApiModelProperty("用户ID")
     private String userId;
 
     @ApiModelProperty("用户名称")
     private String userName;
 
+    @ApiModelProperty("密码")
+    @JsonIgnore
+    private String password;
+
+    @ApiModelProperty("密码提示问题")
+    private String question;
+
+    @ApiModelProperty("密码提示答案")
+    private String answer;
 
     @ApiModelProperty("姓名")
     private String persionName;
@@ -42,15 +48,8 @@ public class UserInfo {
     private String remark;
     @ApiModelProperty("状态")
     private String status;
-
-    @ApiModelProperty("部门列表")
-    private List<DepartmentInfo> departmentInfos;
-
-    @ApiModelProperty("权限列表")
-    private List<RolePojo> rolePojos;
-
-    @ApiModelProperty("三层菜单列表")
-    private List<MenuLevel> menuLevels;
+    @ApiModelProperty("创建时间")
+    private Date createTime;
 
     public String getUserId() {
         return userId;
@@ -66,6 +65,30 @@ public class UserInfo {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(String question) {
+        this.question = question;
+    }
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
     }
 
     public String getPersionName() {
@@ -140,27 +163,11 @@ public class UserInfo {
         this.status = status;
     }
 
-    public List<DepartmentInfo> getDepartmentInfos() {
-        return departmentInfos;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setDepartmentInfos(List<DepartmentInfo> departmentInfos) {
-        this.departmentInfos = departmentInfos;
-    }
-
-    public List<RolePojo> getRolePojos() {
-        return rolePojos;
-    }
-
-    public void setRolePojos(List<RolePojo> rolePojos) {
-        this.rolePojos = rolePojos;
-    }
-
-    public List<MenuLevel> getMenuLevels() {
-        return menuLevels;
-    }
-
-    public void setMenuLevels(List<MenuLevel> menuLevels) {
-        this.menuLevels = menuLevels;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }
