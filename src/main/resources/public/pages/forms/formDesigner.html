@@ -52,18 +52,9 @@ License: You must have a valid license purchased only from themeforest(the above
     <link href="../../assets/admin/layout/css/themes/default.css" rel="stylesheet" type="text/css" id="style_color"/>
     <link href="../../assets/admin/layout/css/custom.css" rel="stylesheet" type="text/css"/>
     <!-- END THEME STYLES -->
-
     <link rel="shortcut icon" href="favicon.ico"/>
-
     <link rel="stylesheet" href="../../dragula/dragula.css">
-    <script src="../../dragula/dragula.js"></script>
-
-    <style>
-        .mydiv {
-            border: 3px dashed #ff0000;
-            min-height: 40px;
-        }
-    </style>
+    <link rel="stylesheet" href="../../css/form-design.css">
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
@@ -579,19 +570,25 @@ License: You must have a valid license purchased only from themeforest(the above
                         </div>
                         <div class="portlet-body">
 
-                            <div id="formPanel" class="scroller" style="height:200px" data-rail-visible="1"
+                            <div class="scroller form-horizontal" style="height:300px" data-rail-visible="1"
                                  data-rail-color="yellow"
                                  data-handle-color="#a1b2bd">
                                 <!--<strong>Scroll is hidden</strong><br/>-->
-                                <a href="#" class="btn blue">
-                                    AAA
-                                </a>
-                                <a href="#" class="btn blue">
-                                    BBB
-                                </a>
-                                <a href="#" class="btn blue">
-                                    CCC
-                                </a>
+
+                                <div id="formPanel" class="form-body">
+                                    <a href="#" class="btn blue">
+                                        AAA
+                                    </a>
+                                    <a href="#" class="btn blue">
+                                        BBB
+                                    </a>
+                                    <a href="#" class="btn blue">
+                                        CCC
+                                    </a>
+
+                                </div>
+
+
                             </div>
                         </div>
                     </div>
@@ -1369,92 +1366,20 @@ License: You must have a valid license purchased only from themeforest(the above
 <script src="../../assets/admin/layout/scripts/layout.js" type="text/javascript"></script>
 <script src="../../assets/admin/layout/scripts/quick-sidebar.js" type="text/javascript"></script>
 
+<script src="../../dragula/dragula.js"></script>
+<script src="../../js/formDesigner.js"></script>
 
-<style>
-    .outofdiv {
-        cursor: no-drop;
-    }
-</style>
 <!-- END PAGE LEVEL SCRIPTS -->
 <script>
     jQuery(document).ready(function () {
         Metronic.init(); // init metronic core componets
         Layout.init(); // init layout
         QuickSidebar.init(); // init quick sidebar
-        if (!jQuery().sortable) {
-            return;
-        }
-
-//        dragula([document.getElementById(left), document.getElementById(right)])
-//            .on('drag', function (el) {
-//                el.className = el.className.replace('ex-moved', '');
-//            }).on('drop', function (el) {
-//            el.className += ' ex-moved';
-//        }).on('over', function (el, container) {
-//            container.className += ' ex-over';
-//        }).on('out', function (el, container) {
-//            container.className = container.className.replace('ex-over', '');
-//        });
-
-        var drake = dragula([document.getElementById("formPanel")
-            , document.getElementById("controlPanel")
-            , document.getElementById("formPanel1")], {
-            columnsCount: 4,
-            copy: function (el, source) {
-                return source === document.getElementById("controlPanel");
-            },
-            accepts: function (el, target) {
-                return target !== document.getElementById("controlPanel");
-            }
-        }).on("drag", function (el, source) {
-
-
-        }).on("drop", function (el, target, source, sibling) {
-
-            var cType = el.getAttribute("controltype");
-            if (cType === "1") {
-                $(el).append("<button>啊啊啊</button>")
-            }
-            else if (cType === "2") {
-                $(el).text("啊啊啊22");
-            } else {
-                $(el).text("啊啊啊333");
-            }
-        });
+        FormDesinger.init(2);
         $("#btn").click(function () {
-            alert("des1");
-            drake.destroy();
-            alert("des");
-
+            FormDesinger.dispose();
+            alert("destroy");
         });
-
-//        dragula([document.getElementById(left), document.getElementById(right)], {
-//            copy: function (el, source) {
-//                return source === document.getElementById(left)
-//            },
-//            accepts: function (el, target) {
-//                return target !== document.getElementById(left)
-//            }
-//        });
-
-
-        $("#userMenu").click(function () {
-            var html = "  <div class=\"portlet portlet-sortable light bordered\">\n" +
-                "                        <div class=\"portlet-body\">\n" +
-                "                            <div class=\"actions\">\n" +
-                "                                <label>aaa</label>\n" +
-                "                                <input value='111'>\n" +
-                "                                <a href=\"#\" class=\"btn btn-default btn-sm\">\n" +
-                "                                    <i class=\"fa fa-pencil\"></i> Edit </a>\n" +
-                "                                <a href=\"#\" class=\"btn btn-default btn-sm\">\n" +
-                "                                    <i class=\"fa fa-plus\"></i> Add </a>\n" +
-                "                            </div>\n" +
-                "                        </div>\n" +
-                "                    </div>"
-            $("#t1").append(html);
-
-        });
-
     });
 </script>
 <!-- END JAVASCRIPTS -->

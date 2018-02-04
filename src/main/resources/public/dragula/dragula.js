@@ -113,7 +113,6 @@
                         o.columnsCount = 1;
                     }
 
-
                     if (o.moves === void 0) {
                         o.moves = always;
                     }
@@ -315,9 +314,11 @@
                             // TODO 复制的样式
                             _copy = document.createElement("div");
                             _copy.setAttribute("controltype", context.item.getAttribute("controltype"));
-                            _copy.classList.add("mydiv");
+                            if (options.controlStyle) {
+                                _copy.classList.add(options.controlStyle);
+                            }
                             _copy.classList.add("col-md-" + (12 / options.columnsCount));
-                            //_copy = context.item.cloneNode(true);
+                            // _copy = context.item.cloneNode(true);
                             drake.emit('cloned', _copy, context.item, 'copy');
                         }
 

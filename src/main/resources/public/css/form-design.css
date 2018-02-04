@@ -1,0 +1,4 @@
+.control-shadow {
+    border: 3px dashed #ff0000;
+    min-height: 40px;
+}
