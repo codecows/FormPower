@@ -16,7 +16,7 @@
   user-select: none !important;
 }
 .gu-transit {
-  opacity: 0.2;
+  opacity: 0.6;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
   filter: alpha(opacity=20);
 }

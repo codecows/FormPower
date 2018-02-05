@@ -67,7 +67,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- DOC: Apply "page-footer-fixed" class to the body element to have fixed footer -->
 <!-- DOC: Apply "page-sidebar-reversed" class to put the sidebar on the right side -->
 <!-- DOC: Apply "page-full-width" class to the body element to have full width page without the sidebar menu -->
-<body class="page-header-fixed page-quick-sidebar-over-content page-sidebar-closed-hide-logo page-sidebar-closed">
+<body class="page-header-fixed page-quick-sidebar-over-content page-sidebar-closed-hide-logo">
 <!-- BEGIN HEADER -->
 <div class="page-header navbar navbar-fixed-top">
     <!-- BEGIN HEADER INNER -->
@@ -488,24 +488,23 @@ License: You must have a valid license purchased only from themeforest(the above
             <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
             <!-- DOC: Set data-keep-expand="true" to keep the submenues expanded -->
             <!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
-            <ul class="page-sidebar-menu page-sidebar-menu-closed" data-keep-expanded="false" data-auto-scroll="true"
+            <ul class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true"
                 data-slide-speed="200">
                 <!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
                 <li>
                     <a href="javascript:;">
                         <i class="icon-home"></i>
                         <span class="title">系统</span>
-
                         <span class="arrow open"></span>
                     </a>
                     <ul class="sub-menu">
-                        <li>
-                            <a href="../../index.html">
+                        <li controltype="1">
+                            <a href="javascript:;">
                                 <i class="icon-bar-chart"></i>
                                 设置</a>
                         </li>
                         <li>
-                            <a href="index_2.html">
+                            <a href="javascript:;">
                                 <i class="icon-bulb"></i>
                                 初始化</a>
                         </li>
@@ -513,6 +512,30 @@ License: You must have a valid license purchased only from themeforest(the above
                             <a id="userMenu" href="javascript:;">
                                 <i class="icon-graph"></i>
                                 用户</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript:;">
+                        <i class="icon-home"></i>
+                        <span class="title">系统1</span>
+                        <span class="arrow open"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a href="javascript:;">
+                                <i class="icon-bar-chart"></i>
+                                设置1</a>
+                        </li>
+                        <li>
+                            <a href="javascript:;">
+                                <i class="icon-bulb"></i>
+                                初始化1</a>
+                        </li>
+                        <li>
+                            <a href="javascript:;">
+                                <i class="icon-graph"></i>
+                                用户1</a>
                         </li>
                     </ul>
                 </li>
@@ -525,42 +548,8 @@ License: You must have a valid license purchased only from themeforest(the above
     <!-- BEGIN CONTENT -->
     <div class="page-content-wrapper">
         <div class="page-content">
-
             <div class="row">
-                <div class="col-md-2">
-
-
-                    <!-- BEGIN Portlet PORTLET-->
-                    <div class="portlet box blue-hoki">
-                        <div class="portlet-title">
-                            <div class="caption">
-                                控件
-                            </div>
-                        </div>
-                        <div class="portlet-body">
-
-                            <div id="controlPanel" class="scroller" style="height:200px" data-rail-visible="1"
-                                 data-rail-color="yellow"
-                                 data-handle-color="#a1b2bd">
-                                <!--<strong>Scroll is hidden</strong><br/>-->
-                                <a href="#" class="btn blue" controltype="1">
-                                    111<span class="glyphicon glyphicon-cog"></span>
-                                </a>
-                                <a href="#" class="btn blue" controltype="2">
-                                    222<span class="glyphicon glyphicon-cog"></span>
-                                </a>
-                                <a href="#" class="btn blue" controltype="3">
-                                    333<span class="glyphicon glyphicon-cog"></span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- END Portlet PORTLET-->
-
-
-                </div>
                 <div class="col-md-10">
-
                     <!-- BEGIN Portlet PORTLET-->
                     <div class="portlet box blue-hoki">
                         <div class="portlet-title">
@@ -569,25 +558,13 @@ License: You must have a valid license purchased only from themeforest(the above
                             </div>
                         </div>
                         <div class="portlet-body">
-
-                            <div class="scroller form-horizontal" style="height:300px" data-rail-visible="1"
+                            <div id="formPanel" class="form-body" class="scroller" data-rail-visible="1"
                                  data-rail-color="yellow"
                                  data-handle-color="#a1b2bd">
                                 <!--<strong>Scroll is hidden</strong><br/>-->
+                                <!--<div id="formPanel" class="form-body">-->
 
-                                <div id="formPanel" class="form-body">
-                                    <a href="#" class="btn blue">
-                                        AAA
-                                    </a>
-                                    <a href="#" class="btn blue">
-                                        BBB
-                                    </a>
-                                    <a href="#" class="btn blue">
-                                        CCC
-                                    </a>
-
-                                </div>
-
+                                <!--</div>-->
 
                             </div>
                         </div>
@@ -595,65 +572,11 @@ License: You must have a valid license purchased only from themeforest(the above
                     <!-- END Portlet PORTLET-->
 
                 </div>
-                <div class="col-md-12">
 
-                    <!--BEGIN Portlet PORTLET-->
-                    <!--<div class="portlet box blue-hoki">-->
-                    <!--<div class="portlet-title">-->
-                    <!--<div class="caption">-->
-                    <!--设计1-->
-                    <!--</div>-->
-                    <!--</div>-->
-                    <!--<div class="portlet-body">-->
-
-                    <!--<div id="formPanel2" class="scroller" style="height:200px" data-rail-visible="1"-->
-                    <!--data-rail-color="yellow"-->
-                    <!--data-handle-color="#a1b2bd">-->
-                    <!--&lt;!&ndash;<strong>Scroll is hidden</strong><br/>&ndash;&gt;-->
-                    <!--<div draggable="true" class="btn blue">-->
-                    <!--AAA1-->
-                    <!--</div>-->
-                    <!--<a href="#" class="btn blue">-->
-                    <!--BBB-->
-                    <!--</a>-->
-                    <!--<a href="#" class="btn blue">-->
-                    <!--CCC-->
-                    <!--</a>-->
-                    <!--</div>-->
-                    <!--</div>-->
-                    <!--</div>-->
-                    <!--END Portlet PORTLET-->
-                </div>
             </div>
-
             <div id="msg"></div>
 
-            <button id="btn">11111</button>
-            <div class="form-horizontal">
-                <div class="form-body">
-                    <h3 class="form-section">个人信息</h3>
-                    <div class="row" id="formPanel1">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="control-label col-md-3">First1 Name</label>
-                                <div class="col-md-9">
-                                    <input type="text" class="form-control" placeholder="Chee Kin">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="control-label col-md-3">First Name</label>
-                                <div class="col-md-9">
-                                    <input type="text" class="form-control" placeholder="Chee Kin">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!--/row-->
-                </div>
-            </div>
+            <button id="btn" class="btn blue">11111</button>
         </div>
     </div>
 </div>
@@ -1375,9 +1298,10 @@ License: You must have a valid license purchased only from themeforest(the above
         Metronic.init(); // init metronic core componets
         Layout.init(); // init layout
         QuickSidebar.init(); // init quick sidebar
-        FormDesinger.init(2);
+        FormDesinger.sizeInit();
+        FormDesinger.drakeInit(2);
         $("#btn").click(function () {
-            FormDesinger.dispose();
+            FormDesinger.drakeDispose();
             alert("destroy");
         });
     });

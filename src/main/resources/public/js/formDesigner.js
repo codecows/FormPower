@@ -1,32 +1,34 @@
 var FormDesinger = function () {
     var drake;
-    var formInit = function formInit(colCount) {
-        drake = dragula([document.getElementById("formPanel")
-            , document.getElementById("controlPanel")], {
+    var drakeInit = function drakeInit(colCount) {
+        var panels = [];
+        panels.push(document.getElementById("formPanel"));
+        var controls = document.getElementsByClassName("sub-menu");
+        for (i = 0; i < controls.length; i++) {
+            panels.push(controls[i]);
+        }
+        drake = dragula(panels, {
             columnsCount: colCount,
             controlStyle: "control-shadow",
             copy: function (el, source) {
-                return source === document.getElementById("controlPanel");
+                return source.classList[0] === "sub-menu";
+                //return source === document.getElementById("controlPanel");
             },
             accepts: function (el, target) {
-                return target !== document.getElementById("controlPanel");
+                return target.classList[0] !== "sub-menu";
             }
         }).on("drag", function (el, source) {
-            var a = $("<div><button>11111</button></div>")
-            el = a[0];
 
         }).on("shadow", function (el, container, source) {
-            var b = $("<div>2222</div>");
-            el = b[0];
 
         }).on("drop", function (el, target, source, sibling) {
 
             var cType = el.getAttribute("controltype");
             if (cType === "1") {
-                var html = "<div id='F001' class=\"form-group\">\n" +
-                    "           <label class=\"control-label col-md-3\">标签</label>\n" +
-                    "           <div class=\"col-md-9\">\n" +
-                    "               <input type=\"text\" class=\"form-control\" placeholder=\"提示\">\n" +
+                var html = "<div class=\"form-group\">\n" +
+                    "           <label class=\"control-label\">标签</label>\n" +
+                    "           <div>\n" +
+                    "               <input type=\"text\" class=\"form-control input-sm\" placeholder=\"提示\">\n" +
                     "           </div>\n" +
                     "       </div>";
                 $(el).append(html)
@@ -39,14 +41,22 @@ var FormDesinger = function () {
         });
     }
 
+    function sizeInit() {
+        $("#formPanel").css("height", "300px");
+         // alert(3);
+    }
+
     return {
-        init: function (colCount) {
-            formInit(colCount);
+        drakeInit: function (colCount) {
+            drakeInit(colCount);
         },
-        dispose: function () {
+        drakeDispose: function () {
             if (drake) {
                 drake.destroy();
             }
+        },
+        sizeInit: function () {
+            sizeInit();
         }
     };
 }();

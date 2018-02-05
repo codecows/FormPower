@@ -559,11 +559,10 @@
                         var rect = _item.getBoundingClientRect();
                         //TODO 拖动中 显示的样式
                         // _mirror = document.createElement("div");
-                        //
                         // _mirror.innerText = "啊啊啊啊啊的打";
                         // _mirror.classList.add("mydiv");
-
                         _mirror = _item.cloneNode(true);
+                        _mirror.setAttribute("style", "border: 1px dashed blue;list-style-type:none")
                         _mirror.style.width = getRectWidth(rect) + 'px';
                         _mirror.style.height = getRectHeight(rect) + 'px';
                         classes.rm(_mirror, 'gu-transit');

@@ -1,4 +1,31 @@
-.control-shadow {
-    border: 3px dashed #ff0000;
-    min-height: 40px;
+body {
 }
+
+a:link {
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+a:active {
+    text-decoration: none;
+}
+
+.control-shadow {
+    /*border: dashed 1px black;*/
+    min-height: 50px;
+    background: lightblue;
+    margin: 2px 0px;
+}
+
+.page-content-wrapper{
+    margin: 0px;
+    padding: 0px;
+}
+.page-content{
+    margin: 0px;
+    padding: 0px;
+}
+
