@@ -548,32 +548,50 @@ License: You must have a valid license purchased only from themeforest(the above
     <!-- BEGIN CONTENT -->
     <div class="page-content-wrapper">
         <div class="page-content">
-            <div class="row">
-                <div class="col-md-10">
-                    <!-- BEGIN Portlet PORTLET-->
-                    <div class="portlet box blue-hoki">
-                        <div class="portlet-title">
-                            <div class="caption">
-                                设计
+
+
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs nav-pills" role="tablist">
+                <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
+                <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
+                <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>
+                <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="home">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <!-- BEGIN Portlet PORTLET-->
+                            <div class="portlet box blue-hoki">
+                                <div class="portlet-title">
+                                    <div class="caption">
+                                        设计
+                                    </div>
+                                </div>
+                                <div class="portlet-body">
+                                    <div id="formPanel" class="form-body" class="scroller" data-rail-visible="1"
+                                         data-rail-color="yellow"
+                                         data-handle-color="#a1b2bd">
+                                        <!--<strong>Scroll is hidden</strong><br/>-->
+                                        <!--<div id="formPanel" class="form-body">-->
+
+                                        <!--</div>-->
+
+                                    </div>
+                                </div>
                             </div>
+                            <!-- END Portlet PORTLET-->
+
                         </div>
-                        <div class="portlet-body">
-                            <div id="formPanel" class="form-body" class="scroller" data-rail-visible="1"
-                                 data-rail-color="yellow"
-                                 data-handle-color="#a1b2bd">
-                                <!--<strong>Scroll is hidden</strong><br/>-->
-                                <!--<div id="formPanel" class="form-body">-->
 
-                                <!--</div>-->
-
-                            </div>
-                        </div>
-                    </div>
-                    <!-- END Portlet PORTLET-->
-
-                </div>
-
+                    </div></div>
+                <div role="tabpanel" class="tab-pane" id="profile">2</div>
+                <div role="tabpanel" class="tab-pane" id="messages">3</div>
+                <div role="tabpanel" class="tab-pane" id="settings">4441</div>
             </div>
+
             <div id="msg"></div>
 
             <button id="btn" class="btn blue">11111</button>
