@@ -82,3 +82,23 @@ INSERT INTO "sys_user_department_rel"("guid", "user_id", "department_id", "statu
 /*==============================================================*/
 
 INSERT INTO "sys_user_role_rel"("guid", "user_id", "role_id", "status", "operation_date") VALUES ('7639211c-530c-4013-aadc-c0f81cd4fef5', '10000', '0101009', 'y', '2018-02-01');
+
+/*==============================================================*/
+/* init sys_form_control_groups                                                */
+/*==============================================================*/
+
+INSERT INTO "sys_form_control_groups" VALUES ('10', '基础控件', 'Y');
+INSERT INTO "sys_form_control_groups" VALUES ('20', '布局控件', 'Y');
+INSERT INTO "sys_form_control_groups" VALUES ('30', '系统控件', 'Y');
+INSERT INTO "sys_form_control_groups" VALUES ('40', '高级控件', 'Y');
+INSERT INTO "sys_form_control_groups" VALUES ('50', '其它控件', 'Y');
+
+/*==============================================================*/
+/* init sys_from_controls                                                */
+/*==============================================================*/
+
+INSERT INTO "sys_from_controls" VALUES ('10', '标签', null, null, null, '10');
+INSERT INTO "sys_from_controls" VALUES ('20', '文本框', null, null, null, '10');
+INSERT INTO "sys_from_controls" VALUES ('30', '数字', null, null, null, '10');
+INSERT INTO "sys_from_controls" VALUES ('40', '下拉框', null, null, null, '10');
+INSERT INTO "sys_from_controls" VALUES ('50', '日期', null, null, null, '10');
