@@ -723,29 +723,50 @@ COMMENT ON COLUMN sys_code.order_num IS
 /*==============================================================*/
 /* Table: sys_form_control_groups                                              */
 /*==============================================================*/
-CREATE TABLE "sys_form_control_groups" (
-  "group_id"   VARCHAR(30) COLLATE "default" NOT NULL,
-  "group_name" VARCHAR(50) COLLATE "default",
-  "status"     VARCHAR(1) COLLATE "default"
+CREATE TABLE "public"."sys_form_control_groups" (
+  "group_id"   VARCHAR(30) COLLATE "pg_catalog"."default" NOT NULL,
+  "group_name" VARCHAR(50) COLLATE "pg_catalog"."default",
+  "status"     VARCHAR(1) COLLATE "pg_catalog"."default"
 );
-ALTER TABLE "sys_form_control_groups"
-  ADD PRIMARY KEY ("group_id");
+COMMENT ON COLUMN "public"."sys_form_control_groups"."group_id" IS '组ID';
+COMMENT ON COLUMN "public"."sys_form_control_groups"."group_name" IS '组名称';
+COMMENT ON COLUMN "public"."sys_form_control_groups"."status" IS '状体';
+COMMENT ON TABLE "public"."sys_form_control_groups" IS '控件组';
+
+-- ----------------------------
+-- Primary Key structure for table sys_form_control_groups
+-- ----------------------------
+ALTER TABLE "public"."sys_form_control_groups"
+  ADD CONSTRAINT "sys_form_control_groups_pkey" PRIMARY KEY ("group_id");
+
 
 /*==============================================================*/
 /* Table: sys_from_controls                                              */
 /*==============================================================*/
-CREATE TABLE "sys_from_controls" (
-  "control_id"   VARCHAR(20) COLLATE "default" NOT NULL,
-  "control_name" VARCHAR(50) COLLATE "default",
-  "img"          VARCHAR(200) COLLATE "default",
-  "status"       VARCHAR(1) COLLATE "default",
+CREATE TABLE "public"."sys_from_controls" (
+  "control_id"   VARCHAR(20) COLLATE "pg_catalog"."default" NOT NULL,
+  "control_name" VARCHAR(50) COLLATE "pg_catalog"."default",
+  "img"          VARCHAR(200) COLLATE "pg_catalog"."default",
+  "status"       VARCHAR(1) COLLATE "pg_catalog"."default",
   "order_num"    NUMERIC,
-  "group_id"     VARCHAR COLLATE "default"
+  "group_id"     VARCHAR COLLATE "pg_catalog"."default"
 );
+COMMENT ON COLUMN "public"."sys_from_controls"."control_id" IS '控件ID';
+COMMENT ON COLUMN "public"."sys_from_controls"."control_name" IS '空间名称';
+COMMENT ON COLUMN "public"."sys_from_controls"."img" IS '图标';
+COMMENT ON COLUMN "public"."sys_from_controls"."status" IS '状态';
+COMMENT ON COLUMN "public"."sys_from_controls"."order_num" IS '排序号';
+COMMENT ON COLUMN "public"."sys_from_controls"."group_id" IS '所属组ID';
+COMMENT ON TABLE "public"."sys_from_controls" IS '控件表';
 
-ALTER TABLE "sys_from_controls"
-  ADD PRIMARY KEY ("control_id");
-ALTER TABLE "sys_from_controls"
-  ADD FOREIGN KEY ("group_id")
-REFERENCES "sys_form_control_groups" ("group_id")
-ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ----------------------------
+-- Primary Key structure for table sys_from_controls
+-- ----------------------------
+ALTER TABLE "public"."sys_from_controls"
+  ADD CONSTRAINT "sys_from_controls_pkey" PRIMARY KEY ("control_id");
+
+-- ----------------------------
+-- Foreign Keys structure for table sys_from_controls
+-- ----------------------------
+ALTER TABLE "public"."sys_from_controls"
+  ADD CONSTRAINT "sys_from_controls_group_id_fkey" FOREIGN KEY ("group_id") REFERENCES "sys_form_control_groups" ("group_id") ON DELETE NO ACTION ON UPDATE NO ACTION;
