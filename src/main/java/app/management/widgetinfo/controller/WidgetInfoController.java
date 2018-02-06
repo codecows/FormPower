@@ -23,8 +23,8 @@ public class WidgetInfoController {
 
     @ApiOperation(value = "查找所有状态为y的控件",
             notes = "查找所有状态为y的控件")
-    @RequestMapping(path = "getUserInfo", method = GET)
-    public Result<List<WidgetInfo>> getUserInfo() {
+    @RequestMapping(path = "getWidgetInfo", method = GET)
+    public Result<List<WidgetInfo>> getWidgetInfo() {
         return new Result<>(ResponseCode.Success, widgetInfoSercice.getItems());
     }
 
