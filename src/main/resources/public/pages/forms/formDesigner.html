@@ -49,7 +49,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <link href="../../assets/global/css/components.css" id="style_components" rel="stylesheet" type="text/css"/>
     <link href="../../assets/global/css/plugins.css" rel="stylesheet" type="text/css"/>
     <link href="../../assets/admin/layout/css/layout.css" rel="stylesheet" type="text/css"/>
-    <link href="../../assets/admin/layout/css/themes/default.css" rel="stylesheet" type="text/css" id="style_color"/>
+    <link href="../../assets/admin/layout/css/themes/darkblue.css" rel="stylesheet" type="text/css" id="style_color"/>
     <link href="../../assets/admin/layout/css/custom.css" rel="stylesheet" type="text/css"/>
     <!-- END THEME STYLES -->
     <link rel="shortcut icon" href="favicon.ico"/>
@@ -82,6 +82,87 @@ License: You must have a valid license purchased only from themeforest(the above
             </div>
         </div>
         <!-- END LOGO -->
+        <div class="hor-menu hor-menu-light hidden-sm hidden-xs">
+            <ul class="nav navbar-nav">
+                <!-- DOC: Add data-hover="dropdown", data-close-others="true" and data-toggle="dropdown" attributes for the below "dropdown-toggle" links to enable hover dropdowns -->
+                <!-- Nav tabs -->
+                <li role="presentation" class="classic-menu-dropdown active">
+                    <a href="#formPane" aria-controls="formPane" role="tab" data-toggle="tab"
+                       data-toggle="tab">表单</a>
+                    <span class="selected">
+					</span>
+                </li>
+                <li role="presentation" class="classic-menu-dropdown">
+                    <a href="#controlPane" aria-controls="controlPane" role="tab" data-toggle="tab"
+                       data-toggle="tab">控件</a>
+                    </span>
+                </li>
+                <li role="presentation" class="classic-menu-dropdown">
+                    <a href="#sqlPane" aria-controls="sqlPane" role="tab" data-toggle="tab"
+                       data-toggle="tab">存储过程</a>
+                    </span>
+                </li>
+                <li role="presentation" class="classic-menu-dropdown">
+                    <a href="#workflowPane" aria-controls="workflowPane" role="tab" data-toggle="tab"
+                       data-toggle="tab">审批</a>
+                    </span>
+                </li>
+                <li class="classic-menu-dropdown">
+                    <a data-toggle="dropdown" href="javascript:;">
+                        操作 <i class="fa fa-angle-down"></i>
+                    </a>
+                    <ul class="dropdown-menu pull-left">
+                        <li>
+                            <a href="#">
+                                <i class="glyphicon glyphicon-search"></i> Section 1 </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="glyphicon glyphicon-trash"></i> Section 2 </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="glyphicon glyphicon-flag"></i> Section 3 </a>
+                        </li>
+
+                        <li class="dropdown-submenu">
+                            <a href="javascript:;">
+                                <i class="glyphicon glyphicon-warning-sign"></i> More options </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="#">
+                                        Second level link </a>
+                                </li>
+                                <li class="dropdown-submenu">
+                                    <a href="javascript:;">
+                                        More options </a>
+                                    <ul class="dropdown-menu">
+
+                                        <li>
+                                            <a href="index.html">
+                                                Third level link </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="index.html">
+                                        Second level link </a>
+                                </li>
+                                <li>
+                                    <a href="index.html">
+                                        Second level link </a>
+                                </li>
+                                <li>
+                                    <a href="index.html">
+                                        Second level link </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
         <!-- BEGIN HEADER SEARCH BOX -->
         <form class="search-form search-form-expanded" action="extra_search.html" method="GET">
             <div class="input-group">
@@ -548,53 +629,28 @@ License: You must have a valid license purchased only from themeforest(the above
     <!-- BEGIN CONTENT -->
     <div class="page-content-wrapper">
         <div class="page-content">
-
-
-            <!-- Nav tabs -->
-            <ul class="nav nav-tabs nav-pills" role="tablist">
-                <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
-                <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
-                <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>
-                <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
-            </ul>
-
             <!-- Tab panes -->
             <div class="tab-content">
-                <div role="tabpanel" class="tab-pane active" id="home">
+                <div role="tabpanel" class="tab-pane active" id="formPane">
+
+                </div>
+                <div role="tabpanel" class="tab-pane" id="controlPane">
                     <div class="row">
-                        <div class="col-md-10">
-                            <!-- BEGIN Portlet PORTLET-->
-                            <div class="portlet box blue-hoki">
-                                <div class="portlet-title">
-                                    <div class="caption">
-                                        设计
-                                    </div>
-                                </div>
-                                <div class="portlet-body">
-                                    <div id="formPanel" class="form-body" class="scroller" data-rail-visible="1"
-                                         data-rail-color="yellow"
-                                         data-handle-color="#a1b2bd">
-                                        <!--<strong>Scroll is hidden</strong><br/>-->
-                                        <!--<div id="formPanel" class="form-body">-->
+                        <div id="formPanel" class="form-body" class="scroller" data-rail-visible="1"
+                             data-rail-color="yellow"
+                             data-handle-color="#a1b2bd">
+                            <!--<strong>Scroll is hidden</strong><br/>-->
+                            <!--<div id="formPanel" class="form-body">-->
 
-                                        <!--</div>-->
-
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- END Portlet PORTLET-->
+                            <!--</div>-->
 
                         </div>
-
-                    </div></div>
-                <div role="tabpanel" class="tab-pane" id="profile">2</div>
-                <div role="tabpanel" class="tab-pane" id="messages">3</div>
-                <div role="tabpanel" class="tab-pane" id="settings">4441</div>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="sqlPane">3</div>
+                <div role="tabpanel" class="tab-pane" id="workflowPane">4441</div>
             </div>
 
-            <div id="msg"></div>
-
-            <button id="btn" class="btn blue">11111</button>
         </div>
     </div>
 </div>
