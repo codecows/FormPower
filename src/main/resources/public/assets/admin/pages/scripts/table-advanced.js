@@ -428,12 +428,12 @@ var TableAdvanced = function () {
 
             console.log('me 1');
 
-            initTable1();
-            initTable2();
-            initTable3();
+            // initTable1();
+            // initTable2();
+            // initTable3();
             initTable4();
-            initTable5();
-            initTable6();
+            // initTable5();
+            // initTable6();
 
             console.log('me 2');
         }
