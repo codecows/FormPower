@@ -60,6 +60,8 @@
         <!--<table tableName="sys_auth_menu_rel"></table>-->
         <!--<table tableName="sys_company_dept_rel"></table>-->
         <!--<table tableName="sys_code"></table>-->
+        <!--<table tableName="sys_form_control_groups"></table>-->
+        <!--<table tableName="sys_from_controls"></table>-->
 
     </context>
 </generatorConfiguration>

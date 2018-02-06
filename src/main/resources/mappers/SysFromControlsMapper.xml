@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="app.dao.mappers.SysFromControlsMapper">
+    <resultMap id="BaseResultMap" type="app.dao.entities.SysFromControls">
+        <id column="control_id" jdbcType="VARCHAR" property="controlId"/>
+        <result column="control_name" jdbcType="VARCHAR" property="controlName"/>
+        <result column="img" jdbcType="VARCHAR" property="img"/>
+        <result column="status" jdbcType="VARCHAR" property="status"/>
+        <result column="order_num" jdbcType="NUMERIC" property="orderNum"/>
+        <result column="group_id" jdbcType="VARCHAR" property="groupId"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        control_id, control_name, img, status, order_num, group_id
+    </sql>
+    <select id="selectByExample" parameterType="app.dao.entities.SysFromControlsExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from sys_from_controls
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_from_controls
+        where control_id = #{controlId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        DELETE FROM sys_from_controls
+        WHERE control_id = #{controlId,jdbcType=VARCHAR}
+    </delete>
+    <delete id="deleteByExample" parameterType="app.dao.entities.SysFromControlsExample">
+        delete from sys_from_controls
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="app.dao.entities.SysFromControls">
+        INSERT INTO sys_from_controls (control_id, control_name, img,
+                                       status, order_num, group_id
+        )
+        VALUES (#{controlId,jdbcType=VARCHAR}, #{controlName,jdbcType=VARCHAR}, #{img,jdbcType=VARCHAR},
+                #{status,jdbcType=VARCHAR}, #{orderNum,jdbcType=NUMERIC}, #{groupId,jdbcType=VARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="app.dao.entities.SysFromControls">
+        insert into sys_from_controls
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="controlId != null">
+                control_id,
+            </if>
+            <if test="controlName != null">
+                control_name,
+            </if>
+            <if test="img != null">
+                img,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="orderNum != null">
+                order_num,
+            </if>
+            <if test="groupId != null">
+                group_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="controlId != null">
+                #{controlId,jdbcType=VARCHAR},
+            </if>
+            <if test="controlName != null">
+                #{controlName,jdbcType=VARCHAR},
+            </if>
+            <if test="img != null">
+                #{img,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="orderNum != null">
+                #{orderNum,jdbcType=NUMERIC},
+            </if>
+            <if test="groupId != null">
+                #{groupId,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="app.dao.entities.SysFromControlsExample" resultType="java.lang.Long">
+        select count(*) from sys_from_controls
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update sys_from_controls
+        <set>
+            <if test="record.controlId != null">
+                control_id = #{record.controlId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.controlName != null">
+                control_name = #{record.controlName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.img != null">
+                img = #{record.img,jdbcType=VARCHAR},
+            </if>
+            <if test="record.status != null">
+                status = #{record.status,jdbcType=VARCHAR},
+            </if>
+            <if test="record.orderNum != null">
+                order_num = #{record.orderNum,jdbcType=NUMERIC},
+            </if>
+            <if test="record.groupId != null">
+                group_id = #{record.groupId,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update sys_from_controls
+        set control_id = #{record.controlId,jdbcType=VARCHAR},
+        control_name = #{record.controlName,jdbcType=VARCHAR},
+        img = #{record.img,jdbcType=VARCHAR},
+        status = #{record.status,jdbcType=VARCHAR},
+        order_num = #{record.orderNum,jdbcType=NUMERIC},
+        group_id = #{record.groupId,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="app.dao.entities.SysFromControls">
+        update sys_from_controls
+        <set>
+            <if test="controlName != null">
+                control_name = #{controlName,jdbcType=VARCHAR},
+            </if>
+            <if test="img != null">
+                img = #{img,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="orderNum != null">
+                order_num = #{orderNum,jdbcType=NUMERIC},
+            </if>
+            <if test="groupId != null">
+                group_id = #{groupId,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where control_id = #{controlId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="app.dao.entities.SysFromControls">
+        UPDATE sys_from_controls
+        SET control_name = #{controlName,jdbcType=VARCHAR},
+            img          = #{img,jdbcType=VARCHAR},
+            status       = #{status,jdbcType=VARCHAR},
+            order_num    = #{orderNum,jdbcType=NUMERIC},
+            group_id     = #{groupId,jdbcType=VARCHAR}
+        WHERE control_id = #{controlId,jdbcType=VARCHAR}
+    </update>
+</mapper>
