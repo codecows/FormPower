@@ -31,3 +31,21 @@ var HttpHelper = function () {
         }
     };
 }();
+var HttpMethod = function () {
+    return {
+        GET: "GET",
+        POST: "POST",
+        PUT: "PUT",
+        DELETE: "DELETE"
+    }
+}();
+var URL = function () {
+    var _baseUrl = "/";
+    return {
+        management: {
+            widgetInfo: {
+                getWidgetInfo: _baseUrl + "management/widgetInfo/getWidgetInfo"
+            }
+        }
+    };
+}();
