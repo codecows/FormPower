@@ -15,26 +15,27 @@ public class CustomerInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
         logger.debug("请求开始*****************************************************************");
-
-        final String authorization = httpServletRequest.getHeader("x-access-token");
-        final String visitor = httpServletRequest.getHeader("visitor");
-        logger.debug("token:" + authorization);
-
-        if (visitor == null || visitor.length() <= 0) {
-            logger.debug("visitor 不能为空");
-            return false;
-        }
-        if (authorization == null || !authorization.startsWith("Bearer ")) {
-            logger.debug("token 不能为空");
-            return false;
-        }
-
-        final String token = authorization.substring(7);
-        boolean b = JwtUtil.validateToken(token, visitor);
-        if (!b) {
-            logger.debug("token 验证失败");
-        }
-        return b;
+        return true;
+        // TODO 测试屏蔽
+//        final String authorization = httpServletRequest.getHeader("x-access-token");
+//        final String visitor = httpServletRequest.getHeader("visitor");
+//        logger.debug("token:" + authorization);
+//
+//        if (visitor == null || visitor.length() <= 0) {
+//            logger.debug("visitor 不能为空");
+//            return false;
+//        }
+//        if (authorization == null || !authorization.startsWith("Bearer ")) {
+//            logger.debug("token 不能为空");
+//            return false;
+//        }
+//
+//        final String token = authorization.substring(7);
+//        boolean b = JwtUtil.validateToken(token, visitor);
+//        if (!b) {
+//            logger.debug("token 验证失败");
+//        }
+//        return b;
     }
 
     @Override
