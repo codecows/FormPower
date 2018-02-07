@@ -15,7 +15,6 @@ public class CustomerInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
         logger.debug("请求开始*****************************************************************");
-        final String token = authorization.substring(7);
         return true;
         // TODO 测试屏蔽
 //        final String authorization = httpServletRequest.getHeader("x-access-token");
