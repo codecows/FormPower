@@ -28,40 +28,11 @@
 </html>
 <script>
     $(function () {
-//        var websocket = null;
-//
-//        //判断当前浏览器是否支持WebSocket
-//        if('WebSocket' in window){
-//            websocket = new WebSocket("ws://localhost:8086/ws/message");
-//        }
-//        else{
-//            alert('Not support websocket')
-//        }
 
+        HttpHelper.ajax("management/widgetInfo/getWidgetInfo", HttpHelper.method().GET, null,
+            function (data) {
+                layer.msg(JSON.stringify(data));
+            });
 
-
-        var suc = function (data) {
-            alert(JSON.stringify(data));
-        };
-        HttpHelper.ajax("management/widgetInfo/getWidgetInfo", HttpHelper.method().GET, null, suc);
-        layer.msg("hello word!~");
-//        $.ajax({
-//            url: '/friend/getFriends/' + userId,
-//            type: 'GET',
-//            data: {},
-//            timeout: 5000,    //超时时间
-//            dataType: 'json',    //返回的数据格式：json/xml/html/script/jsonp/text
-//            headers: {
-//                "authorization": "Bearer " + token,
-//                "userId": userId
-//            },
-//            contentType: 'application/json; charset=UTF-8',
-//            success: function (response, textStatus, jqXHR) {
-//                //var result = eval('(' + JSON.stringify(response) + ')');
-//                $.each(response, function (i, item) {
-//                    $("#div").append("<div>item.uid</div>");
-//                });
-//            }
-//        });
     });
 </script>

@@ -17,7 +17,7 @@ var HttpHelper = function () {
                 contentType: 'application/json; charset=UTF-8',
                 success: sucFun,
                 error: function (e) {
-                    alert(JSON.stringify(e));
+                    layer.msg(JSON.stringify(e));
                 }
             });
         },
