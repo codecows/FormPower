@@ -7,9 +7,12 @@
 /*==============================================================*/
 truncate table sys_department;
 
-INSERT INTO "sys_department"("department_id", "parent_id", "department_name", "short_name", "department_code", "department_level", "department_type", "remark", "order_num", "status", "create_date") VALUES ('0101', '01', '销售公司', NULL, NULL, '2', 'c', NULL, NULL, 'Y', '2018-01-30');
-INSERT INTO "sys_department"("department_id", "parent_id", "department_name", "short_name", "department_code", "department_level", "department_type", "remark", "order_num", "status", "create_date") VALUES ('0101009', '0101', '信息部', NULL, NULL, '3', 'd', NULL, NULL, 'Y', '2018-01-30');
-INSERT INTO "sys_department"("department_id", "parent_id", "department_name", "short_name", "department_code", "department_level", "department_type", "remark", "order_num", "status", "create_date") VALUES ('01', '00', '铸锻集团', NULL, NULL, '1', 'g', NULL, NULL, 'Y', '2018-01-30');
+INSERT INTO "sys_department" ("department_id", "parent_id", "department_name", "short_name", "department_code", "department_level", "department_type", "remark", "order_num", "status", "create_date")
+VALUES ('0101', '01', '销售公司', NULL, NULL, '2', 'c', NULL, NULL, 'y', '2018-01-30');
+INSERT INTO "sys_department" ("department_id", "parent_id", "department_name", "short_name", "department_code", "department_level", "department_type", "remark", "order_num", "status", "create_date")
+VALUES ('0101009', '0101', '信息部', NULL, NULL, '3', 'd', NULL, NULL, 'y', '2018-01-30');
+INSERT INTO "sys_department" ("department_id", "parent_id", "department_name", "short_name", "department_code", "department_level", "department_type", "remark", "order_num", "status", "create_date")
+VALUES ('01', '00', '铸锻集团', NULL, NULL, '1', 'g', NULL, NULL, 'y', '2018-01-30');
 
 /*==============================================================*/
 /* init sys_menu                                                */
@@ -39,15 +42,20 @@ VALUES ('2010', '20', 'g', '2', '表单', NULL, NULL, NULL, '', NULL, NULL, 'y',
 /* init sys_role                                                */
 /*==============================================================*/
 truncate table sys_role;
-INSERT INTO "sys_role"("role_id", "parent_id", "role_name", "description", "remark", "order_num", "status", "create_date") VALUES ('01', '00', '集团CEO', NULL, NULL, NULL, 'Y', '2018-01-30');
-INSERT INTO "sys_role"("role_id", "parent_id", "role_name", "description", "remark", "order_num", "status", "create_date") VALUES ('0101', '01', '销售公司总经理', NULL, NULL, NULL, 'Y', '2018-01-30');
-INSERT INTO "sys_role"("role_id", "parent_id", "role_name", "description", "remark", "order_num", "status", "create_date") VALUES ('0101009', '0101', '销售公司信息总监', NULL, NULL, NULL, 'Y', '2018-01-30');
+INSERT INTO "sys_role" ("role_id", "parent_id", "role_name", "description", "remark", "order_num", "status", "create_date")
+VALUES ('01', '00', '集团CEO', NULL, NULL, NULL, 'y', '2018-01-30');
+INSERT INTO "sys_role" ("role_id", "parent_id", "role_name", "description", "remark", "order_num", "status", "create_date")
+VALUES ('0101', '01', '销售公司总经理', NULL, NULL, NULL, 'y', '2018-01-30');
+INSERT INTO "sys_role" ("role_id", "parent_id", "role_name", "description", "remark", "order_num", "status", "create_date")
+VALUES ('0101009', '0101', '销售公司信息总监', NULL, NULL, NULL, 'y', '2018-01-30');
 
 /*==============================================================*/
 /* init sys_user                                                */
 /*==============================================================*/
 truncate table sys_user;
-INSERT INTO "sys_user"("user_id", "user_name", "password", "question", "answer", "persion_name", "persion_sex", "mobile", "telephone", "email", "user_position", "img_url", "remark", "order_num", "status", "create_time") VALUES ('10000', 'zhangsansan', '', NULL, NULL, '张三三', '男', '13940001001', NULL, 'zhuye0213@126.com', NULL, NULL, '他很懒什么都没写,这是系统帮他写的', NULL, 'Y', NULL);
+INSERT INTO "sys_user" ("user_id", "user_name", "password", "question", "answer", "persion_name", "persion_sex", "mobile", "telephone", "email", "user_position", "img_url", "remark", "order_num", "status", "create_time")
+VALUES ('10000', 'zhangsansan', '', NULL, NULL, '张三三', '男', '13940001001', NULL, 'zhuye0213@126.com', NULL, NULL,
+        '他很懒什么都没写,这是系统帮他写的', NULL, 'y', NULL);
 
 
 /*==============================================================*/
