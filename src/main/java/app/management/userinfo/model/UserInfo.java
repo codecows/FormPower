@@ -1,6 +1,6 @@
 package app.management.userinfo.model;
 
-import app.management.departmentinfo.model.DepartmentInfo;
+import app.management.department.model.Department;
 import app.management.menuinfo.model.MenuLevel;
 import app.management.roleinfo.model.RolePojo;
 import io.swagger.annotations.ApiModel;
@@ -43,8 +43,14 @@ public class UserInfo {
     @ApiModelProperty("状态")
     private String status;
 
-    @ApiModelProperty("部门列表")
-    private List<DepartmentInfo> departmentInfos;
+    @ApiModelProperty("集团")
+    private Department group;
+
+    @ApiModelProperty("公司")
+    private Department company;
+
+    @ApiModelProperty("部门")
+    private Department department;
 
     @ApiModelProperty("权限列表")
     private List<RolePojo> rolePojos;
@@ -140,12 +146,28 @@ public class UserInfo {
         this.status = status;
     }
 
-    public List<DepartmentInfo> getDepartmentInfos() {
-        return departmentInfos;
+    public Department getGroup() {
+        return group;
     }
 
-    public void setDepartmentInfos(List<DepartmentInfo> departmentInfos) {
-        this.departmentInfos = departmentInfos;
+    public void setGroup(Department group) {
+        this.group = group;
+    }
+
+    public Department getCompany() {
+        return company;
+    }
+
+    public void setCompany(Department company) {
+        this.company = company;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 
     public List<RolePojo> getRolePojos() {

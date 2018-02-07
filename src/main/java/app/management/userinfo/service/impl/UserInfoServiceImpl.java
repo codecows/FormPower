@@ -2,6 +2,7 @@ package app.management.userinfo.service.impl;
 
 import app.dao.entities.SysUser;
 import app.dao.mappers.SysUserMapper;
+import app.management.department.model.Department;
 import app.management.departmentinfo.converter.DepartmentInfoConverter;
 import app.management.departmentinfo.entities.DepartmentInfoEntity;
 import app.management.departmentinfo.mappers.DepartmentInfoMapper;
@@ -64,15 +65,37 @@ public class UserInfoServiceImpl implements UserInfoService {
 
         UserInfo userInfo = new UserInfo();
 
+        Department group = new Department();
+
+        Department company = new Department();
+
+        Department department = new Department();
+
         SysUser sysUser = sysUserMapper.selectByPrimaryKey(userId);
 
         BeanUtils.copyProperties(sysUser, userInfo);
 
         List<DepartmentInfoEntity> departmentInfoEntities = departmentInfoMapper.selectByUserId(userId);
 
-        List<DepartmentInfo> departmentInfos = departmentInfoConverter.convert2ModelList(departmentInfoEntities);
 
-        userInfo.setDepartmentInfos(departmentInfos);
+        DepartmentInfoEntity departmentInfoEntity = departmentInfoEntities.get(0);
+        DepartmentInfo departmentInfo = departmentInfoConverter.convert2Model(departmentInfoEntity);
+
+        BeanUtils.copyProperties(departmentInfo, group);
+
+        userInfo.setGroup(group);
+
+        DepartmentInfo departmentInfo1 = departmentInfoConverter.convert2Model(departmentInfoEntity.getDepartments().get(0));
+
+        BeanUtils.copyProperties(departmentInfo1, company);
+
+        userInfo.setCompany(company);
+
+        DepartmentInfo departmentInfo2 = departmentInfoConverter.convert2Model(departmentInfoEntity.getDepartments().get(0).getDepartments().get(0));
+
+        BeanUtils.copyProperties(departmentInfo2, department);
+
+        userInfo.setDepartment(department);
 
         List<RolePojoEntity> rolePojoEntities = roleInfoMapper.selectByUserId(userId);
 

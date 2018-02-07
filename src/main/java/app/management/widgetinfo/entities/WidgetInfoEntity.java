@@ -10,6 +10,8 @@ public class WidgetInfoEntity {
     List<WidgetsEntity> widgets;
     private String groupId;
     private String groupName;
+    private String img;
+    private Number ordernum;
     private String status;
 
     public String getGroupId() {
@@ -28,6 +30,22 @@ public class WidgetInfoEntity {
         this.groupName = groupName;
     }
 
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    public Number getOrdernum() {
+        return ordernum;
+    }
+
+    public void setOrdernum(Number ordernum) {
+        this.ordernum = ordernum;
+    }
+
     public String getStatus() {
         return status;
     }
@@ -43,4 +61,6 @@ public class WidgetInfoEntity {
     public void setWidgets(List<WidgetsEntity> widgets) {
         this.widgets = widgets;
     }
+
+
 }

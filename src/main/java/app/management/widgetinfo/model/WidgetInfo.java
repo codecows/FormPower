@@ -17,6 +17,10 @@ public class WidgetInfo {
     private String groupId;
     @ApiModelProperty("组名称")
     private String groupName;
+    @ApiModelProperty("组图标")
+    private String img;
+    @ApiModelProperty("排序号")
+    private Number ordernum;
     @ApiModelProperty("状态")
     private String status;
 
@@ -34,6 +38,22 @@ public class WidgetInfo {
 
     public void setGroupName(String groupName) {
         this.groupName = groupName;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    public Number getOrdernum() {
+        return ordernum;
+    }
+
+    public void setOrdernum(Number ordernum) {
+        this.ordernum = ordernum;
     }
 
     public String getStatus() {
