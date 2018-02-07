@@ -2,6 +2,7 @@ package app.management.userinfo.controller;
 
 import app.base.Result;
 import app.comn.ResponseCode;
+import app.comn.ServiceException;
 import app.management.userinfo.model.UserInfo;
 import app.management.userinfo.model.UserPojo;
 import app.management.userinfo.service.UserInfoService;
@@ -28,7 +29,12 @@ public class UserInfoController {
             notes = "按ID查找用户,部门,角色,菜单列表信息列表")
     @RequestMapping(path = "getUserInfo", method = GET)
     public Result<UserInfo> getUserInfo(@RequestParam String userId) {
-        return new Result<>(ResponseCode.Success, userInfoService.getItem(userId));
+
+        try {
+            return new Result<>(ResponseCode.Success, userInfoService.getItem(userId));
+        } catch (ServiceException e) {
+            return new Result<>(e.getResponseCode());
+        }
     }
 
     @ApiOperation(value = "按部门查找部门下的所有用户",

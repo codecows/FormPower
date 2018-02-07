@@ -2,6 +2,7 @@ package app.management.userinfo.model;
 
 import app.management.department.model.Department;
 import app.management.menuinfo.model.MenuLevel;
+import app.management.menuinfo.model.SystemMenu;
 import app.management.roleinfo.model.RolePojo;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -55,8 +56,8 @@ public class UserInfo {
     @ApiModelProperty("权限列表")
     private List<RolePojo> rolePojos;
 
-    @ApiModelProperty("三层菜单列表")
-    private List<MenuLevel> menuLevels;
+    @ApiModelProperty("系统三级菜单列表")
+    private List<SystemMenu> systemMenus;
 
     public String getUserId() {
         return userId;
@@ -178,11 +179,11 @@ public class UserInfo {
         this.rolePojos = rolePojos;
     }
 
-    public List<MenuLevel> getMenuLevels() {
-        return menuLevels;
+    public List<SystemMenu> getSystemMenus() {
+        return systemMenus;
     }
 
-    public void setMenuLevels(List<MenuLevel> menuLevels) {
-        this.menuLevels = menuLevels;
+    public void setSystemMenus(List<SystemMenu> systemMenus) {
+        this.systemMenus = systemMenus;
     }
 }

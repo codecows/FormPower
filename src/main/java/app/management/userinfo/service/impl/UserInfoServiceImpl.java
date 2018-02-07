@@ -1,6 +1,9 @@
 package app.management.userinfo.service.impl;
 
+import app.comn.ResponseCode;
+import app.comn.ServiceException;
 import app.dao.entities.SysUser;
+import app.dao.entities.SysUserExample;
 import app.dao.mappers.SysUserMapper;
 import app.management.department.model.Department;
 import app.management.departmentinfo.converter.DepartmentInfoConverter;
@@ -11,6 +14,8 @@ import app.management.menuinfo.converter.MenuLevelConverter;
 import app.management.menuinfo.entities.MenuLevelEntity;
 import app.management.menuinfo.mappers.MenuLevelMapper;
 import app.management.menuinfo.model.MenuLevel;
+import app.management.menuinfo.model.SystemMenu;
+import app.management.menuinfo.service.SystemMenuService;
 import app.management.roleinfo.converter.RolePojoConverter;
 import app.management.roleinfo.entities.RolePojoEntity;
 import app.management.roleinfo.mappers.RoleInfoMapper;
@@ -49,10 +54,7 @@ public class UserInfoServiceImpl implements UserInfoService {
     private RolePojoConverter rolePojoConverter;
 
     @Resource
-    private MenuLevelMapper menuLevelMapper;
-
-    @Resource
-    private MenuLevelConverter menuLevelConverter;
+    private SystemMenuService systemMenuService;
 
     @Resource
     private UserPojoMapper userPojoMapper;
@@ -61,19 +63,30 @@ public class UserInfoServiceImpl implements UserInfoService {
     private UserPojoConverter userPojoConverter;
 
     @Override
-    public UserInfo getItem(String userId) {
+    public UserInfo getItem(String userId) throws ServiceException {
 
+        /*new UserInfo对象*/
         UserInfo userInfo = new UserInfo();
 
+        /*分别新建集团、公司、部门对象*/
         Department group = new Department();
 
         Department company = new Department();
 
         Department department = new Department();
 
+        /*根据用户ID查询用户信息，然后压进UserInfo对象*/
+        SysUserExample sysUserExample = new SysUserExample();
+        sysUserExample.createCriteria().andUserIdEqualTo(userId);
+        long l = sysUserMapper.countByExample(sysUserExample);
+        if (l == 0) {
+            throw new ServiceException(ResponseCode.InformationUnexist);
+        }
         SysUser sysUser = sysUserMapper.selectByPrimaryKey(userId);
 
         BeanUtils.copyProperties(sysUser, userInfo);
+
+        /*从departmentInfoMapper接口查出3层关系部门列表，分别压进集团、公司、部门对象*/
 
         List<DepartmentInfoEntity> departmentInfoEntities = departmentInfoMapper.selectByUserId(userId);
 
@@ -97,17 +110,18 @@ public class UserInfoServiceImpl implements UserInfoService {
 
         userInfo.setDepartment(department);
 
+        /*从roleInfoMapper接口按UserId查出用户权限列表，压进UserInfo对象*/
         List<RolePojoEntity> rolePojoEntities = roleInfoMapper.selectByUserId(userId);
 
         List<RolePojo> rolePojos = rolePojoConverter.convert2ModelList(rolePojoEntities);
 
         userInfo.setRolePojos(rolePojos);
 
-        List<MenuLevelEntity> menuLevelEntities = menuLevelMapper.selectByUserId(userId);
+        /*从systemMenuService调用getItemByUserId方法，返回SystemMenu列表*/
+        List<SystemMenu> itemByUserId = systemMenuService.getItemByUserId(userId, null);
 
-        List<MenuLevel> menuLevels = menuLevelConverter.convert2ModelList(menuLevelEntities);
+        userInfo.setSystemMenus(itemByUserId);
 
-        userInfo.setMenuLevels(menuLevels);
 
         return userInfo;
     }

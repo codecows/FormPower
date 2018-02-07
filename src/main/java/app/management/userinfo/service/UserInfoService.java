@@ -1,5 +1,6 @@
 package app.management.userinfo.service;
 
+import app.comn.ServiceException;
 import app.management.userinfo.model.UserInfo;
 import app.management.userinfo.model.UserPojo;
 
@@ -10,7 +11,7 @@ import java.util.List;
  */
 public interface UserInfoService {
 
-    UserInfo getItem(String userId);
+    UserInfo getItem(String userId) throws ServiceException;
 
     List<UserPojo> getItemsByDepartmentId(String deptId);
 
