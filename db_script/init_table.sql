@@ -726,13 +726,23 @@ COMMENT ON COLUMN sys_code.order_num IS
 CREATE TABLE "public"."sys_form_control_groups" (
   "group_id"   VARCHAR(30) COLLATE "pg_catalog"."default" NOT NULL,
   "group_name" VARCHAR(50) COLLATE "pg_catalog"."default",
+  "img"        VARCHAR(50) COLLATE "pg_catalog"."default",
+  "order_num"  NUMERIC,
   "status"     VARCHAR(1) COLLATE "pg_catalog"."default"
 );
-COMMENT ON COLUMN "public"."sys_form_control_groups"."group_id" IS '组ID';
-COMMENT ON COLUMN "public"."sys_form_control_groups"."group_name" IS '组名称';
-COMMENT ON COLUMN "public"."sys_form_control_groups"."status" IS '状体';
-COMMENT ON TABLE "public"."sys_form_control_groups" IS '控件组';
 
+
+COMMENT ON COLUMN "public"."sys_form_control_groups"."group_id" IS '组ID';
+
+COMMENT ON COLUMN "public"."sys_form_control_groups"."group_name" IS '组名称';
+
+COMMENT ON COLUMN "public"."sys_form_control_groups"."img" IS '图标';
+
+COMMENT ON COLUMN "public"."sys_form_control_groups"."order_num" IS '排序号';
+
+COMMENT ON COLUMN "public"."sys_form_control_groups"."status" IS '状体';
+
+COMMENT ON TABLE "public"."sys_form_control_groups" IS '控件组';
 -- ----------------------------
 -- Primary Key structure for table sys_form_control_groups
 -- ----------------------------

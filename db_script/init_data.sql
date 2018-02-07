@@ -98,11 +98,16 @@ INSERT INTO "sys_user_role_rel"("guid", "user_id", "role_id", "status", "operati
 /* init sys_form_control_groups                                                */
 /*==============================================================*/
 truncate table sys_form_control_groups cascade;
-INSERT INTO "sys_form_control_groups" ("group_id", "group_name", "status") VALUES ('10', '基础控件', 'y');
-INSERT INTO "sys_form_control_groups" ("group_id", "group_name", "status") VALUES ('20', '布局控件', 'y');
-INSERT INTO "sys_form_control_groups" ("group_id", "group_name", "status") VALUES ('30', '系统控件', 'y');
-INSERT INTO "sys_form_control_groups" ("group_id", "group_name", "status") VALUES ('40', '高级控件', 'y');
-INSERT INTO "sys_form_control_groups" ("group_id", "group_name", "status") VALUES ('50', '其它控件', 'y');
+INSERT INTO "sys_form_control_groups" ("group_id", "group_name", "status", "img", "order_num")
+VALUES ('10', '基础控件', 'y', 'icon-briefcase', 0);
+INSERT INTO "sys_form_control_groups" ("group_id", "group_name", "status", "img", "order_num")
+VALUES ('20', '布局控件', 'y', 'icon-layers', 0);
+INSERT INTO "sys_form_control_groups" ("group_id", "group_name", "status", "img", "order_num")
+VALUES ('30', '系统控件', 'y', 'icon-wrench', 0);
+INSERT INTO "sys_form_control_groups" ("group_id", "group_name", "status", "img", "order_num")
+VALUES ('40', '高级控件', 'y', 'icon-rocket', 0);
+INSERT INTO "sys_form_control_groups" ("group_id", "group_name", "status", "img", "order_num")
+VALUES ('50', '其它控件', 'y', 'icon-puzzle', 0);
 
 
 /*==============================================================*/
@@ -110,64 +115,64 @@ INSERT INTO "sys_form_control_groups" ("group_id", "group_name", "status") VALUE
 /*==============================================================*/
 truncate table sys_from_controls cascade;
 INSERT INTO "sys_from_controls" ("control_id", "control_name", "img", "status", "order_num", "group_id")
-VALUES ('1001', '单行文本', 'fa-font', 'y', NULL, '10');
+VALUES ('1001', '单行文本', 'fa-font', 'y', 0, '10');
 INSERT INTO "sys_from_controls" ("control_id", "control_name", "img", "status", "order_num", "group_id")
-VALUES ('1002', '多行文本', 'fa-indent', 'y', NULL, '10');
+VALUES ('1002', '多行文本', 'fa-indent', 'y', 0, '10');
 INSERT INTO "sys_from_controls" ("control_id", "control_name", "img", "status", "order_num", "group_id")
-VALUES ('1003', '日期', 'fa-calendar', 'y', NULL, '10');
+VALUES ('1003', '日期', 'fa-calendar', 'y', 0, '10');
 INSERT INTO "sys_from_controls" ("control_id", "control_name", "img", "status", "order_num", "group_id")
-VALUES ('1004', '数字', 'fa-html5', 'y', NULL, '10');
+VALUES ('1004', '数字', 'fa-html5', 'y', 0, '10');
 INSERT INTO "sys_from_controls" ("control_id", "control_name", "img", "status", "order_num", "group_id")
-VALUES ('1005', '单选框', 'fa-dot-circle-o', 'y', NULL, '10');
+VALUES ('1005', '单选框', 'fa-dot-circle-o', 'y', 0, '10');
 INSERT INTO "sys_from_controls" ("control_id", "control_name", "img", "status", "order_num", "group_id")
-VALUES ('1006', '复选框', 'fa-check-square-o', 'y', NULL, '10');
+VALUES ('1006', '复选框', 'fa-check-square-o', 'y', 0, '10');
 INSERT INTO "sys_from_controls" ("control_id", "control_name", "img", "status", "order_num", "group_id")
-VALUES ('1007', '下拉框', 'fa-list-ul', 'y', NULL, '10');
+VALUES ('1007', '下拉框', 'fa-list-ul', 'y', 0, '10');
 INSERT INTO "sys_from_controls" ("control_id", "control_name", "img", "status", "order_num", "group_id")
-VALUES ('1008', '附件', 'fa-paperclip', 'y', NULL, '10');
+VALUES ('1008', '附件', 'fa-paperclip', 'y', 0, '10');
 INSERT INTO "sys_from_controls" ("control_id", "control_name", "img", "status", "order_num", "group_id")
-VALUES ('1009', '地址', 'fa-inbox', 'y', NULL, '10');
+VALUES ('1009', '地址', 'fa-inbox', 'y', 0, '10');
 INSERT INTO "sys_from_controls" ("control_id", "control_name", "img", "status", "order_num", "group_id")
-VALUES ('1010', '位置', 'fa-map-marker', 'y', NULL, '10');
+VALUES ('1010', '位置', 'fa-map-marker', 'y', 0, '10');
 INSERT INTO "sys_from_controls" ("control_id", "control_name", "img", "status", "order_num", "group_id")
-VALUES ('1011', '人员单选', 'fa-user', 'y', NULL, '10');
+VALUES ('1011', '人员单选', 'fa-user', 'y', 0, '10');
 INSERT INTO "sys_from_controls" ("control_id", "control_name", "img", "status", "order_num", "group_id")
-VALUES ('1012', '人员多选', 'fa-users', 'y', NULL, '10');
+VALUES ('1012', '人员多选', 'fa-users', 'y', 0, '10');
 INSERT INTO "sys_from_controls" ("control_id", "control_name", "img", "status", "order_num", "group_id")
-VALUES ('1013', '部门单选', 'fa-th-large', 'y', NULL, '10');
+VALUES ('1013', '部门单选', 'fa-th-large', 'y', 0, '10');
 INSERT INTO "sys_from_controls" ("control_id", "control_name", "img", "status", "order_num", "group_id")
-VALUES ('1014', '部门多选', 'fa-th', 'y', NULL, '10');
+VALUES ('1014', '部门多选', 'fa-th', 'y', 0, '10');
 INSERT INTO "sys_from_controls" ("control_id", "control_name", "img", "status", "order_num", "group_id")
-VALUES ('1015', '图片', 'fa-image', 'y', NULL, '10');
+VALUES ('1015', '图片', 'fa-image', 'y', 0, '10');
 INSERT INTO "sys_from_controls" ("control_id", "control_name", "img", "status", "order_num", "group_id")
-VALUES ('1016', '是/否', 'fa-check-square', 'y', NULL, '10');
+VALUES ('1016', '是/否', 'fa-check-square', 'y', 0, '10');
 INSERT INTO "sys_from_controls" ("control_id", "control_name", "img", "status", "order_num", "group_id")
-VALUES ('2001', '分组标题', 'fa-header', 'y', NULL, '20');
+VALUES ('2001', '分组标题', 'fa-header', 'y', 0, '20');
 INSERT INTO "sys_from_controls" ("control_id", "control_name", "img", "status", "order_num", "group_id")
-VALUES ('2002', '一行两列', 'fa-columns', 'y', NULL, '20');
+VALUES ('2002', '一行两列', 'fa-columns', 'y', 0, '20');
 INSERT INTO "sys_from_controls" ("control_id", "control_name", "img", "status", "order_num", "group_id")
-VALUES ('2003', '描述说明', 'fa-info', 'y', NULL, '20');
+VALUES ('2003', '描述说明', 'fa-info', 'y', 0, '20');
 INSERT INTO "sys_from_controls" ("control_id", "control_name", "img", "status", "order_num", "group_id")
-VALUES ('2004', '子表', 'fa-book', 'y', NULL, '20');
+VALUES ('2004', '子表', 'fa-book', 'y', 0, '20');
 INSERT INTO "sys_from_controls" ("control_id", "control_name", "img", "status", "order_num", "group_id")
-VALUES ('3001', '流水号', 'fa-barcode', 'y', NULL, '30');
+VALUES ('3001', '流水号', 'fa-barcode', 'y', 0, '30');
 INSERT INTO "sys_from_controls" ("control_id", "control_name", "img", "status", "order_num", "group_id")
-VALUES ('3002', '创建人', 'icon-user-follow', 'y', NULL, '30');
+VALUES ('3002', '创建人', 'icon-user-follow', 'y', 0, '30');
 INSERT INTO "sys_from_controls" ("control_id", "control_name", "img", "status", "order_num", "group_id")
-VALUES ('3003', '拥有者', 'icon-user-following', 'y', NULL, '30');
+VALUES ('3003', '拥有者', 'icon-user-following', 'y', 0, '30');
 INSERT INTO "sys_from_controls" ("control_id", "control_name", "img", "status", "order_num", "group_id")
-VALUES ('3004', '所属部门', 'fa-sitemap', 'y', NULL, '30');
+VALUES ('3004', '所属部门', 'fa-sitemap', 'y', 0, '30');
 INSERT INTO "sys_from_controls" ("control_id", "control_name", "img", "status", "order_num", "group_id")
-VALUES ('3005', '创建时间', 'fa-calendar', 'y', NULL, '30');
+VALUES ('3005', '创建时间', 'fa-calendar', 'y', 0, '30');
 INSERT INTO "sys_from_controls" ("control_id", "control_name", "img", "status", "order_num", "group_id")
-VALUES ('3006', '修改时间', 'fa-calendar-o', 'y', NULL, '30');
+VALUES ('3006', '修改时间', 'fa-calendar-o', 'y', 0, '30');
 INSERT INTO "sys_from_controls" ("control_id", "control_name", "img", "status", "order_num", "group_id")
-VALUES ('4001', '关联表单', 'fa-building-o', 'y', NULL, '40');
+VALUES ('4001', '关联表单', 'fa-building-o', 'y', 0, '40');
 INSERT INTO "sys_from_controls" ("control_id", "control_name", "img", "status", "order_num", "group_id")
-VALUES ('4002', '关联属性', 'fa-ticket', 'y', NULL, '40');
+VALUES ('4002', '关联属性', 'fa-ticket', 'y', 0, '40');
 INSERT INTO "sys_from_controls" ("control_id", "control_name", "img", "status", "order_num", "group_id")
-VALUES ('4003', '关联表单多选', 'fa-fax', 'y', NULL, '40');
+VALUES ('4003', '关联表单多选', 'fa-fax', 'y', 0, '40');
 INSERT INTO "sys_from_controls" ("control_id", "control_name", "img", "status", "order_num", "group_id")
-VALUES ('4004', '公式型控件', 'icon-calculator', 'y', NULL, '40');
+VALUES ('4004', '公式型控件', 'icon-calculator', 'y', 0, '40');
 INSERT INTO "sys_from_controls" ("control_id", "control_name", "img", "status", "order_num", "group_id")
-VALUES ('4005', '按钮', 'fa-circle-o-notch', 'y', NULL, '40');
+VALUES ('4005', '按钮', 'fa-circle-o-notch', 'y', 0, '40');
