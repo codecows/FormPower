@@ -16,14 +16,24 @@ INSERT INTO "sys_department"("department_id", "parent_id", "department_name", "s
 /*==============================================================*/
 truncate table sys_menu;
 
-INSERT INTO "sys_menu"("menu_id", "parent_id", "menu_type", "menu_level", "menu_name", "menu_code", "menu_path", "form_id","menu_url", "remark", "order_num", "status", "create_date") VALUES ('01', '00', 's', '1', '基础系统', NULL, NULL, NULL,NULL, NULL, NULL, 'Y', '2018-01-30');
-INSERT INTO "sys_menu"("menu_id", "parent_id", "menu_type", "menu_level", "menu_name", "menu_code", "menu_path", "form_id","menu_url", "remark", "order_num", "status", "create_date") VALUES ('02', '00', 's', '1', '表单系统', NULL, NULL, NULL,NULL, NULL, NULL, 'Y', '2018-01-30');
-INSERT INTO "sys_menu"("menu_id", "parent_id", "menu_type", "menu_level", "menu_name", "menu_code", "menu_path", "form_id","menu_url", "remark", "order_num", "status", "create_date") VALUES ('001', '01', 'g', '2', '系统设置', NULL, NULL, NULL,NULL, NULL, NULL, 'Y', '2018-01-30');
-INSERT INTO "sys_menu"("menu_id", "parent_id", "menu_type", "menu_level", "menu_name", "menu_code", "menu_path", "form_id","menu_url", "remark", "order_num", "status", "create_date") VALUES ('002', '01', 'g', '2', 'XX设置', NULL, NULL, NULL,NULL, NULL, NULL, 'Y', '2018-01-30');
-INSERT INTO "sys_menu"("menu_id", "parent_id", "menu_type", "menu_level", "menu_name", "menu_code", "menu_path", "form_id","menu_url", "remark", "order_num", "status", "create_date") VALUES ('1001', '001', 'm', '3', '用户', NULL, NULL, NULL,'sys/user', NULL, NULL, 'Y', '2018-01-30');
-INSERT INTO "sys_menu"("menu_id", "parent_id", "menu_type", "menu_level", "menu_name", "menu_code", "menu_path", "form_id","menu_url", "remark", "order_num", "status", "create_date") VALUES ('1002', '001', 'm', '3', '部门', NULL, NULL, NULL,'sys/dept', NULL, NULL, 'Y', '2018-01-30');
-INSERT INTO "sys_menu"("menu_id", "parent_id", "menu_type", "menu_level", "menu_name", "menu_code", "menu_path", "form_id","menu_url", "remark", "order_num", "status", "create_date") VALUES ('1003', '002', 'm', '3', '表单定义', NULL, NULL, NULL,'sys/fdef', NULL, NULL, 'Y', '2018-01-30');
-INSERT INTO "sys_menu"("menu_id", "parent_id", "menu_type", "menu_level", "menu_name", "menu_code", "menu_path", "form_id","menu_url", "remark", "order_num", "status", "create_date") VALUES ('1004', '002', 'm', '3', '表单设计', NULL, NULL, NULL,'sys/fdeg', NULL, NULL, 'Y', '2018-01-30');
+INSERT INTO "sys_menu" ("menu_id", "parent_id", "menu_type", "menu_level", "menu_name", "menu_code", "menu_path", "form_id", "menu_url", "remark", "order_num", "status", "create_date")
+VALUES ('10', '00', 's', '1', '基础系统', NULL, NULL, NULL, NULL, NULL, NULL, 'y', '2018-01-30');
+INSERT INTO "sys_menu" ("menu_id", "parent_id", "menu_type", "menu_level", "menu_name", "menu_code", "menu_path", "form_id", "menu_url", "remark", "order_num", "status", "create_date")
+VALUES ('1001', '10', 'g', '2', '用户', NULL, NULL, NULL, 'sys/user', NULL, NULL, 'y', '2018-01-30');
+INSERT INTO "sys_menu" ("menu_id", "parent_id", "menu_type", "menu_level", "menu_name", "menu_code", "menu_path", "form_id", "menu_url", "remark", "order_num", "status", "create_date")
+VALUES ('1002', '10', 'g', '2', '部门', NULL, NULL, NULL, 'sys/dept', NULL, NULL, 'y', '2018-01-30');
+INSERT INTO "sys_menu" ("menu_id", "parent_id", "menu_type", "menu_level", "menu_name", "menu_code", "menu_path", "form_id", "menu_url", "remark", "order_num", "status", "create_date")
+VALUES ('20', '00', 's', '1', '表单系统', NULL, NULL, NULL, NULL, NULL, NULL, 'y', '2018-01-30');
+INSERT INTO "sys_menu" ("menu_id", "parent_id", "menu_type", "menu_level", "menu_name", "menu_code", "menu_path", "form_id", "menu_url", "remark", "order_num", "status", "create_date")
+VALUES ('30', '01', 's', '2', '系统设置', NULL, NULL, NULL, NULL, NULL, NULL, 'y', '2018-01-30');
+INSERT INTO "sys_menu" ("menu_id", "parent_id", "menu_type", "menu_level", "menu_name", "menu_code", "menu_path", "form_id", "menu_url", "remark", "order_num", "status", "create_date")
+VALUES ('3002', '01', 'g', '2', 'XX设置', NULL, NULL, NULL, NULL, NULL, NULL, 'y', '2018-01-30');
+INSERT INTO "sys_menu" ("menu_id", "parent_id", "menu_type", "menu_level", "menu_name", "menu_code", "menu_path", "form_id", "menu_url", "remark", "order_num", "status", "create_date")
+VALUES ('2030102', '2010', 'm', '3', '表单设计', NULL, NULL, NULL, 'sys/fdeg', NULL, NULL, 'y', '2018-02-07');
+INSERT INTO "sys_menu" ("menu_id", "parent_id", "menu_type", "menu_level", "menu_name", "menu_code", "menu_path", "form_id", "menu_url", "remark", "order_num", "status", "create_date")
+VALUES ('2020101', '2010', 'm', '3', '表单定义', NULL, NULL, NULL, 'sys/fdef', NULL, NULL, 'y', '2018-01-30');
+INSERT INTO "sys_menu" ("menu_id", "parent_id", "menu_type", "menu_level", "menu_name", "menu_code", "menu_path", "form_id", "menu_url", "remark", "order_num", "status", "create_date")
+VALUES ('2010', '20', 'g', '2', '表单', NULL, NULL, NULL, '', NULL, NULL, 'y', '2018-01-30');
 
 /*==============================================================*/
 /* init sys_role                                                */
@@ -44,41 +54,71 @@ INSERT INTO "sys_user"("user_id", "user_name", "password", "question", "answer",
 /* init sys_auth_menu_rel                                                */
 /*==============================================================*/
 truncate table sys_auth_menu_rel;
-INSERT INTO "sys_auth_menu_rel"("guid", "auth_id", "menu_id", "status", "operation_date") VALUES ('7fd702d1-5d90-4366-99b5-45ea07e6e8d3', '4a656945-29a3-4492-a779-3f74b79989a7', '01', 'y', '2018-02-01');
-INSERT INTO "sys_auth_menu_rel"("guid", "auth_id", "menu_id", "status", "operation_date") VALUES ('27f74f3e-6ede-4b89-a04d-dae8af190100', 'ceff10c2-5807-432d-b677-00d04772526b', '02', 'y', '2018-02-01');
-INSERT INTO "sys_auth_menu_rel"("guid", "auth_id", "menu_id", "status", "operation_date") VALUES ('44c843eb-bdf4-41b1-aa7d-6576a5b501dc', 'fc2edea6-c3a0-4cab-8b0a-994efcdc1270', '001', 'y', '2018-02-01');
-INSERT INTO "sys_auth_menu_rel"("guid", "auth_id", "menu_id", "status", "operation_date") VALUES ('88826504-b8d0-475d-89a0-3ad602810183', 'b70b659b-b72d-4c37-ad5f-1bdbede9a51b', '002', 'y', '2018-02-01');
-INSERT INTO "sys_auth_menu_rel"("guid", "auth_id", "menu_id", "status", "operation_date") VALUES ('e9e83da4-3261-4498-b353-220edabe1c19', 'c3ca4a1c-d9e3-488d-b8de-99602dee0ed4', '1001', 'y', '2018-02-01');
-INSERT INTO "sys_auth_menu_rel"("guid", "auth_id", "menu_id", "status", "operation_date") VALUES ('a9a484a0-2d12-473a-ae78-bb1b677ab5fd', '6a01720e-9c72-4189-81e2-3c562e4cc105', '1002', 'y', '2018-02-01');
-INSERT INTO "sys_auth_menu_rel"("guid", "auth_id", "menu_id", "status", "operation_date") VALUES ('3f56b3f7-f6f8-492e-8e7e-7458f8837768', '99498870-68ea-4c6b-8118-3b2c5d355af3', '1003', 'y', '2018-02-01');
-INSERT INTO "sys_auth_menu_rel"("guid", "auth_id", "menu_id", "status", "operation_date") VALUES ('28aef366-406f-42be-93ca-f6a4bc0d1a33', '778b11cb-9365-404a-9a74-f2b2c360cf5c', '1004', 'y', '2018-02-01');
+INSERT INTO "sys_auth_menu_rel" ("guid", "auth_id", "menu_id", "status", "operation_date")
+VALUES ('7fd702d1-5d90-4366-99b5-45ea07e6e8d3', '10', '10', 'y', '2018-02-01');
+INSERT INTO "sys_auth_menu_rel" ("guid", "auth_id", "menu_id", "status", "operation_date")
+VALUES ('27f74f3e-6ede-4b89-a04d-dae8af190100', '20', '20', 'y', '2018-02-01');
+INSERT INTO "sys_auth_menu_rel" ("guid", "auth_id", "menu_id", "status", "operation_date")
+VALUES ('44c843eb-bdf4-41b1-aa7d-6576a5b501dc', '30', '30', 'y', '2018-02-01');
+INSERT INTO "sys_auth_menu_rel" ("guid", "auth_id", "menu_id", "status", "operation_date")
+VALUES ('88826504-b8d0-475d-89a0-3ad602810183', '3002', '3002', 'y', '2018-02-01');
+INSERT INTO "sys_auth_menu_rel" ("guid", "auth_id", "menu_id", "status", "operation_date")
+VALUES ('e9e83da4-3261-4498-b353-220edabe1c19', '1001', '1001', 'y', '2018-02-01');
+INSERT INTO "sys_auth_menu_rel" ("guid", "auth_id", "menu_id", "status", "operation_date")
+VALUES ('a9a484a0-2d12-473a-ae78-bb1b677ab5fd', '1002', '1002', 'y', '2018-02-01');
+INSERT INTO "sys_auth_menu_rel" ("guid", "auth_id", "menu_id", "status", "operation_date")
+VALUES ('3f56b3f7-f6f8-492e-8e7e-7458f8837768', '2020101', '2020101', 'y', '2018-02-01');
+INSERT INTO "sys_auth_menu_rel" ("guid", "auth_id", "menu_id", "status", "operation_date")
+VALUES ('28aef366-406f-42be-93ca-f6a4bc0d1a33', '2030102', '2030102', 'y', '2018-02-01');
+INSERT INTO "sys_auth_menu_rel" ("guid", "auth_id", "menu_id", "status", "operation_date")
+VALUES ('5932b63a-e60c-4037-96ac-e8d4df73eb7e', '2010', '2010', 'y', '2018-02-01');
 
 /*==============================================================*/
 /* init sys_authority                                                */
 /*==============================================================*/
 truncate table sys_authority;
 
-INSERT INTO "sys_authority"("auth_id", "parent_id", "authority_name", "descripthon", "remark", "order_num", "status", "create_date") VALUES ('4a656945-29a3-4492-a779-3f74b79989a7', NULL, '基础系统权限', NULL, NULL, NULL, 'Y', '2018-02-01');
-INSERT INTO "sys_authority"("auth_id", "parent_id", "authority_name", "descripthon", "remark", "order_num", "status", "create_date") VALUES ('ceff10c2-5807-432d-b677-00d04772526b', NULL, '表单系统权限', NULL, NULL, NULL, 'Y', '2018-02-01');
-INSERT INTO "sys_authority"("auth_id", "parent_id", "authority_name", "descripthon", "remark", "order_num", "status", "create_date") VALUES ('fc2edea6-c3a0-4cab-8b0a-994efcdc1270', NULL, '系统设置权限', NULL, NULL, NULL, 'Y', '2018-02-01');
-INSERT INTO "sys_authority"("auth_id", "parent_id", "authority_name", "descripthon", "remark", "order_num", "status", "create_date") VALUES ('b70b659b-b72d-4c37-ad5f-1bdbede9a51b', NULL, 'XX设置权限', NULL, NULL, NULL, 'Y', '2018-02-01');
-INSERT INTO "sys_authority"("auth_id", "parent_id", "authority_name", "descripthon", "remark", "order_num", "status", "create_date") VALUES ('c3ca4a1c-d9e3-488d-b8de-99602dee0ed4', NULL, '用户菜单权限', NULL, NULL, NULL, 'Y', '2018-02-01');
-INSERT INTO "sys_authority"("auth_id", "parent_id", "authority_name", "descripthon", "remark", "order_num", "status", "create_date") VALUES ('6a01720e-9c72-4189-81e2-3c562e4cc105', NULL, '部门菜单权限', NULL, NULL, NULL, 'Y', '2018-02-01');
-INSERT INTO "sys_authority"("auth_id", "parent_id", "authority_name", "descripthon", "remark", "order_num", "status", "create_date") VALUES ('99498870-68ea-4c6b-8118-3b2c5d355af3', NULL, '表单定义权限', NULL, NULL, NULL, 'Y', '2018-02-01');
-INSERT INTO "sys_authority"("auth_id", "parent_id", "authority_name", "descripthon", "remark", "order_num", "status", "create_date") VALUES ('778b11cb-9365-404a-9a74-f2b2c360cf5c', NULL, '表单设计权限', '', NULL, NULL, 'Y', '2018-02-01');
+INSERT INTO "sys_authority" ("auth_id", "parent_id", "authority_name", "descripthon", "remark", "order_num", "status", "create_date")
+VALUES ('10', NULL, '基础系统权限', NULL, NULL, NULL, 'y', '2018-02-01');
+INSERT INTO "sys_authority" ("auth_id", "parent_id", "authority_name", "descripthon", "remark", "order_num", "status", "create_date")
+VALUES ('20', NULL, '表单系统权限', NULL, NULL, NULL, 'y', '2018-02-01');
+INSERT INTO "sys_authority" ("auth_id", "parent_id", "authority_name", "descripthon", "remark", "order_num", "status", "create_date")
+VALUES ('30', NULL, '系统设置权限', NULL, NULL, NULL, 'y', '2018-02-01');
+INSERT INTO "sys_authority" ("auth_id", "parent_id", "authority_name", "descripthon", "remark", "order_num", "status", "create_date")
+VALUES ('3002', NULL, 'XX设置权限', NULL, NULL, NULL, 'y', '2018-02-01');
+INSERT INTO "sys_authority" ("auth_id", "parent_id", "authority_name", "descripthon", "remark", "order_num", "status", "create_date")
+VALUES ('1001', NULL, '用户菜单权限', NULL, NULL, NULL, 'y', '2018-02-01');
+INSERT INTO "sys_authority" ("auth_id", "parent_id", "authority_name", "descripthon", "remark", "order_num", "status", "create_date")
+VALUES ('1002', NULL, '部门菜单权限', NULL, NULL, NULL, 'y', '2018-02-01');
+INSERT INTO "sys_authority" ("auth_id", "parent_id", "authority_name", "descripthon", "remark", "order_num", "status", "create_date")
+VALUES ('2020101', NULL, '表单定义权限', NULL, NULL, NULL, 'y', '2018-02-01');
+INSERT INTO "sys_authority" ("auth_id", "parent_id", "authority_name", "descripthon", "remark", "order_num", "status", "create_date")
+VALUES ('2030102', NULL, '表单设计权限', '', NULL, NULL, 'y', '2018-02-01');
+INSERT INTO "sys_authority" ("auth_id", "parent_id", "authority_name", "descripthon", "remark", "order_num", "status", "create_date")
+VALUES ('2010', NULL, '表单权限', NULL, NULL, NULL, 'y', '2018-02-01');
 
 /*==============================================================*/
 /* init sys_role_auth_rel                                                */
 /*==============================================================*/
 truncate table sys_role_auth_rel;
-INSERT INTO "sys_role_auth_rel"("guid", "role_id", "auth_id", "status", "operation_date") VALUES ('fc3326ec-2aee-452f-ab11-2c07af633570', '0101009', '4a656945-29a3-4492-a779-3f74b79989a7', 'y', '2018-02-01');
-INSERT INTO "sys_role_auth_rel"("guid", "role_id", "auth_id", "status", "operation_date") VALUES ('1861112f-5dd1-4409-99df-1466548b3c11', '0101009', 'ceff10c2-5807-432d-b677-00d04772526b', 'y', '2018-02-01');
-INSERT INTO "sys_role_auth_rel"("guid", "role_id", "auth_id", "status", "operation_date") VALUES ('13e1d2f7-d25a-4bdb-8a45-866bbd347d4c', '0101009', 'fc2edea6-c3a0-4cab-8b0a-994efcdc1270', 'y', '2018-02-01');
-INSERT INTO "sys_role_auth_rel"("guid", "role_id", "auth_id", "status", "operation_date") VALUES ('62709017-949d-4d3a-91b2-b8c8bde4cf32', '0101009', 'b70b659b-b72d-4c37-ad5f-1bdbede9a51b', 'y', '2018-02-01');
-INSERT INTO "sys_role_auth_rel"("guid", "role_id", "auth_id", "status", "operation_date") VALUES ('16c3f477-4b6a-4734-9667-9094899f4e6a', '0101009', 'c3ca4a1c-d9e3-488d-b8de-99602dee0ed4', 'y', '2018-02-01');
-INSERT INTO "sys_role_auth_rel"("guid", "role_id", "auth_id", "status", "operation_date") VALUES ('a1203de3-3e4a-4112-9183-eeb96dfcc8e2', '0101009', '6a01720e-9c72-4189-81e2-3c562e4cc105', 'y', '2018-02-01');
-INSERT INTO "sys_role_auth_rel"("guid", "role_id", "auth_id", "status", "operation_date") VALUES ('48d4bb62-27f6-4f95-8ec3-8391490e0b0b', '0101009', '99498870-68ea-4c6b-8118-3b2c5d355af3', 'y', '2018-02-01');
-INSERT INTO "sys_role_auth_rel"("guid", "role_id", "auth_id", "status", "operation_date") VALUES ('60612948-4ba0-4889-a0f9-c222472f4d62', '0101009', '778b11cb-9365-404a-9a74-f2b2c360cf5c', 'y', '2018-02-01');
+INSERT INTO "sys_role_auth_rel" ("guid", "role_id", "auth_id", "status", "operation_date")
+VALUES ('fc3326ec-2aee-452f-ab11-2c07af633570', '0101009', '10', 'y', '2018-02-01');
+INSERT INTO "sys_role_auth_rel" ("guid", "role_id", "auth_id", "status", "operation_date")
+VALUES ('1861112f-5dd1-4409-99df-1466548b3c11', '0101009', '20', 'y', '2018-02-01');
+INSERT INTO "sys_role_auth_rel" ("guid", "role_id", "auth_id", "status", "operation_date")
+VALUES ('13e1d2f7-d25a-4bdb-8a45-866bbd347d4c', '0101009', '30', 'y', '2018-02-01');
+INSERT INTO "sys_role_auth_rel" ("guid", "role_id", "auth_id", "status", "operation_date")
+VALUES ('62709017-949d-4d3a-91b2-b8c8bde4cf32', '0101009', '3002', 'y', '2018-02-01');
+INSERT INTO "sys_role_auth_rel" ("guid", "role_id", "auth_id", "status", "operation_date")
+VALUES ('16c3f477-4b6a-4734-9667-9094899f4e6a', '0101009', '1001', 'y', '2018-02-01');
+INSERT INTO "sys_role_auth_rel" ("guid", "role_id", "auth_id", "status", "operation_date")
+VALUES ('a1203de3-3e4a-4112-9183-eeb96dfcc8e2', '0101009', '1002', 'y', '2018-02-01');
+INSERT INTO "sys_role_auth_rel" ("guid", "role_id", "auth_id", "status", "operation_date")
+VALUES ('48d4bb62-27f6-4f95-8ec3-8391490e0b0b', '0101009', '2020101', 'y', '2018-02-01');
+INSERT INTO "sys_role_auth_rel" ("guid", "role_id", "auth_id", "status", "operation_date")
+VALUES ('60612948-4ba0-4889-a0f9-c222472f4d62', '0101009', '2030102', 'y', '2018-02-01');
+INSERT INTO "sys_role_auth_rel" ("guid", "role_id", "auth_id", "status", "operation_date")
+VALUES ('096e9642-0240-4998-98eb-5f832f62fbc6', '0101009', '2010', 'y', '2018-02-07');
 
 /*==============================================================*/
 /* init sys_user_department_rel                                                */
@@ -99,15 +139,15 @@ INSERT INTO "sys_user_role_rel"("guid", "user_id", "role_id", "status", "operati
 /*==============================================================*/
 truncate table sys_form_control_groups cascade;
 INSERT INTO "sys_form_control_groups" ("group_id", "group_name", "status", "img", "order_num")
-VALUES ('10', '基础控件', 'y', 'icon-briefcase', 0);
+VALUES ('10', '基础控件', 'y', 'fa-truck', 0);
 INSERT INTO "sys_form_control_groups" ("group_id", "group_name", "status", "img", "order_num")
-VALUES ('20', '布局控件', 'y', 'icon-layers', 0);
+VALUES ('20', '布局控件', 'y', 'fa-qrcode', 0);
 INSERT INTO "sys_form_control_groups" ("group_id", "group_name", "status", "img", "order_num")
-VALUES ('30', '系统控件', 'y', 'icon-wrench', 0);
+VALUES ('30', '系统控件', 'y', 'fa-cogs', 0);
 INSERT INTO "sys_form_control_groups" ("group_id", "group_name", "status", "img", "order_num")
-VALUES ('40', '高级控件', 'y', 'icon-rocket', 0);
+VALUES ('40', '高级控件', 'y', 'fa-cubes', 0);
 INSERT INTO "sys_form_control_groups" ("group_id", "group_name", "status", "img", "order_num")
-VALUES ('50', '其它控件', 'y', 'icon-puzzle', 0);
+VALUES ('50', '其它控件', 'y', 'fa-sun-o', 0);
 
 
 /*==============================================================*/
@@ -157,9 +197,9 @@ VALUES ('2004', '子表', 'fa-book', 'y', 0, '20');
 INSERT INTO "sys_from_controls" ("control_id", "control_name", "img", "status", "order_num", "group_id")
 VALUES ('3001', '流水号', 'fa-barcode', 'y', 0, '30');
 INSERT INTO "sys_from_controls" ("control_id", "control_name", "img", "status", "order_num", "group_id")
-VALUES ('3002', '创建人', 'icon-user-follow', 'y', 0, '30');
+VALUES ('3002', '创建人', 'fa-child', 'y', 0, '30');
 INSERT INTO "sys_from_controls" ("control_id", "control_name", "img", "status", "order_num", "group_id")
-VALUES ('3003', '拥有者', 'icon-user-following', 'y', 0, '30');
+VALUES ('3003', '拥有者', 'fa-drupal', 'y', 0, '30');
 INSERT INTO "sys_from_controls" ("control_id", "control_name", "img", "status", "order_num", "group_id")
 VALUES ('3004', '所属部门', 'fa-sitemap', 'y', 0, '30');
 INSERT INTO "sys_from_controls" ("control_id", "control_name", "img", "status", "order_num", "group_id")
@@ -173,6 +213,6 @@ VALUES ('4002', '关联属性', 'fa-ticket', 'y', 0, '40');
 INSERT INTO "sys_from_controls" ("control_id", "control_name", "img", "status", "order_num", "group_id")
 VALUES ('4003', '关联表单多选', 'fa-fax', 'y', 0, '40');
 INSERT INTO "sys_from_controls" ("control_id", "control_name", "img", "status", "order_num", "group_id")
-VALUES ('4004', '公式型控件', 'icon-calculator', 'y', 0, '40');
+VALUES ('4004', '公式型控件', 'fa-cog', 'y', 0, '40');
 INSERT INTO "sys_from_controls" ("control_id", "control_name", "img", "status", "order_num", "group_id")
 VALUES ('4005', '按钮', 'fa-circle-o-notch', 'y', 0, '40');
