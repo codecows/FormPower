@@ -36,9 +36,9 @@ DROP TABLE IF EXISTS sys_company_dept_rel;
 
 DROP TABLE IF EXISTS sys_code;
 
-DROP TABLE IF EXISTS sys_form_control_groups;
+DROP TABLE IF EXISTS sys_form_control_groups CASCADE;
 
-DROP TABLE IF EXISTS sys_from_controls;
+DROP TABLE IF EXISTS sys_from_controls CASCADE;
 
 /*==============================================================*/
 /* Table: sys_auth_menu_rel                                     */
