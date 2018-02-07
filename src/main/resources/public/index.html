@@ -39,8 +39,12 @@
 //        }
 
 
+
+        var suc = function (data) {
+            alert(JSON.stringify(data));
+        };
+        HttpHelper.ajax("management/widgetInfo/getWidgetInfo", HttpHelper.method().GET, null, suc);
         layer.msg("hello word!~");
-        ajax();
 //        $.ajax({
 //            url: '/friend/getFriends/' + userId,
 //            type: 'GET',
