@@ -10,11 +10,9 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-
 import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -40,15 +38,15 @@ public class UserInfoController {
 
     @ApiOperation(value = "按部门查找部门下的所有用户",
             notes = "按部门查找部门下的所有用户")
-    @RequestMapping(path = "getUserByDeptId", method = GET)
-    public Result<List<UserPojo>> getUserByDeptId(@RequestParam String deptId) {
+    @RequestMapping(path = "getUserByDeptId/{deptId}", method = GET)
+    public Result<List<UserPojo>> getUserByDeptId(@PathVariable String deptId) {
         return new Result<>(ResponseCode.Success, userInfoService.getItemsByDepartmentId(deptId));
     }
 
     @ApiOperation(value = "按角色查找拥有角色的用户",
             notes = "按角色查找拥有角色的用户")
-    @RequestMapping(path = "getUserByRoleId", method = GET)
-    public Result<List<UserPojo>> getUserByRoleId(@RequestParam String roleId) {
+    @RequestMapping(path = "getUserByRoleId/{roleId}", method = GET)
+    public Result<List<UserPojo>> getUserByRoleId(@PathVariable String roleId) {
         return new Result<>(ResponseCode.Success, userInfoService.getItemByRoleId(roleId));
     }
 

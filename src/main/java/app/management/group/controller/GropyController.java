@@ -8,9 +8,9 @@ import app.management.group.model.Group;
 import app.management.group.service.GroupService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -40,16 +40,16 @@ public class GropyController {
             notes = "分页获取所有组信息,返回List",
             responseContainer = "List",
             response = Group.class)
-    @RequestMapping(path = "getGroupsByPage", method = GET)
-    public PageModel<Group> getGroupsByPage(@RequestParam int pageNum, @RequestParam int pageSize) {
+    @RequestMapping(path = "getGroupsByPage/{pageNum}/{pageSize}", method = GET)
+    public PageModel<Group> getGroupsByPage(@PathVariable int pageNum, @PathVariable int pageSize) {
         PageModel<Group> itemsByPage = groupService.getItemsByPage(pageNum, pageSize);
         return itemsByPage;
     }
 
     @ApiOperation(value = "按id查找组信息",
             notes = "按id查找组信息")
-    @RequestMapping(path = "getGroup", method = GET)
-    public Result<Group> getGroup(@RequestParam String groupId) {
+    @RequestMapping(path = "getGroup/{groupId}", method = GET)
+    public Result<Group> getGroup(@PathVariable String groupId) {
         return new Result<>(ResponseCode.Success, groupService.getItem(groupId));
     }
 
@@ -78,8 +78,8 @@ public class GropyController {
 
 
     @ApiOperation(value = "按id删除组信息", notes = "删除组信息")
-    @RequestMapping(path = "delGroup", method = DELETE)
-    public Result<Integer> delGroup(@RequestParam String groupId) {
+    @RequestMapping(path = "delGroup/{groupId}", method = DELETE)
+    public Result<Integer> delGroup(@PathVariable String groupId) {
         try {
             groupService.delItem(groupId);
         } catch (ServiceException e) {
@@ -90,8 +90,8 @@ public class GropyController {
 
 
     @ApiOperation(value = "批量删除组信息", notes = "批量删除组信息")
-    @RequestMapping(path = "delGroups", method = DELETE)
-    public Result<Integer> delGroups(@RequestParam List<String> groupIds) {
+    @RequestMapping(path = "delGroups/{groupIds}", method = DELETE)
+    public Result<Integer> delGroups(@PathVariable List<String> groupIds) {
         try {
             groupService.delItems(groupIds);
         } catch (ServiceException e) {

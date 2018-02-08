@@ -8,9 +8,9 @@ import app.management.relation.model.*;
 import app.management.relation.service.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -32,8 +32,8 @@ public class RelationController {
             notes = "分页获取所有用户角色关系信息,返回List",
             responseContainer = "List",
             response = UserRoleRel.class)
-    @RequestMapping(path = "getUserRoleRelByPage", method = GET)
-    public PageModel<UserRoleRel> getUserRoleRelByPage(@RequestParam int pageNum, @RequestParam int pageSize) {
+    @RequestMapping(path = "getUserRoleRelByPage/{pageNum}/{pageSize}", method = GET)
+    public PageModel<UserRoleRel> getUserRoleRelByPage(@PathVariable int pageNum, @PathVariable int pageSize) {
         PageModel<UserRoleRel> itemsByPage = userRoleRelService.getItemsByPage(pageNum, pageSize);
         return itemsByPage;
     }
@@ -64,8 +64,8 @@ public class RelationController {
 
 
     @ApiOperation(value = "按id删除用户角色关系", notes = "删除用户角色关系")
-    @RequestMapping(path = "delUserRoleRel", method = DELETE)
-    public Result<Integer> delUserRoleRel(@RequestParam String urIds) {
+    @RequestMapping(path = "delUserRoleRel/{urIds}", method = DELETE)
+    public Result<Integer> delUserRoleRel(@PathVariable String urIds) {
         try {
             userRoleRelService.delItem(urIds);
         } catch (ServiceException e) {
@@ -76,8 +76,8 @@ public class RelationController {
 
 
     @ApiOperation(value = "批量删除用户角色关系", notes = "批量删除用户角色关系")
-    @RequestMapping(path = "delUserRoleRels", method = DELETE)
-    public Result<Integer> delUserRoleRels(@RequestParam List<String> urIds) {
+    @RequestMapping(path = "delUserRoleRels/{urIds}", method = DELETE)
+    public Result<Integer> delUserRoleRels(@PathVariable List<String> urIds) {
         try {
             userRoleRelService.delItems(urIds);
         } catch (ServiceException e) {
@@ -121,8 +121,8 @@ public class RelationController {
             notes = "分页获取所有用户部门关系信息,返回List",
             responseContainer = "List",
             response = UserDepartmentRel.class)
-    @RequestMapping(path = "getUserDepartmentRelByPage", method = GET)
-    public PageModel<UserDepartmentRel> getUserDepartmentRelByPage(@RequestParam int pageNum, @RequestParam int pageSize) {
+    @RequestMapping(path = "getUserDepartmentRelByPage/{pageNum}/{pageSize}", method = GET)
+    public PageModel<UserDepartmentRel> getUserDepartmentRelByPage(@PathVariable int pageNum, @PathVariable int pageSize) {
         PageModel<UserDepartmentRel> itemsByPage = userDepartmentRelService.getItemsByPage(pageNum, pageSize);
         return itemsByPage;
     }
@@ -153,8 +153,8 @@ public class RelationController {
 
 
     @ApiOperation(value = "按id删除用户部门关系", notes = "删除用户部门关系")
-    @RequestMapping(path = "delUserDepartmentRel", method = DELETE)
-    public Result<Integer> delUserDepartmentRel(@RequestParam String urIds) {
+    @RequestMapping(path = "delUserDepartmentRel/{urIds}", method = DELETE)
+    public Result<Integer> delUserDepartmentRel(@PathVariable String urIds) {
         try {
             userDepartmentRelService.delItem(urIds);
         } catch (ServiceException e) {
@@ -165,8 +165,8 @@ public class RelationController {
 
 
     @ApiOperation(value = "批量删除用户部门关系", notes = "批量删除用户部门关系")
-    @RequestMapping(path = "delUserDepartmentRels", method = DELETE)
-    public Result<Integer> delUserDepartmentRels(@RequestParam List<String> urIds) {
+    @RequestMapping(path = "delUserDepartmentRels/{urIds}", method = DELETE)
+    public Result<Integer> delUserDepartmentRels(@PathVariable List<String> urIds) {
         try {
             userDepartmentRelService.delItems(urIds);
         } catch (ServiceException e) {
@@ -210,8 +210,8 @@ public class RelationController {
             notes = "分页获取所有用户与组关系信息,返回List",
             responseContainer = "List",
             response = UserGroupRel.class)
-    @RequestMapping(path = "getUserGroupRelByPage", method = GET)
-    public PageModel<UserGroupRel> getUserGroupRelByPage(@RequestParam int pageNum, @RequestParam int pageSize) {
+    @RequestMapping(path = "getUserGroupRelByPage/{pageNum}/{pageSize}", method = GET)
+    public PageModel<UserGroupRel> getUserGroupRelByPage(@PathVariable int pageNum, @PathVariable int pageSize) {
         PageModel<UserGroupRel> itemsByPage = userGroupRelService.getItemsByPage(pageNum, pageSize);
         return itemsByPage;
     }
@@ -242,8 +242,8 @@ public class RelationController {
 
 
     @ApiOperation(value = "按id删除用户与组关系", notes = "删除用户与组关系")
-    @RequestMapping(path = "delUserGroupRel", method = DELETE)
-    public Result<Integer> delUserGroupRel(@RequestParam String urIds) {
+    @RequestMapping(path = "delUserGroupRel/{urIds}", method = DELETE)
+    public Result<Integer> delUserGroupRel(@PathVariable String urIds) {
         try {
             userGroupRelService.delItem(urIds);
         } catch (ServiceException e) {
@@ -254,8 +254,8 @@ public class RelationController {
 
 
     @ApiOperation(value = "批量删除用户与组关系", notes = "批量删除用户与组关系")
-    @RequestMapping(path = "delUserGroupRels", method = DELETE)
-    public Result<Integer> delUserGroupRels(@RequestParam List<String> urIds) {
+    @RequestMapping(path = "delUserGroupRels/{urIds}", method = DELETE)
+    public Result<Integer> delUserGroupRels(@PathVariable List<String> urIds) {
         try {
             userGroupRelService.delItems(urIds);
         } catch (ServiceException e) {
@@ -299,8 +299,8 @@ public class RelationController {
             notes = "分页获取所有用户权限关系信息,返回List",
             responseContainer = "List",
             response = UserAuthRel.class)
-    @RequestMapping(path = "getUserAuthRelByPage", method = GET)
-    public PageModel<UserAuthRel> getUserAuthRelByPage(@RequestParam int pageNum, @RequestParam int pageSize) {
+    @RequestMapping(path = "getUserAuthRelByPage/{pageNum}/{pageSize}", method = GET)
+    public PageModel<UserAuthRel> getUserAuthRelByPage(@PathVariable int pageNum, @PathVariable int pageSize) {
         PageModel<UserAuthRel> itemsByPage = userAuthRelService.getItemsByPage(pageNum, pageSize);
         return itemsByPage;
     }
@@ -331,8 +331,8 @@ public class RelationController {
 
 
     @ApiOperation(value = "按id删除用户权限关系", notes = "删除用户权限关系")
-    @RequestMapping(path = "delUserAuthRel", method = DELETE)
-    public Result<Integer> delUserAuthRel(@RequestParam String urIds) {
+    @RequestMapping(path = "delUserAuthRel/{urIds}", method = DELETE)
+    public Result<Integer> delUserAuthRel(@PathVariable String urIds) {
         try {
             userAuthRelService.delItem(urIds);
         } catch (ServiceException e) {
@@ -343,8 +343,8 @@ public class RelationController {
 
 
     @ApiOperation(value = "批量删除用户权限关系", notes = "批量删除用户权限关系")
-    @RequestMapping(path = "delUserAuthRels", method = DELETE)
-    public Result<Integer> delUserAuthRels(@RequestParam List<String> urIds) {
+    @RequestMapping(path = "delUserAuthRels/{urIds}", method = DELETE)
+    public Result<Integer> delUserAuthRels(@PathVariable List<String> urIds) {
         try {
             userAuthRelService.delItems(urIds);
         } catch (ServiceException e) {
@@ -388,8 +388,8 @@ public class RelationController {
             notes = "分页获取所有角色权限关系信息,返回List",
             responseContainer = "List",
             response = RoleAuthRel.class)
-    @RequestMapping(path = "getRoleAuthRelByPage", method = GET)
-    public PageModel<RoleAuthRel> getRoleAuthRelByPage(@RequestParam int pageNum, @RequestParam int pageSize) {
+    @RequestMapping(path = "getRoleAuthRelByPage/{pageNum}/{pageSize}", method = GET)
+    public PageModel<RoleAuthRel> getRoleAuthRelByPage(@PathVariable int pageNum, @PathVariable int pageSize) {
         PageModel<RoleAuthRel> itemsByPage = roleAuthRelService.getItemsByPage(pageNum, pageSize);
         return itemsByPage;
     }
@@ -420,8 +420,8 @@ public class RelationController {
 
 
     @ApiOperation(value = "按id删除角色权限关系", notes = "删除角色权限关系")
-    @RequestMapping(path = "delRoleAuthRel", method = DELETE)
-    public Result<Integer> delRoleAuthRel(@RequestParam String urIds) {
+    @RequestMapping(path = "delRoleAuthRel/{urIds}", method = DELETE)
+    public Result<Integer> delRoleAuthRel(@PathVariable String urIds) {
         try {
             roleAuthRelService.delItem(urIds);
         } catch (ServiceException e) {
@@ -432,8 +432,8 @@ public class RelationController {
 
 
     @ApiOperation(value = "批量删除角色权限关系", notes = "批量删除角色权限关系")
-    @RequestMapping(path = "delRoleAuthRels", method = DELETE)
-    public Result<Integer> delRoleAuthRels(@RequestParam List<String> urIds) {
+    @RequestMapping(path = "delRoleAuthRels/{urIds}", method = DELETE)
+    public Result<Integer> delRoleAuthRels(@PathVariable List<String> urIds) {
         try {
             roleAuthRelService.delItems(urIds);
         } catch (ServiceException e) {
@@ -476,8 +476,8 @@ public class RelationController {
             notes = "分页获取所有组角色关系信息,返回List",
             responseContainer = "List",
             response = GroupRoleRel.class)
-    @RequestMapping(path = "getGroupRoleRelByPage", method = GET)
-    public PageModel<GroupRoleRel> getGroupRoleRelByPage(@RequestParam int pageNum, @RequestParam int pageSize) {
+    @RequestMapping(path = "getGroupRoleRelByPage/{pageNum}/{pageSize}", method = GET)
+    public PageModel<GroupRoleRel> getGroupRoleRelByPage(@PathVariable int pageNum, @PathVariable int pageSize) {
         PageModel<GroupRoleRel> itemsByPage = groupRoleRelService.getItemsByPage(pageNum, pageSize);
         return itemsByPage;
     }
@@ -508,8 +508,8 @@ public class RelationController {
 
 
     @ApiOperation(value = "按id删除组角色关系", notes = "删除组角色关系")
-    @RequestMapping(path = "delGroupRoleRel", method = DELETE)
-    public Result<Integer> delGroupRoleRel(@RequestParam String urIds) {
+    @RequestMapping(path = "delGroupRoleRel/{urIds}", method = DELETE)
+    public Result<Integer> delGroupRoleRel(@PathVariable String urIds) {
         try {
             groupRoleRelService.delItem(urIds);
         } catch (ServiceException e) {
@@ -520,8 +520,8 @@ public class RelationController {
 
 
     @ApiOperation(value = "批量删除组角色关系", notes = "批量删除组角色关系")
-    @RequestMapping(path = "delGroupRoleRels", method = DELETE)
-    public Result<Integer> delGroupRoleRels(@RequestParam List<String> urIds) {
+    @RequestMapping(path = "delGroupRoleRels/{urIds}", method = DELETE)
+    public Result<Integer> delGroupRoleRels(@PathVariable List<String> urIds) {
         try {
             groupRoleRelService.delItems(urIds);
         } catch (ServiceException e) {
@@ -565,8 +565,8 @@ public class RelationController {
             notes = "分页获取所有组权限关系信息,返回List",
             responseContainer = "List",
             response = GroupAuthRel.class)
-    @RequestMapping(path = "getGroupAuthRelByPage", method = GET)
-    public PageModel<GroupAuthRel> getGroupAuthRelByPage(@RequestParam int pageNum, @RequestParam int pageSize) {
+    @RequestMapping(path = "getGroupAuthRelByPage/{pageNum}/{pageSize}", method = GET)
+    public PageModel<GroupAuthRel> getGroupAuthRelByPage(@PathVariable int pageNum, @PathVariable int pageSize) {
         PageModel<GroupAuthRel> itemsByPage = GroupAuthRelService.getItemsByPage(pageNum, pageSize);
         return itemsByPage;
     }
@@ -597,8 +597,8 @@ public class RelationController {
 
 
     @ApiOperation(value = "按id删除组权限关系", notes = "删除组权限关系")
-    @RequestMapping(path = "delGroupAuthRel", method = DELETE)
-    public Result<Integer> delGroupAuthRel(@RequestParam String urIds) {
+    @RequestMapping(path = "delGroupAuthRel/{urIds}", method = DELETE)
+    public Result<Integer> delGroupAuthRel(@PathVariable String urIds) {
         try {
             GroupAuthRelService.delItem(urIds);
         } catch (ServiceException e) {
@@ -609,8 +609,8 @@ public class RelationController {
 
 
     @ApiOperation(value = "批量删除组权限关系", notes = "批量删除组权限关系")
-    @RequestMapping(path = "delGroupAuthRels", method = DELETE)
-    public Result<Integer> delGroupAuthRels(@RequestParam List<String> urIds) {
+    @RequestMapping(path = "delGroupAuthRels/{urIds}", method = DELETE)
+    public Result<Integer> delGroupAuthRels(@PathVariable List<String> urIds) {
         try {
             GroupAuthRelService.delItems(urIds);
         } catch (ServiceException e) {
@@ -653,8 +653,8 @@ public class RelationController {
             notes = "分页获取所有公司部门关系信息,返回List",
             responseContainer = "List",
             response = CompanyDeptRel.class)
-    @RequestMapping(path = "getCompanyDeptRelByPage", method = GET)
-    public PageModel<CompanyDeptRel> getCompanyDeptRelByPage(@RequestParam int pageNum, @RequestParam int pageSize) {
+    @RequestMapping(path = "getCompanyDeptRelByPage/{pageNum}/{pageSize}", method = GET)
+    public PageModel<CompanyDeptRel> getCompanyDeptRelByPage(@PathVariable int pageNum, @PathVariable int pageSize) {
         PageModel<CompanyDeptRel> itemsByPage = companyDeptRelService.getItemsByPage(pageNum, pageSize);
         return itemsByPage;
     }
@@ -685,8 +685,8 @@ public class RelationController {
 
 
     @ApiOperation(value = "按id删除公司部门关系", notes = "删除公司部门关系")
-    @RequestMapping(path = "delCompanyDeptRel", method = DELETE)
-    public Result<Integer> delCompanyDeptRel(@RequestParam String urIds) {
+    @RequestMapping(path = "delCompanyDeptRel/{urIds}", method = DELETE)
+    public Result<Integer> delCompanyDeptRel(@PathVariable String urIds) {
         try {
             companyDeptRelService.delItem(urIds);
         } catch (ServiceException e) {
@@ -697,8 +697,8 @@ public class RelationController {
 
 
     @ApiOperation(value = "批量删除公司部门关系", notes = "批量删除公司部门关系")
-    @RequestMapping(path = "delCompanyDeptRels", method = DELETE)
-    public Result<Integer> delCompanyDeptRels(@RequestParam List<String> urIds) {
+    @RequestMapping(path = "delCompanyDeptRels/{urIds}", method = DELETE)
+    public Result<Integer> delCompanyDeptRels(@PathVariable List<String> urIds) {
         try {
             companyDeptRelService.delItems(urIds);
         } catch (ServiceException e) {
@@ -741,8 +741,8 @@ public class RelationController {
             notes = "分页获取所有权限菜单关系信息,返回List",
             responseContainer = "List",
             response = AuthMenuRel.class)
-    @RequestMapping(path = "getAuthMenuRelByPage", method = GET)
-    public PageModel<AuthMenuRel> getAuthMenuRelByPage(@RequestParam int pageNum, @RequestParam int pageSize) {
+    @RequestMapping(path = "getAuthMenuRelByPage/{pageNum}/{pageSize}", method = GET)
+    public PageModel<AuthMenuRel> getAuthMenuRelByPage(@PathVariable int pageNum, @PathVariable int pageSize) {
         PageModel<AuthMenuRel> itemsByPage = authMenuRelService.getItemsByPage(pageNum, pageSize);
         return itemsByPage;
     }
@@ -773,8 +773,8 @@ public class RelationController {
 
 
     @ApiOperation(value = "按id删除权限菜单关系", notes = "删除权限菜单关系")
-    @RequestMapping(path = "delAuthMenuRel", method = DELETE)
-    public Result<Integer> delAuthMenuRel(@RequestParam String urIds) {
+    @RequestMapping(path = "delAuthMenuRel/{urIds}", method = DELETE)
+    public Result<Integer> delAuthMenuRel(@PathVariable String urIds) {
         try {
             authMenuRelService.delItem(urIds);
         } catch (ServiceException e) {
@@ -785,8 +785,8 @@ public class RelationController {
 
 
     @ApiOperation(value = "批量删除权限菜单关系", notes = "批量删除权限菜单关系")
-    @RequestMapping(path = "delAuthMenuRels", method = DELETE)
-    public Result<Integer> delAuthMenuRels(@RequestParam List<String> urIds) {
+    @RequestMapping(path = "delAuthMenuRels/{urIds}", method = DELETE)
+    public Result<Integer> delAuthMenuRels(@PathVariable List<String> urIds) {
         try {
             authMenuRelService.delItems(urIds);
         } catch (ServiceException e) {

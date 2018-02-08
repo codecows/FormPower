@@ -1,14 +1,17 @@
 package app.management.department.controller;
 
+import app.base.Result;
 import app.comn.PageModel;
 import app.comn.ResponseCode;
 import app.comn.ServiceException;
 import app.management.department.model.Department;
 import app.management.department.service.DepartmentService;
-import app.base.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -36,16 +39,16 @@ public class DepartmentController {
             notes = "分页获取所有部门信息,返回List",
             responseContainer = "List",
             response = Department.class)
-    @RequestMapping(path = "getDeptsByPage", method = GET)
-    public PageModel<Department> getDeptsByPage(@RequestParam int pageNum, @RequestParam int pageSize) {
+    @RequestMapping(path = "getDeptsByPage/{pageNum}/{pageSize}", method = GET)
+    public PageModel<Department> getDeptsByPage(@PathVariable int pageNum, @PathVariable int pageSize) {
         PageModel<Department> itemsByPage = departmentService.getItemsByPage(pageNum, pageSize);
         return itemsByPage;
     }
 
     @ApiOperation(value = "按departmentid查找部门信息",
             notes = "按departmentid查找部门信息")
-    @RequestMapping(path = "getDept", method = GET)
-    public Result<Department> getDept(@RequestParam String depaId) {
+    @RequestMapping(path = "getDept/{depaId}", method = GET)
+    public Result<Department> getDept(@PathVariable String depaId) {
         return new Result<>(ResponseCode.Success, departmentService.getItem(depaId));
     }
 
@@ -75,8 +78,8 @@ public class DepartmentController {
 
 
     @ApiOperation(value = "按departmentid删除部门信息",notes = "删除部门信息")
-    @RequestMapping(path = "delDept", method = DELETE)
-    public Result<Integer> delDept(@RequestParam String depaId){
+    @RequestMapping(path = "delDept/{depaId}", method = DELETE)
+    public Result<Integer> delDept(@PathVariable String depaId) {
         try {
             departmentService.delItem(depaId);
         } catch (ServiceException e) {
@@ -87,8 +90,8 @@ public class DepartmentController {
 
 
     @ApiOperation(value = "批量删除部门信息",notes = "批量删除部门信息")
-    @RequestMapping(path = "delDepts", method = DELETE)
-    public Result<Integer> delDepts(@RequestParam List<String> depaIds){
+    @RequestMapping(path = "delDepts/{depaIds}", method = DELETE)
+    public Result<Integer> delDepts(@PathVariable List<String> depaIds) {
         try {
             departmentService.delItems(depaIds);
         } catch (ServiceException e) {

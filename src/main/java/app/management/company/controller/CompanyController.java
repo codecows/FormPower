@@ -9,9 +9,9 @@ import app.management.company.model.Company;
 import app.management.company.service.CompanyService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -41,16 +41,16 @@ public class CompanyController {
             notes = "分页获取所有公司信息,返回List",
             responseContainer = "List",
             response = Company.class)
-    @RequestMapping(path = "getCompsByPage", method = GET)
-    public PageModel<Company> getCompsByPage(@RequestParam int pageNum, @RequestParam int pageSize) {
+    @RequestMapping(path = "getCompsByPage/{pageNum}/{pageSize}", method = GET)
+    public PageModel<Company> getCompsByPage(@PathVariable int pageNum, @PathVariable int pageSize) {
         PageModel<Company> itemsByPage = companyService.getItemsByPage(pageNum, pageSize);
         return itemsByPage;
     }
 
     @ApiOperation(value = "按id查找公司信息",
             notes = "按id查找公司信息")
-    @RequestMapping(path = "getComp", method = GET)
-    public Result<Company> getComp(@RequestParam String depaId) {
+    @RequestMapping(path = "getComp/{depaId}", method = GET)
+    public Result<Company> getComp(@PathVariable String depaId) {
         return new Result<>(ResponseCode.Success, companyService.getItem(depaId));
     }
 
@@ -79,8 +79,8 @@ public class CompanyController {
 
 
     @ApiOperation(value = "按id删除公司信息", notes = "按id删除公司信息")
-    @RequestMapping(path = "delComp", method = DELETE)
-    public Result<Integer> delComp(@RequestParam String authId) {
+    @RequestMapping(path = "delComp/{authId}", method = DELETE)
+    public Result<Integer> delComp(@PathVariable String authId) {
         try {
             companyService.delItem(authId);
         } catch (ServiceException e) {
@@ -91,8 +91,8 @@ public class CompanyController {
 
 
     @ApiOperation(value = "批量删除公司信息", notes = "批量删除公司信息")
-    @RequestMapping(path = "delComps", method = DELETE)
-    public Result<Integer> delComps(@RequestParam List<String> authIds) {
+    @RequestMapping(path = "delComps/{authIds}", method = DELETE)
+    public Result<Integer> delComps(@PathVariable List<String> authIds) {
         try {
             companyService.delItems(authIds);
         } catch (ServiceException e) {

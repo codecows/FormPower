@@ -1,16 +1,16 @@
 package app.management.user.controller;
 
+import app.base.Result;
 import app.comn.PageModel;
 import app.comn.ResponseCode;
 import app.comn.ServiceException;
-import app.base.Result;
 import app.management.user.model.User;
 import app.management.user.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -27,8 +27,8 @@ public class UserController {
 
     @ApiOperation(value = "按ID查找用户信息",
             notes = "按ID查找用户信息")
-    @RequestMapping(path = "getUser", method = GET)
-    public Result<User> getUser(@RequestParam String userId) {
+    @RequestMapping(path = "getUser/{userId}", method = GET)
+    public Result<User> getUser(@PathVariable String userId) {
         return new Result<>(ResponseCode.Success, userService.getItem(userId));
     }
 
@@ -45,8 +45,8 @@ public class UserController {
             notes = "分页获取用户信息,返回List",
             responseContainer = "List",
             response = User.class)
-    @RequestMapping(path = "getUsersByPage", method = GET)
-    public PageModel<User> getDeptsByPage(@RequestParam int pageNum, @RequestParam int pageSize) {
+    @RequestMapping(path = "getUsersByPage/{pageNum}/{pageSize}", method = GET)
+    public PageModel<User> getDeptsByPage(@PathVariable int pageNum, @PathVariable int pageSize) {
         PageModel<User> itemsByPage = userService.getItemsByPage(pageNum, pageSize);
         return itemsByPage;
     }
