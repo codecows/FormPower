@@ -1305,12 +1305,22 @@ License: You must have a valid license purchased only from themeforest(the above
         Metronic.init(); // init metronic core componets
         Layout.init(); // init layout
         QuickSidebar.init(); // init quick sidebar
+        //TODO 测试用
+        localStorage.setItem("userId", "10000");
+        var userInfo = User.getUserInfo();
 
-        alert(URL.management.widgetInfo.getWidgetInfo);
-        HttpHelper.ajax(URL.management.widgetInfo.getWidgetInfo, HttpMethod.GET, null,
-            function (data) {
-                layer.msg(JSON.stringify(data));
-            });
+        if (userInfo == null) {
+
+           //alert(JSON.stringify(userInfo));
+
+        } else {
+            //alert(2);
+        }
+
+//        HttpHelper.ajax(URL.management.widgetInfo.getWidgetInfo, HttpMethod.GET, null,
+//            function (data) {
+//                layer.msg(JSON.stringify(data));
+//            });
     });
 </script>
 <!-- END JAVASCRIPTS -->

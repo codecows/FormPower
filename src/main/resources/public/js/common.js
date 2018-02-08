@@ -21,14 +21,10 @@ var HttpHelper = function () {
                 }
             });
         },
-        method: function () {
-            return {
-                GET: "GET",
-                POST: "POST",
-                PUT: "PUT",
-                DELETE: "DELETE"
-            };
+        get: function (url, func) {
+            $.get(url, func, "json");
         }
+
     };
 }();
 var HttpMethod = function () {
@@ -53,14 +49,43 @@ var URL = function () {
     };
 }();
 
+
 var User = function () {
+    function getUserById() {
+        var userId = localStorage.getItem("token");
+        if (!userId) {
+            return null;
+        }
+    }
+
 
     return {
         getUserInfo: function () {
+            var userId = localStorage.getItem("userId");
+            if (!userId) {
+                return null;
+            }
+            var _user;
+            HttpHelper.get(URL.management.userInfo.getUserInfo + localStorage.getItem("userId"), function (data, status, xhr) {
+                var result = checkResult(data);
+                if (result !== null) {
+                    _user = result;
 
-            10000
-            HttpHelper.ajax()
+                }
+            });
+            alert(_user);
+            alert(JSON.stringify(result));
+            return _user;
         }
-
     }
 }();
+
+function checkResult(data) {
+    var result = eval('(' + JSON.stringify(data) + ')');
+    if (result.code === 200) {
+        return result.data;
+    } else {
+        layer.msg(result.message);
+        return null;
+    }
+}
