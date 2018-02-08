@@ -43,7 +43,7 @@ var FormDesinger = function () {
 
     function sizeInit() {
         $("#formPanel").css("height", "300px");
-         // alert(3);
+        // alert(3);
     }
 
     return {
@@ -58,6 +58,7 @@ var FormDesinger = function () {
         sizeInit: function () {
             sizeInit();
         }
+
     };
 }();
 

@@ -45,7 +45,22 @@ var URL = function () {
         management: {
             widgetInfo: {
                 getWidgetInfo: _baseUrl + "management/widgetInfo/getWidgetInfo"
+            },
+            userInfo: {
+                getUserInfo: "/management/userInfo/getUserInfo?userId="
             }
         }
     };
+}();
+
+var User = function () {
+
+    return {
+        getUserInfo: function () {
+
+            10000
+            HttpHelper.ajax()
+        }
+
+    }
 }();

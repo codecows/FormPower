@@ -8,6 +8,7 @@ import app.management.userinfo.model.UserPojo;
 import app.management.userinfo.service.UserInfoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,8 +28,8 @@ public class UserInfoController {
 
     @ApiOperation(value = "按ID查找用户,部门,角色,菜单列表信息列表",
             notes = "按ID查找用户,部门,角色,菜单列表信息列表")
-    @RequestMapping(path = "getUserInfo", method = GET)
-    public Result<UserInfo> getUserInfo(@RequestParam String userId) {
+    @RequestMapping(path = "getUserInfo/{userId}", method = GET)
+    public Result<UserInfo> getUserInfo(@PathVariable String userId) {
 
         try {
             return new Result<>(ResponseCode.Success, userInfoService.getItem(userId));
