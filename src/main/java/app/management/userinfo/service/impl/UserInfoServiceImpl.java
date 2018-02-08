@@ -114,7 +114,7 @@ public class UserInfoServiceImpl implements UserInfoService {
         userInfo.setRolePojos(rolePojos);
 
         /*从systemMenuService调用getItemByUserId方法，返回SystemMenu列表*/
-        List<SystemMenu> itemByUserId = systemMenuService.getItemByUserId(userId, null);
+        List<SystemMenu> itemByUserId = systemMenuService.getItemByUserId(userId, "y");
 
         userInfo.setSystemMenus(itemByUserId);
 
