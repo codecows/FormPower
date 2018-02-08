@@ -1,16 +1,16 @@
 package app.management.menu.controller;
 
+import app.base.Result;
 import app.comn.PageModel;
 import app.comn.ResponseCode;
 import app.comn.ServiceException;
-import app.base.Result;
 import app.management.menu.model.Menu;
 import app.management.menu.service.MenuService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -40,16 +40,16 @@ public class MenuController {
             notes = "分页获取所有菜单信息,返回List",
             responseContainer = "List",
             response = Menu.class)
-    @RequestMapping(path = "getMenusByPage", method = GET)
-    public PageModel<Menu> getMenusByPage(@RequestParam int pageNum, @RequestParam int pageSize) {
+    @RequestMapping(path = "getMenusByPage/{pageNum}/{pageSize}", method = GET)
+    public PageModel<Menu> getMenusByPage(@PathVariable int pageNum, @PathVariable int pageSize) {
         PageModel<Menu> itemsByPage = menuService.getItemsByPage(pageNum, pageSize);
         return itemsByPage;
     }
 
     @ApiOperation(value = "按id查找菜单信息",
             notes = "按id查找菜单信息")
-    @RequestMapping(path = "getMenu", method = GET)
-    public Result<Menu> getMenu(@RequestParam String menuId) {
+    @RequestMapping(path = "getMenu/{menuId}", method = GET)
+    public Result<Menu> getMenu(@PathVariable String menuId) {
         return new Result<>(ResponseCode.Success, menuService.getItem(menuId));
     }
 
@@ -78,8 +78,8 @@ public class MenuController {
 
 
     @ApiOperation(value = "按id删除菜单信息", notes = "删除菜单信息")
-    @RequestMapping(path = "delMenu", method = DELETE)
-    public Result<Integer> delMenu(@RequestParam String depaId) {
+    @RequestMapping(path = "delMenu/{depaId}", method = DELETE)
+    public Result<Integer> delMenu(@PathVariable String depaId) {
         try {
             menuService.delItem(depaId);
         } catch (ServiceException e) {
@@ -90,8 +90,8 @@ public class MenuController {
 
 
     @ApiOperation(value = "批量删除菜单信息", notes = "批量删除菜单信息")
-    @RequestMapping(path = "delMenus", method = DELETE)
-    public Result<Integer> delMenus(@RequestParam List<String> depaIds) {
+    @RequestMapping(path = "delMenus/{depaIds}", method = DELETE)
+    public Result<Integer> delMenus(@PathVariable List<String> depaIds) {
         try {
             menuService.delItems(depaIds);
         } catch (ServiceException e) {

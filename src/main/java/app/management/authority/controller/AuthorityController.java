@@ -1,16 +1,16 @@
 package app.management.authority.controller;
 
-import app.management.authority.model.Authority;
-import app.management.authority.service.AuthorityService;
 import app.base.Result;
 import app.comn.PageModel;
 import app.comn.ResponseCode;
 import app.comn.ServiceException;
+import app.management.authority.model.Authority;
+import app.management.authority.service.AuthorityService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -39,16 +39,16 @@ public class AuthorityController {
             notes = "分页获取所有权限信息,返回List",
             responseContainer = "List",
             response = Authority.class)
-    @RequestMapping(path = "getAuthsByPage", method = GET)
-    public PageModel<Authority> getAuthsByPage(@RequestParam int pageNum, @RequestParam int pageSize) {
+    @RequestMapping(path = "getAuthsByPage/{pageNum}/{pageSize}", method = GET)
+    public PageModel<Authority> getAuthsByPage(@PathVariable int pageNum, @PathVariable int pageSize) {
         PageModel<Authority> itemsByPage = authorityService.getItemsByPage(pageNum, pageSize);
         return itemsByPage;
     }
 
     @ApiOperation(value = "按id查找权限信息",
             notes = "按id查找权限信息")
-    @RequestMapping(path = "getAuth", method = GET)
-    public Result<Authority> getAuth(@RequestParam String authId) {
+    @RequestMapping(path = "getAuth/{authId}", method = GET)
+    public Result<Authority> getAuth(@PathVariable String authId) {
         return new Result<>(ResponseCode.Success, authorityService.getItem(authId));
     }
 
@@ -78,8 +78,8 @@ public class AuthorityController {
 
 
     @ApiOperation(value = "按id删除权限信息",notes = "按id删除权限信息")
-    @RequestMapping(path = "delAuth", method = DELETE)
-    public Result<Integer> delAuth(@RequestParam String authId){
+    @RequestMapping(path = "delAuth/{authId}", method = DELETE)
+    public Result<Integer> delAuth(@PathVariable String authId) {
         try {
             authorityService.delItem(authId);
         } catch (ServiceException e) {
@@ -90,8 +90,8 @@ public class AuthorityController {
 
 
     @ApiOperation(value = "批量删除权限信息",notes = "批量删除权限信息")
-    @RequestMapping(path = "delAuths", method = DELETE)
-    public Result<Integer> delAuths(@RequestParam List<String> authIds){
+    @RequestMapping(path = "delAuths/{authIds}", method = DELETE)
+    public Result<Integer> delAuths(@PathVariable List<String> authIds) {
         try {
             authorityService.delItems(authIds);
         } catch (ServiceException e) {
