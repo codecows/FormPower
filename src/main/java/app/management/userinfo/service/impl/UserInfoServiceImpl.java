@@ -92,13 +92,15 @@ public class UserInfoServiceImpl implements UserInfoService {
 
         userInfo.setGroup(group);
 
-        DepartmentInfo departmentInfo1 = departmentInfoConverter.convert2Model(departmentInfoEntity.getDepartments().get(0));
+        DepartmentInfoEntity departmentInfoEntity1 = departmentInfoEntity.getDepartments().get(0);
+        DepartmentInfo departmentInfo1 = departmentInfoConverter.convert2Model(departmentInfoEntity1);
 
         BeanUtils.copyProperties(departmentInfo1, company);
 
         userInfo.setCompany(company);
 
-        DepartmentInfo departmentInfo2 = departmentInfoConverter.convert2Model(departmentInfoEntity.getDepartments().get(0).getDepartments().get(0));
+        DepartmentInfoEntity departmentInfoEntity2 = departmentInfoEntity1.getDepartments().get(0);
+        DepartmentInfo departmentInfo2 = departmentInfoConverter.convert2Model(departmentInfoEntity2);
 
         BeanUtils.copyProperties(departmentInfo2, department);
 
