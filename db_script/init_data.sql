@@ -28,7 +28,7 @@ VALUES ('1002', '10', 'g', '2', '部门', NULL, NULL, NULL, 'sys/dept', NULL, NU
 INSERT INTO "sys_menu" ("menu_id", "parent_id", "menu_type", "menu_level", "menu_name", "menu_code", "menu_path", "form_id", "menu_url", "remark", "order_num", "status", "create_date")
 VALUES ('20', '00', 's', '1', '表单系统', NULL, NULL, NULL, NULL, NULL, NULL, 'y', '2018-01-30');
 INSERT INTO "sys_menu" ("menu_id", "parent_id", "menu_type", "menu_level", "menu_name", "menu_code", "menu_path", "form_id", "menu_url", "remark", "order_num", "status", "create_date")
-VALUES ('30', '01', 's', '2', '系统设置', NULL, NULL, NULL, NULL, NULL, NULL, 'y', '2018-01-30');
+VALUES ('30', '01', 'g', '2', '系统设置', NULL, NULL, NULL, NULL, NULL, NULL, 'y', '2018-01-30');
 INSERT INTO "sys_menu" ("menu_id", "parent_id", "menu_type", "menu_level", "menu_name", "menu_code", "menu_path", "form_id", "menu_url", "remark", "order_num", "status", "create_date")
 VALUES ('3002', '01', 'g', '2', 'XX设置', NULL, NULL, NULL, NULL, NULL, NULL, 'y', '2018-01-30');
 INSERT INTO "sys_menu" ("menu_id", "parent_id", "menu_type", "menu_level", "menu_name", "menu_code", "menu_path", "form_id", "menu_url", "remark", "order_num", "status", "create_date")

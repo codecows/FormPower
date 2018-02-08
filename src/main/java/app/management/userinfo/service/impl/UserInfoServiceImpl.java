@@ -3,17 +3,12 @@ package app.management.userinfo.service.impl;
 import app.comn.ResponseCode;
 import app.comn.ServiceException;
 import app.dao.entities.SysUser;
-import app.dao.entities.SysUserExample;
 import app.dao.mappers.SysUserMapper;
 import app.management.department.model.Department;
 import app.management.departmentinfo.converter.DepartmentInfoConverter;
 import app.management.departmentinfo.entities.DepartmentInfoEntity;
 import app.management.departmentinfo.mappers.DepartmentInfoMapper;
 import app.management.departmentinfo.model.DepartmentInfo;
-import app.management.menuinfo.converter.MenuLevelConverter;
-import app.management.menuinfo.entities.MenuLevelEntity;
-import app.management.menuinfo.mappers.MenuLevelMapper;
-import app.management.menuinfo.model.MenuLevel;
 import app.management.menuinfo.model.SystemMenu;
 import app.management.menuinfo.service.SystemMenuService;
 import app.management.roleinfo.converter.RolePojoConverter;
@@ -76,13 +71,12 @@ public class UserInfoServiceImpl implements UserInfoService {
         Department department = new Department();
 
         /*根据用户ID查询用户信息，然后压进UserInfo对象*/
-        SysUserExample sysUserExample = new SysUserExample();
-        sysUserExample.createCriteria().andUserIdEqualTo(userId);
-        long l = sysUserMapper.countByExample(sysUserExample);
-        if (l == 0) {
+
+        SysUser sysUser = sysUserMapper.selectByPrimaryKey(userId);
+
+        if (sysUser == null) {
             throw new ServiceException(ResponseCode.InformationUnexist);
         }
-        SysUser sysUser = sysUserMapper.selectByPrimaryKey(userId);
 
         BeanUtils.copyProperties(sysUser, userInfo);
 
@@ -98,13 +92,15 @@ public class UserInfoServiceImpl implements UserInfoService {
 
         userInfo.setGroup(group);
 
-        DepartmentInfo departmentInfo1 = departmentInfoConverter.convert2Model(departmentInfoEntity.getDepartments().get(0));
+        DepartmentInfoEntity departmentInfoEntity1 = departmentInfoEntity.getDepartments().get(0);
+        DepartmentInfo departmentInfo1 = departmentInfoConverter.convert2Model(departmentInfoEntity1);
 
         BeanUtils.copyProperties(departmentInfo1, company);
 
         userInfo.setCompany(company);
 
-        DepartmentInfo departmentInfo2 = departmentInfoConverter.convert2Model(departmentInfoEntity.getDepartments().get(0).getDepartments().get(0));
+        DepartmentInfoEntity departmentInfoEntity2 = departmentInfoEntity1.getDepartments().get(0);
+        DepartmentInfo departmentInfo2 = departmentInfoConverter.convert2Model(departmentInfoEntity2);
 
         BeanUtils.copyProperties(departmentInfo2, department);
 
@@ -118,7 +114,7 @@ public class UserInfoServiceImpl implements UserInfoService {
         userInfo.setRolePojos(rolePojos);
 
         /*从systemMenuService调用getItemByUserId方法，返回SystemMenu列表*/
-        List<SystemMenu> itemByUserId = systemMenuService.getItemByUserId(userId, null);
+        List<SystemMenu> itemByUserId = systemMenuService.getItemByUserId(userId, "y");
 
         userInfo.setSystemMenus(itemByUserId);
 
