@@ -3,17 +3,12 @@ package app.management.userinfo.service.impl;
 import app.comn.ResponseCode;
 import app.comn.ServiceException;
 import app.dao.entities.SysUser;
-import app.dao.entities.SysUserExample;
 import app.dao.mappers.SysUserMapper;
 import app.management.department.model.Department;
 import app.management.departmentinfo.converter.DepartmentInfoConverter;
 import app.management.departmentinfo.entities.DepartmentInfoEntity;
 import app.management.departmentinfo.mappers.DepartmentInfoMapper;
 import app.management.departmentinfo.model.DepartmentInfo;
-import app.management.menuinfo.converter.MenuLevelConverter;
-import app.management.menuinfo.entities.MenuLevelEntity;
-import app.management.menuinfo.mappers.MenuLevelMapper;
-import app.management.menuinfo.model.MenuLevel;
 import app.management.menuinfo.model.SystemMenu;
 import app.management.menuinfo.service.SystemMenuService;
 import app.management.roleinfo.converter.RolePojoConverter;
@@ -76,13 +71,12 @@ public class UserInfoServiceImpl implements UserInfoService {
         Department department = new Department();
 
         /*根据用户ID查询用户信息，然后压进UserInfo对象*/
-        SysUserExample sysUserExample = new SysUserExample();
-        sysUserExample.createCriteria().andUserIdEqualTo(userId);
-        long l = sysUserMapper.countByExample(sysUserExample);
-        if (l == 0) {
+
+        SysUser sysUser = sysUserMapper.selectByPrimaryKey(userId);
+
+        if (sysUser == null) {
             throw new ServiceException(ResponseCode.InformationUnexist);
         }
-        SysUser sysUser = sysUserMapper.selectByPrimaryKey(userId);
 
         BeanUtils.copyProperties(sysUser, userInfo);
 
