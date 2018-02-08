@@ -1,9 +1,5 @@
 package app.management.menuinfo.entities;
 
-import app.management.menuinfo.model.MenuPojo;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -41,7 +37,7 @@ public class GroupMenuEntity {
 
     private Date createDate;
 
-    private List<MenuPojoEntity> menuPojoEntityList;
+    private List<MenuPojoEntity> menuEntityList;
 
     public String getMenuId() {
         return menuId;
@@ -147,11 +143,11 @@ public class GroupMenuEntity {
         this.createDate = createDate;
     }
 
-    public List<MenuPojoEntity> getMenuPojoEntityList() {
-        return menuPojoEntityList;
+    public List<MenuPojoEntity> getMenuEntityList() {
+        return menuEntityList;
     }
 
-    public void setMenuPojoEntityList(List<MenuPojoEntity> menuPojoEntityList) {
-        this.menuPojoEntityList = menuPojoEntityList;
+    public void setMenuEntityList(List<MenuPojoEntity> menuEntityList) {
+        this.menuEntityList = menuEntityList;
     }
 }

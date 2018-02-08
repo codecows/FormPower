@@ -39,12 +39,12 @@ public class SystemMenuServiceImpl implements SystemMenuService {
                 GroupMenu groupMenu = new GroupMenu();
                 BeanUtils.copyProperties(groupMenuEntity, groupMenu);
                 ArrayList<MenuPojo> menuPojos = new ArrayList<>();
-                for (MenuPojoEntity menuPojoEntity : groupMenuEntity.getMenuPojoEntityList()) {
+                for (MenuPojoEntity menuPojoEntity : groupMenuEntity.getMenuEntityList()) {
                     MenuPojo menuPojo = new MenuPojo();
                     BeanUtils.copyProperties(menuPojoEntity, menuPojo);
                     menuPojos.add(menuPojo);
                 }
-                groupMenu.setMenuPojoList(menuPojos);
+                groupMenu.setMenuList(menuPojos);
                 groupMenus.add(groupMenu);
             }
             systemMenu.setGroupMenuList(groupMenus);

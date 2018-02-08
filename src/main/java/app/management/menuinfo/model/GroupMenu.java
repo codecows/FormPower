@@ -53,7 +53,7 @@ public class GroupMenu {
     private Date createDate;
 
     @ApiModelProperty("下级菜单列表")
-    private List<MenuPojo> menuPojoList;
+    private List<MenuPojo> menuList;
 
     public String getMenuId() {
         return menuId;
@@ -159,11 +159,11 @@ public class GroupMenu {
         this.createDate = createDate;
     }
 
-    public List<MenuPojo> getMenuPojoList() {
-        return menuPojoList;
+    public List<MenuPojo> getMenuList() {
+        return menuList;
     }
 
-    public void setMenuPojoList(List<MenuPojo> menuPojoList) {
-        this.menuPojoList = menuPojoList;
+    public void setMenuList(List<MenuPojo> menuList) {
+        this.menuList = menuList;
     }
 }
