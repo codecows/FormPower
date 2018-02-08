@@ -1299,6 +1299,8 @@ License: You must have a valid license purchased only from themeforest(the above
 
 <script src="../../js/layer/layer.js"></script>
 <script src="../../js/common.js"></script>
+<script src="../../js/mpage.js"></script>
+
 <!-- END PAGE LEVEL SCRIPTS -->
 <script>
     jQuery(document).ready(function () {
@@ -1307,14 +1309,14 @@ License: You must have a valid license purchased only from themeforest(the above
         QuickSidebar.init(); // init quick sidebar
         //TODO 测试用
         localStorage.setItem("userId", "10000");
-        var userInfo = User.getUserInfo();
+        User.setUserInfo();
+        MainMenu.loadMenus();
+        if (window.UserInfo == null) {
 
-        if (userInfo == null) {
-
-           //alert(JSON.stringify(userInfo));
+            //alert(JSON.stringify(userInfo));
 
         } else {
-            //alert(2);
+//            alert(2);
         }
 
 //        HttpHelper.ajax(URL.management.widgetInfo.getWidgetInfo, HttpMethod.GET, null,

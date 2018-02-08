@@ -1,6 +1,6 @@
 var HttpHelper = function () {
     return {
-        ajax: function (url, type, data, sucFun) {
+        ajax: function (url, type, data, func) {
             if (!type) type = "GET";
             if (!data) data = {};
             if ((!url) || !(sucFun)) return;
@@ -15,17 +15,34 @@ var HttpHelper = function () {
                     "visitor": localStorage.getItem("visitor")
                 },
                 contentType: 'application/json; charset=UTF-8',
-                success: sucFun,
+                success: func,
                 error: function (e) {
                     layer.msg(JSON.stringify(e));
                 }
             });
         },
-        get: function (url, func) {
-            $.get(url, func, "json");
-        }
+        syncGet: function (url, func) {
+            if ((!url) || !(func)) return;
+            $.ajax({
+                url: url,
+                type: "GET",
+                async: false,
+                data: {},
+                timeout: 5000,
+                dataType: 'json',
+                headers: {
+                    "x-access-token": "Bearer " + localStorage.getItem("token"),
+                    "visitor": localStorage.getItem("visitor")
+                },
+                contentType: 'application/json; charset=UTF-8',
+                success: func,
+                error: function (e) {
+                    layer.msg(JSON.stringify(e));
+                }
+            });
 
-    };
+        }
+    }
 }();
 var HttpMethod = function () {
     return {
@@ -43,7 +60,7 @@ var URL = function () {
                 getWidgetInfo: _baseUrl + "management/widgetInfo/getWidgetInfo"
             },
             userInfo: {
-                getUserInfo: "/management/userInfo/getUserInfo?userId="
+                getUserInfo: _baseUrl + "management/userInfo/getUserInfo/"
             }
         }
     };
@@ -51,31 +68,15 @@ var URL = function () {
 
 
 var User = function () {
-    function getUserById() {
-        var userId = localStorage.getItem("token");
-        if (!userId) {
-            return null;
-        }
-    }
-
-
     return {
-        getUserInfo: function () {
+        setUserInfo: function () {
             var userId = localStorage.getItem("userId");
-            if (!userId) {
-                return null;
-            }
-            var _user;
-            HttpHelper.get(URL.management.userInfo.getUserInfo + localStorage.getItem("userId"), function (data, status, xhr) {
+            if (!userId) return null;
+            var _user = null;
+            HttpHelper.syncGet(URL.management.userInfo.getUserInfo + localStorage.getItem("userId"), function (data, status, xhr) {
                 var result = checkResult(data);
-                if (result !== null) {
-                    _user = result;
-
-                }
+                if (result !== null) window.UserInfo = result;
             });
-            alert(_user);
-            alert(JSON.stringify(result));
-            return _user;
         }
     }
 }();
