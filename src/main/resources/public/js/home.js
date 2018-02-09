@@ -36,6 +36,7 @@ var MainMenu = function () {
             md2 += "</div>";
             md3 += "</div>";
             var html = md1 + md2 + md3;
+            // alert(html);
             if (html.length <= 0) return
             $(".news-page div.row").append(html);
         },
