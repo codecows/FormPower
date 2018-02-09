@@ -21,7 +21,8 @@
 </head>
 <body>
 <div id="div">
-
+    <button id="btn" class="aa">点我呀~</button>
+    <button id="btn2">佳佳~</button>
 </div>
 
 </body>
@@ -29,10 +30,32 @@
 <script>
     $(function () {
 
-        HttpHelper.ajax("management/widgetInfo/getWidgetInfo", HttpHelper.method().GET, null,
-            function (data) {
-                layer.msg(JSON.stringify(data));
-            });
+        
+//        HttpHelper.ajax("management/widgetInfo/getWidgetInfo", HttpHelper.method().GET, null,
+//            function (data) {
+//                layer.msg(JSON.stringify(data));
+//            });
 
     });
+    $("#btn2").click(function () {
+        $("body").append(" <button class=\"aa\">点我呀~</button>")
+    });
+    $('body').on('click', '.aa', function (e) {
+
+        $("body").append("<div>1111111111111111111</div>")
+    });
+
+    $("body").click(function () {
+        alert(22);
+    });
+//    $(".aa").click(function () {
+//        $("body").append("<div>1111111111111111111</div>")
+//    });
 </script>
+
+<style>
+    .aa {
+
+    }
+
+</style>
