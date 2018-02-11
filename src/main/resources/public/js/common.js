@@ -57,10 +57,12 @@ var URL = function () {
     return {
         management: {
             widgetInfo: {
-                getWidgetInfo: _baseUrl + "management/widgetInfo/getWidgetInfo"
+                getWidgetInfo: _baseUrl + "management/widgetInfo/getWidgetInfo",
+                getWidgetInfoType: HttpMethod.GET
             },
             userInfo: {
-                getUserInfo: _baseUrl + "management/userInfo/getUserInfo/"
+                getUserInfo: _baseUrl + "management/userInfo/getUserInfo/",
+                getUserInfoType: HttpMethod.GET
             }
         }
     };
@@ -90,3 +92,40 @@ function checkResult(data) {
         return null;
     }
 }
+
+var DataTablesSettings = function () {
+    return {
+        init: function () {
+            return {
+                "language": {
+                    "decimal": ".",
+                    "thousands": ",",
+                    "emptyTable": "表格为空",
+                    "info": "_START_~_END_/_TOTAL_",
+                    "infoEmpty": "共找到 0 条数据",
+                    "infoFiltered": "(filtered from _MAX_ total entries)",
+                    "infoPostFix": "",
+                    "lengthMenu": "_MENU_/页",
+                    "loadingRecords": "数据载入中...",
+                    "processing": "加载中...",
+                    "search": "查找:",
+                    "zeroRecords": "共找到 0 条数据",
+                    "paginate": {
+                        "first": "首页",
+                        "last": "尾页",
+                        "next": "下一页",
+                        "previous": "上一页"
+                    }
+                },
+                "pageLength": 10,
+                "dom": "" +
+                "<'row'<'col-md-12'tr>>" +
+                "<'row'<'col-md-5'i><'col-md-7'p>>",
+                "aria": {
+                    "sortAscending": ": 升序",
+                    "sortDescending": ": 降序"
+                }
+            };
+        }
+    }
+}();
