@@ -105,7 +105,7 @@ var DataTablesSettings = function () {
                     "infoEmpty": "共找到 0 条数据",
                     "infoFiltered": "(filtered from _MAX_ total entries)",
                     "infoPostFix": "",
-                    "lengthMenu": "_MENU_/页",
+                    "lengthMenu": "_MENU_行/页",
                     "loadingRecords": "数据载入中...",
                     "processing": "加载中...",
                     "search": "查找:",
@@ -120,7 +120,7 @@ var DataTablesSettings = function () {
                 "pageLength": 10,
                 "dom": "" +
                 "<'row'<'col-md-12'tr>>" +
-                "<'row'<'col-md-5'i><'col-md-7'p>>",
+                "<'row'<'col-md-3'l><'col-md-2'i><'col-md-7'p>>",
                 "aria": {
                     "sortAscending": ": 升序",
                     "sortDescending": ": 降序"
