@@ -50,23 +50,6 @@ var FormList = function () {
                 return sOut;
             }
 
-            /*
-             * Insert a 'details' column to the table
-             */
-            var nCloneTh = document.createElement('th');
-            nCloneTh.className = "table-checkbox";
-
-            var nCloneTd = document.createElement('td');
-            nCloneTd.innerHTML = '<span class="row-details row-details-close"></span>';
-
-            table.find('thead tr').each(function () {
-                this.insertBefore(nCloneTh, this.childNodes[0]);
-            });
-
-            table.find('tbody tr').each(function () {
-                this.insertBefore(nCloneTd.cloneNode(true), this.childNodes[0]);
-            });
-
 
             var setting = DataTablesSettings.init();
             setting.columnDefs = [{
@@ -77,12 +60,59 @@ var FormList = function () {
                 [1, 'asc']
             ];
 
+            setting.columns = [
+                // {
+                //     "data": null,
+                //     defaultContent: "<span class = 'row-details row-details-close'> </span>",
+                //     "orderable": false
+                // },
+                {"data": "formId"},
+                {"data": "formName"},
+                {"data": "remark"},
+                {"data": "inUse"}
+            ];
+            // private String formId;
+            // private String formName;
+            // private String remark;
+            // private int inUse;
+
             setting.lengthMenu = [
                 [5, 15, 20, -1],
                 [5, 15, 20, "全部"] // change per page values here
             ];
 
+            setting.ajax = function (data, callback, settings) {
+
+                var base64Data = Base64.encode(JSON.stringify(data));
+                HttpHelper.ajax(URL.management.form.getFromList + base64Data, "GET", data,
+                    function (respose) {
+                        callback(respose.data);
+                        insertDetailsColumn();
+                    });
+            };
+
+
             var oTable = table.dataTable(setting);
+
+            function insertDetailsColumn() {
+                /*
+                     * Insert a 'details' column to the table
+                     */
+                var nCloneTh = document.createElement('th');
+                nCloneTh.className = "table-checkbox";
+
+                var nCloneTd = document.createElement('td');
+                nCloneTd.innerHTML = '<span class="row-details row-details-close"></span>';
+
+                table.find('thead tr').each(function () {
+                    this.insertBefore(nCloneTh, this.childNodes[0]);
+                });
+
+                table.find('tbody tr').each(function () {
+                    this.insertBefore(nCloneTd.cloneNode(true), this.childNodes[0]);
+                });
+            }
+
 
             //var tableWrapper = $('#sample_4_wrapper'); // datatable creates the table wrapper by adding with id {your_table_jd}_wrapper
             var tableColumnToggler = $('#sample_4_column_toggler');
@@ -113,9 +143,10 @@ var FormList = function () {
                 var iCol = parseInt($(this).attr("data-column"));
                 var bVis = oTable.fnSettings().aoColumns[iCol].bVisible;
                 oTable.fnSetColumnVis(iCol, (bVis ? false : true));
-                oTable.fnset
+
             });
 
         }
     };
-}();
+}
+();

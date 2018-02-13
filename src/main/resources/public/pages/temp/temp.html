@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="dragula.min.css">
+    <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="dragula.min.js"></script>
+
+    <script type="text/javascript">
+
+
+      dragula([document.getElementById("ul1"), document.getElementById("ul2")]);
+      alert(1);
+    </script>
+</head>
+
+<body>
+
+
+<ul id="ul1">
+    <li>1111111111111111</li>
+    <li>222222222222222</li>
+    <li>333333333333333333</li>
+</ul>
+<ul id="ul2">
+    <li>AAAAAAAAAAAAAAAAAA</li>
+    <li>BBBBBBBBBBBB</li>
+</ul>
+
+
+</body>
+</html>
+<style>
+    ul{
+        border: solid 2px blue;
+    }
+    li {
+        margin: 20px;
+        list-style-type:none;
+        -moz-user-select: -moz-none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        border: solid 2px black;
+    }
+</style>

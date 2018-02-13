@@ -5,12 +5,12 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
 
 public class BaseBizModel {
-    private String createdBy;
-    private String modifiedBy;
+    private String createdBy = "";
+    private String modifiedBy = "";
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date created;
+    private Date created = new Date();
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date modified;
+    private Date modified = new Date();
 
     public String getCreatedBy() {
         return createdBy;

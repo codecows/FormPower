@@ -4,13 +4,15 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 public enum ResponseCode {
 
-    Success(200,"成功"),
-    Unauthorized(300,"没有权限"),
+    Success(200, "成功"),
+    Unauthorized(300, "没有权限"),
     UserExist(1000, "用户已经存在"),
-    InformationExist(1001,"信息已存在"),
-    InformationUnexist(1002,"信息不存在"),
-    UnknowSqlException(8999,"未知数据库异常"),
-    Etc(9999,"其它原因");
+    InformationExist(1001, "信息已存在"),
+    InformationUnexist(1002, "信息不存在"),
+    SerializeError(8001, "序列化错误"),
+    UnknowSqlException(8999, "未知数据库异常"),
+
+    Etc(9999, "其它原因");
 
     // 成员变量
     private String message;

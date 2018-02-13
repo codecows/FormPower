@@ -3,7 +3,7 @@ var HttpHelper = function () {
         ajax: function (url, type, data, func) {
             if (!type) type = "GET";
             if (!data) data = {};
-            if ((!url) || !(sucFun)) return;
+            if ((!url)) return;
             $.ajax({
                 url: url,
                 type: type,
@@ -63,7 +63,12 @@ var URL = function () {
             userInfo: {
                 getUserInfo: _baseUrl + "management/userInfo/getUserInfo/",
                 getUserInfoType: HttpMethod.GET
+            },
+            form: {
+                getFromList: _baseUrl + "form/getFormList/",
+                getFromListType: HttpMethod.GET
             }
+
         }
     };
 }();
@@ -117,6 +122,8 @@ var DataTablesSettings = function () {
                         "previous": "上一页"
                     }
                 },
+                "processing": true,
+                "serverSide": true,
                 "pageLength": 10,
                 "dom": "" +
                 "<'row'<'col-md-12'tr>>" +
