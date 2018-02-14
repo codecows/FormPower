@@ -57,7 +57,7 @@ var FormList = function () {
                 "targets": [0]
             }];
             setting.order = [
-                [1, 'asc']
+                [0, 'asc']
             ];
 
             setting.columns = [
@@ -104,15 +104,66 @@ var FormList = function () {
                 var nCloneTd = document.createElement('td');
                 nCloneTd.innerHTML = '<span class="row-details row-details-close"></span>';
 
+                var nOpTh = document.createElement('th');
+                nOpTh.innerHTML = "操作";
+                var opTd = document.createElement('td');
+                opTd.setAttribute('style', 'white-space : normal nowrap');
+                opTd.style.setProperty("white-space", "nowrap")
+                var nCloneSel = document.createElement("a");
+                nCloneSel.setName("tableSelBtn");
+                nCloneSel.classList.add("btn", "btn-xs", "yellow");
+                nCloneSel.innerHTML = "<i class='fa fa-check'></i></a>";
+                var nCloneEdit = document.createElement("a");
+                nCloneEdit.classList.add("btn", "default", "btn-xs", "green");
+                nCloneEdit.innerHTML = "<i class='fa fa-edit'></i>";
+                var nCloneDel = document.createElement("a");
+                nCloneDel.classList.add("btn", "default", "btn-xs", "purple");
+                nCloneDel.innerHTML = "<i class='fa fa-trash-o'></i>";
+                opTd.appendChild(nCloneSel);
+                opTd.appendChild(nCloneEdit);
+                opTd.appendChild(nCloneDel);
+
                 table.find('thead tr').each(function () {
                     this.insertBefore(nCloneTh, this.childNodes[0]);
+                    this.appendChild(nOpTh.cloneNode(true));
                 });
 
                 table.find('tbody tr').each(function () {
                     this.insertBefore(nCloneTd.cloneNode(true), this.childNodes[0]);
+                    this.appendChild(opTd.cloneNode(true));
                 });
+
+
+                // <a href="#" class="btn default btn-xs purple">
+                //         <i class='fa fa-edit'></i> Edit </a>
+                //     fa fa-trash-o
             }
 
+            table.find("tbody").on('click', 'tr', function () {
+                if ($(this).hasClass('active')) {
+                    $(this).removeClass('active');
+                }
+                else {
+                    table.find('tbody > tr.active').removeClass('active');
+                    $(this).addClass('active');
+                }
+            });
+
+            // table.on('click', " tbody td a[name = 'tableSelBtn']", function () {
+            //     var nTr = $(this).parents('tr')[0];
+            //     if (oTable.fnIsOpen(nTr)) {
+            //         /* This row is already open - close it */
+            //         $(this).addClass("row-details-close").removeClass("row-details-open");
+            //         oTable.fnClose(nTr);
+            //     } else {
+            //         /* Open this row */
+            //         $(this).addClass("row-details-open").removeClass("row-details-close");
+            //         oTable.fnOpen(nTr, fnFormatDetails(oTable, nTr), 'details');
+            //     }
+            // });
+
+
+            // { "data": null, defaultContent: "", "orderable": false },
 
             //var tableWrapper = $('#sample_4_wrapper'); // datatable creates the table wrapper by adding with id {your_table_jd}_wrapper
             var tableColumnToggler = $('#sample_4_column_toggler');
