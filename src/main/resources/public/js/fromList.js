@@ -62,6 +62,7 @@ var FormList = function () {
 
             $("#btnSaveFormDesign").click(function () {
                 alert("保存设计");
+                //FIXME 未完
                 toggleProtletFullscreen();
                 showTableCollapse();
             });
