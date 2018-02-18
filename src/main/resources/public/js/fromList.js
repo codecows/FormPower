@@ -23,6 +23,7 @@ var FormList = function () {
     function showAddFormCollapse() {
         $(".collapse:not(#collapseAddForm)").collapse('hide');
         $("#collapseAddForm").collapse('show');
+        toggleProtletFullscreen();
     }
 
     //显示查询表格
@@ -31,9 +32,39 @@ var FormList = function () {
         $("#collapseTable").collapse('show');
     }
 
+    function toggleProtletFullscreen() {
+        var portlet = $(".portlet");
+        if (portlet.hasClass('portlet-fullscreen')) {
+            portlet.removeClass('on');
+            portlet.removeClass('portlet-fullscreen');
+            $('body').removeClass('page-portlet-fullscreen');
+            portlet.children('.portlet-body').css('height', 'auto');
+        } else {
+            var height = Metronic.getViewPort().height -
+                portlet.children('.portlet-title').outerHeight() -
+                parseInt(portlet.children('.portlet-body').css('padding-top')) -
+                parseInt(portlet.children('.portlet-body').css('padding-bottom'));
+
+            $(this).addClass('on');
+            portlet.addClass('portlet-fullscreen');
+            $('body').addClass('page-portlet-fullscreen');
+            portlet.children('.portlet-body').css('height', height);
+        }
+    }
+
     return {
         init: function () {
             collapseInit();
+
+            $("#btnDesignForm").click(function () {
+
+            });
+
+            $("#btnSaveFormDesign").click(function () {
+                alert("保存设计");
+                toggleProtletFullscreen();
+                showTableCollapse();
+            });
 
             var table = $('#fromListTable');
 
@@ -71,10 +102,6 @@ var FormList = function () {
                 {"data": "remark"},
                 {"data": "inUse"}
             ];
-            // private String formId;
-            // private String formName;
-            // private String remark;
-            // private int inUse;
 
             setting.lengthMenu = [
                 [5, 15, 20, -1],
@@ -82,19 +109,19 @@ var FormList = function () {
             ];
 
             setting.ajax = function (data, callback, settings) {
-
                 var base64Data = Base64.encode(JSON.stringify(data));
                 HttpHelper.ajax(URL.management.form.getFromList + base64Data, "GET", data,
                     function (respose) {
                         callback(respose.data);
-                        insertDetailsColumn();
+                        insertOperationColumn();
                     });
             };
 
-
+            //datatable初始化
             var oTable = table.dataTable(setting);
 
-            function insertDetailsColumn() {
+            //插入操作列
+            function insertOperationColumn() {
                 /*
                      * Insert a 'details' column to the table
                      */
@@ -110,13 +137,15 @@ var FormList = function () {
                 opTd.setAttribute('style', 'white-space : normal nowrap');
                 opTd.style.setProperty("white-space", "nowrap")
                 var nCloneSel = document.createElement("a");
-                nCloneSel.setName("tableSelBtn");
+                nCloneSel.name = "tableSelBtn";
                 nCloneSel.classList.add("btn", "btn-xs", "yellow");
                 nCloneSel.innerHTML = "<i class='fa fa-check'></i></a>";
                 var nCloneEdit = document.createElement("a");
+                nCloneEdit.name = "tableEditBtn";
                 nCloneEdit.classList.add("btn", "default", "btn-xs", "green");
                 nCloneEdit.innerHTML = "<i class='fa fa-edit'></i>";
                 var nCloneDel = document.createElement("a");
+                nCloneDel.name = "tableDelBtn";
                 nCloneDel.classList.add("btn", "default", "btn-xs", "purple");
                 nCloneDel.innerHTML = "<i class='fa fa-trash-o'></i>";
                 opTd.appendChild(nCloneSel);
@@ -132,35 +161,47 @@ var FormList = function () {
                     this.insertBefore(nCloneTd.cloneNode(true), this.childNodes[0]);
                     this.appendChild(opTd.cloneNode(true));
                 });
-
-
-                // <a href="#" class="btn default btn-xs purple">
-                //         <i class='fa fa-edit'></i> Edit </a>
-                //     fa fa-trash-o
             }
 
-            table.find("tbody").on('click', 'tr', function () {
-                if ($(this).hasClass('active')) {
-                    $(this).removeClass('active');
+            // table.find("tbody").on('click', 'tr', function () {
+            //     if ($(this).hasClass('active')) {
+            //         $(this).removeClass('active');
+            //     }
+            //     else {
+            //         table.find('tbody > tr.active').removeClass('active');
+            //         $(this).addClass('active');
+            //     }
+            // });
+
+            //表格内按钮事件 -- 选择
+            table.on('click', " tbody td a[name = 'tableSelBtn']", function () {
+                var tr = $(this).parents('tr');
+                if (tr.hasClass('active')) {
+                    tr.removeClass('active');
                 }
                 else {
                     table.find('tbody > tr.active').removeClass('active');
-                    $(this).addClass('active');
+                    tr.addClass('active');
                 }
+                // var nTr = $(this).parents('tr')[0];
+                // if (oTable.fnIsOpen(nTr)) {
+                //     /* This row is already open - close it */
+                //     $(this).addClass("row-details-close").removeClass("row-details-open");
+                //     oTable.fnClose(nTr);
+                // } else {
+                //     /* Open this row */
+                //     $(this).addClass("row-details-open").removeClass("row-details-close");
+                //     oTable.fnOpen(nTr, fnFormatDetails(oTable, nTr), 'details');
+                // }
             });
 
-            // table.on('click', " tbody td a[name = 'tableSelBtn']", function () {
-            //     var nTr = $(this).parents('tr')[0];
-            //     if (oTable.fnIsOpen(nTr)) {
-            //         /* This row is already open - close it */
-            //         $(this).addClass("row-details-close").removeClass("row-details-open");
-            //         oTable.fnClose(nTr);
-            //     } else {
-            //         /* Open this row */
-            //         $(this).addClass("row-details-open").removeClass("row-details-close");
-            //         oTable.fnOpen(nTr, fnFormatDetails(oTable, nTr), 'details');
-            //     }
-            // });
+            table.on('click', " tbody td a[name = 'tableEditBtn']", function () {
+                alert("我是编辑按钮");
+            });
+
+            table.on('click', " tbody td a[name = 'tableDelBtn']", function () {
+                alert("我是删除按钮");
+            });
 
 
             // { "data": null, defaultContent: "", "orderable": false },

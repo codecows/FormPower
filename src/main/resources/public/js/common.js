@@ -106,7 +106,7 @@ var DataTablesSettings = function () {
                     "decimal": ".",
                     "thousands": ",",
                     "emptyTable": "表格为空",
-                    "info": "_START_~_END_/_TOTAL_",
+                    "info": "显示_START_~_END_行/共_TOTAL_行",
                     "infoEmpty": "共找到 0 条数据",
                     "infoFiltered": "(filtered from _MAX_ total entries)",
                     "infoPostFix": "",
@@ -122,6 +122,7 @@ var DataTablesSettings = function () {
                         "previous": "上一页"
                     }
                 },
+                "pagingType": "full_numbers",
                 "processing": true,
                 "serverSide": true,
                 "pageLength": 10,

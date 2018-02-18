@@ -41,7 +41,7 @@ public class FormController {
             formList.add(form);
         }
         DataTableResponse<Form> dr = new DataTableResponse<>(dataTableRequest.getDraw(),
-                formList.size(), formList.size(), formList);
+                110, 110, formList);
 
         return new Result<>(ResponseCode.Success, dr);
     }
