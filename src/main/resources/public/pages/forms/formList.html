@@ -19,9 +19,11 @@
     <link href="../../assets/global/css/plugins.css" rel="stylesheet" type="text/css"/>
 
 
-    <!-- END PAGE LEVEL STYLES -->
 
-    <link rel="stylesheet" href="../../css/form-list.css">
+
+    <!-- END PAGE LEVEL STYLES -->
+    <link rel="stylesheet" href="../../css/formlist.css">
+    <!--<link rel="stylesheet" href="../../css/form-design.css">-->
 
 </head>
 <body>
@@ -311,15 +313,15 @@
             <div class="portlet-title">
                 <ul class="nav nav-tabs" style="float: left">
                     <li class="active">
-                        <a href="#portlet_tab3" data-toggle="tab">
+                        <a href="#portlet_control" data-toggle="tab">
                             控件 </a>
                     </li>
                     <li>
-                        <a href="#portlet_tab2" data-toggle="tab">
+                        <a href="#portlet_form" data-toggle="tab">
                             表单 </a>
                     </li>
                     <li>
-                        <a href="#portlet_tab1" data-toggle="tab">
+                        <a href="#portlet_sql" data-toggle="tab">
                             存储过程 </a>
                     </li>
                 </ul>
@@ -330,34 +332,64 @@
             </div>
             <div class="portlet-body">
                 <div class="tab-content">
-                    <div class="tab-pane active" id="portlet_tab1">
-                        <p>
-                            Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel
-                            illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui
-                            blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem
-                            ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
-                            ut laoreet dolore magna aliquam erat volutpat.ut laoreet dolore magna ut laoreet dolore
-                            magna. ut laoreet dolore magna. ut laoreet dolore magna.
-                        </p>
+                    <div class="tab-pane" id="portlet_sql">
+                        <!-- FIXME 存储过程-->
+                        存储过程
                     </div>
-                    <div class="tab-pane" id="portlet_tab2">
-                        <p>
-                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-                            invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam
-                            et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
-                            Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                            diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-                            voluptua. At vero eos et accusam et justo.
-                        </p>
+                    <div class="tab-pane" id="portlet_form">
+                        <!-- FIXME 表单内容-->
+                        表单内容
                     </div>
-                    <div class="tab-pane" id="portlet_tab3">
-                        <p>
-                            Ut wisi enim ad btn-smm veniam, quis nostrud exerci tation ullamcorper suscipit lobortis
-                            nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in
-                            vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero
-                            eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue
-                            duis dolore te feugait nulla facilisi.
-                        </p>
+                    <div class="tab-pane active" id="portlet_control">
+                        <div class="row">
+                            <div class="col-md-2 right-border">
+                                <ul class="left">
+                                    <li>
+                                        <label>基础控件</label>
+                                        <ul>
+                                            <li controltype="1">
+                                                <a href="javascript:;">
+                                                    <i class="icon-bar-chart"></i>
+                                                    文本框</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:;">
+                                                    <i class="icon-bulb"></i>
+                                                    初始化</a>
+                                            </li>
+                                            <li>
+                                                <a id="userMenu" href="javascript:;">
+                                                    <i class="icon-graph"></i>
+                                                    用户</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <label>布局控件</label>
+                                        <ul>
+                                            <li controltype="1">
+                                                <a href="javascript:;">
+                                                    <i class="icon-bar-chart"></i>
+                                                    文本框</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:;">
+                                                    <i class="icon-bulb"></i>
+                                                    初始化</a>
+                                            </li>
+                                        </ul>
+
+                                    </li>
+                                </ul>
+
+                            </div>
+                            <div class="col-md-10">
+
+
+                            </div>
+                        </div>
+
+
                     </div>
                 </div>
             </div>
