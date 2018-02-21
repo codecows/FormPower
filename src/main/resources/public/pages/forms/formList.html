@@ -19,9 +19,9 @@
     <link href="../../assets/global/css/plugins.css" rel="stylesheet" type="text/css"/>
 
 
-
-
     <!-- END PAGE LEVEL STYLES -->
+
+    <link rel="stylesheet" href="../../dragula/dragula.css">
     <link rel="stylesheet" href="../../css/formlist.css">
     <!--<link rel="stylesheet" href="../../css/form-design.css">-->
 
@@ -346,7 +346,7 @@
                                 <ul class="left">
                                     <li>
                                         <label>基础控件</label>
-                                        <ul>
+                                        <ul class="control">
                                             <li controltype="1">
                                                 <a href="javascript:;">
                                                     <i class="icon-bar-chart"></i>
@@ -366,7 +366,7 @@
                                     </li>
                                     <li>
                                         <label>布局控件</label>
-                                        <ul>
+                                        <ul class="control">
                                             <li controltype="1">
                                                 <a href="javascript:;">
                                                     <i class="icon-bar-chart"></i>
@@ -383,7 +383,7 @@
                                 </ul>
 
                             </div>
-                            <div class="col-md-10">
+                            <div id="designCanvas" class="col-md-10 form-body">
 
 
                             </div>
@@ -479,9 +479,10 @@
 <script src="../../assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js"></script>
 <script src="../../assets/admin/pages/scripts/form-samples.js"></script>
 <script src="../../assets/admin/pages/scripts/components-dropdowns.js"></script>
-
+<script src="../../dragula/dragula.js"></script>
 <script src="../../js/fromList.js"></script>
 <script type="text/javascript">
     FormList.init();
+    FormList.drakeInit(2);
 </script>
 
