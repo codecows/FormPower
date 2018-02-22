@@ -32,6 +32,7 @@ var FormList = function () {
         $("#collapseTable").collapse('show');
     }
 
+    //portlet全屏切换
     function toggleProtletFullscreen() {
         var portlet = $(".portlet");
         if (portlet.hasClass('portlet-fullscreen')) {
@@ -52,10 +53,11 @@ var FormList = function () {
         }
     }
 
-    function btnInit() {
-        $("#btnDesignForm").click(function () {
-
-        });
+    //按钮事件绑定
+    function btnClickBind() {
+        // $("#btnDesignForm").click(function () {
+        //
+        // });
 
         $("#btnSaveFormDesign").click(function () {
             alert("保存设计");
@@ -63,7 +65,28 @@ var FormList = function () {
             toggleProtletFullscreen();
             showTableCollapse();
         });
+
+
+        $("#designCanvas").on('click', "[type='removeBtn']", function () {
+            $(this).parent().parent().remove();
+        });
+        $("#designCanvas").on('click', "[type='copyBtn']", function () {
+            $(this).parent().parent().after($(this).parent().parent().clone());
+        });
+        $("#designCanvas").on('click', "[type='copyBtn']", function () {
+            $(this).parent().parent().after($(this).parent().parent().clone());
+        });
+        //fixme  选中变色
+        $("#designCanvas").on('click', ".form-group", function () {
+
+        });
     }
+
+    //显示控件属性
+    function showProperty() {
+
+    }
+
 
     function datatableInit() {
         var table = $('#fromListTable');
@@ -249,8 +272,7 @@ var FormList = function () {
             panels.push(controls[i]);
         }
         drake = dragula(panels, {
-            mirrorContainer:$(".portlet")[0],//设置拖拽父容器,避免portlet全屏时候无法看到镜像
-            columnsCount: colCount,
+            mirrorContainer: $(".portlet")[0],//设置拖拽父容器,避免portlet全屏时候无法看到镜像
             controlStyle: "control-shadow",
             copy: function (el, source) {
                 return source.classList[0] === "control";
@@ -269,19 +291,45 @@ var FormList = function () {
         }).on("drop", function (el, target, source, sibling) {
 
             var cType = el.getAttribute("controltype");
+            var jqEl = $(el);
+            if (jqEl.attr("isReady")) {
+                return;
+            }
+
+            function removeBtnBuilder() {
+                var html = "<a href='javascript:;' type='removeBtn' class='btn btn-icon-only pull-right'>" +
+                    "                    <i class='fa fa-times'></i>" +
+                    "       </a>";
+                return html;
+            }
+
+            function copyBtnBuilder() {
+                var html = "<a href='javascript:;' type='copyBtn' class='btn btn-icon-only pull-right'>" +
+                    "                    <i class='fa fa-copy'></i>\n" +
+                    "       </a>";
+                return html;
+            }
+
+            function formGroupBuilder(el) {
+                var html = "<div class='form-group'>";
+                html += removeBtnBuilder();
+                html += copyBtnBuilder();
+                html += el;
+                html += "</div>";
+                return html;
+            }
+
             if (cType === "1") {
-                var html = "<div class=\"form-group\">\n" +
-                    "           <label class=\"control-label\">标签</label>\n" +
-                    "           <div>\n" +
-                    "               <input type=\"text\" class=\"form-control input-sm\" placeholder=\"提示\">\n" +
-                    "           </div>\n" +
-                    "       </div>";
-                $(el).append(html)
+                var elHtml = "<label class='control-label'>标签</label>" +
+                    "<div><input type='text' class='form-control input-sm' placeholder='提示'></div>";
+                var html = formGroupBuilder(elHtml);
+                jqEl.append(html)
+                jqEl.attr("isReady", "true");
             }
             else if (cType === "2") {
-                $(el).text("啊啊啊22");
+                jqEl.text("啊啊啊22");
             } else {
-                $(el).text("啊啊啊333");
+                jqEl.text("啊啊啊333");
             }
         });
     }
@@ -289,7 +337,7 @@ var FormList = function () {
     return {
         init: function () {
             collapseInit();
-            btnInit();
+            btnClickBind();
             datatableInit();
         },
         drakeInit: function (colCount) {

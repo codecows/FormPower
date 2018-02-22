@@ -109,10 +109,6 @@
                     var o = options || {};
 
                     // TODO 新增选项
-                    if (o.columnsCount === void 0) {
-                        o.columnsCount = 1;
-                    }
-
                     if (o.moves === void 0) {
                         o.moves = always;
                     }
@@ -317,7 +313,7 @@
                             if (options.controlStyle) {
                                 _copy.classList.add(options.controlStyle);
                             }
-                            _copy.classList.add("col-md-" + (12 / options.columnsCount));
+                            _copy.classList.add("col-md-6");
                             // _copy = context.item.cloneNode(true);
                             drake.emit('cloned', _copy, context.item, 'copy');
                         }
@@ -562,7 +558,7 @@
                         // _mirror.innerText = "啊啊啊啊啊的打";
                         // _mirror.classList.add("mydiv");
                         _mirror = _item.cloneNode(true);
-                        _mirror.setAttribute("style", "border: 1px dashed blue;list-style-type:none")
+                        // _mirror.setAttribute("style", "border: 1px dashed blue;list-style-type:none")
                         _mirror.style.width = getRectWidth(rect) + 'px';
                         _mirror.style.height = getRectHeight(rect) + 'px';
                         classes.rm(_mirror, 'gu-transit');
