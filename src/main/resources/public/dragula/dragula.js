@@ -310,6 +310,7 @@
                             // TODO 复制的样式
                             _copy = document.createElement("div");
                             _copy.setAttribute("controltype", context.item.getAttribute("controltype"));
+                            _copy.setAttribute("colMdValue", 6);
                             if (options.controlStyle) {
                                 _copy.classList.add(options.controlStyle);
                             }

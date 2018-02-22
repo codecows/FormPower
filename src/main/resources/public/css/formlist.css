@@ -59,6 +59,12 @@ a:active {
 .control-shadow {
     /*border: dashed 1px black;*/
     min-height: 70px;
+    height: 70px;
     background: lightblue;
     margin: 2px 0px;
 }
+
+.control-shadow-active {
+    border: solid 2px blue;
+}
+

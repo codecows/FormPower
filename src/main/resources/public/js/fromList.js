@@ -66,24 +66,49 @@ var FormList = function () {
             showTableCollapse();
         });
 
+        var designCanvas = $("#designCanvas");
 
-        $("#designCanvas").on('click', "[type='removeBtn']", function () {
+        designCanvas.on('click', "[type='removeBtn']", function (event) {
+            event.stopPropagation();
             $(this).parent().parent().remove();
         });
-        $("#designCanvas").on('click', "[type='copyBtn']", function () {
-            $(this).parent().parent().after($(this).parent().parent().clone());
-        });
-        $("#designCanvas").on('click', "[type='copyBtn']", function () {
-            $(this).parent().parent().after($(this).parent().parent().clone());
+        designCanvas.on('click', "[type='copyBtn']", function (event) {
+            event.stopPropagation();
+            var clone = $(this).parent().parent().clone();
+            if (clone.hasClass("control-shadow-active")) {
+                clone.removeClass("control-shadow-active")
+            }
+            $(this).parent().parent().after(clone);
         });
         //fixme  选中变色
-        $("#designCanvas").on('click', ".form-group", function () {
-
+        designCanvas.on('click', ".control-shadow", function () {
+            var the = $(this);
+            if (the.hasClass("control-shadow-active")) {
+                return;
+            }
+            $(".control-shadow-active").removeClass("control-shadow-active");
+            the.addClass("control-shadow-active")
+            showProperty();
         });
     }
 
     //显示控件属性
     function showProperty() {
+        var the = $(".control-shadow-active");
+        var html = "<div class='form-group'>\n" +
+            "            <label class='control-label'>宽度</label>\n" +
+            "            <div>" +
+            "               <input propertyType='colMdValue' type='number' max='12' min='2' class='form-control input-sm' placeholder='2-12'" +
+            "                    value='" + the.attr("colMdValue") + "'>" +
+            "             </div>\n" +
+            "       </div>"
+        $("#propertyCanvas").empty();
+        $("#propertyCanvas").append(html);
+        $("input[propertyType='colMdValue']").on('input propertychange', function () {
+            the.removeClass("col-md-" + the.attr("colMdValue"));
+            the.addClass("col-md-" + $(this).val());
+            the.attr("colMdValue", $(this).val())
+        });
 
     }
 
