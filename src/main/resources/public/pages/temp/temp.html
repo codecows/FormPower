@@ -8,15 +8,25 @@
     <script src="dragula.min.js"></script>
 
     <script type="text/javascript">
+        $(function () {
+            var divs = $("div[name='11']");
 
 
-      dragula([document.getElementById("ul1"), document.getElementById("ul2")]);
-      alert(1);
+            alert(JSON.stringify(divs));
+
+        })
+
+
+        //        dragula([document.getElementById("ul1"), document.getElementById("ul2")]);
+
+
     </script>
 </head>
 
 <body>
 
+<div name="11">22</div>
+<div name="11">33</div>
 
 <ul id="ul1">
     <li>1111111111111111</li>
@@ -32,12 +42,13 @@
 </body>
 </html>
 <style>
-    ul{
+    ul {
         border: solid 2px blue;
     }
+
     li {
         margin: 20px;
-        list-style-type:none;
+        list-style-type: none;
         -moz-user-select: -moz-none;
         -khtml-user-select: none;
         -webkit-user-select: none;

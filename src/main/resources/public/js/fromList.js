@@ -75,41 +75,49 @@ var FormList = function () {
         designCanvas.on('click', "[type='copyBtn']", function (event) {
             event.stopPropagation();
             var clone = $(this).parent().parent().clone();
-            if (clone.hasClass("control-shadow-active")) {
-                clone.removeClass("control-shadow-active")
+            if (clone.hasClass("control-active")) {
+                clone.removeClass("control-active")
             }
             $(this).parent().parent().after(clone);
         });
         //fixme  选中变色
         designCanvas.on('click', ".control-shadow", function () {
             var the = $(this);
-            if (the.hasClass("control-shadow-active")) {
+            if (the.hasClass("control-active")) {
                 return;
             }
-            $(".control-shadow-active").removeClass("control-shadow-active");
-            the.addClass("control-shadow-active")
-            showProperty();
+            $(".control-active").removeClass("control-active");
+            the.addClass("control-active")
+            showProperty($(".control-active"));
         });
     }
 
-    //显示控件属性
-    function showProperty() {
-        var the = $(".control-shadow-active");
-        var html = "<div class='form-group'>\n" +
-            "            <label class='control-label'>宽度</label>\n" +
-            "            <div>" +
-            "               <input propertyType='colMdValue' type='number' max='12' min='2' class='form-control input-sm' placeholder='2-12'" +
-            "                    value='" + the.attr("colMdValue") + "'>" +
-            "             </div>\n" +
-            "       </div>"
-        $("#propertyCanvas").empty();
-        $("#propertyCanvas").append(html);
-        $("input[propertyType='colMdValue']").on('input propertychange', function () {
-            the.removeClass("col-md-" + the.attr("colMdValue"));
-            the.addClass("col-md-" + $(this).val());
-            the.attr("colMdValue", $(this).val())
-        });
+    //控件属性
+    var ControlProperty = function () {
+        return {
+            showWidth: function (activeControl) {
+                var html = "<div class='form-group'>\n" +
+                    "            <label class='control-label'>宽度</label>\n" +
+                    "            <div>" +
+                    "               <input propertyType='colMdValue' type='number' max='12' min='2' class='form-control input-sm' placeholder='2-12'" +
+                    "                    value='" + activeControl.attr("colMdValue") + "'>" +
+                    "             </div>\n" +
+                    "       </div>"
+                $("#propertyCanvas").append(html);
+                $("input[propertyType='colMdValue']").on('input propertychange', function () {
+                    the.removeClass("col-md-" + activeControl.attr("colMdValue"));
+                    the.addClass("col-md-" + $(this).val());
+                    the.attr("colMdValue", $(this).val())
+                });
+            }
+        };
+    }();
 
+    //显示控件属性
+    function showProperty(activeControl) {
+        // var the = $(".control-active");
+        $("#propertyCanvas").empty();
+        ControlProperty.showWidth(activeControl);
     }
 
 
@@ -173,11 +181,11 @@ var FormList = function () {
             /*
                  * Insert a 'details' column to the table
                  */
-            var nCloneTh = document.createElement('th');
-            nCloneTh.className = "table-checkbox";
-
-            var nCloneTd = document.createElement('td');
-            nCloneTd.innerHTML = '<span class="row-details row-details-close"></span>';
+            // var nCloneTh = document.createElement('th');
+            // nCloneTh.className = "table-checkbox";
+            //
+            // var nCloneTd = document.createElement('td');
+            // nCloneTd.innerHTML = '<span class="row-details row-details-close"></span>';
 
             var nOpTh = document.createElement('th');
             nOpTh.innerHTML = "操作";
@@ -196,17 +204,23 @@ var FormList = function () {
             nCloneDel.name = "tableDelBtn";
             nCloneDel.classList.add("btn", "default", "btn-xs", "purple");
             nCloneDel.innerHTML = "<i class='fa fa-trash-o'></i>";
+            var nCloneDetails = document.createElement("a");
+            nCloneDetails.name = "tableDetBtn";
+            nCloneDetails.classList.add("btn", "default", "btn-xs", "bg-green-haze");
+            nCloneDetails.innerHTML = "<i class='fa fa-plus-square-o'></i>";
+
+            opTd.appendChild(nCloneDetails);
             opTd.appendChild(nCloneSel);
             opTd.appendChild(nCloneEdit);
             opTd.appendChild(nCloneDel);
 
             table.find('thead tr').each(function () {
-                this.insertBefore(nCloneTh, this.childNodes[0]);
+                // this.insertBefore(nCloneTh, this.childNodes[0]);
                 this.appendChild(nOpTh.cloneNode(true));
             });
 
             table.find('tbody tr').each(function () {
-                this.insertBefore(nCloneTd.cloneNode(true), this.childNodes[0]);
+                // this.insertBefore(nCloneTd.cloneNode(true), this.childNodes[0]);
                 this.appendChild(opTd.cloneNode(true));
             });
         }
@@ -251,6 +265,18 @@ var FormList = function () {
             alert("我是删除按钮");
         });
 
+        table.on('click', " tbody td a[name = 'tableDetBtn']", function () {
+            var nTr = $(this).parents('tr')[0];
+            if (oTable.fnIsOpen(nTr)) {
+                /* This row is already open - close it */
+                $(this).find("i").addClass("fa-plus-square-o").removeClass("fa-minus-square-o");
+                oTable.fnClose(nTr);
+            } else {
+                /* Open this row */
+                $(this).find("i").addClass("fa-minus-square-o").removeClass("fa-plus-square-o");
+                oTable.fnOpen(nTr, fnFormatDetails(oTable, nTr), 'details');
+            }
+        });
 
         // { "data": null, defaultContent: "", "orderable": false },
 
@@ -264,18 +290,18 @@ var FormList = function () {
          * Note that the indicator for showing which row is open is not controlled by DataTables,
          * rather it is done here
          */
-        table.on('click', ' tbody td .row-details', function () {
-            var nTr = $(this).parents('tr')[0];
-            if (oTable.fnIsOpen(nTr)) {
-                /* This row is already open - close it */
-                $(this).addClass("row-details-close").removeClass("row-details-open");
-                oTable.fnClose(nTr);
-            } else {
-                /* Open this row */
-                $(this).addClass("row-details-open").removeClass("row-details-close");
-                oTable.fnOpen(nTr, fnFormatDetails(oTable, nTr), 'details');
-            }
-        });
+        // table.on('click', ' tbody td .row-details', function () {
+        //     var nTr = $(this).parents('tr')[0];
+        //     if (oTable.fnIsOpen(nTr)) {
+        //         /* This row is already open - close it */
+        //         $(this).addClass("row-details-close").removeClass("row-details-open");
+        //         oTable.fnClose(nTr);
+        //     } else {
+        //         /* Open this row */
+        //         $(this).addClass("row-details-open").removeClass("row-details-close");
+        //         oTable.fnOpen(nTr, fnFormatDetails(oTable, nTr), 'details');
+        //     }
+        // });
 
         /* handle show/hide columns*/
         $('input[type="checkbox"]', tableColumnToggler).change(function () {
