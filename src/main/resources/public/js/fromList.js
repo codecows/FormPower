@@ -92,31 +92,12 @@ var FormList = function () {
         });
     }
 
-    //控件属性
-    var ControlProperty = function () {
-        return {
-            showWidth: function (activeControl) {
-                var html = "<div class='form-group'>\n" +
-                    "            <label class='control-label'>宽度</label>\n" +
-                    "            <div>" +
-                    "               <input propertyType='colMdValue' type='number' max='12' min='2' class='form-control input-sm' placeholder='2-12'" +
-                    "                    value='" + activeControl.attr("colMdValue") + "'>" +
-                    "             </div>\n" +
-                    "       </div>"
-                $("#propertyCanvas").append(html);
-                $("input[propertyType='colMdValue']").on('input propertychange', function () {
-                    activeControl.removeClass("col-md-" + activeControl.attr("colMdValue"));
-                    activeControl.addClass("col-md-" + $(this).val());
-                    activeControl.attr("colMdValue", $(this).val())
-                });
-            }
-        };
-    }();
-
     //显示控件属性
     function showProperty(activeControl) {
         // var the = $(".control-active");
         $("#propertyCanvas").empty();
+
+        ControlProperty.showCode(activeControl);
         ControlProperty.showWidth(activeControl);
     }
 
@@ -403,3 +384,44 @@ var FormList = function () {
     };
 }
 ();
+//控件属性
+var ControlProperty = function () {
+    return {
+        showWidth: function (activeControl) {
+            var html = "<div class='form-group'>\n" +
+                "            <label class='control-label'>宽度</label>\n" +
+                "            <div>" +
+                "               <input propertyType='colMdValue' type='number' max='12' min='2' class='form-control input-sm' placeholder='2-12'" +
+                "                    value='" + activeControl.attr("colMdValue") + "'>" +
+                "             </div>\n" +
+                "       </div>"
+            $("#propertyCanvas").append(html);
+            $("input[propertyType='colMdValue']").on('input propertychange', function () {
+                activeControl.removeClass("col-md-" + activeControl.attr("colMdValue"));
+                activeControl.addClass("col-md-" + $(this).val());
+                activeControl.attr("colMdValue", $(this).val())
+            });
+        },
+        showCode: function () {
+            var html = "<div class='form-group'>\n" +
+                "     <label class='control-label'>控件编码</label>\n" +
+                "     <div><input readonly type='text' class='form-control input-sm'></div>\n" +
+                "     </div>";
+            $("#propertyCanvas").append(html);
+        }
+
+
+    };
+}();
+var SeqNo = function () {
+    return {
+        getSeqNo: function () {
+            var canvas = $("#designCanvas");
+            var count = canvas.children.length;
+            canvas.each(function (index, el) {
+
+            });
+
+        }
+    }
+}();
