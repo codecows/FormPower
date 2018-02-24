@@ -387,9 +387,91 @@
 
 
                             </div>
-                            <div id="propertyCanvas" class="col-md-2 form-body">
+                            <div id='propertyCanvas' class='col-md-2 form-body'>
+                                <div class='form-group'>
+                                    <label class='control-label'>宽度</label>
+                                    <div><input propertytype='colMdValue' type='number' max='12' min='2'
+                                                class='form-control input-sm' placeholder='2-12'></div>
+                                </div>
+
+                                <div class='form-group'>
+                                    <label class='control-label'>提示语</label>
+                                    <div><input type='text' class='form-control input-sm'></div>
+                                </div>
+
+                                <div class='form-group'>
+                                    <label class='control-label'>小数位数</label>
+                                    <div><input propertytype='colMdValue' type='number' max='0' min='6'
+                                                class='form-control input-sm' placeholder='0-6' value='2'></div>
+                                </div>
+
+                                <div class='form-group'>
+                                    <label>格式</label>
+                                    <select class='form-control input-sm'>
+                                        <option>普通</option>
+                                        <option>手机</option>
+                                        <option>地址</option>
+                                        <option>邮箱</option>
+                                        <option>身份证</option>
+                                        <option>正则</option>
+                                    </select>
+                                </div>
+                                <div class='form-group'>
+                                    <label class='control-label'>正则</label>
+                                    <div><input type='text' class='form-control input-sm'></div>
+                                </div>
+
+                                <div class='form-group'>
+                                    <label class='control-label'>数据长度</label>
+                                    <div><input type='number' class='form-control input-sm'></div>
+                                </div>
+
+                                <div class='form-group'>
+                                    <label class='control-label'>最大值</label>
+                                    <div><input type='number' class='form-control input-sm'></div>
+                                </div>
+
+                                <div class='form-group'>
+                                    <label class='control-label'>最小值</label>
+                                    <div><input type='number' class='form-control input-sm'></div>
+                                </div>
+
+                                <div class='form-group'>
+                                    <label class='control-label'>默认值</label>
+                                    <div><input type='text' class='form-control input-sm'></div>
+                                </div>
+
+                                <div class='form-group'>
+                                    <label class='control-label'>公式</label>
+                                    <div><input type='date' class='form-control input-sm'></div>
+                                </div>
+
+                                <div class='form-group'>
+                                    <label>数据源</label>
+                                    <select class='form-control input-sm'>
+                                        <option>数据1</option>
+                                        <option>数据2</option>
+                                        <option>数据3</option>
+                                    </select>
+                                </div>
+
+                                <div class='form-group'>
+                                    <label>选项</label>
+                                    <div class='checkbox-list'>
+                                        <label>
+                                            <input type='checkbox'>只读 </label>
+                                        <label>
+                                            <input type='checkbox'>隐藏 </label>
+                                        <label>
+                                            <input type='checkbox' disabled> Disabled </label>
+                                    </div>
+                                </div>
 
 
+                                <div class='form-group'>
+                                    <label class='control-label'>描述</label>
+                                    <div><input type='text' class='form-control input-sm'></div>
+                                </div>
                             </div>
                         </div>
                     </div>
