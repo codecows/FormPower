@@ -32,7 +32,14 @@
         SELECT
         <include refid="Base_Column_List"/>
         FROM
-        sys_form_def d OFFSET #{start,jdbcType=NUMERIC} LIMIT #{length,jdbcType=NUMERIC}
+        sys_form_def d
+        <if test="start >=0">
+            OFFSET #{start,jdbcType=NUMERIC}
+        </if>
+        <if test="length >=0">
+            LIMIT #{length,jdbcType=NUMERIC}
+        </if>
+
     </select>
 
 </mapper>
