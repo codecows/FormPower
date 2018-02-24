@@ -32,9 +32,11 @@ VALUES ('30', '01', 'g', '2', '系统设置', NULL, NULL, NULL, NULL, NULL, NULL
 INSERT INTO "sys_menu" ("menu_id", "parent_id", "menu_type", "menu_level", "menu_name", "menu_code", "menu_path", "form_id", "menu_url", "remark", "order_num", "status", "create_date")
 VALUES ('3002', '01', 'g', '2', 'XX设置', NULL, NULL, NULL, NULL, NULL, NULL, 'y', '2018-01-30');
 INSERT INTO "sys_menu" ("menu_id", "parent_id", "menu_type", "menu_level", "menu_name", "menu_code", "menu_path", "form_id", "menu_url", "remark", "order_num", "status", "create_date")
-VALUES ('2030102', '2010', 'm', '3', '表单设计', NULL, NULL, NULL, 'sys/fdeg', NULL, NULL, 'y', '2018-02-07');
+VALUES ('2030102', '2010', 'm', '3', '表单设计', NULL, NULL, NULL, '/pages/forms/formDesigner.html', NULL, NULL, 'y',
+        '2018-02-07');
 INSERT INTO "sys_menu" ("menu_id", "parent_id", "menu_type", "menu_level", "menu_name", "menu_code", "menu_path", "form_id", "menu_url", "remark", "order_num", "status", "create_date")
-VALUES ('2020101', '2010', 'm', '3', '表单定义', NULL, NULL, NULL, 'sys/fdef', NULL, NULL, 'y', '2018-01-30');
+VALUES
+  ('2020101', '2010', 'm', '3', '表单定义', NULL, NULL, NULL, '/pages/forms/formList.html', NULL, NULL, 'y', '2018-01-30');
 INSERT INTO "sys_menu" ("menu_id", "parent_id", "menu_type", "menu_level", "menu_name", "menu_code", "menu_path", "form_id", "menu_url", "remark", "order_num", "status", "create_date")
 VALUES ('2010', '20', 'g', '2', '表单', NULL, NULL, NULL, '', NULL, NULL, 'y', '2018-01-30');
 
