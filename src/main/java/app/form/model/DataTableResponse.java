@@ -4,10 +4,20 @@ import java.util.List;
 
 public class DataTableResponse<T> {
     private int draw;
-    private int recordsTotal;
-    private int recordsFiltered;
+    private Long recordsTotal;
+    private Long recordsFiltered;
     private List<T> data;
     private String error;
+
+    public DataTableResponse() {
+    }
+
+    public DataTableResponse(int draw, Long recordsTotal, Long recordsFiltered, List<T> data) {
+        this.draw = draw;
+        this.recordsTotal = recordsTotal;
+        this.recordsFiltered = recordsFiltered;
+        this.data = data;
+    }
 
     public String getError() {
         return error;
@@ -15,16 +25,6 @@ public class DataTableResponse<T> {
 
     public void setError(String error) {
         this.error = error;
-    }
-
-    public DataTableResponse() {
-    }
-
-    public DataTableResponse(int draw, int recordsTotal, int recordsFiltered, List<T> data) {
-        this.draw = draw;
-        this.recordsTotal = recordsTotal;
-        this.recordsFiltered = recordsFiltered;
-        this.data = data;
     }
 
     public int getDraw() {
@@ -35,19 +35,19 @@ public class DataTableResponse<T> {
         this.draw = draw;
     }
 
-    public int getRecordsTotal() {
+    public Long getRecordsTotal() {
         return recordsTotal;
     }
 
-    public void setRecordsTotal(int recordsTotal) {
+    public void setRecordsTotal(Long recordsTotal) {
         this.recordsTotal = recordsTotal;
     }
 
-    public int getRecordsFiltered() {
+    public Long getRecordsFiltered() {
         return recordsFiltered;
     }
 
-    public void setRecordsFiltered(int recordsFiltered) {
+    public void setRecordsFiltered(Long recordsFiltered) {
         this.recordsFiltered = recordsFiltered;
     }
 

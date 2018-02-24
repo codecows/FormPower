@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="app.form.mappers.FormDefMapper">
+    <resultMap id="BaseResultMap" type="app.form.entities.FormDefEntity">
+        <id column="form_id" jdbcType="VARCHAR" property="formId"/>
+        <result column="form_name" jdbcType="VARCHAR" property="formName"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="order_num" jdbcType="NUMERIC" property="orderNum"/>
+        <result column="status" jdbcType="VARCHAR" property="status"/>
+        <result column="operation_time" jdbcType="DATE" property="operationTime"/>
+        <result column="operation_persion" jdbcType="VARCHAR" property="operationPersion"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        d.form_id,
+        d.form_name,
+        d.remark,
+        d.order_num,
+        d.status,
+        d.operation_time,
+        d.operation_persion
+    </sql>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        sys_form_def d
+    </select>
+
+
+</mapper>

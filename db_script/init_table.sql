@@ -40,6 +40,8 @@ DROP TABLE IF EXISTS sys_form_control_groups CASCADE;
 
 DROP TABLE IF EXISTS sys_from_controls CASCADE;
 
+DROP TABLE IF EXISTS sys_form_def;
+
 /*==============================================================*/
 /* Table: sys_auth_menu_rel                                     */
 /*==============================================================*/
