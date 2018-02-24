@@ -28,5 +28,11 @@
         sys_form_def d
     </select>
 
+    <select id="selectByPage" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        sys_form_def d OFFSET #{start,jdbcType=NUMERIC} LIMIT #{length,jdbcType=NUMERIC}
+    </select>
 
 </mapper>

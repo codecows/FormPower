@@ -34,20 +34,11 @@ public class FormServiceImpl implements FormService {
     }
 
     @Override
-    public PageModel<Form> getItemsByPage(int pageNum, int pageSize) {
-        PageHelper.startPage(pageNum, pageSize);
+    public List<Form> getItemsByPage(int start, int length) {
 
-        Page<FormDefEntity> formDefEntities = (Page<FormDefEntity>) formDefMapper.selectAll();
+        List<FormDefEntity> formDefEntities = formDefMapper.selectByPage(start, length);
         List<Form> forms = formConverter.convert2ModelList(formDefEntities);
 
-        PageModel<Form> userPageModel = new PageModel<>(forms, ConstantPage.NAVIGATE_SIZE,
-                formDefEntities.getPageNum(),
-                formDefEntities.getPageSize(),
-                formDefEntities.getPages(),
-                formDefEntities.size(),
-                formDefEntities.getTotal(),
-                formDefEntities.getStartRow());
-
-        return userPageModel;
+        return forms;
     }
 }

@@ -1,6 +1,7 @@
 package app.form.mappers;
 
 import app.form.entities.FormDefEntity;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -10,4 +11,6 @@ import java.util.List;
 public interface FormDefMapper {
 
     List<FormDefEntity> selectAll();
+
+    List<FormDefEntity> selectByPage(@Param("start") int start, @Param("length") int length);
 }

@@ -12,5 +12,5 @@ public interface FormService {
 
     List<Form> getItems();
 
-    PageModel<Form> getItemsByPage(int pageNum, int pageSize);
+    List<Form> getItemsByPage(int start, int length);
 }

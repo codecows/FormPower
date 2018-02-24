@@ -48,9 +48,9 @@ public class FormController {
 //            formList.add(form);
 //        }
         //todo pageNum,pageSize需要前端传值。
-        PageModel<Form> itemsByPage = formService.getItemsByPage(1, 5);
+        List<Form> itemsByPage = formService.getItemsByPage(dataTableRequest.getStart(), dataTableRequest.getLength());
         DataTableResponse<Form> dr = new DataTableResponse<>(dataTableRequest.getDraw(),
-                itemsByPage.getTotal(), itemsByPage.getTotal(), itemsByPage.getList());
+                100, 100, itemsByPage);
 
         return new Result<>(ResponseCode.Success, dr);
     }
