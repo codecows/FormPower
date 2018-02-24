@@ -1,4 +1,4 @@
-package app.temp;
+package app.form;
 
 public class DataTableSearch {
     private String value;
