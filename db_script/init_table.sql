@@ -780,3 +780,41 @@ ALTER TABLE "public"."sys_from_controls"
 -- ----------------------------
 ALTER TABLE "public"."sys_from_controls"
   ADD CONSTRAINT "sys_from_controls_group_id_fkey" FOREIGN KEY ("group_id") REFERENCES "sys_form_control_groups" ("group_id") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+/*==============================================================*/
+/* Table: sys_form_def                                              */
+/*==============================================================*/
+CREATE TABLE sys_form_def (
+  form_id           VARCHAR(36) NOT NULL DEFAULT uuid_generate_v4(),
+  form_name         VARCHAR(64) NULL,
+  remark            TEXT        NULL,
+  order_num         NUMERIC     NULL,
+  status            VARCHAR(2)  NULL,
+  operation_time    DATE        NULL,
+  operation_persion VARCHAR(64) NULL,
+  CONSTRAINT PK_sys_form_def PRIMARY KEY (form_id)
+);
+
+COMMENT ON TABLE sys_form_def IS
+'表单定义表';
+
+COMMENT ON COLUMN sys_form_def.form_id IS
+'表单ID';
+
+COMMENT ON COLUMN sys_form_def.form_name IS
+'表单名称';
+
+COMMENT ON COLUMN sys_form_def.remark IS
+'备注';
+
+COMMENT ON COLUMN sys_form_def.order_num IS
+'排序码';
+
+COMMENT ON COLUMN sys_form_def.status IS
+'状态';
+
+COMMENT ON COLUMN sys_form_def.operation_time IS
+'操作时间';
+
+COMMENT ON COLUMN sys_form_def.operation_persion IS
+'操作人';

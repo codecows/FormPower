@@ -1,4 +1,4 @@
-package app.temp;
+package app.form;
 
 import app.base.model.BaseBizModel;
 
