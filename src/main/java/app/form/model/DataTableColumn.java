@@ -1,4 +1,4 @@
-package app.form;
+package app.form.model;
 
 public class DataTableColumn {
     private String data;

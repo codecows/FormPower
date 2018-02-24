@@ -1,4 +1,4 @@
-package app.form;
+package app.form.model;
 
 import app.base.model.BaseBizModel;
 
