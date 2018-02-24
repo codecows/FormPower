@@ -105,9 +105,9 @@ var FormList = function () {
                     "       </div>"
                 $("#propertyCanvas").append(html);
                 $("input[propertyType='colMdValue']").on('input propertychange', function () {
-                    the.removeClass("col-md-" + activeControl.attr("colMdValue"));
-                    the.addClass("col-md-" + $(this).val());
-                    the.attr("colMdValue", $(this).val())
+                    activeControl.removeClass("col-md-" + activeControl.attr("colMdValue"));
+                    activeControl.addClass("col-md-" + $(this).val());
+                    activeControl.attr("colMdValue", $(this).val())
                 });
             }
         };
@@ -139,10 +139,6 @@ var FormList = function () {
 
 
         var setting = DataTablesSettings.init();
-        setting.columnDefs = [{
-            "orderable": false,
-            "targets": [0]
-        }];
         setting.order = [
             [0, 'asc']
         ];
@@ -169,15 +165,24 @@ var FormList = function () {
             HttpHelper.ajax(URL.management.form.getFromList + base64Data, "GET", data,
                 function (respose) {
                     callback(respose.data);
-                    insertOperationColumn();
+                    appendOperationColumn();
                 });
         };
 
         //datatable初始化
         var oTable = table.dataTable(setting);
+        ~function appendOperationColumnHeader() {
+            var nOpTh = document.createElement('th');
+            nOpTh.innerHTML = "操作";
+            table.find('thead tr').each(function () {
+                // this.insertBefore(nCloneTh, this.childNodes[0]);
+                this.appendChild(nOpTh.cloneNode(true));
+            });
+        }();
+
 
         //插入操作列
-        function insertOperationColumn() {
+        function appendOperationColumn() {
             /*
                  * Insert a 'details' column to the table
                  */
@@ -187,8 +192,7 @@ var FormList = function () {
             // var nCloneTd = document.createElement('td');
             // nCloneTd.innerHTML = '<span class="row-details row-details-close"></span>';
 
-            var nOpTh = document.createElement('th');
-            nOpTh.innerHTML = "操作";
+
             var opTd = document.createElement('td');
             opTd.setAttribute('style', 'white-space : normal nowrap');
             opTd.style.setProperty("white-space", "nowrap")
@@ -214,10 +218,6 @@ var FormList = function () {
             opTd.appendChild(nCloneEdit);
             opTd.appendChild(nCloneDel);
 
-            table.find('thead tr').each(function () {
-                // this.insertBefore(nCloneTh, this.childNodes[0]);
-                this.appendChild(nOpTh.cloneNode(true));
-            });
 
             table.find('tbody tr').each(function () {
                 // this.insertBefore(nCloneTd.cloneNode(true), this.childNodes[0]);
