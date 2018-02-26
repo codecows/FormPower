@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+
+</head>
+<body>
+<div id="div1">111</div>
+
+</body>
+
+
+<div class="aa">333</div>
+
+
+<a href="#">啊啊啊</a>
+</body>
+
+<button id="btn">点我</button>
+</html>
+<style>
+
+    .aa {
+        font-size: x-large;
+    }
+
+    div {
+        border: 1px dashed #333333;
+        padding: 5px;
+        border-radius: 30px;
+    }
+
+</style>
+
+<script type="text/javascript">
+
+    $(function () {
+
+
+        $("#btn").click(function () {
+
+            var html = "<div>呜呜呜呜</div>";
+            $("div").eq(1).append(html);
+            $("div").addClass("aa");
+
+        });
+
+
+    });
+
+</script>

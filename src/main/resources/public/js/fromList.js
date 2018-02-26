@@ -137,8 +137,8 @@ var FormList = function () {
         ];
 
         setting.lengthMenu = [
-            [5, 15, 20, -1],
-            [5, 15, 20, "全部"] // change per page values here
+            [5, 10, 15, 20, 50, -1],
+            [5, 10, 15, 20, 50, "全部"] // change per page values here
         ];
 
         setting.ajax = function (data, callback, settings) {
