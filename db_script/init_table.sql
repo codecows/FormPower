@@ -820,3 +820,73 @@ COMMENT ON COLUMN sys_form_def.operation_time IS
 
 COMMENT ON COLUMN sys_form_def.operation_persion IS
 '操作人';
+
+
+CREATE TABLE "public"."sys_base_tab_tmpl" (
+  "id"             VARCHAR(36) COLLATE "pg_catalog"."default" NOT NULL DEFAULT uuid_generate_v4(),
+  "tab_name"       VARCHAR(255) COLLATE "pg_catalog"."default",
+  "tab_column"     VARCHAR(255) COLLATE "pg_catalog"."default",
+  "tab_col_type"   VARCHAR(255) COLLATE "pg_catalog"."default",
+  "tab_col_length" NUMERIC,
+  "tab_col_small"  NUMERIC,
+  "is_null"        VARCHAR(2) COLLATE "pg_catalog"."default",
+  "is_key"         VARCHAR(2) COLLATE "pg_catalog"."default",
+  "comment"        VARCHAR(255) COLLATE "pg_catalog"."default",
+  "default_value"  VARCHAR(255) COLLATE "pg_catalog"."default",
+  "order_num"      INT4,
+  CONSTRAINT "sys_base_tab_tmpl_pkey" PRIMARY KEY ("id")
+);
+
+ALTER TABLE "public"."sys_base_tab_tmpl"
+  OWNER TO "postgres";
+
+COMMENT ON COLUMN "public"."sys_base_tab_tmpl"."id" IS 'id';
+
+COMMENT ON COLUMN "public"."sys_base_tab_tmpl"."tab_name" IS '表名';
+
+COMMENT ON COLUMN "public"."sys_base_tab_tmpl"."tab_column" IS '列名称';
+
+COMMENT ON COLUMN "public"."sys_base_tab_tmpl"."tab_col_type" IS '列类型';
+
+COMMENT ON COLUMN "public"."sys_base_tab_tmpl"."tab_col_length" IS '列长度';
+
+COMMENT ON COLUMN "public"."sys_base_tab_tmpl"."tab_col_small" IS '小数位';
+
+COMMENT ON COLUMN "public"."sys_base_tab_tmpl"."is_null" IS '是否为空';
+
+COMMENT ON COLUMN "public"."sys_base_tab_tmpl"."is_key" IS '是否主键';
+
+COMMENT ON COLUMN "public"."sys_base_tab_tmpl"."comment" IS '注释';
+
+COMMENT ON COLUMN "public"."sys_base_tab_tmpl"."default_value" IS '默认值';
+
+COMMENT ON COLUMN "public"."sys_base_tab_tmpl"."order_num" IS '排序号';
+
+COMMENT ON TABLE "public"."sys_base_tab_tmpl" IS '基础表模版';
+
+CREATE TABLE "public"."sys_form_func" (
+  "id"        VARCHAR(36) COLLATE "pg_catalog"."default" NOT NULL DEFAULT uuid_generate_v4(),
+  "form_id"   VARCHAR(36) COLLATE "pg_catalog"."default",
+  "func_name" VARCHAR(255) COLLATE "pg_catalog"."default",
+  "func_para" VARCHAR(255) COLLATE "pg_catalog"."default",
+  "func_body" TEXT COLLATE "pg_catalog"."default",
+  "status"    VARCHAR(2) COLLATE "pg_catalog"."default",
+  CONSTRAINT "sys_form_func_pkey" PRIMARY KEY ("id")
+);
+
+ALTER TABLE "public"."sys_form_func"
+  OWNER TO "postgres";
+
+COMMENT ON COLUMN "public"."sys_form_func"."id" IS '唯一id';
+
+COMMENT ON COLUMN "public"."sys_form_func"."form_id" IS 'formid';
+
+COMMENT ON COLUMN "public"."sys_form_func"."func_name" IS '回调函数名称';
+
+COMMENT ON COLUMN "public"."sys_form_func"."func_para" IS '函数参数列表';
+
+COMMENT ON COLUMN "public"."sys_form_func"."func_body" IS '函数体';
+
+COMMENT ON COLUMN "public"."sys_form_func"."status" IS '状态';
+
+COMMENT ON TABLE "public"."sys_form_func" IS '表单关联函数表';

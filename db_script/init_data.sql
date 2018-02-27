@@ -226,3 +226,17 @@ INSERT INTO "sys_from_controls" ("control_id", "control_name", "img", "status", 
 VALUES ('4004', '公式型控件', 'fa-cog', 'y', 0, '40');
 INSERT INTO "sys_from_controls" ("control_id", "control_name", "img", "status", "order_num", "group_id")
 VALUES ('4005', '按钮', 'fa-circle-o-notch', 'y', 0, '40');
+
+/*==============================================================*/
+/* init sys_base_tab_tmpl                                                */
+/*==============================================================*/
+INSERT INTO "sys_base_tab_tmpl" ("id", "tab_name", "tab_column", "tab_col_type", "tab_col_length", "tab_col_small", "is_null", "is_key", "comment", "default_value", "order_num")
+VALUES ('1b91d3b4-432e-45e8-8651-e6a9e3703b98', 'base_tab', 'id', 'varchar', 36, NULL, 'y', 'y', '唯一id',
+                                                'uuid_generate_v4()', NULL);
+INSERT INTO "sys_base_tab_tmpl" ("id", "tab_name", "tab_column", "tab_col_type", "tab_col_length", "tab_col_small", "is_null", "is_key", "comment", "default_value", "order_num")
+VALUES
+  ('ecf224eb-a3d4-4275-88cb-c61a574dcf74', 'base_tab', 'operation_persion', 'varchar', 255, NULL, NULL, NULL, '操作人',
+                                           NULL, NULL);
+INSERT INTO "sys_base_tab_tmpl" ("id", "tab_name", "tab_column", "tab_col_type", "tab_col_length", "tab_col_small", "is_null", "is_key", "comment", "default_value", "order_num")
+VALUES ('40ef9092-61ec-4b8d-8e98-0ff6f42716a9', 'base_tab', 'operation_time', 'date', NULL, NULL, NULL, NULL, '操作时间',
+                                                'current_date', NULL);
