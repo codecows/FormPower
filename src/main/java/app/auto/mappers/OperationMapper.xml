@@ -77,12 +77,12 @@
         </foreach>
     </update>
 
-    <update id="createFunction" statementType="STATEMENT">
-        CREATE OR REPLACE FUNCTION ${func.func_name}(${FUNC.FUNC_PARA})
-            RETURNS ${FUNC.FUNC_RETURN_PARA} AS
+    <update id="createFunction" parameterType="app.auto.model.BaseTableModel" statementType="STATEMENT">
+        CREATE OR REPLACE FUNCTION ${func.funcName}(${func.funcPara})
+        RETURNS ${func.funcReturnPara} AS
         $BODY$
 
-        ${func.func_body}
+        ${func.funcBody}
 
         $BODY$ LANGUAGE PLPGSQL;
     </update>

@@ -5,40 +5,40 @@ package app.auto.model;
  */
 public class BaseFunctionModel {
 
-    private String func_name;
-    private String func_para;
-    private String func_return_para;
-    private String func_body;
+    private String funcName;
+    private String funcPara;
+    private String funcReturnPara;
+    private String funcBody;
 
-    public String getFunc_name() {
-        return func_name;
+    public String getFuncName() {
+        return funcName;
     }
 
-    public void setFunc_name(String func_name) {
-        this.func_name = func_name;
+    public void setFuncName(String funcName) {
+        this.funcName = funcName;
     }
 
-    public String getFunc_para() {
-        return func_para;
+    public String getFuncPara() {
+        return funcPara;
     }
 
-    public void setFunc_para(String func_para) {
-        this.func_para = func_para;
+    public void setFuncPara(String funcPara) {
+        this.funcPara = funcPara;
     }
 
-    public String getFunc_return_para() {
-        return func_return_para;
+    public String getFuncReturnPara() {
+        return funcReturnPara;
     }
 
-    public void setFunc_return_para(String func_return_para) {
-        this.func_return_para = func_return_para;
+    public void setFuncReturnPara(String funcReturnPara) {
+        this.funcReturnPara = funcReturnPara;
     }
 
-    public String getFunc_body() {
-        return func_body;
+    public String getFuncBody() {
+        return funcBody;
     }
 
-    public void setFunc_body(String func_body) {
-        this.func_body = func_body;
+    public void setFuncBody(String funcBody) {
+        this.funcBody = funcBody;
     }
 }

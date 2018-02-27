@@ -4,6 +4,8 @@ import app.auto.entities.SysBaseTabEntity;
 import app.auto.model.BaseFunctionModel;
 import app.auto.service.BaseOperationService;
 import app.auto.service.BaseTableTmplService;
+import app.base.Result;
+import app.comn.ResponseCode;
 import app.utils.JsonUtil;
 import org.springframework.util.Base64Utils;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -50,17 +52,18 @@ public class OperationController {
 
     }
 
-    @RequestMapping(path = "createFunction/{base64Param}", method = POST)
+    @RequestMapping(path = "createFunction/{base64Param}", method = GET)
     public void createFunction(@PathVariable String base64Param) {
 
-        BaseFunctionModel baseFunctionModel = new BaseFunctionModel();
+        BaseFunctionModel baseFunctionModel = null;
         try {
             byte[] bytes = Base64Utils.decodeFromString(base64Param);
             String param = new String(bytes);
             baseFunctionModel = JsonUtil.toJson(param, BaseFunctionModel.class);
         } catch (IOException e) {
-
+            new Result<>(ResponseCode.SerializeError);
         }
+
 
         baseOperationService.createFunction(baseFunctionModel);
 
