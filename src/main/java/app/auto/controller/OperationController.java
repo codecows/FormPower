@@ -4,9 +4,7 @@ import app.auto.entities.SysBaseTabEntity;
 import app.auto.model.BaseFunctionModel;
 import app.auto.service.BaseOperationService;
 import app.auto.service.BaseTableTmplService;
-import app.base.Result;
-import app.comn.ResponseCode;
-import app.utils.JsonUtil;
+import net.sf.json.JSONObject;
 import org.springframework.util.Base64Utils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,14 +52,13 @@ public class OperationController {
     @RequestMapping(path = "createFunction/{base64Param}", method = GET)
     public void createFunction(@PathVariable String base64Param) {
 
-        BaseFunctionModel baseFunctionModel = null;
-        try {
-            byte[] bytes = Base64Utils.decodeFromString(base64Param);
-            String param = new String(bytes);
-            baseFunctionModel = JsonUtil.toJson(param, BaseFunctionModel.class);
-        } catch (IOException e) {
-            new Result<>(ResponseCode.SerializeError);
-        }
+
+        byte[] bytes = Base64Utils.decodeFromString(base64Param);
+        String param = new String(bytes);
+
+
+        JSONObject jsonObject = JSONObject.fromObject(param);
+        BaseFunctionModel baseFunctionModel = (BaseFunctionModel) JSONObject.toBean(jsonObject, BaseFunctionModel.class);
 
 
         baseOperationService.createFunction(baseFunctionModel);
