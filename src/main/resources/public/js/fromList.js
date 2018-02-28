@@ -60,8 +60,15 @@ var FormList = function () {
         // });
 
         $("#btnSaveFormDesign").click(function () {
-            alert("保存设计");
+            alert("/operation/createFunction/" + $("#sqlTextArea").val().replace(/\n/g, "<br/>"));
             //FIXME 未完
+            //TODO 测试用
+            var base64Data = Base64.encode($("#sqlTextArea").val().replace(/\n/g, "<br/>"));
+            HttpHelper.ajax("/operation/createFunction/" + base64Data, "GET", null,
+                function (respose) {
+
+
+                });
             toggleProtletFullscreen();
             showTableCollapse();
         });
