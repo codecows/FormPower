@@ -23,4 +23,8 @@ public interface OperationMapper {
     void dropColumn(@Param("tablename") String tablename, @Param("columnbody") List columnbody);
 
     void createFunction(@Param("func") BaseFunctionModel baseFunctionModel);
+
+    void dropFunction(@Param("funcname") String funcname);
+
+    Object execFunction(@Param("funcname") String funcname, @Param("paralist") String paralist);
 }

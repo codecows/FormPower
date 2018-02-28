@@ -42,6 +42,10 @@ DROP TABLE IF EXISTS sys_from_controls CASCADE;
 
 DROP TABLE IF EXISTS sys_form_def;
 
+DROP TABLE IF EXISTS sys_base_tab_tmpl;
+
+DROP TABLE IF EXISTS sys_exec_func;
+
 /*==============================================================*/
 /* Table: sys_auth_menu_rel                                     */
 /*==============================================================*/
@@ -864,29 +868,38 @@ COMMENT ON COLUMN "public"."sys_base_tab_tmpl"."order_num" IS '排序号';
 
 COMMENT ON TABLE "public"."sys_base_tab_tmpl" IS '基础表模版';
 
-CREATE TABLE "public"."sys_form_func" (
-  "id"        VARCHAR(36) COLLATE "pg_catalog"."default" NOT NULL DEFAULT uuid_generate_v4(),
-  "form_id"   VARCHAR(36) COLLATE "pg_catalog"."default",
-  "func_name" VARCHAR(255) COLLATE "pg_catalog"."default",
-  "func_para" VARCHAR(255) COLLATE "pg_catalog"."default",
-  "func_body" TEXT COLLATE "pg_catalog"."default",
-  "status"    VARCHAR(2) COLLATE "pg_catalog"."default",
-  CONSTRAINT "sys_form_func_pkey" PRIMARY KEY ("id")
+
+CREATE TABLE "public"."sys_exec_func" (
+  "id"               VARCHAR(36) COLLATE "pg_catalog"."default" NOT NULL DEFAULT uuid_generate_v4(),
+  "object_id"        VARCHAR(36) COLLATE "pg_catalog"."default",
+  "object_type"      VARCHAR(2) COLLATE "pg_catalog"."default",
+  "func_name"        VARCHAR(255) COLLATE "pg_catalog"."default",
+  "func_para"        VARCHAR(255) COLLATE "pg_catalog"."default",
+  "func_return_para" VARCHAR(255) COLLATE "pg_catalog"."default",
+  "func_body"        TEXT COLLATE "pg_catalog"."default",
+  "on_action"        VARCHAR(5) COLLATE "pg_catalog"."default",
+  "status"           VARCHAR(2) COLLATE "pg_catalog"."default",
+  "create_date"      DATE                                                DEFAULT CURRENT_DATE,
+  CONSTRAINT "sys_exec_func_pkey" PRIMARY KEY ("id")
 );
 
-ALTER TABLE "public"."sys_form_func"
-  OWNER TO "postgres";
 
-COMMENT ON COLUMN "public"."sys_form_func"."id" IS '唯一id';
+COMMENT ON COLUMN "public"."sys_exec_func"."id" IS '唯一id';
 
-COMMENT ON COLUMN "public"."sys_form_func"."form_id" IS 'formid';
+COMMENT ON COLUMN "public"."sys_exec_func"."object_id" IS '对象id';
 
-COMMENT ON COLUMN "public"."sys_form_func"."func_name" IS '回调函数名称';
+COMMENT ON COLUMN "public"."sys_exec_func"."object_type" IS '对象类型，f:form,c:column';
 
-COMMENT ON COLUMN "public"."sys_form_func"."func_para" IS '函数参数列表';
+COMMENT ON COLUMN "public"."sys_exec_func"."func_name" IS '回调函数名称';
 
-COMMENT ON COLUMN "public"."sys_form_func"."func_body" IS '函数体';
+COMMENT ON COLUMN "public"."sys_exec_func"."func_para" IS '函数参数列表';
 
-COMMENT ON COLUMN "public"."sys_form_func"."status" IS '状态';
+COMMENT ON COLUMN "public"."sys_exec_func"."func_return_para" IS '返回参数';
 
-COMMENT ON TABLE "public"."sys_form_func" IS '表单关联函数表';
+COMMENT ON COLUMN "public"."sys_exec_func"."func_body" IS '函数体';
+
+COMMENT ON COLUMN "public"."sys_exec_func"."on_action" IS '执行事件，s:select,i:insert,d:delete,u:update,c:create,dr:drop';
+
+COMMENT ON COLUMN "public"."sys_exec_func"."status" IS '状态';
+
+COMMENT ON TABLE "public"."sys_exec_func" IS '表单关联函数表';

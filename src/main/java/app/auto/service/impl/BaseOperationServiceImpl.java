@@ -3,6 +3,9 @@ package app.auto.service.impl;
 import app.auto.mappers.OperationMapper;
 import app.auto.model.BaseFunctionModel;
 import app.auto.service.BaseOperationService;
+
+import java.lang.String;
+
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -32,6 +35,14 @@ public class BaseOperationServiceImpl implements BaseOperationService {
 
     @Override
     public void createFunction(BaseFunctionModel baseFunctionModel) {
+        String fBody = baseFunctionModel.getFuncBody().replace("<br/>", "\n");
+        baseFunctionModel.setFuncBody(fBody);
         operationMapper.createFunction(baseFunctionModel);
+    }
+
+    @Override
+    public Object execFunction(String funcname, String paralist) {
+        Object o = operationMapper.execFunction(funcname, paralist);
+        return o;
     }
 }

@@ -2,11 +2,14 @@ package app.auto.controller;
 
 import app.auto.entities.SysBaseTabEntity;
 import app.auto.model.BaseFunctionModel;
+import app.auto.model.ExecFunc;
 import app.auto.service.BaseOperationService;
 import app.auto.service.BaseTableTmplService;
+import app.auto.service.SysExecFuncService;
 import app.base.Result;
 import app.comn.ResponseCode;
 import app.utils.JsonUtil;
+import org.springframework.beans.BeanUtils;
 import org.springframework.util.Base64Utils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,7 +34,10 @@ public class OperationController {
     @Resource
     private BaseOperationService baseOperationService;
 
-    @RequestMapping(path = "createTable/{tablename}/{tmplname}", method = GET)
+    @Resource
+    private SysExecFuncService sysExecFuncService;
+
+    @RequestMapping(path = "createTable/{tablename}/{tmplname}", method = POST)
     public void createTable(@PathVariable String tablename, @PathVariable String tmplname) {
 
         List<SysBaseTabEntity> tableBody = baseTableTmplService.getTableBody(tmplname);
@@ -52,7 +58,7 @@ public class OperationController {
 
     }
 
-    @RequestMapping(path = "createFunction/{base64Param}", method = GET)
+    @RequestMapping(path = "createFunction/{base64Param}", method = POST)
     public void createFunction(@PathVariable String base64Param) {
 
         BaseFunctionModel baseFunctionModel = null;
@@ -64,8 +70,21 @@ public class OperationController {
             new Result<>(ResponseCode.SerializeError);
         }
 
+        ExecFunc execFunc = new ExecFunc();
+
+        BeanUtils.copyProperties(baseFunctionModel, execFunc);
+
+        //todo 插入函数表需要考虑函数已存在的情况，待进一步处理
+        sysExecFuncService.addItems(execFunc);
 
         baseOperationService.createFunction(baseFunctionModel);
 
+    }
+
+    @RequestMapping(path = "execFunction/{funcname}/{paralist}", method = POST)
+    public Object execFunction(@PathVariable String funcname, @PathVariable String paralist) {
+
+        Object o = baseOperationService.execFunction(funcname, paralist);
+        return o;
     }
 }

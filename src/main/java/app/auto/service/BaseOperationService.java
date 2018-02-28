@@ -15,4 +15,6 @@ public interface BaseOperationService {
 
     void createFunction(BaseFunctionModel baseFunctionModel);
 
+    Object execFunction(String funcname, String paralist);
+
 }

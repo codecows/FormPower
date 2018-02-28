@@ -86,4 +86,12 @@
 
         $BODY$ LANGUAGE PLPGSQL;
     </update>
+
+    <update id="dropFunction" parameterType="java.lang.String">
+        DROP FUNCTION ${funcname};
+    </update>
+
+    <select id="execFunction" parameterType="java.lang.String" resultType="java.lang.Object">
+        SELECT ${funcname}(${paralist});
+    </select>
 </mapper>
