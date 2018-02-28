@@ -18,6 +18,7 @@
 
     <link href="../../assets/global/css/plugins.css" rel="stylesheet" type="text/css"/>
 
+    <link href="../../assets/global/plugins/icheck/skins/all.css" rel="stylesheet" type="text/css"/>
 
     <!-- END PAGE LEVEL STYLES -->
 
@@ -339,14 +340,13 @@
                             decare @formid varchar(20);
                             decare @formid varchar(20);
                         </div>
-                        <textarea id="sqlTextArea">
-                            begin
+                        <textarea id="sqlTextArea">begin
                              DO BIZ
                             end
                         </textarea>
 
                         <div class="well">
-                        return 0
+                            return 0
                         </div>
                     </div>
                     <div class="tab-pane" id="portlet_form">
@@ -400,63 +400,39 @@
 
 
                             </div>
+
                             <div id='propertyCanvas' class='col-md-2 form-body'>
-                                <div class='form-group'>
-                                    <label class='control-label'>宽度</label>
-                                    <div><input propertytype='colMdValue' type='number' max='12' min='2'
-                                                class='form-control input-sm' placeholder='2-12'></div>
-                                </div>
 
-                                <div class='form-group'>
-                                    <label class='control-label'>提示语</label>
-                                    <div><input type='text' class='form-control input-sm'></div>
-                                </div>
-
-                                <div class='form-group'>
-                                    <label class='control-label'>小数位数</label>
-                                    <div><input propertytype='colMdValue' type='number' max='0' min='6'
-                                                class='form-control input-sm' placeholder='0-6' value='2'></div>
-                                </div>
-
-                                <div class='form-group'>
-                                    <label>格式</label>
-                                    <select class='form-control input-sm'>
-                                        <option>普通</option>
-                                        <option>手机</option>
-                                        <option>地址</option>
-                                        <option>邮箱</option>
-                                        <option>身份证</option>
-                                        <option>正则</option>
-                                    </select>
-                                </div>
-                                <div class='form-group'>
-                                    <label class='control-label'>正则</label>
-                                    <div><input type='text' class='form-control input-sm'></div>
-                                </div>
-
-                                <div class='form-group'>
-                                    <label class='control-label'>数据长度</label>
-                                    <div><input type='number' class='form-control input-sm'></div>
-                                </div>
-
-                                <div class='form-group'>
-                                    <label class='control-label'>最大值</label>
-                                    <div><input type='number' class='form-control input-sm'></div>
-                                </div>
-
-                                <div class='form-group'>
-                                    <label class='control-label'>最小值</label>
-                                    <div><input type='number' class='form-control input-sm'></div>
-                                </div>
-
-                                <div class='form-group'>
-                                    <label class='control-label'>默认值</label>
-                                    <div><input type='text' class='form-control input-sm'></div>
-                                </div>
-
-                                <div class='form-group'>
-                                    <label class='control-label'>公式</label>
-                                    <div><input type='date' class='form-control input-sm'></div>
+                                <div class="form-group">
+                                    <label>Checkbox List</label>
+                                    <div class="input-group">
+                                        <div class="icheck-list">
+                                            <label class="">
+                                                <div class="icheckbox_minimal-grey checked" style="position: relative;">
+                                                    <input type="checkbox" class="icheck"
+                                                           style="position: absolute; opacity: 0;">
+                                                    <ins class="iCheck-helper"
+                                                         style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
+                                                </div>
+                                                Checkbox 1 </label>
+                                            <label class="">
+                                                <div class="icheckbox_minimal-grey" style="position: relative;"><input
+                                                        type="checkbox" checked="" class="icheck"
+                                                        style="position: absolute; opacity: 0;">
+                                                    <ins class="iCheck-helper"
+                                                         style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
+                                                </div>
+                                                Checkbox 2 </label>
+                                            <label>
+                                                <div class="icheckbox_minimal-grey" style="position: relative;"><input
+                                                        type="checkbox" class="icheck"
+                                                        style="position: absolute; opacity: 0;">
+                                                    <ins class="iCheck-helper"
+                                                         style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
+                                                </div>
+                                                Checkbox 3 </label>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div class='form-group'>
@@ -486,6 +462,7 @@
                                     <div><input type='text' class='form-control input-sm'></div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -576,6 +553,9 @@
 <script src="../../assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js"></script>
 <script src="../../assets/admin/pages/scripts/form-samples.js"></script>
 <script src="../../assets/admin/pages/scripts/components-dropdowns.js"></script>
+<script src="../../assets/global/plugins/icheck/icheck.min.js"></script>
+
+
 <script src="../../dragula/dragula.js"></script>
 <script src="../../js/fromList.js"></script>
 <script type="text/javascript">
