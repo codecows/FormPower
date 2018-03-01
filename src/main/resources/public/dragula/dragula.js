@@ -315,6 +315,7 @@
                                 _copy.classList.add(options.controlStyle);
                             }
                             _copy.classList.add("col-md-6");
+                            _copy.classList.add("form-group");
                             // _copy = context.item.cloneNode(true);
                             drake.emit('cloned', _copy, context.item, 'copy');
                         }

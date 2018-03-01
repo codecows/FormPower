@@ -77,15 +77,15 @@ var FormList = function () {
 
         designCanvas.on('click', "[type='removeBtn']", function (event) {
             event.stopPropagation();
-            $(this).parent().parent().remove();
+            $(this).parent().remove();
         });
         designCanvas.on('click', "[type='copyBtn']", function (event) {
             event.stopPropagation();
-            var clone = $(this).parent().parent().clone();
+            var clone = $(this).parent().clone();
             if (clone.hasClass("control-active")) {
                 clone.removeClass("control-active")
             }
-            $(this).parent().parent().after(clone);
+            $(this).parent().after(clone);
         });
         //fixme  选中变色
         designCanvas.on('click', ".control-shadow", function () {
@@ -305,7 +305,7 @@ var FormList = function () {
 
     var drake;
 
-    function drakeInit(colCount) {
+    function drakeInit() {
         var panels = [];
         panels.push(document.getElementById("designCanvas"));
         var controls = document.getElementsByClassName("control");
@@ -338,41 +338,66 @@ var FormList = function () {
             }
 
             function removeBtnBuilder() {
-                var html = "<a href='javascript:;' type='removeBtn' class='btn btn-icon-only pull-right'>" +
+                var html = "<a href='javascript:;' type='removeBtn' style='margin: 0px;padding: 0px' class='pull-right'>" +
                     "                    <i class='fa fa-times'></i>" +
                     "       </a>";
                 return html;
             }
 
             function copyBtnBuilder() {
-                var html = "<a href='javascript:;' type='copyBtn' class='btn btn-icon-only pull-right'>" +
-                    "                    <i class='fa fa-copy'></i>\n" +
+                var html = "<a href='javascript:;' type='copyBtn' style='margin: 0px;padding: 0px' class='pull-right'>" +
+                    "                    <i class='fa fa-copy'></i> &nbsp;" +
                     "       </a>";
                 return html;
             }
 
             function formGroupBuilder(el) {
-                var html = "<div class='form-group'>";
+                var html = "";
+                // var html = "<div class='form-group'>";
                 html += removeBtnBuilder();
                 html += copyBtnBuilder();
                 html += el;
-                html += "</div>";
+                // html += "</div>";
                 return html;
             }
 
-            if (cType === "1") {
-                var elHtml = "<label class='control-label'>标签</label>" +
-                    "<div><input type='text' class='form-control input-sm' placeholder='提示'></div>";
-                var html = formGroupBuilder(elHtml);
-                jqEl.append(html)
+            var elHtml = "";
+            switch (cType) {
+                case "1001":
+                    elHtml = formGroupBuilder("<label' class='control-label'>标签</label>" +
+                        "<div><input type='text' class='form-control input-sm' placeholder='提示'></div>");
+                    break;
+                case "1002":
+                    elHtml = formGroupBuilder("<label class='control-label'>多行文本</label>" +
+                        "<div><textarea style='resize: none;' rows='3' class='form-control' placeholder='提示'></textarea>");
+                    break;
+            }
+            if (elHtml) {
+                jqEl.append(elHtml);
                 jqEl.attr("isReady", "true");
             }
-            else if (cType === "2") {
-                jqEl.text("啊啊啊22");
-            } else {
-                jqEl.text("啊啊啊333");
-            }
         });
+    }
+
+    function controlInit() {
+        HttpHelper.ajax(URL.management.widgetInfo.getWidgetInfo, URL.management.widgetInfo.getWidgetInfoType, null,
+            function (respose) {
+                var result = checkResult(respose);
+                if (result === null) return;
+                $.each(result, function (index, item) {
+                    var html = "";
+                    html += "<li groupId='" + item.groupId + "'><div><h4>" + item.groupName + "</h4></div>";
+                    html += "<ul class='control'>";
+                    $.each(item.widgets, function (index1, item1) {
+                        html += "<li controltype='" + item1.controlId + "'>";
+                        html += "<a href='javascript:;'><i class='fa " + item1.img + "'></i>" + item1.controlName + "</a>";
+                        html += "</li>";
+                    });
+                    html += "</ul></li>";
+                    $("ul.controls").append(html);
+                });
+                drakeInit();
+            });
     }
 
     return {
@@ -380,15 +405,16 @@ var FormList = function () {
             collapseInit();
             btnClickBind();
             datatableInit();
+            controlInit();
         },
-        drakeInit: function (colCount) {
-            drakeInit(colCount)
+        drakeInit: function () {
+            drakeInit()
         },
         drakeDispose: function () {
             if (drake) {
                 drake.destroy();
             }
-        },
+        }
 
     };
 }();

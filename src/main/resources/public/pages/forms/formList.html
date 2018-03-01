@@ -289,6 +289,25 @@
                         <!--/span-->
                     </div>
                     <!--/row-->
+
+                    <div controltype="1002" colmdvalue="6" class="control-shadow col-md-6 form-group" isready="true">
+                        <a href="javascript:;" type="removeBtn" class="btn btn-icon-only pull-right"> <i
+                                class="fa fa-times"></i> </a><a href="javascript:;" type="copyBtn"
+                                                                class="btn btn-icon-only pull-right"> <i
+                            class="fa fa-copy"></i>
+                    </a> <label class="control-label">Textarea</label>
+                        <div>
+                            <textarea class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div controltype="1001" colmdvalue="6" class="control-shadow col-md-6 form-group" isready="true">
+
+                        <span class="input-group-addon">
+										<label class="control-label col-md-3">标签</label>
+											</span>
+                        <input type="text" class="form-control input-sm" placeholder="提示">
+                    </div>
+
                 </div>
                 <div class="form-actions">
                     <div class="row">
@@ -351,53 +370,36 @@
                     </div>
                     <div class="tab-pane" id="portlet_form">
                         <!-- FIXME 表单内容-->
-                        表单内容
                     </div>
                     <div class="tab-pane active" id="portlet_control">
                         <div class="row">
                             <div class="col-md-2">
                                 <ul class="controls">
-                                    <li>
-                                        <div><h4>基础控件</h4></div>
-                                        <ul class="control">
-                                            <li controltype="1">
-                                                <a href="javascript:;">
-                                                    <i class="icon-bar-chart"></i>
-                                                    文本框</a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:;">
-                                                    <i class="icon-bulb"></i>
-                                                    初始化</a>
-                                            </li>
-                                            <li>
-                                                <a id="userMenu" href="javascript:;">
-                                                    <i class="icon-graph"></i>
-                                                    用户</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <div><h4>布局控件</h4></div>
-                                        <ul class="control">
-                                            <li controltype="1">
-                                                <a href="javascript:;">
-                                                    <i class="icon-bar-chart"></i>
-                                                    文本框</a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:;">
-                                                    <i class="icon-bulb"></i>
-                                                    初始化</a>
-                                            </li>
-                                        </ul>
-
-                                    </li>
+                                    <!--<li>-->
+                                    <!--<div><h4>基础控件</h4></div>-->
+                                    <!--<ul class="control">-->
+                                    <!--<li controltype="1">-->
+                                    <!--<a href="javascript:;">-->
+                                    <!--<i class="fa fa-font"></i>-->
+                                    <!--文本框</a>-->
+                                    <!--</li>-->
+                                    <!--<li>-->
+                                    <!--<a href="javascript:;">-->
+                                    <!--<i class="icon-bulb"></i>-->
+                                    <!--初始化</a>-->
+                                    <!--</li>-->
+                                    <!--<li>-->
+                                    <!--<a id="userMenu" href="javascript:;">-->
+                                    <!--<i class="icon-graph"></i>-->
+                                    <!--用户</a>-->
+                                    <!--</li>-->
+                                    <!--</ul>-->
+                                    <!--</li>-->
+                                    <!---->
                                 </ul>
 
                             </div>
-                            <div id="designCanvas" class="col-md-8 form-body formDesigner">
-
+                            <div id="designCanvas" class="col-md-8 formDesigner form-body">
 
                             </div>
 
@@ -492,41 +494,6 @@
             </tr>
             </thead>
             <tbody>
-            <!--<tr>-->
-            <!--<td>-->
-            <!--Trident-->
-            <!--</td>-->
-            <!--<td>-->
-            <!--Internet Explorer 4.0-->
-            <!--</td>-->
-            <!--<td>-->
-            <!--Win 95+-->
-            <!--</td>-->
-            <!--<td>-->
-            <!--4122112.223-->
-            <!--</td>-->
-            <!--<td>-->
-            <!--X-->
-            <!--</td>-->
-            <!--</tr>-->
-            <!--<tr>-->
-            <!--<td>-->
-            <!--Trident-->
-            <!--</td>-->
-            <!--<td>-->
-            <!--Internet Explorer 5.0-->
-            <!--</td>-->
-            <!--<td>-->
-            <!--Win 95+-->
-            <!--</td>-->
-            <!--<td>-->
-            <!--5-->
-            <!--</td>-->
-            <!--<td>-->
-            <!--C-->
-            <!--</td>-->
-            <!--</tr>-->
-
             </tbody>
         </table>
     </div>
@@ -560,6 +527,5 @@
 <script src="../../js/fromList.js"></script>
 <script type="text/javascript">
     FormList.init();
-    FormList.drakeInit(2);
 </script>
 
