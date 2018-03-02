@@ -2,6 +2,7 @@ package app.system.widgetinfo.entities;
 
 
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * Created by real on 2018/2/6.
@@ -21,6 +22,8 @@ public class WidgetsEntity {
     private BigDecimal orderNum;
 
     private String groupId;
+
+    private List<ControlAttributeEntity> controlAttributeList;
 
     public String getControlId() {
         return controlId;
@@ -68,5 +71,13 @@ public class WidgetsEntity {
 
     public void setGroupId(String groupId) {
         this.groupId = groupId;
+    }
+
+    public List<ControlAttributeEntity> getControlAttributeList() {
+        return controlAttributeList;
+    }
+
+    public void setControlAttributeList(List<ControlAttributeEntity> controlAttributeList) {
+        this.controlAttributeList = controlAttributeList;
     }
 }

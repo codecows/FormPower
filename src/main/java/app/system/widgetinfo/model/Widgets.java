@@ -4,6 +4,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * Created by real on 2018/2/6.
@@ -28,6 +29,9 @@ public class Widgets {
 
     @ApiModelProperty("所属控件组")
     private String groupId;
+
+    @ApiModelProperty("控件属性列表")
+    private List<ControlAttribute> controlAttributeList;
 
     public String getControlId() {
         return controlId;
@@ -75,5 +79,13 @@ public class Widgets {
 
     public void setGroupId(String groupId) {
         this.groupId = groupId;
+    }
+
+    public List<ControlAttribute> getControlAttributeList() {
+        return controlAttributeList;
+    }
+
+    public void setControlAttributeList(List<ControlAttribute> controlAttributeList) {
+        this.controlAttributeList = controlAttributeList;
     }
 }

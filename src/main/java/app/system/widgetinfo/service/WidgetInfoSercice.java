@@ -1,5 +1,6 @@
 package app.system.widgetinfo.service;
 
+import app.system.widgetinfo.model.ControlAttribute;
 import app.system.widgetinfo.model.WidgetInfo;
 
 import java.util.List;
@@ -10,4 +11,6 @@ import java.util.List;
 public interface WidgetInfoSercice {
 
     List<WidgetInfo> getItems();
+
+    ControlAttribute getControlAttributes(String controlId, String status);
 }

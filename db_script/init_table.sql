@@ -46,7 +46,7 @@ DROP TABLE IF EXISTS sys_base_tab_tmpl;
 
 DROP TABLE IF EXISTS sys_exec_func;
 
-DROP TABLE IF EXISTS sys_control_attribute;
+DROP TABLE IF EXISTS sys_form_control_attribute;
 
 /*==============================================================*/
 /* Table: sys_auth_menu_rel                                     */
@@ -843,8 +843,6 @@ CREATE TABLE "public"."sys_base_tab_tmpl" (
   CONSTRAINT "sys_base_tab_tmpl_pkey" PRIMARY KEY ("id")
 );
 
-ALTER TABLE "public"."sys_base_tab_tmpl"
-  OWNER TO "postgres";
 
 COMMENT ON COLUMN "public"."sys_base_tab_tmpl"."id" IS 'id';
 
@@ -907,7 +905,7 @@ COMMENT ON COLUMN "public"."sys_exec_func"."status" IS '状态';
 COMMENT ON TABLE "public"."sys_exec_func" IS '表单关联函数表';
 
 
-CREATE TABLE "public"."sys_control_attribute" (
+CREATE TABLE "public"."sys_form_control_attribute" (
   "id"             VARCHAR(36) COLLATE "pg_catalog"."default" NOT NULL,
   "control_id"     VARCHAR(36) COLLATE "pg_catalog"."default",
   "attribute_name" VARCHAR(255) COLLATE "pg_catalog"."default",
@@ -916,26 +914,24 @@ CREATE TABLE "public"."sys_control_attribute" (
   "order_num"      NUMERIC,
   "status"         VARCHAR(2) COLLATE "pg_catalog"."default",
   "create_date"    DATE,
-  CONSTRAINT "sys_control_attribute_pkey" PRIMARY KEY ("id")
+  CONSTRAINT "sys_form_control_attribute_pkey" PRIMARY KEY ("id")
 );
 
-ALTER TABLE "public"."sys_control_attribute"
-  OWNER TO "postgres";
 
-COMMENT ON COLUMN "public"."sys_control_attribute"."id" IS 'ID';
+COMMENT ON COLUMN "public"."sys_form_control_attribute"."id" IS 'ID';
 
-COMMENT ON COLUMN "public"."sys_control_attribute"."control_id" IS '控件ID';
+COMMENT ON COLUMN "public"."sys_form_control_attribute"."control_id" IS '控件ID';
 
-COMMENT ON COLUMN "public"."sys_control_attribute"."attribute_name" IS '属性名称';
+COMMENT ON COLUMN "public"."sys_form_control_attribute"."attribute_name" IS '属性名称';
 
-COMMENT ON COLUMN "public"."sys_control_attribute"."attribute_type" IS '属性类型';
+COMMENT ON COLUMN "public"."sys_form_control_attribute"."attribute_type" IS '属性类型';
 
-COMMENT ON COLUMN "public"."sys_control_attribute"."default_value" IS '默认值';
+COMMENT ON COLUMN "public"."sys_form_control_attribute"."default_value" IS '默认值';
 
-COMMENT ON COLUMN "public"."sys_control_attribute"."order_num" IS '排序号';
+COMMENT ON COLUMN "public"."sys_form_control_attribute"."order_num" IS '排序号';
 
-COMMENT ON COLUMN "public"."sys_control_attribute"."status" IS '状态';
+COMMENT ON COLUMN "public"."sys_form_control_attribute"."status" IS '状态';
 
-COMMENT ON COLUMN "public"."sys_control_attribute"."create_date" IS '创建时间';
+COMMENT ON COLUMN "public"."sys_form_control_attribute"."create_date" IS '创建时间';
 
-COMMENT ON TABLE "public"."sys_control_attribute" IS '控件属性表';
+COMMENT ON TABLE "public"."sys_form_control_attribute" IS '控件属性表';

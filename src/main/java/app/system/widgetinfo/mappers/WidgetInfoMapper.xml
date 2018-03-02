@@ -17,6 +17,17 @@
         </collection>
     </resultMap>
 
+    <resultMap id="ControlAttribute" type="app.system.widgetinfo.entities.ControlAttributeEntity">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="control_id" jdbcType="VARCHAR" property="controlId"/>
+        <result column="attribute_name" jdbcType="VARCHAR" property="attributeName"/>
+        <result column="attribute_type" jdbcType="VARCHAR" property="attributeType"/>
+        <result column="default_value" jdbcType="VARCHAR" property="defaultValue"/>
+        <result column="order_num" jdbcType="NUMERIC" property="orderNum"/>
+        <result column="status" jdbcType="VARCHAR" property="status"/>
+        <result column="create_date" jdbcType="DATE" property="createDate"/>
+    </resultMap>
+
     <sql id="Base_Column_List">
         G.group_id g_group_id,
         G.group_name,
@@ -45,6 +56,15 @@
                 and c.status = #{cStatus,jdbcType=VARCHAR}
             </if>
         </trim>
+    </select>
+
+    <select id="selectWidgetByControlId" parameterType="java.lang.String" resultMap="">
+        SELECT *
+        FROM
+            sys_form_control_attribute t
+        WHERE
+            t.control_id = #{controlid,jdbcType=VARCHAR}
+            AND t.status = #{status,jdbcType=VARCHAR};
     </select>
 
 </mapper>
