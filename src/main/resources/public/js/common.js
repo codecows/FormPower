@@ -56,16 +56,19 @@ var URL = function () {
     var _baseUrl = "/";
     return {
         management: {
-            widgetInfo: {
-                getWidgetInfo: _baseUrl + "management/widgetInfo/getWidgetInfo",
-                getWidgetInfoType: HttpMethod.GET
-            },
             userInfo: {
                 getUserInfo: _baseUrl + "management/userInfo/getUserInfo/",
                 getUserInfoType: HttpMethod.GET
+            }
+
+        },
+        system: {
+            widgetInfo: {
+                getWidgetInfo: _baseUrl + "system/widgetInfo/getWidgetInfo",
+                getWidgetInfoType: HttpMethod.GET
             },
             form: {
-                getFromList: _baseUrl + "form/getFormList/",
+                getFromList: _baseUrl + "system/form/getFormList/",
                 getFromListType: HttpMethod.GET
             }
 
