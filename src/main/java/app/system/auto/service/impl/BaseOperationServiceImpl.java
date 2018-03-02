@@ -19,9 +19,9 @@ public class BaseOperationServiceImpl implements BaseOperationService {
     private OperationMapper operationMapper;
 
     @Override
-    public void createTable(String tablename, List tablebody) {
+    public void createTable(String tablename, String tablecomment, List tablebody) {
 
-        operationMapper.createTable(tablename, tablebody);
+        operationMapper.createTable(tablename, tablecomment, tablebody);
 
     }
 

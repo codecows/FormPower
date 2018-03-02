@@ -7,6 +7,7 @@ import app.system.form.model.DataTableResponse;
 import app.system.form.model.Form;
 import app.system.form.service.FormService;
 import app.utils.JsonUtil;
+import io.swagger.annotations.Api;
 import org.springframework.util.Base64Utils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +19,7 @@ import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
+@Api(description = "表单信息管理接口")
 @RestController
 @RequestMapping("system/form")
 public class FormController {

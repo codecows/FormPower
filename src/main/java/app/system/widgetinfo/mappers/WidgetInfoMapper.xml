@@ -4,6 +4,8 @@
     <resultMap id="BaseResultMap" type="app.system.widgetinfo.entities.WidgetInfoEntity">
         <id column="g_group_id" jdbcType="VARCHAR" property="groupId"/>
         <result column="group_name" jdbcType="VARCHAR" property="groupName"/>
+        <result column="g_img" jdbcType="VARCHAR" property="img"/>
+        <result column="g_order_num" jdbcType="NUMERIC" property="orderNum"/>
         <result column="g_status" jdbcType="VARCHAR" property="status"/>
         <collection property="widgets" ofType="app.system.widgetinfo.entities.WidgetsEntity">
             <id column="control_id" jdbcType="VARCHAR" property="controlId"/>
@@ -18,6 +20,8 @@
     <sql id="Base_Column_List">
         G.group_id g_group_id,
         G.group_name,
+        G.img g_img,
+        G.order_num g_order_num,
         G.status g_status,
         C.control_id,
         C.control_name,
@@ -33,13 +37,14 @@
         FROM
         sys_form_control_groups
         G INNER JOIN sys_from_controls C ON G.group_id = C.group_id
-        where 1=1
-        <if test="gStatus != null">
-            and g.status = #{gStatus,jdbcType=VARCHAR}
-        </if>
-        <if test="cStatus != null">
-            and c.status = #{cStatus,jdbcType=VARCHAR}
-        </if>
+        <trim prefix="where" prefixOverrides="and|or">
+            <if test="gStatus != null">
+                and g.status = #{gStatus,jdbcType=VARCHAR}
+            </if>
+            <if test="cStatus != null">
+                and c.status = #{cStatus,jdbcType=VARCHAR}
+            </if>
+        </trim>
     </select>
 
 </mapper>

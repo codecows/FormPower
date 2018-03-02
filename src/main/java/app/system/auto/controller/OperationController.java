@@ -9,6 +9,7 @@ import app.system.auto.service.BaseOperationService;
 import app.system.auto.service.BaseTableTmplService;
 import app.system.auto.service.SysExecFuncService;
 import app.utils.JsonUtil;
+import io.swagger.annotations.Api;
 import org.springframework.beans.BeanUtils;
 import org.springframework.util.Base64Utils;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +24,7 @@ import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
+@Api(description = "系统自动化操作接口")
 @RestController
 @RequestMapping("system/operation")
 public class OperationController {
@@ -36,12 +38,12 @@ public class OperationController {
     @Resource
     private SysExecFuncService sysExecFuncService;
 
-    @RequestMapping(path = "createTable/{tablename}/{tmplname}", method = POST)
-    public void createTable(@PathVariable String tablename, @PathVariable String tmplname) {
+    @RequestMapping(path = "createTable/{tablename}/{tablecomment}/{tmplname}", method = POST)
+    public void createTable(@PathVariable String tablename, @PathVariable String tablecomment, @PathVariable String tmplname) {
 
         List<SysBaseTabEntity> tableBody = baseTableTmplService.getTableBody(tmplname);
 
-        baseOperationService.createTable(tablename, tableBody);
+        baseOperationService.createTable(tablename, tablecomment, tableBody);
     }
 
     @RequestMapping(path = "addColumn/{tablename}", method = POST)

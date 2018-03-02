@@ -3,6 +3,7 @@ package app.system.widgetinfo.model;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -11,8 +12,6 @@ import java.util.List;
 @ApiModel("控件组信息-二层菜单")
 public class WidgetInfo {
 
-    @ApiModelProperty("控件列表")
-    List<Widgets> widgets;
     @ApiModelProperty("组ID")
     private String groupId;
     @ApiModelProperty("组名称")
@@ -20,9 +19,11 @@ public class WidgetInfo {
     @ApiModelProperty("组图标")
     private String img;
     @ApiModelProperty("排序号")
-    private Number ordernum;
+    private BigDecimal orderNum;
     @ApiModelProperty("状态")
     private String status;
+    @ApiModelProperty("控件列表")
+    List<Widgets> widgets;
 
     public String getGroupId() {
         return groupId;
@@ -48,12 +49,12 @@ public class WidgetInfo {
         this.img = img;
     }
 
-    public Number getOrdernum() {
-        return ordernum;
+    public BigDecimal getOrderNum() {
+        return orderNum;
     }
 
-    public void setOrdernum(Number ordernum) {
-        this.ordernum = ordernum;
+    public void setOrderNum(BigDecimal orderNum) {
+        this.orderNum = orderNum;
     }
 
     public String getStatus() {

@@ -1,5 +1,6 @@
 package app.system.widgetinfo.entities;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -7,12 +8,12 @@ import java.util.List;
  */
 public class WidgetInfoEntity {
 
-    List<WidgetsEntity> widgets;
     private String groupId;
     private String groupName;
     private String img;
-    private Number ordernum;
+    private BigDecimal orderNum;
     private String status;
+    List<WidgetsEntity> widgets;
 
     public String getGroupId() {
         return groupId;
@@ -38,12 +39,12 @@ public class WidgetInfoEntity {
         this.img = img;
     }
 
-    public Number getOrdernum() {
-        return ordernum;
+    public BigDecimal getOrderNum() {
+        return orderNum;
     }
 
-    public void setOrdernum(Number ordernum) {
-        this.ordernum = ordernum;
+    public void setOrderNum(BigDecimal orderNum) {
+        this.orderNum = orderNum;
     }
 
     public String getStatus() {

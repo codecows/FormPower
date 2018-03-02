@@ -30,6 +30,7 @@
                 COMMENT ON COLUMN ${tablename}.${comment.tabColumn} IS '${comment.comment}';
             </if>
         </foreach>
+        COMMENT ON TABLE ${tablename} IS '${tablecomment}';
     </update>
 
     <update id="dropTable" statementType="STATEMENT" parameterType="java.lang.String">

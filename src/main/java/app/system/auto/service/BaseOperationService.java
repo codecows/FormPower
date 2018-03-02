@@ -9,7 +9,7 @@ import java.util.List;
  */
 public interface BaseOperationService {
 
-    void createTable(String tablename, List tablebody);
+    void createTable(String tablename, String tablecomment, List tablebody);
 
     void addColumn(String tablename, List body);
 

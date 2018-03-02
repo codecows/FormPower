@@ -12,7 +12,7 @@ public interface OperationMapper {
 
     int existTable(@Param("tablename") String tablename);
 
-    void createTable(@Param("tablename") String tablename, @Param("tablebody") List body);
+    void createTable(@Param("tablename") String tablename, @Param("tablecomment") String tablecomment, @Param("tablebody") List body);
 
     void dropTable(@Param("tablename") String tablename);
 
