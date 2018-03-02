@@ -10,16 +10,16 @@ import app.base.model.BaseBizModel;
  */
 public class FormAddInfo extends BaseBizModel {
     //表名
-    private String id;
+    private String code;
     private String name;
     private String remark;
 
     public String getId() {
-        return id;
+        return code;
     }
 
     public void setId(String id) {
-        this.id = id;
+        this.code = id;
     }
 
     public String getName() {
