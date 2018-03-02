@@ -152,7 +152,7 @@ var FormList = function () {
 
         setting.ajax = function (data, callback, settings) {
             var base64Data = Base64.encode(JSON.stringify(data));
-            HttpHelper.ajax(URL.management.form.getFromList + base64Data, "GET", data,
+            HttpHelper.ajax(URL.system.form.getFromList + base64Data, "GET", data,
                 function (respose) {
                     callback(respose.data);
                     appendOperationColumn();
@@ -380,7 +380,7 @@ var FormList = function () {
     }
 
     function controlInit() {
-        HttpHelper.ajax(URL.management.widgetInfo.getWidgetInfo, URL.management.widgetInfo.getWidgetInfoType, null,
+        HttpHelper.ajax(URL.system.widgetInfo.getWidgetInfo, URL.system.widgetInfo.getWidgetInfoType, null,
             function (respose) {
                 var result = checkResult(respose);
                 if (result === null) return;
