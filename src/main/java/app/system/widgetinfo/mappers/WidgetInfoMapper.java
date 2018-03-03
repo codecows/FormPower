@@ -1,7 +1,7 @@
 package app.system.widgetinfo.mappers;
 
 
-import app.system.widgetinfo.entities.ControlAttributeEntity;
+import app.system.widgetinfo.entities.FieldAttributeEntity;
 import app.system.widgetinfo.entities.WidgetInfoEntity;
 import org.apache.ibatis.annotations.Param;
 
@@ -14,6 +14,6 @@ public interface WidgetInfoMapper {
 
     List<WidgetInfoEntity> selectByStatus(@Param("gStatus") String gStatus, @Param("cStatus") String cStatus);
 
-    ControlAttributeEntity selectWidgetByControlId(@Param("controlid") String controlId, @Param("status") String status);
+    FieldAttributeEntity selectWidgetByFieldId(@Param("controlid") String controlId, @Param("status") String status);
 
 }

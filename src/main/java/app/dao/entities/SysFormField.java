@@ -2,10 +2,12 @@ package app.dao.entities;
 
 import java.math.BigDecimal;
 
-public class SysFromControls {
-    private String controlId;
+public class SysFormField {
+    private String fieldId;
 
-    private String controlName;
+    private String fieldName;
+
+    private String columnType;
 
     private String img;
 
@@ -15,20 +17,28 @@ public class SysFromControls {
 
     private String groupId;
 
-    public String getControlId() {
-        return controlId;
+    public String getFieldId() {
+        return fieldId;
     }
 
-    public void setControlId(String controlId) {
-        this.controlId = controlId == null ? null : controlId.trim();
+    public void setFieldId(String fieldId) {
+        this.fieldId = fieldId == null ? null : fieldId.trim();
     }
 
-    public String getControlName() {
-        return controlName;
+    public String getFieldName() {
+        return fieldName;
     }
 
-    public void setControlName(String controlName) {
-        this.controlName = controlName == null ? null : controlName.trim();
+    public void setFieldName(String fieldName) {
+        this.fieldName = fieldName == null ? null : fieldName.trim();
+    }
+
+    public String getColumnType() {
+        return columnType;
+    }
+
+    public void setColumnType(String columnType) {
+        this.columnType = columnType == null ? null : columnType.trim();
     }
 
     public String getImg() {

@@ -1,10 +1,10 @@
 package app.system.widgetinfo.service.impl;
 
-import app.system.widgetinfo.entities.ControlAttributeEntity;
+import app.system.widgetinfo.entities.FieldAttributeEntity;
 import app.system.widgetinfo.entities.WidgetInfoEntity;
 import app.system.widgetinfo.entities.WidgetsEntity;
 import app.system.widgetinfo.mappers.WidgetInfoMapper;
-import app.system.widgetinfo.model.ControlAttribute;
+import app.system.widgetinfo.model.FieldAttribute;
 import app.system.widgetinfo.model.WidgetInfo;
 import app.system.widgetinfo.model.Widgets;
 import app.system.widgetinfo.service.WidgetInfoSercice;
@@ -53,12 +53,12 @@ public class WidgetInfoServiceImpl implements WidgetInfoSercice {
     }
 
     @Override
-    public ControlAttribute getControlAttributes(String controlId, String status) {
-        ControlAttributeEntity controlAttributeEntity = widgetInfoMapper.selectWidgetByControlId(controlId, status);
-        ControlAttribute controlAttribute = new ControlAttribute();
-        BeanUtils.copyProperties(controlAttributeEntity, controlAttribute);
+    public FieldAttribute getControlAttributes(String controlId, String status) {
+        FieldAttributeEntity fieldAttributeEntity = widgetInfoMapper.selectWidgetByFieldId(controlId, status);
+        FieldAttribute fieldAttribute = new FieldAttribute();
+        BeanUtils.copyProperties(fieldAttributeEntity, fieldAttribute);
 
-        return controlAttribute;
+        return fieldAttribute;
     }
 
 

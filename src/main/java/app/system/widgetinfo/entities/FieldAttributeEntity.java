@@ -1,6 +1,4 @@
-package app.system.widgetinfo.model;
-
-import io.swagger.annotations.ApiModel;
+package app.system.widgetinfo.entities;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -8,11 +6,10 @@ import java.util.Date;
 /**
  * Created by Fan on 2018/3/2.
  */
-@ApiModel("控件属性模型")
-public class ControlAttribute {
+public class FieldAttributeEntity {
 
     private String id;
-    private String controlId;
+    private String fieldId;
     private String attributeName;
     private String attributeType;
     private String defaultValue;
@@ -28,12 +25,12 @@ public class ControlAttribute {
         this.id = id;
     }
 
-    public String getControlId() {
-        return controlId;
+    public String getFieldId() {
+        return fieldId;
     }
 
-    public void setControlId(String controlId) {
-        this.controlId = controlId;
+    public void setFieldId(String fieldId) {
+        this.fieldId = fieldId;
     }
 
     public String getAttributeName() {

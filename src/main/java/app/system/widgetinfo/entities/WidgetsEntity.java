@@ -11,9 +11,11 @@ import java.util.List;
 public class WidgetsEntity {
 
 
-    private String controlId;
+    private String fieldId;
 
-    private String controlName;
+    private String fieldName;
+
+    private String columnType;
 
     private String img;
 
@@ -23,22 +25,30 @@ public class WidgetsEntity {
 
     private String groupId;
 
-    private List<ControlAttributeEntity> controlAttributeList;
+    private List<FieldAttributeEntity> controlAttributeList;
 
-    public String getControlId() {
-        return controlId;
+    public String getFieldId() {
+        return fieldId;
     }
 
-    public void setControlId(String controlId) {
-        this.controlId = controlId;
+    public void setFieldId(String fieldId) {
+        this.fieldId = fieldId;
     }
 
-    public String getControlName() {
-        return controlName;
+    public String getFieldName() {
+        return fieldName;
     }
 
-    public void setControlName(String controlName) {
-        this.controlName = controlName;
+    public void setFieldName(String fieldName) {
+        this.fieldName = fieldName;
+    }
+
+    public String getColumnType() {
+        return columnType;
+    }
+
+    public void setColumnType(String columnType) {
+        this.columnType = columnType;
     }
 
     public String getImg() {
@@ -73,11 +83,11 @@ public class WidgetsEntity {
         this.groupId = groupId;
     }
 
-    public List<ControlAttributeEntity> getControlAttributeList() {
+    public List<FieldAttributeEntity> getControlAttributeList() {
         return controlAttributeList;
     }
 
-    public void setControlAttributeList(List<ControlAttributeEntity> controlAttributeList) {
+    public void setControlAttributeList(List<FieldAttributeEntity> controlAttributeList) {
         this.controlAttributeList = controlAttributeList;
     }
 }

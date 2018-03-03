@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="app.dao.mappers.SysFromControlsMapper">
-    <resultMap id="BaseResultMap" type="app.dao.entities.SysFromControls">
-        <id column="control_id" jdbcType="VARCHAR" property="fieldId"/>
-        <result column="control_name" jdbcType="VARCHAR" property="fieldName"/>
+<mapper namespace="app.dao.mappers.SysFormFieldMapper">
+    <resultMap id="BaseResultMap" type="app.dao.entities.SysFormField">
+        <id column="field_id" jdbcType="VARCHAR" property="fieldId"/>
+        <result column="field_name" jdbcType="VARCHAR" property="fieldName"/>
+        <result column="column_type" jdbcType="VARCHAR" property="columnType"/>
         <result column="img" jdbcType="VARCHAR" property="img"/>
         <result column="status" jdbcType="VARCHAR" property="status"/>
         <result column="order_num" jdbcType="NUMERIC" property="orderNum"/>
@@ -70,15 +71,15 @@
         </where>
     </sql>
     <sql id="Base_Column_List">
-        control_id, control_name, img, status, order_num, group_id
+        field_id, field_name, column_type, img, status, order_num, group_id
     </sql>
-    <select id="selectByExample" parameterType="app.dao.entities.SysFromControlsExample" resultMap="BaseResultMap">
+    <select id="selectByExample" parameterType="app.dao.entities.SysFormFieldExample" resultMap="BaseResultMap">
         select
         <if test="distinct">
             distinct
         </if>
         <include refid="Base_Column_List"/>
-        from sys_from_controls
+        from sys_form_field
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
@@ -89,35 +90,38 @@
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from sys_from_controls
-        where control_id = #{fieldId,jdbcType=VARCHAR}
+        from sys_form_field
+        where field_id = #{fieldId,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-        DELETE FROM sys_from_controls
-        WHERE control_id = #{fieldId,jdbcType=VARCHAR}
+        delete from sys_form_field
+        where field_id = #{fieldId,jdbcType=VARCHAR}
     </delete>
-    <delete id="deleteByExample" parameterType="app.dao.entities.SysFromControlsExample">
-        delete from sys_from_controls
+    <delete id="deleteByExample" parameterType="app.dao.entities.SysFormFieldExample">
+        delete from sys_form_field
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
     </delete>
-    <insert id="insert" parameterType="app.dao.entities.SysFromControls">
-        INSERT INTO sys_from_controls (control_id, control_name, img,
-                                       status, order_num, group_id
-        )
-        VALUES (#{fieldId,jdbcType=VARCHAR}, #{fieldName,jdbcType=VARCHAR}, #{img,jdbcType=VARCHAR},
-                #{status,jdbcType=VARCHAR}, #{orderNum,jdbcType=NUMERIC}, #{groupId,jdbcType=VARCHAR}
-        )
+    <insert id="insert" parameterType="app.dao.entities.SysFormField">
+        insert into sys_form_field (field_id, field_name, column_type,
+        img, status, order_num,
+        group_id)
+        values (#{fieldId,jdbcType=VARCHAR}, #{fieldName,jdbcType=VARCHAR}, #{columnType,jdbcType=VARCHAR},
+        #{img,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{orderNum,jdbcType=NUMERIC},
+        #{groupId,jdbcType=VARCHAR})
     </insert>
-    <insert id="insertSelective" parameterType="app.dao.entities.SysFromControls">
-        insert into sys_from_controls
+    <insert id="insertSelective" parameterType="app.dao.entities.SysFormField">
+        insert into sys_form_field
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="fieldId != null">
-                control_id,
+                field_id,
             </if>
             <if test="fieldName != null">
-                control_name,
+                field_name,
+            </if>
+            <if test="columnType != null">
+                column_type,
             </if>
             <if test="img != null">
                 img,
@@ -139,6 +143,9 @@
             <if test="fieldName != null">
                 #{fieldName,jdbcType=VARCHAR},
             </if>
+            <if test="columnType != null">
+                #{columnType,jdbcType=VARCHAR},
+            </if>
             <if test="img != null">
                 #{img,jdbcType=VARCHAR},
             </if>
@@ -153,20 +160,23 @@
             </if>
         </trim>
     </insert>
-    <select id="countByExample" parameterType="app.dao.entities.SysFromControlsExample" resultType="java.lang.Long">
-        select count(*) from sys_from_controls
+    <select id="countByExample" parameterType="app.dao.entities.SysFormFieldExample" resultType="java.lang.Long">
+        select count(*) from sys_form_field
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
     </select>
     <update id="updateByExampleSelective" parameterType="map">
-        update sys_from_controls
+        update sys_form_field
         <set>
             <if test="record.fieldId != null">
-                control_id = #{record.fieldId,jdbcType=VARCHAR},
+                field_id = #{record.fieldId,jdbcType=VARCHAR},
             </if>
             <if test="record.fieldName != null">
-                control_name = #{record.fieldName,jdbcType=VARCHAR},
+                field_name = #{record.fieldName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.columnType != null">
+                column_type = #{record.columnType,jdbcType=VARCHAR},
             </if>
             <if test="record.img != null">
                 img = #{record.img,jdbcType=VARCHAR},
@@ -186,9 +196,10 @@
         </if>
     </update>
     <update id="updateByExample" parameterType="map">
-        update sys_from_controls
-        set control_id = #{record.fieldId,jdbcType=VARCHAR},
-        control_name = #{record.fieldName,jdbcType=VARCHAR},
+        update sys_form_field
+        set field_id = #{record.fieldId,jdbcType=VARCHAR},
+        field_name = #{record.fieldName,jdbcType=VARCHAR},
+        column_type = #{record.columnType,jdbcType=VARCHAR},
         img = #{record.img,jdbcType=VARCHAR},
         status = #{record.status,jdbcType=VARCHAR},
         order_num = #{record.orderNum,jdbcType=NUMERIC},
@@ -197,11 +208,14 @@
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
     </update>
-    <update id="updateByPrimaryKeySelective" parameterType="app.dao.entities.SysFromControls">
-        update sys_from_controls
+    <update id="updateByPrimaryKeySelective" parameterType="app.dao.entities.SysFormField">
+        update sys_form_field
         <set>
             <if test="fieldName != null">
-                control_name = #{fieldName,jdbcType=VARCHAR},
+                field_name = #{fieldName,jdbcType=VARCHAR},
+            </if>
+            <if test="columnType != null">
+                column_type = #{columnType,jdbcType=VARCHAR},
             </if>
             <if test="img != null">
                 img = #{img,jdbcType=VARCHAR},
@@ -216,15 +230,16 @@
                 group_id = #{groupId,jdbcType=VARCHAR},
             </if>
         </set>
-        where control_id = #{fieldId,jdbcType=VARCHAR}
+        where field_id = #{fieldId,jdbcType=VARCHAR}
     </update>
-    <update id="updateByPrimaryKey" parameterType="app.dao.entities.SysFromControls">
-        UPDATE sys_from_controls
-        SET control_name = #{fieldName,jdbcType=VARCHAR},
-            img          = #{img,jdbcType=VARCHAR},
-            status       = #{status,jdbcType=VARCHAR},
-            order_num    = #{orderNum,jdbcType=NUMERIC},
-            group_id     = #{groupId,jdbcType=VARCHAR}
-        WHERE control_id = #{fieldId,jdbcType=VARCHAR}
+    <update id="updateByPrimaryKey" parameterType="app.dao.entities.SysFormField">
+        update sys_form_field
+        set field_name = #{fieldName,jdbcType=VARCHAR},
+        column_type = #{columnType,jdbcType=VARCHAR},
+        img = #{img,jdbcType=VARCHAR},
+        status = #{status,jdbcType=VARCHAR},
+        order_num = #{orderNum,jdbcType=NUMERIC},
+        group_id = #{groupId,jdbcType=VARCHAR}
+        where field_id = #{fieldId,jdbcType=VARCHAR}
     </update>
 </mapper>

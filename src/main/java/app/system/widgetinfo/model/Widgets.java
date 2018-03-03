@@ -13,10 +13,13 @@ import java.util.List;
 public class Widgets {
 
     @ApiModelProperty("控件ID")
-    private String controlId;
+    private String fieldId;
 
     @ApiModelProperty("控件名称")
-    private String controlName;
+    private String fieldName;
+
+    @ApiModelProperty("列类型")
+    private String columnType;
 
     @ApiModelProperty("控件图标")
     private String img;
@@ -31,22 +34,30 @@ public class Widgets {
     private String groupId;
 
     @ApiModelProperty("控件属性列表")
-    private List<ControlAttribute> controlAttributeList;
+    private List<FieldAttribute> fieldAttributeList;
 
-    public String getControlId() {
-        return controlId;
+    public String getFieldId() {
+        return fieldId;
     }
 
-    public void setControlId(String controlId) {
-        this.controlId = controlId;
+    public void setFieldId(String fieldId) {
+        this.fieldId = fieldId;
     }
 
-    public String getControlName() {
-        return controlName;
+    public String getFieldName() {
+        return fieldName;
     }
 
-    public void setControlName(String controlName) {
-        this.controlName = controlName;
+    public void setFieldName(String fieldName) {
+        this.fieldName = fieldName;
+    }
+
+    public String getColumnType() {
+        return columnType;
+    }
+
+    public void setColumnType(String columnType) {
+        this.columnType = columnType;
     }
 
     public String getImg() {
@@ -81,11 +92,11 @@ public class Widgets {
         this.groupId = groupId;
     }
 
-    public List<ControlAttribute> getControlAttributeList() {
-        return controlAttributeList;
+    public List<FieldAttribute> getFieldAttributeList() {
+        return fieldAttributeList;
     }
 
-    public void setControlAttributeList(List<ControlAttribute> controlAttributeList) {
-        this.controlAttributeList = controlAttributeList;
+    public void setFieldAttributeList(List<FieldAttribute> fieldAttributeList) {
+        this.fieldAttributeList = fieldAttributeList;
     }
 }

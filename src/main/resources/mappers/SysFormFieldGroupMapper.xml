@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="app.dao.mappers.SysFormControlGroupsMapper">
-    <resultMap id="BaseResultMap" type="app.dao.entities.SysFormControlGroups">
+<mapper namespace="app.dao.mappers.SysFormFieldGroupMapper">
+    <resultMap id="BaseResultMap" type="app.dao.entities.SysFormFieldGroup">
         <id column="group_id" jdbcType="VARCHAR" property="groupId"/>
         <result column="group_name" jdbcType="VARCHAR" property="groupName"/>
+        <result column="img" jdbcType="VARCHAR" property="img"/>
+        <result column="order_num" jdbcType="NUMERIC" property="orderNum"/>
         <result column="status" jdbcType="VARCHAR" property="status"/>
     </resultMap>
     <sql id="Example_Where_Clause">
@@ -67,15 +69,15 @@
         </where>
     </sql>
     <sql id="Base_Column_List">
-        group_id, group_name, status
+        group_id, group_name, img, order_num, status
     </sql>
-    <select id="selectByExample" parameterType="app.dao.entities.SysFormControlGroupsExample" resultMap="BaseResultMap">
+    <select id="selectByExample" parameterType="app.dao.entities.SysFormFieldGroupExample" resultMap="BaseResultMap">
         select
         <if test="distinct">
             distinct
         </if>
         <include refid="Base_Column_List"/>
-        from sys_form_control_groups
+        from sys_form_field_group
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
@@ -86,33 +88,39 @@
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from sys_form_control_groups
+        from sys_form_field_group
         where group_id = #{groupId,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-        delete from sys_form_control_groups
+        delete from sys_form_field_group
         where group_id = #{groupId,jdbcType=VARCHAR}
     </delete>
-    <delete id="deleteByExample" parameterType="app.dao.entities.SysFormControlGroupsExample">
-        delete from sys_form_control_groups
+    <delete id="deleteByExample" parameterType="app.dao.entities.SysFormFieldGroupExample">
+        delete from sys_form_field_group
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
     </delete>
-    <insert id="insert" parameterType="app.dao.entities.SysFormControlGroups">
-        insert into sys_form_control_groups (group_id, group_name, status
-        )
-        values (#{groupId,jdbcType=VARCHAR}, #{groupName,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}
-        )
+    <insert id="insert" parameterType="app.dao.entities.SysFormFieldGroup">
+        insert into sys_form_field_group (group_id, group_name, img,
+        order_num, status)
+        values (#{groupId,jdbcType=VARCHAR}, #{groupName,jdbcType=VARCHAR}, #{img,jdbcType=VARCHAR},
+        #{orderNum,jdbcType=NUMERIC}, #{status,jdbcType=VARCHAR})
     </insert>
-    <insert id="insertSelective" parameterType="app.dao.entities.SysFormControlGroups">
-        insert into sys_form_control_groups
+    <insert id="insertSelective" parameterType="app.dao.entities.SysFormFieldGroup">
+        insert into sys_form_field_group
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="groupId != null">
                 group_id,
             </if>
             <if test="groupName != null">
                 group_name,
+            </if>
+            <if test="img != null">
+                img,
+            </if>
+            <if test="orderNum != null">
+                order_num,
             </if>
             <if test="status != null">
                 status,
@@ -125,26 +133,37 @@
             <if test="groupName != null">
                 #{groupName,jdbcType=VARCHAR},
             </if>
+            <if test="img != null">
+                #{img,jdbcType=VARCHAR},
+            </if>
+            <if test="orderNum != null">
+                #{orderNum,jdbcType=NUMERIC},
+            </if>
             <if test="status != null">
                 #{status,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
-    <select id="countByExample" parameterType="app.dao.entities.SysFormControlGroupsExample"
-            resultType="java.lang.Long">
-        select count(*) from sys_form_control_groups
+    <select id="countByExample" parameterType="app.dao.entities.SysFormFieldGroupExample" resultType="java.lang.Long">
+        select count(*) from sys_form_field_group
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
     </select>
     <update id="updateByExampleSelective" parameterType="map">
-        update sys_form_control_groups
+        update sys_form_field_group
         <set>
             <if test="record.groupId != null">
                 group_id = #{record.groupId,jdbcType=VARCHAR},
             </if>
             <if test="record.groupName != null">
                 group_name = #{record.groupName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.img != null">
+                img = #{record.img,jdbcType=VARCHAR},
+            </if>
+            <if test="record.orderNum != null">
+                order_num = #{record.orderNum,jdbcType=NUMERIC},
             </if>
             <if test="record.status != null">
                 status = #{record.status,jdbcType=VARCHAR},
@@ -155,19 +174,27 @@
         </if>
     </update>
     <update id="updateByExample" parameterType="map">
-        update sys_form_control_groups
+        update sys_form_field_group
         set group_id = #{record.groupId,jdbcType=VARCHAR},
         group_name = #{record.groupName,jdbcType=VARCHAR},
+        img = #{record.img,jdbcType=VARCHAR},
+        order_num = #{record.orderNum,jdbcType=NUMERIC},
         status = #{record.status,jdbcType=VARCHAR}
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
     </update>
-    <update id="updateByPrimaryKeySelective" parameterType="app.dao.entities.SysFormControlGroups">
-        update sys_form_control_groups
+    <update id="updateByPrimaryKeySelective" parameterType="app.dao.entities.SysFormFieldGroup">
+        update sys_form_field_group
         <set>
             <if test="groupName != null">
                 group_name = #{groupName,jdbcType=VARCHAR},
+            </if>
+            <if test="img != null">
+                img = #{img,jdbcType=VARCHAR},
+            </if>
+            <if test="orderNum != null">
+                order_num = #{orderNum,jdbcType=NUMERIC},
             </if>
             <if test="status != null">
                 status = #{status,jdbcType=VARCHAR},
@@ -175,9 +202,11 @@
         </set>
         where group_id = #{groupId,jdbcType=VARCHAR}
     </update>
-    <update id="updateByPrimaryKey" parameterType="app.dao.entities.SysFormControlGroups">
-        update sys_form_control_groups
+    <update id="updateByPrimaryKey" parameterType="app.dao.entities.SysFormFieldGroup">
+        update sys_form_field_group
         set group_name = #{groupName,jdbcType=VARCHAR},
+        img = #{img,jdbcType=VARCHAR},
+        order_num = #{orderNum,jdbcType=NUMERIC},
         status = #{status,jdbcType=VARCHAR}
         where group_id = #{groupId,jdbcType=VARCHAR}
     </update>

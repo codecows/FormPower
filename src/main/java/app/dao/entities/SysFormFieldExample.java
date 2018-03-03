@@ -4,14 +4,14 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SysFromControlsExample {
+public class SysFormFieldExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public SysFromControlsExample() {
+    public SysFormFieldExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -105,143 +105,213 @@ public class SysFromControlsExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andControlIdIsNull() {
-            addCriterion("control_id is null");
+        public Criteria andFieldIdIsNull() {
+            addCriterion("field_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andControlIdIsNotNull() {
-            addCriterion("control_id is not null");
+        public Criteria andFieldIdIsNotNull() {
+            addCriterion("field_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andControlIdEqualTo(String value) {
-            addCriterion("control_id =", value, "controlId");
+        public Criteria andFieldIdEqualTo(String value) {
+            addCriterion("field_id =", value, "fieldId");
             return (Criteria) this;
         }
 
-        public Criteria andControlIdNotEqualTo(String value) {
-            addCriterion("control_id <>", value, "controlId");
+        public Criteria andFieldIdNotEqualTo(String value) {
+            addCriterion("field_id <>", value, "fieldId");
             return (Criteria) this;
         }
 
-        public Criteria andControlIdGreaterThan(String value) {
-            addCriterion("control_id >", value, "controlId");
+        public Criteria andFieldIdGreaterThan(String value) {
+            addCriterion("field_id >", value, "fieldId");
             return (Criteria) this;
         }
 
-        public Criteria andControlIdGreaterThanOrEqualTo(String value) {
-            addCriterion("control_id >=", value, "controlId");
+        public Criteria andFieldIdGreaterThanOrEqualTo(String value) {
+            addCriterion("field_id >=", value, "fieldId");
             return (Criteria) this;
         }
 
-        public Criteria andControlIdLessThan(String value) {
-            addCriterion("control_id <", value, "controlId");
+        public Criteria andFieldIdLessThan(String value) {
+            addCriterion("field_id <", value, "fieldId");
             return (Criteria) this;
         }
 
-        public Criteria andControlIdLessThanOrEqualTo(String value) {
-            addCriterion("control_id <=", value, "controlId");
+        public Criteria andFieldIdLessThanOrEqualTo(String value) {
+            addCriterion("field_id <=", value, "fieldId");
             return (Criteria) this;
         }
 
-        public Criteria andControlIdLike(String value) {
-            addCriterion("control_id like", value, "controlId");
+        public Criteria andFieldIdLike(String value) {
+            addCriterion("field_id like", value, "fieldId");
             return (Criteria) this;
         }
 
-        public Criteria andControlIdNotLike(String value) {
-            addCriterion("control_id not like", value, "controlId");
+        public Criteria andFieldIdNotLike(String value) {
+            addCriterion("field_id not like", value, "fieldId");
             return (Criteria) this;
         }
 
-        public Criteria andControlIdIn(List<String> values) {
-            addCriterion("control_id in", values, "controlId");
+        public Criteria andFieldIdIn(List<String> values) {
+            addCriterion("field_id in", values, "fieldId");
             return (Criteria) this;
         }
 
-        public Criteria andControlIdNotIn(List<String> values) {
-            addCriterion("control_id not in", values, "controlId");
+        public Criteria andFieldIdNotIn(List<String> values) {
+            addCriterion("field_id not in", values, "fieldId");
             return (Criteria) this;
         }
 
-        public Criteria andControlIdBetween(String value1, String value2) {
-            addCriterion("control_id between", value1, value2, "controlId");
+        public Criteria andFieldIdBetween(String value1, String value2) {
+            addCriterion("field_id between", value1, value2, "fieldId");
             return (Criteria) this;
         }
 
-        public Criteria andControlIdNotBetween(String value1, String value2) {
-            addCriterion("control_id not between", value1, value2, "controlId");
+        public Criteria andFieldIdNotBetween(String value1, String value2) {
+            addCriterion("field_id not between", value1, value2, "fieldId");
             return (Criteria) this;
         }
 
-        public Criteria andControlNameIsNull() {
-            addCriterion("control_name is null");
+        public Criteria andFieldNameIsNull() {
+            addCriterion("field_name is null");
             return (Criteria) this;
         }
 
-        public Criteria andControlNameIsNotNull() {
-            addCriterion("control_name is not null");
+        public Criteria andFieldNameIsNotNull() {
+            addCriterion("field_name is not null");
             return (Criteria) this;
         }
 
-        public Criteria andControlNameEqualTo(String value) {
-            addCriterion("control_name =", value, "controlName");
+        public Criteria andFieldNameEqualTo(String value) {
+            addCriterion("field_name =", value, "fieldName");
             return (Criteria) this;
         }
 
-        public Criteria andControlNameNotEqualTo(String value) {
-            addCriterion("control_name <>", value, "controlName");
+        public Criteria andFieldNameNotEqualTo(String value) {
+            addCriterion("field_name <>", value, "fieldName");
             return (Criteria) this;
         }
 
-        public Criteria andControlNameGreaterThan(String value) {
-            addCriterion("control_name >", value, "controlName");
+        public Criteria andFieldNameGreaterThan(String value) {
+            addCriterion("field_name >", value, "fieldName");
             return (Criteria) this;
         }
 
-        public Criteria andControlNameGreaterThanOrEqualTo(String value) {
-            addCriterion("control_name >=", value, "controlName");
+        public Criteria andFieldNameGreaterThanOrEqualTo(String value) {
+            addCriterion("field_name >=", value, "fieldName");
             return (Criteria) this;
         }
 
-        public Criteria andControlNameLessThan(String value) {
-            addCriterion("control_name <", value, "controlName");
+        public Criteria andFieldNameLessThan(String value) {
+            addCriterion("field_name <", value, "fieldName");
             return (Criteria) this;
         }
 
-        public Criteria andControlNameLessThanOrEqualTo(String value) {
-            addCriterion("control_name <=", value, "controlName");
+        public Criteria andFieldNameLessThanOrEqualTo(String value) {
+            addCriterion("field_name <=", value, "fieldName");
             return (Criteria) this;
         }
 
-        public Criteria andControlNameLike(String value) {
-            addCriterion("control_name like", value, "controlName");
+        public Criteria andFieldNameLike(String value) {
+            addCriterion("field_name like", value, "fieldName");
             return (Criteria) this;
         }
 
-        public Criteria andControlNameNotLike(String value) {
-            addCriterion("control_name not like", value, "controlName");
+        public Criteria andFieldNameNotLike(String value) {
+            addCriterion("field_name not like", value, "fieldName");
             return (Criteria) this;
         }
 
-        public Criteria andControlNameIn(List<String> values) {
-            addCriterion("control_name in", values, "controlName");
+        public Criteria andFieldNameIn(List<String> values) {
+            addCriterion("field_name in", values, "fieldName");
             return (Criteria) this;
         }
 
-        public Criteria andControlNameNotIn(List<String> values) {
-            addCriterion("control_name not in", values, "controlName");
+        public Criteria andFieldNameNotIn(List<String> values) {
+            addCriterion("field_name not in", values, "fieldName");
             return (Criteria) this;
         }
 
-        public Criteria andControlNameBetween(String value1, String value2) {
-            addCriterion("control_name between", value1, value2, "controlName");
+        public Criteria andFieldNameBetween(String value1, String value2) {
+            addCriterion("field_name between", value1, value2, "fieldName");
             return (Criteria) this;
         }
 
-        public Criteria andControlNameNotBetween(String value1, String value2) {
-            addCriterion("control_name not between", value1, value2, "controlName");
+        public Criteria andFieldNameNotBetween(String value1, String value2) {
+            addCriterion("field_name not between", value1, value2, "fieldName");
+            return (Criteria) this;
+        }
+
+        public Criteria andColumnTypeIsNull() {
+            addCriterion("column_type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andColumnTypeIsNotNull() {
+            addCriterion("column_type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andColumnTypeEqualTo(String value) {
+            addCriterion("column_type =", value, "columnType");
+            return (Criteria) this;
+        }
+
+        public Criteria andColumnTypeNotEqualTo(String value) {
+            addCriterion("column_type <>", value, "columnType");
+            return (Criteria) this;
+        }
+
+        public Criteria andColumnTypeGreaterThan(String value) {
+            addCriterion("column_type >", value, "columnType");
+            return (Criteria) this;
+        }
+
+        public Criteria andColumnTypeGreaterThanOrEqualTo(String value) {
+            addCriterion("column_type >=", value, "columnType");
+            return (Criteria) this;
+        }
+
+        public Criteria andColumnTypeLessThan(String value) {
+            addCriterion("column_type <", value, "columnType");
+            return (Criteria) this;
+        }
+
+        public Criteria andColumnTypeLessThanOrEqualTo(String value) {
+            addCriterion("column_type <=", value, "columnType");
+            return (Criteria) this;
+        }
+
+        public Criteria andColumnTypeLike(String value) {
+            addCriterion("column_type like", value, "columnType");
+            return (Criteria) this;
+        }
+
+        public Criteria andColumnTypeNotLike(String value) {
+            addCriterion("column_type not like", value, "columnType");
+            return (Criteria) this;
+        }
+
+        public Criteria andColumnTypeIn(List<String> values) {
+            addCriterion("column_type in", values, "columnType");
+            return (Criteria) this;
+        }
+
+        public Criteria andColumnTypeNotIn(List<String> values) {
+            addCriterion("column_type not in", values, "columnType");
+            return (Criteria) this;
+        }
+
+        public Criteria andColumnTypeBetween(String value1, String value2) {
+            addCriterion("column_type between", value1, value2, "columnType");
+            return (Criteria) this;
+        }
+
+        public Criteria andColumnTypeNotBetween(String value1, String value2) {
+            addCriterion("column_type not between", value1, value2, "columnType");
             return (Criteria) this;
         }
 
