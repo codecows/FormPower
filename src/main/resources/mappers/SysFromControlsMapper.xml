@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="app.dao.mappers.SysFromControlsMapper">
     <resultMap id="BaseResultMap" type="app.dao.entities.SysFromControls">
-        <id column="control_id" jdbcType="VARCHAR" property="controlId"/>
-        <result column="control_name" jdbcType="VARCHAR" property="controlName"/>
+        <id column="control_id" jdbcType="VARCHAR" property="fieldId"/>
+        <result column="control_name" jdbcType="VARCHAR" property="fieldName"/>
         <result column="img" jdbcType="VARCHAR" property="img"/>
         <result column="status" jdbcType="VARCHAR" property="status"/>
         <result column="order_num" jdbcType="NUMERIC" property="orderNum"/>
@@ -90,11 +90,11 @@
         select
         <include refid="Base_Column_List"/>
         from sys_from_controls
-        where control_id = #{controlId,jdbcType=VARCHAR}
+        where control_id = #{fieldId,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
         DELETE FROM sys_from_controls
-        WHERE control_id = #{controlId,jdbcType=VARCHAR}
+        WHERE control_id = #{fieldId,jdbcType=VARCHAR}
     </delete>
     <delete id="deleteByExample" parameterType="app.dao.entities.SysFromControlsExample">
         delete from sys_from_controls
@@ -106,17 +106,17 @@
         INSERT INTO sys_from_controls (control_id, control_name, img,
                                        status, order_num, group_id
         )
-        VALUES (#{controlId,jdbcType=VARCHAR}, #{controlName,jdbcType=VARCHAR}, #{img,jdbcType=VARCHAR},
+        VALUES (#{fieldId,jdbcType=VARCHAR}, #{fieldName,jdbcType=VARCHAR}, #{img,jdbcType=VARCHAR},
                 #{status,jdbcType=VARCHAR}, #{orderNum,jdbcType=NUMERIC}, #{groupId,jdbcType=VARCHAR}
         )
     </insert>
     <insert id="insertSelective" parameterType="app.dao.entities.SysFromControls">
         insert into sys_from_controls
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="controlId != null">
+            <if test="fieldId != null">
                 control_id,
             </if>
-            <if test="controlName != null">
+            <if test="fieldName != null">
                 control_name,
             </if>
             <if test="img != null">
@@ -133,11 +133,11 @@
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="controlId != null">
-                #{controlId,jdbcType=VARCHAR},
+            <if test="fieldId != null">
+                #{fieldId,jdbcType=VARCHAR},
             </if>
-            <if test="controlName != null">
-                #{controlName,jdbcType=VARCHAR},
+            <if test="fieldName != null">
+                #{fieldName,jdbcType=VARCHAR},
             </if>
             <if test="img != null">
                 #{img,jdbcType=VARCHAR},
@@ -162,11 +162,11 @@
     <update id="updateByExampleSelective" parameterType="map">
         update sys_from_controls
         <set>
-            <if test="record.controlId != null">
-                control_id = #{record.controlId,jdbcType=VARCHAR},
+            <if test="record.fieldId != null">
+                control_id = #{record.fieldId,jdbcType=VARCHAR},
             </if>
-            <if test="record.controlName != null">
-                control_name = #{record.controlName,jdbcType=VARCHAR},
+            <if test="record.fieldName != null">
+                control_name = #{record.fieldName,jdbcType=VARCHAR},
             </if>
             <if test="record.img != null">
                 img = #{record.img,jdbcType=VARCHAR},
@@ -187,8 +187,8 @@
     </update>
     <update id="updateByExample" parameterType="map">
         update sys_from_controls
-        set control_id = #{record.controlId,jdbcType=VARCHAR},
-        control_name = #{record.controlName,jdbcType=VARCHAR},
+        set control_id = #{record.fieldId,jdbcType=VARCHAR},
+        control_name = #{record.fieldName,jdbcType=VARCHAR},
         img = #{record.img,jdbcType=VARCHAR},
         status = #{record.status,jdbcType=VARCHAR},
         order_num = #{record.orderNum,jdbcType=NUMERIC},
@@ -200,8 +200,8 @@
     <update id="updateByPrimaryKeySelective" parameterType="app.dao.entities.SysFromControls">
         update sys_from_controls
         <set>
-            <if test="controlName != null">
-                control_name = #{controlName,jdbcType=VARCHAR},
+            <if test="fieldName != null">
+                control_name = #{fieldName,jdbcType=VARCHAR},
             </if>
             <if test="img != null">
                 img = #{img,jdbcType=VARCHAR},
@@ -216,15 +216,15 @@
                 group_id = #{groupId,jdbcType=VARCHAR},
             </if>
         </set>
-        where control_id = #{controlId,jdbcType=VARCHAR}
+        where control_id = #{fieldId,jdbcType=VARCHAR}
     </update>
     <update id="updateByPrimaryKey" parameterType="app.dao.entities.SysFromControls">
         UPDATE sys_from_controls
-        SET control_name = #{controlName,jdbcType=VARCHAR},
+        SET control_name = #{fieldName,jdbcType=VARCHAR},
             img          = #{img,jdbcType=VARCHAR},
             status       = #{status,jdbcType=VARCHAR},
             order_num    = #{orderNum,jdbcType=NUMERIC},
             group_id     = #{groupId,jdbcType=VARCHAR}
-        WHERE control_id = #{controlId,jdbcType=VARCHAR}
+        WHERE control_id = #{fieldId,jdbcType=VARCHAR}
     </update>
 </mapper>

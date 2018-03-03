@@ -36,9 +36,9 @@ DROP TABLE IF EXISTS sys_company_dept_rel;
 
 DROP TABLE IF EXISTS sys_code;
 
-DROP TABLE IF EXISTS sys_form_control_groups CASCADE;
+DROP TABLE IF EXISTS sys_form_field_group CASCADE;
 
-DROP TABLE IF EXISTS sys_from_controls CASCADE;
+DROP TABLE IF EXISTS sys_from_field CASCADE;
 
 DROP TABLE IF EXISTS sys_form_def;
 
@@ -46,7 +46,7 @@ DROP TABLE IF EXISTS sys_base_tab_tmpl;
 
 DROP TABLE IF EXISTS sys_exec_func;
 
-DROP TABLE IF EXISTS sys_form_control_attribute;
+DROP TABLE IF EXISTS sys_form_field_attribute;
 
 /*==============================================================*/
 /* Table: sys_auth_menu_rel                                     */
@@ -729,9 +729,9 @@ COMMENT ON COLUMN sys_code.order_num IS
 
 
 /*==============================================================*/
-/* Table: sys_form_control_groups                                              */
+/* Table: sys_form_field_group                                              */
 /*==============================================================*/
-CREATE TABLE "public"."sys_form_control_groups" (
+CREATE TABLE "public"."sys_form_field_group" (
   "group_id"   VARCHAR(30) COLLATE "pg_catalog"."default" NOT NULL,
   "group_name" VARCHAR(50) COLLATE "pg_catalog"."default",
   "img"        VARCHAR(50) COLLATE "pg_catalog"."default",
@@ -740,54 +740,56 @@ CREATE TABLE "public"."sys_form_control_groups" (
 );
 
 
-COMMENT ON COLUMN "public"."sys_form_control_groups"."group_id" IS '组ID';
+COMMENT ON COLUMN "public"."sys_form_field_group"."group_id" IS '组ID';
 
-COMMENT ON COLUMN "public"."sys_form_control_groups"."group_name" IS '组名称';
+COMMENT ON COLUMN "public"."sys_form_field_group"."group_name" IS '组名称';
 
-COMMENT ON COLUMN "public"."sys_form_control_groups"."img" IS '图标';
+COMMENT ON COLUMN "public"."sys_form_field_group"."img" IS '图标';
 
-COMMENT ON COLUMN "public"."sys_form_control_groups"."order_num" IS '排序号';
+COMMENT ON COLUMN "public"."sys_form_field_group"."order_num" IS '排序号';
 
-COMMENT ON COLUMN "public"."sys_form_control_groups"."status" IS '状体';
+COMMENT ON COLUMN "public"."sys_form_field_group"."status" IS '状体';
 
-COMMENT ON TABLE "public"."sys_form_control_groups" IS '控件组';
+COMMENT ON TABLE "public"."sys_form_field_group" IS '控件组';
 -- ----------------------------
--- Primary Key structure for table sys_form_control_groups
+-- Primary Key structure for table sys_form_field_group
 -- ----------------------------
-ALTER TABLE "public"."sys_form_control_groups"
-  ADD CONSTRAINT "sys_form_control_groups_pkey" PRIMARY KEY ("group_id");
+ALTER TABLE "public"."sys_form_field_group"
+  ADD CONSTRAINT "sys_form_field_group_pkey" PRIMARY KEY ("group_id");
 
 
 /*==============================================================*/
-/* Table: sys_from_controls                                              */
+/* Table: sys_form_field                                              */
 /*==============================================================*/
-CREATE TABLE "public"."sys_from_controls" (
-  "control_id"   VARCHAR(20) COLLATE "pg_catalog"."default" NOT NULL,
-  "control_name" VARCHAR(50) COLLATE "pg_catalog"."default",
+CREATE TABLE "public"."sys_form_field" (
+  "field_id"     VARCHAR(20) COLLATE "pg_catalog"."default" NOT NULL,
+  "field_name"   VARCHAR(50) COLLATE "pg_catalog"."default",
+  "column_type"  VARCHAR(50) COLLATE "pg_catalog"."default",
   "img"          VARCHAR(200) COLLATE "pg_catalog"."default",
   "status"       VARCHAR(1) COLLATE "pg_catalog"."default",
   "order_num"    NUMERIC,
   "group_id"     VARCHAR COLLATE "pg_catalog"."default"
 );
-COMMENT ON COLUMN "public"."sys_from_controls"."control_id" IS '控件ID';
-COMMENT ON COLUMN "public"."sys_from_controls"."control_name" IS '空间名称';
-COMMENT ON COLUMN "public"."sys_from_controls"."img" IS '图标';
-COMMENT ON COLUMN "public"."sys_from_controls"."status" IS '状态';
-COMMENT ON COLUMN "public"."sys_from_controls"."order_num" IS '排序号';
-COMMENT ON COLUMN "public"."sys_from_controls"."group_id" IS '所属组ID';
-COMMENT ON TABLE "public"."sys_from_controls" IS '控件表';
+COMMENT ON COLUMN "public"."sys_form_field"."field_id" IS '控件ID';
+COMMENT ON COLUMN "public"."sys_form_field"."field_name" IS '控件名称';
+COMMENT ON COLUMN "public"."sys_form_field"."column_type" IS '表字段类型';
+COMMENT ON COLUMN "public"."sys_form_field"."img" IS '图标';
+COMMENT ON COLUMN "public"."sys_form_field"."status" IS '状态';
+COMMENT ON COLUMN "public"."sys_form_field"."order_num" IS '排序号';
+COMMENT ON COLUMN "public"."sys_form_field"."group_id" IS '所属组ID';
+COMMENT ON TABLE "public"."sys_form_field" IS '控件表';
 
 -- ----------------------------
--- Primary Key structure for table sys_from_controls
+-- Primary Key structure for table sys_form_field
 -- ----------------------------
-ALTER TABLE "public"."sys_from_controls"
-  ADD CONSTRAINT "sys_from_controls_pkey" PRIMARY KEY ("control_id");
+ALTER TABLE "public"."sys_form_field"
+  ADD CONSTRAINT "sys_form_field_pkey" PRIMARY KEY ("field_id");
 
 -- ----------------------------
--- Foreign Keys structure for table sys_from_controls
+-- Foreign Keys structure for table sys_form_field
 -- ----------------------------
-ALTER TABLE "public"."sys_from_controls"
-  ADD CONSTRAINT "sys_from_controls_group_id_fkey" FOREIGN KEY ("group_id") REFERENCES "sys_form_control_groups" ("group_id") ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE "public"."sys_form_field"
+  ADD CONSTRAINT "sys_form_field_group_id_fkey" FOREIGN KEY ("group_id") REFERENCES "sys_form_field_group" ("group_id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 /*==============================================================*/
 /* Table: sys_form_def                                              */
@@ -905,33 +907,33 @@ COMMENT ON COLUMN "public"."sys_exec_func"."status" IS '状态';
 COMMENT ON TABLE "public"."sys_exec_func" IS '表单关联函数表';
 
 
-CREATE TABLE "public"."sys_form_control_attribute" (
+CREATE TABLE "public"."sys_form_field_attribute" (
   "id"             VARCHAR(36) COLLATE "pg_catalog"."default" NOT NULL,
-  "control_id"     VARCHAR(36) COLLATE "pg_catalog"."default",
+  "field_id"       VARCHAR(36) COLLATE "pg_catalog"."default",
   "attribute_name" VARCHAR(255) COLLATE "pg_catalog"."default",
   "attribute_type" VARCHAR(255) COLLATE "pg_catalog"."default",
   "default_value"  VARCHAR(255) COLLATE "pg_catalog"."default",
   "order_num"      NUMERIC,
   "status"         VARCHAR(2) COLLATE "pg_catalog"."default",
   "create_date"    DATE,
-  CONSTRAINT "sys_form_control_attribute_pkey" PRIMARY KEY ("id")
+  CONSTRAINT "sys_form_field_attribute_pkey" PRIMARY KEY ("id")
 );
 
 
-COMMENT ON COLUMN "public"."sys_form_control_attribute"."id" IS 'ID';
+COMMENT ON COLUMN "public"."sys_form_field_attribute"."id" IS 'ID';
 
-COMMENT ON COLUMN "public"."sys_form_control_attribute"."control_id" IS '控件ID';
+COMMENT ON COLUMN "public"."sys_form_field_attribute"."field_id" IS '控件ID';
 
-COMMENT ON COLUMN "public"."sys_form_control_attribute"."attribute_name" IS '属性名称';
+COMMENT ON COLUMN "public"."sys_form_field_attribute"."attribute_name" IS '属性名称';
 
-COMMENT ON COLUMN "public"."sys_form_control_attribute"."attribute_type" IS '属性类型';
+COMMENT ON COLUMN "public"."sys_form_field_attribute"."attribute_type" IS '属性类型';
 
-COMMENT ON COLUMN "public"."sys_form_control_attribute"."default_value" IS '默认值';
+COMMENT ON COLUMN "public"."sys_form_field_attribute"."default_value" IS '默认值';
 
-COMMENT ON COLUMN "public"."sys_form_control_attribute"."order_num" IS '排序号';
+COMMENT ON COLUMN "public"."sys_form_field_attribute"."order_num" IS '排序号';
 
-COMMENT ON COLUMN "public"."sys_form_control_attribute"."status" IS '状态';
+COMMENT ON COLUMN "public"."sys_form_field_attribute"."status" IS '状态';
 
-COMMENT ON COLUMN "public"."sys_form_control_attribute"."create_date" IS '创建时间';
+COMMENT ON COLUMN "public"."sys_form_field_attribute"."create_date" IS '创建时间';
 
-COMMENT ON TABLE "public"."sys_form_control_attribute" IS '控件属性表';
+COMMENT ON TABLE "public"."sys_form_field_attribute" IS '控件属性表';

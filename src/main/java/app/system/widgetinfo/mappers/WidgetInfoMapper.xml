@@ -8,8 +8,9 @@
         <result column="g_order_num" jdbcType="NUMERIC" property="orderNum"/>
         <result column="g_status" jdbcType="VARCHAR" property="status"/>
         <collection property="widgets" ofType="app.system.widgetinfo.entities.WidgetsEntity">
-            <id column="control_id" jdbcType="VARCHAR" property="controlId"/>
-            <result column="control_name" jdbcType="VARCHAR" property="controlName"/>
+            <id column="field_id" jdbcType="VARCHAR" property="fieldId"/>
+            <result column="field_name" jdbcType="VARCHAR" property="fieldName"/>
+            <result column="column_type" jdbcType="VARCHAR" property="columnType"/>
             <result column="img" jdbcType="VARCHAR" property="img"/>
             <result column="c_status" jdbcType="VARCHAR" property="status"/>
             <result column="order_num" jdbcType="NUMERIC" property="orderNum"/>
@@ -17,9 +18,9 @@
         </collection>
     </resultMap>
 
-    <resultMap id="ControlAttribute" type="app.system.widgetinfo.entities.ControlAttributeEntity">
+    <resultMap id="FieldAttribute" type="app.system.widgetinfo.entities.FieldAttributeEntity">
         <id column="id" jdbcType="VARCHAR" property="id"/>
-        <result column="control_id" jdbcType="VARCHAR" property="controlId"/>
+        <result column="field_id" jdbcType="VARCHAR" property="fieldId"/>
         <result column="attribute_name" jdbcType="VARCHAR" property="attributeName"/>
         <result column="attribute_type" jdbcType="VARCHAR" property="attributeType"/>
         <result column="default_value" jdbcType="VARCHAR" property="defaultValue"/>
@@ -34,8 +35,9 @@
         G.img g_img,
         G.order_num g_order_num,
         G.status g_status,
-        C.control_id,
-        C.control_name,
+        C.field_id,
+        C.field_name,
+        C.column_type,
         C.img,
         C.order_num,
         C.status c_status,
@@ -46,8 +48,8 @@
         SELECT
         <include refid="Base_Column_List"/>
         FROM
-        sys_form_control_groups
-        G INNER JOIN sys_from_controls C ON G.group_id = C.group_id
+        sys_form_field_group
+        G INNER JOIN sys_form_field C ON G.group_id = C.group_id
         <trim prefix="where" prefixOverrides="and|or">
             <if test="gStatus != null">
                 and g.status = #{gStatus,jdbcType=VARCHAR}
@@ -58,12 +60,12 @@
         </trim>
     </select>
 
-    <select id="selectWidgetByControlId" parameterType="java.lang.String" resultMap="">
+    <select id="selectWidgetByFieldId" parameterType="java.lang.String" resultMap="FieldAttribute">
         SELECT *
         FROM
-            sys_form_control_attribute t
+        sys_form_field_attribute t
         WHERE
-            t.control_id = #{controlid,jdbcType=VARCHAR}
+        t.field_id = #{controlid,jdbcType=VARCHAR}
             AND t.status = #{status,jdbcType=VARCHAR};
     </select>
 
