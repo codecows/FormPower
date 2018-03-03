@@ -1,21 +1,31 @@
 package app.system.auto.model;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.util.Date;
 
 /**
  * Created by real on 2018/2/28.
  */
+@ApiModel("函数信息表模型")
 public class ExecFunc extends BaseFunctionModel {
+    @ApiModelProperty("id")
     private String id;
 
+    @ApiModelProperty("关联对象id")
     private String objectId;
 
+    @ApiModelProperty("关联对象类型")
     private String objectType;
 
+    @ApiModelProperty("触发条件")
     private String onAction;
 
+    @ApiModelProperty("状态")
     private String status;
 
+    @ApiModelProperty("创建时间")
     private Date createDate;
 
     public String getId() {

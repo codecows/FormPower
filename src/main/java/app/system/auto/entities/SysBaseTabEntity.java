@@ -5,6 +5,9 @@ package app.system.auto.entities;
  */
 public class SysBaseTabEntity {
 
+    /*
+    * 列实体，建表时需要的一些属性，比如列名、类型、长度、是否为空等。
+    * */
     private String tabColumn;
     private String tabColType;
     private int tabColLength;

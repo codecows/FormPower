@@ -3,24 +3,37 @@ package app.system.auto.entities;
 import java.util.Date;
 
 public class SysExecFunc {
+
+    /*
+    * 数据表sys_exec_func实体，用来存储函数信息
+    * */
     private String id;
 
+    /*关联的对象id，比如，formid，columnid*/
     private String objectId;
 
+    /*对象类型，比如，表单，列等等*/
     private String objectType;
 
+    /*函数名称*/
     private String funcName;
 
+    /*参数列表：'para1 type,para2 type' 类型的字符串*/
     private String funcPara;
 
+    /*返回值类型*/
     private String funcReturnPara;
 
+    /*函数体*/
     private String funcBody;
 
+    /*触发条件，比如，新增数据时等等*/
     private String onAction;
 
+    /*记录状态，有效，失效等*/
     private String status;
 
+    /*创建时间*/
     private Date createDate;
 
     public String getId() {
