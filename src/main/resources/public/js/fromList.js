@@ -408,16 +408,19 @@ var FormList = function () {
                     elHtml = "分组标题";
                     break;
                 case "2004":
+                    var cc = "<a href='javascript:;' style='margin: 0px;padding: 0px' class='pull-right'>" +
+                        "                    <i class='fa fa-copy'></i> &nbsp;" +
+                        "       </a>";
                     elHtml = "<table width='100%' class='table table-bordered'>" +
-                        "<thead><th>列标题</th><th>列标题</th><th>列标题</th></thead>" +
+                        "<thead><th>列标题" + cc + "</th><th>列标题</th><th>列标题</th></thead>" +
                         "<tbody>" +
                         "<tr>" +
                         "<td>" +
-                            "<select class='form-control input-sm'>" +
-                            "<option>文本</option>" +
-                            "<option>数字</option>" +
-                            "<option>日期</option>" +
-                            "</select></div>" +
+                        "<select class='form-control input-sm'>" +
+                        "<option>文本</option>" +
+                        "<option>数字</option>" +
+                        "<option>日期</option>" +
+                        "</select></div>" +
                         "</td>" +
                         "<td>" +
                         "<select class='form-control input-sm'>" +
