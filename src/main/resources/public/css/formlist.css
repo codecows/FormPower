@@ -60,7 +60,7 @@ a:active {
 
 .control-shadow {
     border: solid 1px white;
-    /*min-height: 70px;*/
+    min-height: 50px;
     background: #e0d1e6;
     /*margin: 2px 0px;*/
 }
@@ -78,4 +78,7 @@ a:active {
     margin: 0px;
     vertical-align: middle;
     padding:3px;
+}
+.table{
+    margin: 10px;
 }

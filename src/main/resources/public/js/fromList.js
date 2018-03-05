@@ -365,15 +365,99 @@ var FormList = function () {
             switch (cType) {
                 case "1001":
                     elHtml = formGroupBuilder("<label' class='control-label'>标签</label>" +
-                        "<div><input type='text' class='form-control input-sm' placeholder='提示'></div>");
+                        "<div><input type='text' class='form-control input-sm' placeholder='文本'></div>");
                     break;
                 case "1002":
                     elHtml = formGroupBuilder("<label class='control-label'>多行文本</label>" +
-                        "<div><textarea style='resize: none;' rows='3' class='form-control' placeholder='提示'></textarea>");
+                        "<div><textarea style='resize: none;' rows='3' class='form-control' placeholder='多行文本'></textarea>");
                     break;
+                case "1003":
+                    elHtml = formGroupBuilder("<label' class='control-label'>日期</label>" +
+                        "<div><input type='date' class='form-control input-sm' placeholder='日期'></div>");
+                    break;
+                case "1004":
+                    elHtml = formGroupBuilder("<label' class='control-label'>数字</label>" +
+                        "<div><input type='number' class='form-control input-sm' placeholder='数字'></div>");
+                    break;
+                case "1005":
+                    elHtml = formGroupBuilder("<label' class='control-label'>单选框</label>" +
+                        "<div class='radio-list'>" +
+                        "<input type='radio' name='optionsRadios' checked='ture'>选项1" +
+                        "<input type='radio' name='optionsRadios'>               选项2" +
+                        "<input type='radio' name='optionsRadios'>               选项3" +
+                        "</div>");
+                    break;
+                case "1006":
+                    elHtml = formGroupBuilder("<label' class='control-label'>多选框</label>" +
+                        "<div class='radio-list'>" +
+                        "<input type='checkbox' checked='ture'>选项1" +
+                        "<input type='checkbox'>               选项2" +
+                        "<input type='checkbox'>               选项3" +
+                        "</div>");
+                    break;
+                case "1007":
+                    elHtml = formGroupBuilder("<label' class='control-label'>下拉列表</label>" +
+                        "<select class='form-control input-sm'>" +
+                        "<option>选项1</option>" +
+                        "<option>选项2</option>" +
+                        "<option>选项3</option>" +
+                        "</select>");
+                    break;
+
+                case "2001":
+                    elHtml = "分组标题";
+                    break;
+                case "2004":
+                    elHtml = "<table width='100%' class='table table-bordered'>" +
+                        "<thead><th>列标题</th><th>列标题</th><th>列标题</th></thead>" +
+                        "<tbody>" +
+                        "<tr>" +
+                        "<td>" +
+                            "<select class='form-control input-sm'>" +
+                            "<option>文本</option>" +
+                            "<option>数字</option>" +
+                            "<option>日期</option>" +
+                            "</select></div>" +
+                        "</td>" +
+                        "<td>" +
+                        "<select class='form-control input-sm'>" +
+                        "<option>文本</option>" +
+                        "<option>数字</option>" +
+                        "<option>日期</option>" +
+                        "</select></div>" +
+                        "</td>" +
+                        "<td>" +
+                        "<select class='form-control input-sm'>" +
+                        "<option>文本</option>" +
+                        "<option>数字</option>" +
+                        "<option>日期</option>" +
+                        "</select></div>" +
+                        "</td>" +
+                        "</tr>" +
+                        "<tr><td><input type='checkbox'>合计</td><td><input type='checkbox'>合计</td><td><input type='checkbox'>合计</td></tr>" +
+                        "<tr><td><input type='checkbox'>排序</td><td><input type='checkbox'>排序</td><td><input type='checkbox'>排序</td></tr>" +
+                        "<tr><td><input type='checkbox'>显示</td><td><input type='checkbox'>显示</td><td><input type='checkbox'>显示</td></tr>" +
+                        "</tbody></table>";
+                    break;
+
             }
             if (elHtml) {
                 jqEl.append(elHtml);
+                if (cType === "2001") {
+                    jqEl.css('min-height', "0px");
+                    jqEl.removeClass('form-group');
+                    jqEl.removeClass('col-md-6');
+                    jqEl.addClass('col-md-12');
+                    jqEl.attr('colmdvalue', 12);
+                    jqEl.addClass('form-section');
+                }
+                if (cType === "2004") {
+                    jqEl.removeClass('form-group');
+                    jqEl.removeClass('col-md-6');
+                    jqEl.attr('colmdvalue', 12);
+                    jqEl.addClass('col-md-12');
+                    // jqEl.css('background', '#FFFFFF');
+                }
                 jqEl.attr("isReady", "true");
             }
         });
@@ -389,8 +473,8 @@ var FormList = function () {
                     html += "<li groupId='" + item.groupId + "'><div><h4>" + item.groupName + "</h4></div>";
                     html += "<ul class='control'>";
                     $.each(item.widgets, function (index1, item1) {
-                        html += "<li controltype='" + item1.controlId + "'>";
-                        html += "<a href='javascript:;'><i class='fa " + item1.img + "'></i>" + item1.controlName + "</a>";
+                        html += "<li controltype='" + item1.fieldId + "'>";
+                        html += "<a href='javascript:;'><i class='fa " + item1.img + "'></i>" + item1.fieldName + "</a>";
                         html += "</li>";
                     });
                     html += "</ul></li>";
