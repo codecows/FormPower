@@ -13,4 +13,6 @@ public interface FormDefMapper {
     List<FormDefEntity> selectAll();
 
     List<FormDefEntity> selectByPage(@Param("start") int start, @Param("length") int length);
+
+    void insertItem(@Param("formDefEntity") FormDefEntity formDefEntity);
 }

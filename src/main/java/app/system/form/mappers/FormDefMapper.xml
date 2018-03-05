@@ -42,4 +42,54 @@
 
     </select>
 
+    <insert id="insertItem" parameterType="app.system.form.entities.FormDefEntity">
+        INSERT INTO sys_form_def
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="formId != null">
+                form_id,
+            </if>
+            <if test="formName != null">
+                form_name,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="orderNum != null">
+                order_num,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="operationTime != null">
+                operation_time,
+            </if>
+            <if test="operationPersion != null">
+                operation_persion,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="formId != null">
+                #{formId,jdbcType=VARCHAR},
+            </if>
+            <if test="formName != null">
+                #{formName,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="orderNum != null">
+                #{orderNum,jdbcType=NUMERIC},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="operationTime != null">
+                #{operationTime,jdbcType=DATE},
+            </if>
+            <if test="operationPersion != null">
+                #{operationPersion,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
 </mapper>
