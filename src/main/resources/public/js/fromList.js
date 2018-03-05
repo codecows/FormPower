@@ -104,6 +104,22 @@ var FormList = function () {
         // var the = $(".control-active");
         $("#propertyCanvas").empty();
 
+        // switch(activeControl.type){
+        //     case "1001":
+        //         ControlProperty.showCode(activeControl);
+        //         ControlProperty.showWidth(activeControl);
+        //         ControlProperty.showFormat(activeControl);
+        //         ControlProperty.showOptions(activeControl);
+        //         ControlProperty.showDataSoucre(activeControl);
+        //         break;
+        //     case "1002":
+        //         ControlProperty.showCode(activeControl);
+        //         ControlProperty.showWidth(activeControl);
+        //         ControlProperty.showFormat(activeControl);
+        //         ControlProperty.showOptions(activeControl);
+        //         ControlProperty.showDataSoucre(activeControl);
+        //         break;
+        // }
         ControlProperty.showCode(activeControl);
         ControlProperty.showWidth(activeControl);
         ControlProperty.showFormat(activeControl);
@@ -437,6 +453,7 @@ var FormList = function () {
                         "</select></div>" +
                         "</td>" +
                         "</tr>" +
+                        "<tr><td><input type='checkbox'>30</td><td><input type='checkbox'>30</td><td><input type='checkbox'>40</td></tr>" +
                         "<tr><td><input type='checkbox'>合计</td><td><input type='checkbox'>合计</td><td><input type='checkbox'>合计</td></tr>" +
                         "<tr><td><input type='checkbox'>排序</td><td><input type='checkbox'>排序</td><td><input type='checkbox'>排序</td></tr>" +
                         "<tr><td><input type='checkbox'>显示</td><td><input type='checkbox'>显示</td><td><input type='checkbox'>显示</td></tr>" +
