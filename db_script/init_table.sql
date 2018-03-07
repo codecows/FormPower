@@ -1010,6 +1010,7 @@ CREATE TABLE "public"."sys_form_attribute_information" (
   "attribute_name"    VARCHAR(255) COLLATE "pg_catalog"."default",
   "attribute_value"   TEXT COLLATE "pg_catalog"."default",
   "attribute_type"    VARCHAR(255) COLLATE "pg_catalog"."default",
+  "remark"            TEXT COLLATE "pg_catalog"."default",
   "order_num"         NUMERIC,
   "operation_date"    DATE,
   "operation_persion" VARCHAR(255) COLLATE "pg_catalog"."default",
@@ -1032,6 +1033,8 @@ COMMENT ON COLUMN "public"."sys_form_attribute_information"."attribute_name" IS 
 COMMENT ON COLUMN "public"."sys_form_attribute_information"."attribute_value" IS '属性值';
 
 COMMENT ON COLUMN "public"."sys_form_attribute_information"."attribute_type" IS '属性类型';
+
+COMMENT ON COLUMN "public"."sys_form_attribute_information"."remark" IS '备注';
 
 COMMENT ON COLUMN "public"."sys_form_attribute_information"."order_num" IS '排序号';
 
