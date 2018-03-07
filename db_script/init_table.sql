@@ -40,13 +40,17 @@ DROP TABLE IF EXISTS sys_form_field_group CASCADE;
 
 DROP TABLE IF EXISTS sys_from_field CASCADE;
 
-DROP TABLE IF EXISTS sys_form_def;
+DROP TABLE IF EXISTS sys_form_def CASCADE;
 
 DROP TABLE IF EXISTS sys_base_tab_tmpl;
 
 DROP TABLE IF EXISTS sys_exec_func;
 
-DROP TABLE IF EXISTS sys_form_field_attribute;
+DROP TABLE IF EXISTS sys_form_field_attribute CASCADE;
+
+DROP TABLE IF EXISTS sys_form_information CASCADE;
+
+DROP TABLE IF EXISTS sys_form_attribute_information CASCADE;
 
 /*==============================================================*/
 /* Table: sys_auth_menu_rel                                     */
@@ -916,9 +920,12 @@ CREATE TABLE "public"."sys_form_field_attribute" (
   "order_num"      NUMERIC,
   "status"         VARCHAR(2) COLLATE "pg_catalog"."default",
   "create_date"    DATE,
-  CONSTRAINT "sys_form_field_attribute_pkey" PRIMARY KEY ("id")
+  CONSTRAINT "sys_form_field_attribute_pkey" PRIMARY KEY ("id"),
+  CONSTRAINT "ff_to_ff_fk" FOREIGN KEY ("field_id") REFERENCES "public"."sys_form_field" ("field_id") ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+ALTER TABLE "public"."sys_form_field_attribute"
+  OWNER TO "postgres";
 
 COMMENT ON COLUMN "public"."sys_form_field_attribute"."id" IS 'ID';
 
@@ -936,4 +943,106 @@ COMMENT ON COLUMN "public"."sys_form_field_attribute"."status" IS '状态';
 
 COMMENT ON COLUMN "public"."sys_form_field_attribute"."create_date" IS '创建时间';
 
+COMMENT ON CONSTRAINT "ff_to_ff_fk"
+ON "public"."sys_form_field_attribute" IS '关联控件表id';
+
 COMMENT ON TABLE "public"."sys_form_field_attribute" IS '控件属性表';
+
+
+CREATE TABLE "public"."sys_form_information" (
+  "id"                VARCHAR(36) COLLATE "pg_catalog"."default" NOT NULL DEFAULT uuid_generate_v4(),
+  "form_id"           VARCHAR(36) COLLATE "pg_catalog"."default",
+  "field_id"          VARCHAR(36) COLLATE "pg_catalog"."default",
+  "item_title"        VARCHAR(255) COLLATE "pg_catalog"."default",
+  "item_prompt"       VARCHAR(255) COLLATE "pg_catalog"."default",
+  "item_code"         VARCHAR(255) COLLATE "pg_catalog"."default",
+  "field_type"        VARCHAR(2) COLLATE "pg_catalog"."default",
+  "parent_id"         VARCHAR(36) COLLATE "pg_catalog"."default",
+  "p_id"              VARCHAR(36) COLLATE "pg_catalog"."default",
+  "remark"            TEXT COLLATE "pg_catalog"."default",
+  "operation_date"    DATE,
+  "operation_persion" VARCHAR(255) COLLATE "pg_catalog"."default",
+  CONSTRAINT "sys_form_information_pkey" PRIMARY KEY ("id"),
+  CONSTRAINT "fi_to_fd_fk" FOREIGN KEY ("form_id") REFERENCES "public"."sys_form_def" ("form_id") ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT "fi_to_ff_fk" FOREIGN KEY ("field_id") REFERENCES "public"."sys_form_field" ("field_id") ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+ALTER TABLE "public"."sys_form_information"
+  OWNER TO "postgres";
+
+COMMENT ON COLUMN "public"."sys_form_information"."id" IS 'ID';
+
+COMMENT ON COLUMN "public"."sys_form_information"."form_id" IS '所属form的ID';
+
+COMMENT ON COLUMN "public"."sys_form_information"."field_id" IS '控件表的ID';
+
+COMMENT ON COLUMN "public"."sys_form_information"."item_title" IS '列标题';
+
+COMMENT ON COLUMN "public"."sys_form_information"."item_prompt" IS '列提示';
+
+COMMENT ON COLUMN "public"."sys_form_information"."item_code" IS '列代码';
+
+COMMENT ON COLUMN "public"."sys_form_information"."field_type" IS '控件类型，c:列，t:子表，f:表单';
+
+COMMENT ON COLUMN "public"."sys_form_information"."parent_id" IS '上级ID';
+
+COMMENT ON COLUMN "public"."sys_form_information"."p_id" IS 'field_type如果为t或f时，为子表ID或表单ID。';
+
+COMMENT ON COLUMN "public"."sys_form_information"."remark" IS '备注';
+
+COMMENT ON COLUMN "public"."sys_form_information"."operation_date" IS '操作时间';
+
+COMMENT ON COLUMN "public"."sys_form_information"."operation_persion" IS '操作人';
+
+COMMENT ON CONSTRAINT "fi_to_fd_fk"
+ON "public"."sys_form_information" IS '表单定义表外键';
+
+COMMENT ON CONSTRAINT "fi_to_ff_fk"
+ON "public"."sys_form_information" IS '控件定义表外键';
+
+COMMENT ON TABLE "public"."sys_form_information" IS '表单信息表';
+
+
+CREATE TABLE "public"."sys_form_attribute_information" (
+  "id"                VARCHAR(36) COLLATE "pg_catalog"."default" NOT NULL,
+  "field_id"          VARCHAR(36) COLLATE "pg_catalog"."default",
+  "attribute_id"      VARCHAR(36) COLLATE "pg_catalog"."default",
+  "attribute_name"    VARCHAR(255) COLLATE "pg_catalog"."default",
+  "attribute_value"   TEXT COLLATE "pg_catalog"."default",
+  "attribute_type"    VARCHAR(255) COLLATE "pg_catalog"."default",
+  "order_num"         NUMERIC,
+  "operation_date"    DATE,
+  "operation_persion" VARCHAR(255) COLLATE "pg_catalog"."default",
+  CONSTRAINT "sys_form_field_attribute_information_pkey" PRIMARY KEY ("id"),
+  CONSTRAINT "att_to_att_fk" FOREIGN KEY ("attribute_id") REFERENCES "public"."sys_form_field_attribute" ("id") ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT "att_to_ff_fk" FOREIGN KEY ("field_id") REFERENCES "public"."sys_form_information" ("id") ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+ALTER TABLE "public"."sys_form_attribute_information"
+  OWNER TO "postgres";
+
+COMMENT ON COLUMN "public"."sys_form_attribute_information"."id" IS 'ID';
+
+COMMENT ON COLUMN "public"."sys_form_attribute_information"."field_id" IS '表单信息表中ID';
+
+COMMENT ON COLUMN "public"."sys_form_attribute_information"."attribute_id" IS '属性id';
+
+COMMENT ON COLUMN "public"."sys_form_attribute_information"."attribute_name" IS '属性名称';
+
+COMMENT ON COLUMN "public"."sys_form_attribute_information"."attribute_value" IS '属性值';
+
+COMMENT ON COLUMN "public"."sys_form_attribute_information"."attribute_type" IS '属性类型';
+
+COMMENT ON COLUMN "public"."sys_form_attribute_information"."order_num" IS '排序号';
+
+COMMENT ON COLUMN "public"."sys_form_attribute_information"."operation_date" IS '操作时间';
+
+COMMENT ON COLUMN "public"."sys_form_attribute_information"."operation_persion" IS '操作人';
+
+COMMENT ON CONSTRAINT "att_to_att_fk"
+ON "public"."sys_form_attribute_information" IS '关联控件属性表id';
+
+COMMENT ON CONSTRAINT "att_to_ff_fk"
+ON "public"."sys_form_attribute_information" IS '关联表单信息表id';
+
+COMMENT ON TABLE "public"."sys_form_attribute_information" IS '表单属性信息表';
