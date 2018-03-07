@@ -63,6 +63,10 @@
         <!--<table tableName="sys_form_field_group"></table>-->
         <!--<table tableName="sys_form_field"></table>-->
         <!--<table tableName="sys_exec_func"></table>-->
+        <!--<table tableName="sys_form_information"></table>-->
+        <!--<table tableName="sys_attribute_information"></table>-->
+        <!--<table tableName="sys_form_def"></table>-->
+        <!--<table tableName="sys_form_relationship"></table>-->
 
     </context>
 </generatorConfiguration>

@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="app.dao.mappers.SysAttributeInformationMapper">
+    <resultMap id="BaseResultMap" type="app.dao.entities.SysAttributeInformation">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="object_id" jdbcType="VARCHAR" property="objectId"/>
+        <result column="attribute_id" jdbcType="VARCHAR" property="attributeId"/>
+        <result column="attribute_name" jdbcType="VARCHAR" property="attributeName"/>
+        <result column="attribute_value" jdbcType="VARCHAR" property="attributeValue"/>
+        <result column="attribute_type" jdbcType="VARCHAR" property="attributeType"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="order_num" jdbcType="NUMERIC" property="orderNum"/>
+        <result column="operation_date" jdbcType="DATE" property="operationDate"/>
+        <result column="operation_persion" jdbcType="VARCHAR" property="operationPersion"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        id, object_id, attribute_id, attribute_name, attribute_value, attribute_type, remark,
+        order_num, operation_date, operation_persion
+    </sql>
+    <select id="selectByExample" parameterType="app.dao.entities.SysAttributeInformationExample"
+            resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from sys_attribute_information
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_attribute_information
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from sys_attribute_information
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    <delete id="deleteByExample" parameterType="app.dao.entities.SysAttributeInformationExample">
+        delete from sys_attribute_information
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="app.dao.entities.SysAttributeInformation">
+        insert into sys_attribute_information (id, object_id, attribute_id,
+        attribute_name, attribute_value, attribute_type,
+        remark, order_num, operation_date,
+        operation_persion)
+        values (#{id,jdbcType=VARCHAR}, #{objectId,jdbcType=VARCHAR}, #{attributeId,jdbcType=VARCHAR},
+        #{attributeName,jdbcType=VARCHAR}, #{attributeValue,jdbcType=VARCHAR}, #{attributeType,jdbcType=VARCHAR},
+        #{remark,jdbcType=VARCHAR}, #{orderNum,jdbcType=NUMERIC}, #{operationDate,jdbcType=DATE},
+        #{operationPersion,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="app.dao.entities.SysAttributeInformation">
+        insert into sys_attribute_information
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="objectId != null">
+                object_id,
+            </if>
+            <if test="attributeId != null">
+                attribute_id,
+            </if>
+            <if test="attributeName != null">
+                attribute_name,
+            </if>
+            <if test="attributeValue != null">
+                attribute_value,
+            </if>
+            <if test="attributeType != null">
+                attribute_type,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="orderNum != null">
+                order_num,
+            </if>
+            <if test="operationDate != null">
+                operation_date,
+            </if>
+            <if test="operationPersion != null">
+                operation_persion,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="objectId != null">
+                #{objectId,jdbcType=VARCHAR},
+            </if>
+            <if test="attributeId != null">
+                #{attributeId,jdbcType=VARCHAR},
+            </if>
+            <if test="attributeName != null">
+                #{attributeName,jdbcType=VARCHAR},
+            </if>
+            <if test="attributeValue != null">
+                #{attributeValue,jdbcType=VARCHAR},
+            </if>
+            <if test="attributeType != null">
+                #{attributeType,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="orderNum != null">
+                #{orderNum,jdbcType=NUMERIC},
+            </if>
+            <if test="operationDate != null">
+                #{operationDate,jdbcType=DATE},
+            </if>
+            <if test="operationPersion != null">
+                #{operationPersion,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="app.dao.entities.SysAttributeInformationExample"
+            resultType="java.lang.Long">
+        select count(*) from sys_attribute_information
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update sys_attribute_information
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=VARCHAR},
+            </if>
+            <if test="record.objectId != null">
+                object_id = #{record.objectId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.attributeId != null">
+                attribute_id = #{record.attributeId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.attributeName != null">
+                attribute_name = #{record.attributeName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.attributeValue != null">
+                attribute_value = #{record.attributeValue,jdbcType=VARCHAR},
+            </if>
+            <if test="record.attributeType != null">
+                attribute_type = #{record.attributeType,jdbcType=VARCHAR},
+            </if>
+            <if test="record.remark != null">
+                remark = #{record.remark,jdbcType=VARCHAR},
+            </if>
+            <if test="record.orderNum != null">
+                order_num = #{record.orderNum,jdbcType=NUMERIC},
+            </if>
+            <if test="record.operationDate != null">
+                operation_date = #{record.operationDate,jdbcType=DATE},
+            </if>
+            <if test="record.operationPersion != null">
+                operation_persion = #{record.operationPersion,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update sys_attribute_information
+        set id = #{record.id,jdbcType=VARCHAR},
+        object_id = #{record.objectId,jdbcType=VARCHAR},
+        attribute_id = #{record.attributeId,jdbcType=VARCHAR},
+        attribute_name = #{record.attributeName,jdbcType=VARCHAR},
+        attribute_value = #{record.attributeValue,jdbcType=VARCHAR},
+        attribute_type = #{record.attributeType,jdbcType=VARCHAR},
+        remark = #{record.remark,jdbcType=VARCHAR},
+        order_num = #{record.orderNum,jdbcType=NUMERIC},
+        operation_date = #{record.operationDate,jdbcType=DATE},
+        operation_persion = #{record.operationPersion,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="app.dao.entities.SysAttributeInformation">
+        update sys_attribute_information
+        <set>
+            <if test="objectId != null">
+                object_id = #{objectId,jdbcType=VARCHAR},
+            </if>
+            <if test="attributeId != null">
+                attribute_id = #{attributeId,jdbcType=VARCHAR},
+            </if>
+            <if test="attributeName != null">
+                attribute_name = #{attributeName,jdbcType=VARCHAR},
+            </if>
+            <if test="attributeValue != null">
+                attribute_value = #{attributeValue,jdbcType=VARCHAR},
+            </if>
+            <if test="attributeType != null">
+                attribute_type = #{attributeType,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="orderNum != null">
+                order_num = #{orderNum,jdbcType=NUMERIC},
+            </if>
+            <if test="operationDate != null">
+                operation_date = #{operationDate,jdbcType=DATE},
+            </if>
+            <if test="operationPersion != null">
+                operation_persion = #{operationPersion,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="app.dao.entities.SysAttributeInformation">
+        update sys_attribute_information
+        set object_id = #{objectId,jdbcType=VARCHAR},
+        attribute_id = #{attributeId,jdbcType=VARCHAR},
+        attribute_name = #{attributeName,jdbcType=VARCHAR},
+        attribute_value = #{attributeValue,jdbcType=VARCHAR},
+        attribute_type = #{attributeType,jdbcType=VARCHAR},
+        remark = #{remark,jdbcType=VARCHAR},
+        order_num = #{orderNum,jdbcType=NUMERIC},
+        operation_date = #{operationDate,jdbcType=DATE},
+        operation_persion = #{operationPersion,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+</mapper>

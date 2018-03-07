@@ -1,0 +1,644 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="app.dao.mappers.SysFormDefMapper">
+    <resultMap id="BaseResultMap" type="app.dao.entities.SysFormDef">
+        <id column="form_id" jdbcType="VARCHAR" property="formId"/>
+        <result column="form_name" jdbcType="VARCHAR" property="formName"/>
+        <result column="form_group" jdbcType="VARCHAR" property="formGroup"/>
+        <result column="form_img" jdbcType="VARCHAR" property="formImg"/>
+        <result column="f_type" jdbcType="VARCHAR" property="fType"/>
+        <result column="is_single" jdbcType="VARCHAR" property="isSingle"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="order_num" jdbcType="NUMERIC" property="orderNum"/>
+        <result column="status" jdbcType="VARCHAR" property="status"/>
+        <result column="operation_time" jdbcType="DATE" property="operationTime"/>
+        <result column="operation_persion" jdbcType="VARCHAR" property="operationPersion"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        form_id, form_name, form_group, form_img, f_type, is_single, remark, order_num, status,
+        operation_time, operation_persion
+    </sql>
+    <select id="selectByExample" parameterType="app.dao.entities.SysFormDefExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from sys_form_def
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_form_def
+        where form_id = #{formId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from sys_form_def
+        where form_id = #{formId,jdbcType=VARCHAR}
+    </delete>
+    <delete id="deleteByExample" parameterType="app.dao.entities.SysFormDefExample">
+        delete from sys_form_def
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="app.dao.entities.SysFormDef">
+        insert into sys_form_def (form_id, form_name, form_group,
+        form_img, f_type, is_single,
+        remark, order_num, status,
+        operation_time, operation_persion)
+        values (#{formId,jdbcType=VARCHAR}, #{formName,jdbcType=VARCHAR}, #{formGroup,jdbcType=VARCHAR},
+        #{formImg,jdbcType=VARCHAR}, #{fType,jdbcType=VARCHAR}, #{isSingle,jdbcType=VARCHAR},
+        #{remark,jdbcType=VARCHAR}, #{orderNum,jdbcType=NUMERIC}, #{status,jdbcType=VARCHAR},
+        #{operationTime,jdbcType=DATE}, #{operationPersion,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="app.dao.entities.SysFormDef">
+        insert into sys_form_def
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="formId != null">
+                form_id,
+            </if>
+            <if test="formName != null">
+                form_name,
+            </if>
+            <if test="formGroup != null">
+                form_group,
+            </if>
+            <if test="formImg != null">
+                form_img,
+            </if>
+            <if test="fType != null">
+                f_type,
+            </if>
+            <if test="isSingle != null">
+                is_single,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="orderNum != null">
+                order_num,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="operationTime != null">
+                operation_time,
+            </if>
+            <if test="operationPersion != null">
+                operation_persion,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="formId != null">
+                #{formId,jdbcType=VARCHAR},
+            </if>
+            <if test="formName != null">
+                #{formName,jdbcType=VARCHAR},
+            </if>
+            <if test="formGroup != null">
+                #{formGroup,jdbcType=VARCHAR},
+            </if>
+            <if test="formImg != null">
+                #{formImg,jdbcType=VARCHAR},
+            </if>
+            <if test="fType != null">
+                #{fType,jdbcType=VARCHAR},
+            </if>
+            <if test="isSingle != null">
+                #{isSingle,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="orderNum != null">
+                #{orderNum,jdbcType=NUMERIC},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="operationTime != null">
+                #{operationTime,jdbcType=DATE},
+            </if>
+            <if test="operationPersion != null">
+                #{operationPersion,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="app.dao.entities.SysFormDefExample" resultType="java.lang.Long">
+        select count(*) from sys_form_def
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update sys_form_def
+        <set>
+            <if test="record.formId != null">
+                form_id = #{record.formId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.formName != null">
+                form_name = #{record.formName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.formGroup != null">
+                form_group = #{record.formGroup,jdbcType=VARCHAR},
+            </if>
+            <if test="record.formImg != null">
+                form_img = #{record.formImg,jdbcType=VARCHAR},
+            </if>
+            <if test="record.fType != null">
+                f_type = #{record.fType,jdbcType=VARCHAR},
+            </if>
+            <if test="record.isSingle != null">
+                is_single = #{record.isSingle,jdbcType=VARCHAR},
+            </if>
+            <if test="record.remark != null">
+                remark = #{record.remark,jdbcType=VARCHAR},
+            </if>
+            <if test="record.orderNum != null">
+                order_num = #{record.orderNum,jdbcType=NUMERIC},
+            </if>
+            <if test="record.status != null">
+                status = #{record.status,jdbcType=VARCHAR},
+            </if>
+            <if test="record.operationTime != null">
+                operation_time = #{record.operationTime,jdbcType=DATE},
+            </if>
+            <if test="record.operationPersion != null">
+                operation_persion = #{record.operationPersion,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update sys_form_def
+        set form_id = #{record.formId,jdbcType=VARCHAR},
+        form_name = #{record.formName,jdbcType=VARCHAR},
+        form_group = #{record.formGroup,jdbcType=VARCHAR},
+        form_img = #{record.formImg,jdbcType=VARCHAR},
+        f_type = #{record.fType,jdbcType=VARCHAR},
+        is_single = #{record.isSingle,jdbcType=VARCHAR},
+        remark = #{record.remark,jdbcType=VARCHAR},
+        order_num = #{record.orderNum,jdbcType=NUMERIC},
+        status = #{record.status,jdbcType=VARCHAR},
+        operation_time = #{record.operationTime,jdbcType=DATE},
+        operation_persion = #{record.operationPersion,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="app.dao.entities.SysFormDef">
+        update sys_form_def
+        <set>
+            <if test="formName != null">
+                form_name = #{formName,jdbcType=VARCHAR},
+            </if>
+            <if test="formGroup != null">
+                form_group = #{formGroup,jdbcType=VARCHAR},
+            </if>
+            <if test="formImg != null">
+                form_img = #{formImg,jdbcType=VARCHAR},
+            </if>
+            <if test="fType != null">
+                f_type = #{fType,jdbcType=VARCHAR},
+            </if>
+            <if test="isSingle != null">
+                is_single = #{isSingle,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="orderNum != null">
+                order_num = #{orderNum,jdbcType=NUMERIC},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="operationTime != null">
+                operation_time = #{operationTime,jdbcType=DATE},
+            </if>
+            <if test="operationPersion != null">
+                operation_persion = #{operationPersion,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where form_id = #{formId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="app.dao.entities.SysFormDef">
+        update sys_form_def
+        set form_name = #{formName,jdbcType=VARCHAR},
+        form_group = #{formGroup,jdbcType=VARCHAR},
+        form_img = #{formImg,jdbcType=VARCHAR},
+        f_type = #{fType,jdbcType=VARCHAR},
+        is_single = #{isSingle,jdbcType=VARCHAR},
+        remark = #{remark,jdbcType=VARCHAR},
+        order_num = #{orderNum,jdbcType=NUMERIC},
+        status = #{status,jdbcType=VARCHAR},
+        operation_time = #{operationTime,jdbcType=DATE},
+        operation_persion = #{operationPersion,jdbcType=VARCHAR}
+        where form_id = #{formId,jdbcType=VARCHAR}
+    </update>
+    <resultMap id="BaseResultMap" type="app.dao.entities.SysFormDef">
+        <id column="form_id" jdbcType="VARCHAR" property="formId"/>
+        <result column="form_name" jdbcType="VARCHAR" property="formName"/>
+        <result column="form_group" jdbcType="VARCHAR" property="formGroup"/>
+        <result column="form_img" jdbcType="VARCHAR" property="formImg"/>
+        <result column="f_type" jdbcType="VARCHAR" property="fType"/>
+        <result column="is_single" jdbcType="VARCHAR" property="isSingle"/>
+        <result column="parent_id" jdbcType="VARCHAR" property="parentId"/>
+        <result column="relationship" jdbcType="VARCHAR" property="relationship"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="order_num" jdbcType="NUMERIC" property="orderNum"/>
+        <result column="status" jdbcType="VARCHAR" property="status"/>
+        <result column="operation_time" jdbcType="DATE" property="operationTime"/>
+        <result column="operation_persion" jdbcType="VARCHAR" property="operationPersion"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        form_id, form_name, form_group, form_img, f_type, is_single, parent_id, relationship,
+        remark, order_num, status, operation_time, operation_persion
+    </sql>
+    <select id="selectByExample" parameterType="app.dao.entities.SysFormDefExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from sys_form_def
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_form_def
+        where form_id = #{formId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from sys_form_def
+        where form_id = #{formId,jdbcType=VARCHAR}
+    </delete>
+    <delete id="deleteByExample" parameterType="app.dao.entities.SysFormDefExample">
+        delete from sys_form_def
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="app.dao.entities.SysFormDef">
+        insert into sys_form_def (form_id, form_name, form_group,
+        form_img, f_type, is_single,
+        parent_id, relationship, remark,
+        order_num, status, operation_time,
+        operation_persion)
+        values (#{formId,jdbcType=VARCHAR}, #{formName,jdbcType=VARCHAR}, #{formGroup,jdbcType=VARCHAR},
+        #{formImg,jdbcType=VARCHAR}, #{fType,jdbcType=VARCHAR}, #{isSingle,jdbcType=VARCHAR},
+        #{parentId,jdbcType=VARCHAR}, #{relationship,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR},
+        #{orderNum,jdbcType=NUMERIC}, #{status,jdbcType=VARCHAR}, #{operationTime,jdbcType=DATE},
+        #{operationPersion,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="app.dao.entities.SysFormDef">
+        insert into sys_form_def
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="formId != null">
+                form_id,
+            </if>
+            <if test="formName != null">
+                form_name,
+            </if>
+            <if test="formGroup != null">
+                form_group,
+            </if>
+            <if test="formImg != null">
+                form_img,
+            </if>
+            <if test="fType != null">
+                f_type,
+            </if>
+            <if test="isSingle != null">
+                is_single,
+            </if>
+            <if test="parentId != null">
+                parent_id,
+            </if>
+            <if test="relationship != null">
+                relationship,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="orderNum != null">
+                order_num,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="operationTime != null">
+                operation_time,
+            </if>
+            <if test="operationPersion != null">
+                operation_persion,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="formId != null">
+                #{formId,jdbcType=VARCHAR},
+            </if>
+            <if test="formName != null">
+                #{formName,jdbcType=VARCHAR},
+            </if>
+            <if test="formGroup != null">
+                #{formGroup,jdbcType=VARCHAR},
+            </if>
+            <if test="formImg != null">
+                #{formImg,jdbcType=VARCHAR},
+            </if>
+            <if test="fType != null">
+                #{fType,jdbcType=VARCHAR},
+            </if>
+            <if test="isSingle != null">
+                #{isSingle,jdbcType=VARCHAR},
+            </if>
+            <if test="parentId != null">
+                #{parentId,jdbcType=VARCHAR},
+            </if>
+            <if test="relationship != null">
+                #{relationship,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="orderNum != null">
+                #{orderNum,jdbcType=NUMERIC},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="operationTime != null">
+                #{operationTime,jdbcType=DATE},
+            </if>
+            <if test="operationPersion != null">
+                #{operationPersion,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="app.dao.entities.SysFormDefExample" resultType="java.lang.Long">
+        select count(*) from sys_form_def
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update sys_form_def
+        <set>
+            <if test="record.formId != null">
+                form_id = #{record.formId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.formName != null">
+                form_name = #{record.formName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.formGroup != null">
+                form_group = #{record.formGroup,jdbcType=VARCHAR},
+            </if>
+            <if test="record.formImg != null">
+                form_img = #{record.formImg,jdbcType=VARCHAR},
+            </if>
+            <if test="record.fType != null">
+                f_type = #{record.fType,jdbcType=VARCHAR},
+            </if>
+            <if test="record.isSingle != null">
+                is_single = #{record.isSingle,jdbcType=VARCHAR},
+            </if>
+            <if test="record.parentId != null">
+                parent_id = #{record.parentId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.relationship != null">
+                relationship = #{record.relationship,jdbcType=VARCHAR},
+            </if>
+            <if test="record.remark != null">
+                remark = #{record.remark,jdbcType=VARCHAR},
+            </if>
+            <if test="record.orderNum != null">
+                order_num = #{record.orderNum,jdbcType=NUMERIC},
+            </if>
+            <if test="record.status != null">
+                status = #{record.status,jdbcType=VARCHAR},
+            </if>
+            <if test="record.operationTime != null">
+                operation_time = #{record.operationTime,jdbcType=DATE},
+            </if>
+            <if test="record.operationPersion != null">
+                operation_persion = #{record.operationPersion,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update sys_form_def
+        set form_id = #{record.formId,jdbcType=VARCHAR},
+        form_name = #{record.formName,jdbcType=VARCHAR},
+        form_group = #{record.formGroup,jdbcType=VARCHAR},
+        form_img = #{record.formImg,jdbcType=VARCHAR},
+        f_type = #{record.fType,jdbcType=VARCHAR},
+        is_single = #{record.isSingle,jdbcType=VARCHAR},
+        parent_id = #{record.parentId,jdbcType=VARCHAR},
+        relationship = #{record.relationship,jdbcType=VARCHAR},
+        remark = #{record.remark,jdbcType=VARCHAR},
+        order_num = #{record.orderNum,jdbcType=NUMERIC},
+        status = #{record.status,jdbcType=VARCHAR},
+        operation_time = #{record.operationTime,jdbcType=DATE},
+        operation_persion = #{record.operationPersion,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="app.dao.entities.SysFormDef">
+        update sys_form_def
+        <set>
+            <if test="formName != null">
+                form_name = #{formName,jdbcType=VARCHAR},
+            </if>
+            <if test="formGroup != null">
+                form_group = #{formGroup,jdbcType=VARCHAR},
+            </if>
+            <if test="formImg != null">
+                form_img = #{formImg,jdbcType=VARCHAR},
+            </if>
+            <if test="fType != null">
+                f_type = #{fType,jdbcType=VARCHAR},
+            </if>
+            <if test="isSingle != null">
+                is_single = #{isSingle,jdbcType=VARCHAR},
+            </if>
+            <if test="parentId != null">
+                parent_id = #{parentId,jdbcType=VARCHAR},
+            </if>
+            <if test="relationship != null">
+                relationship = #{relationship,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="orderNum != null">
+                order_num = #{orderNum,jdbcType=NUMERIC},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="operationTime != null">
+                operation_time = #{operationTime,jdbcType=DATE},
+            </if>
+            <if test="operationPersion != null">
+                operation_persion = #{operationPersion,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where form_id = #{formId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="app.dao.entities.SysFormDef">
+        update sys_form_def
+        set form_name = #{formName,jdbcType=VARCHAR},
+        form_group = #{formGroup,jdbcType=VARCHAR},
+        form_img = #{formImg,jdbcType=VARCHAR},
+        f_type = #{fType,jdbcType=VARCHAR},
+        is_single = #{isSingle,jdbcType=VARCHAR},
+        parent_id = #{parentId,jdbcType=VARCHAR},
+        relationship = #{relationship,jdbcType=VARCHAR},
+        remark = #{remark,jdbcType=VARCHAR},
+        order_num = #{orderNum,jdbcType=NUMERIC},
+        status = #{status,jdbcType=VARCHAR},
+        operation_time = #{operationTime,jdbcType=DATE},
+        operation_persion = #{operationPersion,jdbcType=VARCHAR}
+        where form_id = #{formId,jdbcType=VARCHAR}
+    </update>
+</mapper>

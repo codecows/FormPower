@@ -50,7 +50,9 @@ DROP TABLE IF EXISTS sys_form_field_attribute CASCADE;
 
 DROP TABLE IF EXISTS sys_form_information CASCADE;
 
-DROP TABLE IF EXISTS sys_form_attribute_information CASCADE;
+DROP TABLE IF EXISTS sys_attribute_information CASCADE;
+
+DROP TABLE IF EXISTS sys_form_relationship CASCADE;
 
 /*==============================================================*/
 /* Table: sys_auth_menu_rel                                     */
@@ -801,6 +803,10 @@ ALTER TABLE "public"."sys_form_field"
 CREATE TABLE sys_form_def (
   form_id           VARCHAR(36) NOT NULL DEFAULT uuid_generate_v4(),
   form_name         VARCHAR(64) NULL,
+  form_group        VARCHAR(64) NULL,
+  form_img          VARCHAR(64) NULL,
+  f_type            VARCHAR(2)  NULL,
+  is_single         VARCHAR(2)  NULL,
   remark            TEXT        NULL,
   order_num         NUMERIC     NULL,
   status            VARCHAR(2)  NULL,
@@ -808,30 +814,18 @@ CREATE TABLE sys_form_def (
   operation_persion VARCHAR(64) NULL,
   CONSTRAINT PK_sys_form_def PRIMARY KEY (form_id)
 );
-
-COMMENT ON TABLE sys_form_def IS
-'表单定义表';
-
-COMMENT ON COLUMN sys_form_def.form_id IS
-'表单ID';
-
-COMMENT ON COLUMN sys_form_def.form_name IS
-'表单名称';
-
-COMMENT ON COLUMN sys_form_def.remark IS
-'备注';
-
-COMMENT ON COLUMN sys_form_def.order_num IS
-'排序码';
-
-COMMENT ON COLUMN sys_form_def.status IS
-'状态';
-
-COMMENT ON COLUMN sys_form_def.operation_time IS
-'操作时间';
-
-COMMENT ON COLUMN sys_form_def.operation_persion IS
-'操作人';
+COMMENT ON TABLE sys_form_def IS '表单定义表';
+COMMENT ON COLUMN sys_form_def.form_id IS '表单ID';
+COMMENT ON COLUMN sys_form_def.form_name IS '表单名称';
+COMMENT ON COLUMN sys_form_def.form_group IS '表单分组';
+COMMENT ON COLUMN sys_form_def.form_img IS '图标';
+COMMENT ON COLUMN sys_form_def.f_type IS '类型，f:表单，t:子表';
+COMMENT ON COLUMN sys_form_def.is_single IS '是否单表模式';
+COMMENT ON COLUMN sys_form_def.remark IS '备注';
+COMMENT ON COLUMN sys_form_def.order_num IS '排序码';
+COMMENT ON COLUMN sys_form_def.status IS '状态';
+COMMENT ON COLUMN sys_form_def.operation_time IS '操作时间';
+COMMENT ON COLUMN sys_form_def.operation_persion IS '操作人';
 
 
 CREATE TABLE "public"."sys_base_tab_tmpl" (
@@ -956,9 +950,6 @@ CREATE TABLE "public"."sys_form_information" (
   "item_title"        VARCHAR(255) COLLATE "pg_catalog"."default",
   "item_prompt"       VARCHAR(255) COLLATE "pg_catalog"."default",
   "item_code"         VARCHAR(255) COLLATE "pg_catalog"."default",
-  "field_type"        VARCHAR(2) COLLATE "pg_catalog"."default",
-  "parent_id"         VARCHAR(36) COLLATE "pg_catalog"."default",
-  "p_id"              VARCHAR(36) COLLATE "pg_catalog"."default",
   "remark"            TEXT COLLATE "pg_catalog"."default",
   "operation_date"    DATE,
   "operation_persion" VARCHAR(255) COLLATE "pg_catalog"."default",
@@ -982,12 +973,6 @@ COMMENT ON COLUMN "public"."sys_form_information"."item_prompt" IS '列提示';
 
 COMMENT ON COLUMN "public"."sys_form_information"."item_code" IS '列代码';
 
-COMMENT ON COLUMN "public"."sys_form_information"."field_type" IS '控件类型，c:列，t:子表，f:表单';
-
-COMMENT ON COLUMN "public"."sys_form_information"."parent_id" IS '上级ID';
-
-COMMENT ON COLUMN "public"."sys_form_information"."p_id" IS 'field_type如果为t或f时，为子表ID或表单ID。';
-
 COMMENT ON COLUMN "public"."sys_form_information"."remark" IS '备注';
 
 COMMENT ON COLUMN "public"."sys_form_information"."operation_date" IS '操作时间';
@@ -1003,9 +988,9 @@ ON "public"."sys_form_information" IS '控件定义表外键';
 COMMENT ON TABLE "public"."sys_form_information" IS '表单信息表';
 
 
-CREATE TABLE "public"."sys_form_attribute_information" (
+CREATE TABLE "public"."sys_attribute_information" (
   "id"                VARCHAR(36) COLLATE "pg_catalog"."default" NOT NULL,
-  "field_id"          VARCHAR(36) COLLATE "pg_catalog"."default",
+  "object_id"         VARCHAR(36) COLLATE "pg_catalog"."default",
   "attribute_id"      VARCHAR(36) COLLATE "pg_catalog"."default",
   "attribute_name"    VARCHAR(255) COLLATE "pg_catalog"."default",
   "attribute_value"   TEXT COLLATE "pg_catalog"."default",
@@ -1014,38 +999,57 @@ CREATE TABLE "public"."sys_form_attribute_information" (
   "order_num"         NUMERIC,
   "operation_date"    DATE,
   "operation_persion" VARCHAR(255) COLLATE "pg_catalog"."default",
-  CONSTRAINT "sys_form_field_attribute_information_pkey" PRIMARY KEY ("id"),
-  CONSTRAINT "att_to_att_fk" FOREIGN KEY ("attribute_id") REFERENCES "public"."sys_form_field_attribute" ("id") ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT "att_to_ff_fk" FOREIGN KEY ("field_id") REFERENCES "public"."sys_form_information" ("id") ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT "sys_attribute_information_pkey" PRIMARY KEY ("id")
 );
 
-ALTER TABLE "public"."sys_form_attribute_information"
+ALTER TABLE "public"."sys_attribute_information"
   OWNER TO "postgres";
 
-COMMENT ON COLUMN "public"."sys_form_attribute_information"."id" IS 'ID';
+COMMENT ON COLUMN "public"."sys_attribute_information"."id" IS 'ID';
 
-COMMENT ON COLUMN "public"."sys_form_attribute_information"."field_id" IS '表单信息表中ID';
+COMMENT ON COLUMN "public"."sys_attribute_information"."object_id" IS '对象ID';
 
-COMMENT ON COLUMN "public"."sys_form_attribute_information"."attribute_id" IS '属性id';
+COMMENT ON COLUMN "public"."sys_attribute_information"."attribute_id" IS '属性id';
 
-COMMENT ON COLUMN "public"."sys_form_attribute_information"."attribute_name" IS '属性名称';
+COMMENT ON COLUMN "public"."sys_attribute_information"."attribute_name" IS '属性名称';
 
-COMMENT ON COLUMN "public"."sys_form_attribute_information"."attribute_value" IS '属性值';
+COMMENT ON COLUMN "public"."sys_attribute_information"."attribute_value" IS '属性值';
 
-COMMENT ON COLUMN "public"."sys_form_attribute_information"."attribute_type" IS '属性类型';
+COMMENT ON COLUMN "public"."sys_attribute_information"."attribute_type" IS '属性类型，f:表单属性，t:子表属性，r:关联的表单属性，c:控件属性';
 
-COMMENT ON COLUMN "public"."sys_form_attribute_information"."remark" IS '备注';
+COMMENT ON COLUMN "public"."sys_attribute_information"."remark" IS '备注';
 
-COMMENT ON COLUMN "public"."sys_form_attribute_information"."order_num" IS '排序号';
+COMMENT ON COLUMN "public"."sys_attribute_information"."order_num" IS '排序号';
 
-COMMENT ON COLUMN "public"."sys_form_attribute_information"."operation_date" IS '操作时间';
+COMMENT ON COLUMN "public"."sys_attribute_information"."operation_date" IS '操作时间';
 
-COMMENT ON COLUMN "public"."sys_form_attribute_information"."operation_persion" IS '操作人';
+COMMENT ON COLUMN "public"."sys_attribute_information"."operation_persion" IS '操作人';
 
-COMMENT ON CONSTRAINT "att_to_att_fk"
-ON "public"."sys_form_attribute_information" IS '关联控件属性表id';
+COMMENT ON TABLE "public"."sys_attribute_information" IS '属性信息表';
 
-COMMENT ON CONSTRAINT "att_to_ff_fk"
-ON "public"."sys_form_attribute_information" IS '关联表单信息表id';
 
-COMMENT ON TABLE "public"."sys_form_attribute_information" IS '表单属性信息表';
+CREATE TABLE "public"."sys_form_relationship" (
+  "r_id"              VARCHAR(36) COLLATE "pg_catalog"."default" NOT NULL,
+  "parent_id"         VARCHAR(36) COLLATE "pg_catalog"."default",
+  "child_id"          VARCHAR(36) COLLATE "pg_catalog"."default",
+  "relationship_type" VARCHAR(255) COLLATE "pg_catalog"."default",
+  "operation_date"    DATE,
+  "operation_persion" VARCHAR(255) COLLATE "pg_catalog"."default"
+);
+
+ALTER TABLE "public"."sys_form_relationship"
+  OWNER TO "postgres";
+
+COMMENT ON COLUMN "public"."sys_form_relationship"."r_id" IS '关系ID';
+
+COMMENT ON COLUMN "public"."sys_form_relationship"."parent_id" IS '主表单or表ID';
+
+COMMENT ON COLUMN "public"."sys_form_relationship"."child_id" IS '子表单or表ID';
+
+COMMENT ON COLUMN "public"."sys_form_relationship"."relationship_type" IS '关系类型';
+
+COMMENT ON COLUMN "public"."sys_form_relationship"."operation_date" IS '操作时间';
+
+COMMENT ON COLUMN "public"."sys_form_relationship"."operation_persion" IS '操作人';
+
+COMMENT ON TABLE "public"."sys_form_relationship" IS '表单关系表';
