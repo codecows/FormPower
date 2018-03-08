@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="app.system.form.mappers.FormDefMapper">
-    <resultMap id="BaseResultMap" type="app.system.form.entities.FormDefEntity">
+    <resultMap id="BaseResultMap" type="app.dao.entities.SysFormDef">
         <id column="form_id" jdbcType="VARCHAR" property="formId"/>
         <result column="form_name" jdbcType="VARCHAR" property="formName"/>
+        <result column="form_group" jdbcType="VARCHAR" property="formGroup"/>
+        <result column="form_img" jdbcType="VARCHAR" property="formImg"/>
+        <result column="f_type" jdbcType="VARCHAR" property="fType"/>
+        <result column="is_single" jdbcType="VARCHAR" property="isSingle"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
         <result column="order_num" jdbcType="NUMERIC" property="orderNum"/>
         <result column="status" jdbcType="VARCHAR" property="status"/>
@@ -12,13 +16,8 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        d.form_id,
-        d.form_name,
-        d.remark,
-        d.order_num,
-        d.status,
-        d.operation_time,
-        d.operation_persion
+        form_id, form_name, form_group, form_img, f_type, is_single, remark, order_num, status,
+        operation_time, operation_persion
     </sql>
 
     <select id="selectAll" resultMap="BaseResultMap">
@@ -41,55 +40,5 @@
         </if>
 
     </select>
-
-    <insert id="insertItem" parameterType="app.system.form.entities.FormDefEntity">
-        INSERT INTO sys_form_def
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="formId != null">
-                form_id,
-            </if>
-            <if test="formName != null">
-                form_name,
-            </if>
-            <if test="remark != null">
-                remark,
-            </if>
-            <if test="orderNum != null">
-                order_num,
-            </if>
-            <if test="status != null">
-                status,
-            </if>
-            <if test="operationTime != null">
-                operation_time,
-            </if>
-            <if test="operationPersion != null">
-                operation_persion,
-            </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="formId != null">
-                #{formId,jdbcType=VARCHAR},
-            </if>
-            <if test="formName != null">
-                #{formName,jdbcType=VARCHAR},
-            </if>
-            <if test="remark != null">
-                #{remark,jdbcType=VARCHAR},
-            </if>
-            <if test="orderNum != null">
-                #{orderNum,jdbcType=NUMERIC},
-            </if>
-            <if test="status != null">
-                #{status,jdbcType=VARCHAR},
-            </if>
-            <if test="operationTime != null">
-                #{operationTime,jdbcType=DATE},
-            </if>
-            <if test="operationPersion != null">
-                #{operationPersion,jdbcType=VARCHAR},
-            </if>
-        </trim>
-    </insert>
 
 </mapper>

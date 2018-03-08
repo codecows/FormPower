@@ -11,8 +11,6 @@ public class SysFormRelationship {
 
     private String relationshipType;
 
-    private String relationshipValue;
-
     private Date operationDate;
 
     private String operationPersion;
@@ -47,14 +45,6 @@ public class SysFormRelationship {
 
     public void setRelationshipType(String relationshipType) {
         this.relationshipType = relationshipType == null ? null : relationshipType.trim();
-    }
-
-    public String getRelationshipValue() {
-        return relationshipValue;
-    }
-
-    public void setRelationshipValue(String relationshipValue) {
-        this.relationshipValue = relationshipValue == null ? null : relationshipValue.trim();
     }
 
     public Date getOperationDate() {

@@ -1,6 +1,7 @@
 package app.system.form.mappers;
 
-import app.system.form.entities.FormDefEntity;
+import app.dao.entities.SysFormDef;
+import app.dao.mappers.SysFormDefMapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -8,11 +9,10 @@ import java.util.List;
 /**
  * Created by real on 2018/2/24.
  */
-public interface FormDefMapper {
+public interface FormDefMapper extends SysFormDefMapper {
 
-    List<FormDefEntity> selectAll();
+    List<SysFormDef> selectAll();
 
-    List<FormDefEntity> selectByPage(@Param("start") int start, @Param("length") int length);
+    List<SysFormDef> selectByPage(@Param("start") int start, @Param("length") int length);
 
-    void insertItem(@Param("formDefEntity") FormDefEntity formDefEntity);
 }

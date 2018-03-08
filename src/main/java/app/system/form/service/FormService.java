@@ -1,5 +1,6 @@
 package app.system.form.service;
 
+import app.comn.ServiceException;
 import app.system.form.model.Form;
 
 import java.util.List;
@@ -12,4 +13,8 @@ public interface FormService {
     List<Form> getItems();
 
     List<Form> getItemsByPage(int start, int length);
+
+    void addItem(Form form) throws ServiceException;
+
+    void delItem(String formId) throws ServiceException;
 }

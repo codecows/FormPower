@@ -2,9 +2,7 @@ package app.dao.mappers;
 
 import app.dao.entities.SysFormDef;
 import app.dao.entities.SysFormDefExample;
-
 import java.util.List;
-
 import org.apache.ibatis.annotations.Param;
 
 public interface SysFormDefMapper {

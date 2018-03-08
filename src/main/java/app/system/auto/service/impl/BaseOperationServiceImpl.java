@@ -26,6 +26,11 @@ public class BaseOperationServiceImpl implements BaseOperationService {
     }
 
     @Override
+    public void dropTable(String tablename) {
+        operationMapper.dropTable(tablename);
+    }
+
+    @Override
     public void addColumn(String tablename, List body) {
         operationMapper.addColumn(tablename, body);
     }

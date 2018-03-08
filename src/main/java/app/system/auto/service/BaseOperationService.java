@@ -11,6 +11,8 @@ public interface BaseOperationService {
 
     void createTable(String tablename, String tablecomment, List tablebody);
 
+    void dropTable(String tablename);
+
     void addColumn(String tablename, List body);
 
     void createFunction(BaseFunctionModel baseFunctionModel);

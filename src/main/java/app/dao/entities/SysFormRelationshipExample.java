@@ -16,20 +16,20 @@ public class SysFormRelationshipExample {
         oredCriteria = new ArrayList<Criteria>();
     }
 
-    public void setOrderByClause(String orderByClause) {
-        this.orderByClause = orderByClause;
-    }
-
     public String getOrderByClause() {
         return orderByClause;
     }
 
-    public void setDistinct(boolean distinct) {
-        this.distinct = distinct;
+    public void setOrderByClause(String orderByClause) {
+        this.orderByClause = orderByClause;
     }
 
     public boolean isDistinct() {
         return distinct;
+    }
+
+    public void setDistinct(boolean distinct) {
+        this.distinct = distinct;
     }
 
     public List<Criteria> getOredCriteria() {
@@ -412,76 +412,6 @@ public class SysFormRelationshipExample {
             return (Criteria) this;
         }
 
-        public Criteria andRelationshipValueIsNull() {
-            addCriterion("relationship_value is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andRelationshipValueIsNotNull() {
-            addCriterion("relationship_value is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andRelationshipValueEqualTo(String value) {
-            addCriterion("relationship_value =", value, "relationshipValue");
-            return (Criteria) this;
-        }
-
-        public Criteria andRelationshipValueNotEqualTo(String value) {
-            addCriterion("relationship_value <>", value, "relationshipValue");
-            return (Criteria) this;
-        }
-
-        public Criteria andRelationshipValueGreaterThan(String value) {
-            addCriterion("relationship_value >", value, "relationshipValue");
-            return (Criteria) this;
-        }
-
-        public Criteria andRelationshipValueGreaterThanOrEqualTo(String value) {
-            addCriterion("relationship_value >=", value, "relationshipValue");
-            return (Criteria) this;
-        }
-
-        public Criteria andRelationshipValueLessThan(String value) {
-            addCriterion("relationship_value <", value, "relationshipValue");
-            return (Criteria) this;
-        }
-
-        public Criteria andRelationshipValueLessThanOrEqualTo(String value) {
-            addCriterion("relationship_value <=", value, "relationshipValue");
-            return (Criteria) this;
-        }
-
-        public Criteria andRelationshipValueLike(String value) {
-            addCriterion("relationship_value like", value, "relationshipValue");
-            return (Criteria) this;
-        }
-
-        public Criteria andRelationshipValueNotLike(String value) {
-            addCriterion("relationship_value not like", value, "relationshipValue");
-            return (Criteria) this;
-        }
-
-        public Criteria andRelationshipValueIn(List<String> values) {
-            addCriterion("relationship_value in", values, "relationshipValue");
-            return (Criteria) this;
-        }
-
-        public Criteria andRelationshipValueNotIn(List<String> values) {
-            addCriterion("relationship_value not in", values, "relationshipValue");
-            return (Criteria) this;
-        }
-
-        public Criteria andRelationshipValueBetween(String value1, String value2) {
-            addCriterion("relationship_value between", value1, value2, "relationshipValue");
-            return (Criteria) this;
-        }
-
-        public Criteria andRelationshipValueNotBetween(String value1, String value2) {
-            addCriterion("relationship_value not between", value1, value2, "relationshipValue");
-            return (Criteria) this;
-        }
-
         public Criteria andOperationDateIsNull() {
             addCriterion("operation_date is null");
             return (Criteria) this;
@@ -637,38 +567,6 @@ public class SysFormRelationshipExample {
 
         private String typeHandler;
 
-        public String getCondition() {
-            return condition;
-        }
-
-        public Object getValue() {
-            return value;
-        }
-
-        public Object getSecondValue() {
-            return secondValue;
-        }
-
-        public boolean isNoValue() {
-            return noValue;
-        }
-
-        public boolean isSingleValue() {
-            return singleValue;
-        }
-
-        public boolean isBetweenValue() {
-            return betweenValue;
-        }
-
-        public boolean isListValue() {
-            return listValue;
-        }
-
-        public String getTypeHandler() {
-            return typeHandler;
-        }
-
         protected Criterion(String condition) {
             super();
             this.condition = condition;
@@ -703,6 +601,38 @@ public class SysFormRelationshipExample {
 
         protected Criterion(String condition, Object value, Object secondValue) {
             this(condition, value, secondValue, null);
+        }
+
+        public String getCondition() {
+            return condition;
+        }
+
+        public Object getValue() {
+            return value;
+        }
+
+        public Object getSecondValue() {
+            return secondValue;
+        }
+
+        public boolean isNoValue() {
+            return noValue;
+        }
+
+        public boolean isSingleValue() {
+            return singleValue;
+        }
+
+        public boolean isBetweenValue() {
+            return betweenValue;
+        }
+
+        public boolean isListValue() {
+            return listValue;
+        }
+
+        public String getTypeHandler() {
+            return typeHandler;
         }
     }
 }
