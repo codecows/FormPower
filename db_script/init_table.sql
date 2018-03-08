@@ -1029,12 +1029,13 @@ COMMENT ON TABLE "public"."sys_attribute_information" IS '属性信息表';
 
 
 CREATE TABLE "public"."sys_form_relationship" (
-  "r_id"              VARCHAR(36) COLLATE "pg_catalog"."default" NOT NULL,
-  "parent_id"         VARCHAR(36) COLLATE "pg_catalog"."default",
-  "child_id"          VARCHAR(36) COLLATE "pg_catalog"."default",
-  "relationship_type" VARCHAR(255) COLLATE "pg_catalog"."default",
-  "operation_date"    DATE,
-  "operation_persion" VARCHAR(255) COLLATE "pg_catalog"."default"
+  "r_id"               VARCHAR(36) COLLATE "pg_catalog"."default" NOT NULL,
+  "parent_id"          VARCHAR(36) COLLATE "pg_catalog"."default",
+  "child_id"           VARCHAR(36) COLLATE "pg_catalog"."default",
+  "relationship_type"  VARCHAR(255) COLLATE "pg_catalog"."default",
+  "relationship_value" TEXT COLLATE "pg_catalog"."default",
+  "operation_date"     DATE,
+  "operation_persion"  VARCHAR(255) COLLATE "pg_catalog"."default"
 );
 
 ALTER TABLE "public"."sys_form_relationship"
@@ -1047,6 +1048,8 @@ COMMENT ON COLUMN "public"."sys_form_relationship"."parent_id" IS '主表单or�
 COMMENT ON COLUMN "public"."sys_form_relationship"."child_id" IS '子表单or表ID';
 
 COMMENT ON COLUMN "public"."sys_form_relationship"."relationship_type" IS '关系类型';
+
+COMMENT ON COLUMN "public"."sys_form_relationship"."relationship_value" IS '连接条件';
 
 COMMENT ON COLUMN "public"."sys_form_relationship"."operation_date" IS '操作时间';
 
