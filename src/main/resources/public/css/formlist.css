@@ -77,8 +77,32 @@ a:active {
 .form-group {
     margin: 0px;
     vertical-align: middle;
-    padding:3px;
+    padding: 3px;
 }
-.table{
-    margin: 10px;
+
+.table {
+margin-bottom: 0px;
+}
+
+.tabbable-line {
+    margin-top: 5px;
+    margin-left: 0px;
+    margin-right: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-bottom: 5px;
+}
+
+.tab-content {
+    margin-left: 0px;
+    margin-right: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-bottom: 5px;
+}
+
+.tab-pane {
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
 }

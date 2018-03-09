@@ -87,6 +87,16 @@ var FormList = function () {
             }
             $(this).parent().after(clone);
         });
+        designCanvas.on('click', "[type='copyTabBtn']", function (event) {
+            event.stopPropagation();
+            var clone = $(this).parent().clone();
+            if (clone.hasClass("control-active")) {
+                clone.removeClass("control-active")
+            }
+            $(this).parent().after(clone);
+        })
+
+
         //fixme  选中变色
         designCanvas.on('click', ".control-shadow", function () {
             var the = $(this);
@@ -424,11 +434,11 @@ var FormList = function () {
                     elHtml = "分组标题";
                     break;
                 case "2004":
-                    var cc = "<a href='javascript:;' style='margin: 0px;padding: 0px' class='pull-right'>" +
-                        "                    <i class='fa fa-copy'></i> &nbsp;" +
-                        "       </a>";
-                    elHtml = "<table width='100%' class='table table-bordered'>" +
-                        "<thead><th>列标题" + cc + "</th><th>列标题</th><th>列标题</th></thead>" +
+                    var copyTabBtn = "<a type='copyTabBtn' href='javascript:;' class='btn btn-xs'><i class='fa fa-copy'></i> 复制子表 </a>";
+                    var delTabBtn = "<a type='delTabBtn' href='javascript:;' class='btn btn-xs'><i class='fa fa-times'></i> 删除子表 </a>";
+                    var delAllTabBtn = "<a type='delAllTabBtn' href='javascript:;' class='btn btn-xs'><i class='fa fa-times'></i> 删除所有子表 </a>";
+                    var tabHtml = "<table width='100%' class='table table-bordered'>" +
+                        "<thead><th>列标题</th><th>列标题</th><th>列标题</th></thead>" +
                         "<tbody>" +
                         "<tr>" +
                         "<td>" +
@@ -458,6 +468,19 @@ var FormList = function () {
                         "<tr><td><input type='checkbox'>排序</td><td><input type='checkbox'>排序</td><td><input type='checkbox'>排序</td></tr>" +
                         "<tr><td><input type='checkbox'>显示</td><td><input type='checkbox'>显示</td><td><input type='checkbox'>显示</td></tr>" +
                         "</tbody></table>";
+                    var tabId = "tab" + new Date().getTime();
+                    elHtml = "<div class='tabbable-line'>" +
+                        "    <ul class='nav nav-tabs '>" +
+                        "        <li class='active'><a href='#" + tabId + "' data-toggle='tab' aria-expanded='true'> 子表标题 </a></li>" +
+                        "    </ul>" +
+                        "    <div class='tab-content'>" +
+                        "        <div class='tab-pane active' id='" + tabId + "'>" +
+                        tabHtml +
+                        copyTabBtn + "&nbsp;" + delTabBtn + "&nbsp;" + delAllTabBtn
+                    "        </div>" +
+                    "    </div>" +
+                    "</div> ";
+
                     break;
 
             }
@@ -476,7 +499,7 @@ var FormList = function () {
                     jqEl.removeClass('col-md-6');
                     jqEl.attr('colmdvalue', 12);
                     jqEl.addClass('col-md-12');
-                    // jqEl.css('background', '#FFFFFF');
+                    jqEl.css('padding', '0px 5px 0px 5px');
                 }
                 jqEl.attr("isReady", "true");
             }
