@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="app.system.form.mappers.FieldInfoMapper">
+    <resultMap id="BaseResultMap" type="app.system.form.entities.FieldInfoEntity">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="form_id" jdbcType="VARCHAR" property="formId"/>
+        <result column="field_id" jdbcType="VARCHAR" property="fieldId"/>
+        <result column="item_title" jdbcType="VARCHAR" property="itemTitle"/>
+        <result column="item_prompt" jdbcType="VARCHAR" property="itemPrompt"/>
+        <result column="item_code" jdbcType="VARCHAR" property="itemCode"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="operation_date" jdbcType="DATE" property="operationDate"/>
+        <result column="operation_persion" jdbcType="VARCHAR" property="operationPersion"/>
+        <collection property="sysAttributeInformations" ofType="app.dao.entities.SysAttributeInformation">
+            <id column="aid" jdbcType="VARCHAR" property="id"/>
+            <result column="object_id" jdbcType="VARCHAR" property="objectId"/>
+            <result column="attribute_id" jdbcType="VARCHAR" property="attributeId"/>
+            <result column="attribute_name" jdbcType="VARCHAR" property="attributeName"/>
+            <result column="attribute_value" jdbcType="VARCHAR" property="attributeValue"/>
+            <result column="attribute_type" jdbcType="VARCHAR" property="attributeType"/>
+            <result column="aremark" jdbcType="VARCHAR" property="remark"/>
+            <result column="order_num" jdbcType="NUMERIC" property="orderNum"/>
+            <result column="aoperation_date" jdbcType="DATE" property="operationDate"/>
+            <result column="aoperation_persion" jdbcType="VARCHAR" property="operationPersion"/>
+        </collection>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        fi."id",
+        fi.form_id,
+        fi.field_id,
+        fi.item_title,
+        fi.item_prompt,
+        fi.item_code,
+        fi.remark,
+        fi.operation_date,
+        fi.operation_persion,
+        ai."id" as aid,
+        ai.object_id,
+        ai.attribute_id,
+        ai.attribute_name,
+        ai.attribute_value,
+        ai.attribute_type,
+        ai.remark as aremark,
+        ai.order_num,
+        ai.operation_date as aoperation_date,
+        ai.operation_persion as aoperation_persion
+    </sql>
+
+    <select id="getItemsByFormId" resultMap="BaseResultMap" parameterType="java.lang.String">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        sys_form_information fi
+        LEFT OUTER JOIN sys_attribute_information ai ON fi."id" = ai.object_id
+        WHERE
+        fi.form_id = #{formid,jdbcType=VARCHAR}
+    </select>
+
+
+</mapper>
