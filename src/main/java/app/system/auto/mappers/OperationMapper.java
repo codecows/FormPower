@@ -1,5 +1,6 @@
 package app.system.auto.mappers;
 
+import app.system.auto.model.BaseColumnModel;
 import app.system.auto.model.BaseFunctionModel;
 import org.apache.ibatis.annotations.Param;
 
@@ -14,7 +15,7 @@ public interface OperationMapper {
     int existTable(@Param("tablename") String tablename);
 
     /*创建表，传入参数：表名，表描述，列属性的列表*/
-    void createTable(@Param("tablename") String tablename, @Param("tablecomment") String tablecomment, @Param("tablebody") List body);
+    void createTable(@Param("tablename") String tablename, @Param("tablecomment") String tablecomment, @Param("tablebody") List<BaseColumnModel> baseColumnModels);
 
     /*删除表，传入参数：表名*/
     void dropTable(@Param("tablename") String tablename);
@@ -23,10 +24,10 @@ public interface OperationMapper {
     int existColumn(@Param("tablename") String tablename, @Param("columnname") String columnname);
 
     /*增加列，传入参数：表名，列属性列表*/
-    void addColumn(@Param("tablename") String tablename, @Param("columnbody") List columnbody);
+    void addColumn(@Param("tablename") String tablename, @Param("columnbody") List<BaseColumnModel> baseColumnModels);
 
     /*删除列，传入参数：表名，列名列表*/
-    void dropColumn(@Param("tablename") String tablename, @Param("columnbody") List columnbody);
+    void dropColumn(@Param("tablename") String tablename, @Param("columnbody") List<BaseColumnModel> baseColumnModels);
 
     /*创建函数，传入参数：基本函数对象*/
     void createFunction(@Param("func") BaseFunctionModel baseFunctionModel);

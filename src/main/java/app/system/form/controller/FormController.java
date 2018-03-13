@@ -4,15 +4,18 @@ import app.base.Result;
 import app.comn.ResponseCode;
 import app.comn.ServiceException;
 import app.system.auto.entities.SysBaseTabEntity;
+import app.system.auto.model.BaseColumnModel;
 import app.system.auto.service.BaseOperationService;
 import app.system.auto.service.BaseTableTmplService;
 import app.system.form.model.DataTableRequest;
 import app.system.form.model.DataTableResponse;
+import app.system.form.model.FieldInfo;
 import app.system.form.model.Form;
 import app.system.form.service.FormService;
 import app.utils.JsonUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.BeanUtils;
 import org.springframework.util.Base64Utils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,8 +24,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
+import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
@@ -30,7 +35,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @RestController
 @RequestMapping("system/form")
 public class FormController {
-
+    //todo 需要进一步修改，将业务逻辑添加到service中
     @Resource
     private FormService formService;
 
@@ -40,6 +45,8 @@ public class FormController {
     @Resource
     private BaseTableTmplService baseTableTmplService;
 
+    @ApiOperation(value = "获取表单定义列表",
+            notes = "分页获取表单列表")
     @RequestMapping(path = "getFormList/{base64Param}", method = GET)
     public Result<DataTableResponse> getFormList(@PathVariable String base64Param) {
         DataTableRequest dataTableRequest;
@@ -83,13 +90,20 @@ public class FormController {
         String comment = form.getFormName();
         List<SysBaseTabEntity> base_tab = baseTableTmplService.getTableBody("base_tab");
 
-        baseOperationService.createTable(tablename, comment, base_tab);
+        ArrayList<BaseColumnModel> baseColumnModels = new ArrayList<>();
+        for (SysBaseTabEntity sysBaseTabEntity : base_tab) {
+            BaseColumnModel baseColumnModel = new BaseColumnModel();
+            BeanUtils.copyProperties(sysBaseTabEntity, baseColumnModel);
+            baseColumnModels.add(baseColumnModel);
+        }
+
+        baseOperationService.createTable(tablename, comment, baseColumnModels);
         return new Result<>(ResponseCode.Success);
     }
 
     @ApiOperation(value = "删除表单定义",
             notes = "删除表单，同时删除基础表")
-    @RequestMapping(path = "delForm/{formId}", method = POST)
+    @RequestMapping(path = "delForm/{formId}", method = DELETE)
     public Result<Integer> delForm(@PathVariable String formId) {
         //删除表单定义表中数据
         try {
@@ -102,5 +116,14 @@ public class FormController {
 
         baseOperationService.dropTable(tablename);
         return new Result<>(ResponseCode.Success);
+    }
+
+    @ApiOperation(value = "设计表单",
+            notes = "设计表单，插入表单信息表数据，并修改其基础表")
+    @RequestMapping(path = "designForm", method = POST)
+    public Result<Integer> designForm(@RequestBody FieldInfo fieldInfo) {
+
+        //todo 未完成！
+        return null;
     }
 }

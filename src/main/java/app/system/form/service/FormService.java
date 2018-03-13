@@ -1,6 +1,7 @@
 package app.system.form.service;
 
 import app.comn.ServiceException;
+import app.system.form.model.FieldInfo;
 import app.system.form.model.Form;
 
 import java.util.List;
@@ -17,4 +18,8 @@ public interface FormService {
     void addItem(Form form) throws ServiceException;
 
     void delItem(String formId) throws ServiceException;
+
+    List<FieldInfo> selectFieldByFormId(String formId);
+
+    void designForm(List<FieldInfo> fieldInfo);
 }

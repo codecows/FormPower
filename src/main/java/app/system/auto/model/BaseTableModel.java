@@ -1,6 +1,6 @@
 package app.system.auto.model;
 
-import app.system.auto.entities.SysBaseTabEntity;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -15,7 +15,7 @@ public class BaseTableModel {
     @ApiModelProperty("表名")
     private String tableName;
     @ApiModelProperty("列模型列表")
-    private List<SysBaseTabEntity> columnBodyList;
+    private List<BaseColumnModel> columnBodyList;
 
     public String getTableName() {
         return tableName;
@@ -25,11 +25,11 @@ public class BaseTableModel {
         this.tableName = tableName;
     }
 
-    public List<SysBaseTabEntity> getColumnBodyList() {
+    public List<BaseColumnModel> getColumnBodyList() {
         return columnBodyList;
     }
 
-    public void setColumnBodyList(List<SysBaseTabEntity> columnBodyList) {
+    public void setColumnBodyList(List<BaseColumnModel> columnBodyList) {
         this.columnBodyList = columnBodyList;
     }
 }

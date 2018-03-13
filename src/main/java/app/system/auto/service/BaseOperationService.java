@@ -1,5 +1,6 @@
 package app.system.auto.service;
 
+import app.system.auto.model.BaseColumnModel;
 import app.system.auto.model.BaseFunctionModel;
 
 import java.util.List;
@@ -9,11 +10,11 @@ import java.util.List;
  */
 public interface BaseOperationService {
 
-    void createTable(String tablename, String tablecomment, List tablebody);
+    void createTable(String tablename, String tablecomment, List<BaseColumnModel> baseColumnModels);
 
     void dropTable(String tablename);
 
-    void addColumn(String tablename, List body);
+    void addColumn(String tablename, List<BaseColumnModel> baseColumnModels);
 
     void createFunction(BaseFunctionModel baseFunctionModel);
 

@@ -3,6 +3,7 @@ package app.system.auto.controller;
 import app.base.Result;
 import app.comn.ResponseCode;
 import app.system.auto.entities.SysBaseTabEntity;
+import app.system.auto.model.BaseColumnModel;
 import app.system.auto.model.BaseFunctionModel;
 import app.system.auto.model.ExecFunc;
 import app.system.auto.service.BaseOperationService;
@@ -43,19 +44,21 @@ public class OperationController {
 
         List<SysBaseTabEntity> tableBody = baseTableTmplService.getTableBody(tmplname);
 
-        baseOperationService.createTable(tablename, tablecomment, tableBody);
+        ArrayList<BaseColumnModel> baseColumnModels = new ArrayList<>();
+        for (SysBaseTabEntity sysBaseTabEntity : tableBody) {
+            BaseColumnModel baseColumnModel = new BaseColumnModel();
+            BeanUtils.copyProperties(sysBaseTabEntity, baseColumnModel);
+            baseColumnModels.add(baseColumnModel);
+        }
+
+        baseOperationService.createTable(tablename, tablecomment, baseColumnModels);
     }
 
     @RequestMapping(path = "addColumn/{tablename}", method = POST)
-    public void addColumn(@PathVariable String tablename, @RequestBody SysBaseTabEntity sysBaseTabEntity) {
+    public void addColumn(@PathVariable String tablename, @RequestBody List<BaseColumnModel> baseColumnModels) {
 
-        //todo 测试addColumn
-        //todo SysBaseTabEntity为表列模型
 
-        ArrayList<Object> objects = new ArrayList<>();
-        objects.add(sysBaseTabEntity);
-
-        baseOperationService.addColumn(tablename, objects);
+        baseOperationService.addColumn(tablename, baseColumnModels);
 
     }
 

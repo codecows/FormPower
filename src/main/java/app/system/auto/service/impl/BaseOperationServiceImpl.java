@@ -1,6 +1,7 @@
 package app.system.auto.service.impl;
 
 import app.system.auto.mappers.OperationMapper;
+import app.system.auto.model.BaseColumnModel;
 import app.system.auto.model.BaseFunctionModel;
 import app.system.auto.service.BaseOperationService;
 import org.springframework.stereotype.Service;
@@ -19,9 +20,9 @@ public class BaseOperationServiceImpl implements BaseOperationService {
     private OperationMapper operationMapper;
 
     @Override
-    public void createTable(String tablename, String tablecomment, List tablebody) {
+    public void createTable(String tablename, String tablecomment, List<BaseColumnModel> baseColumnModels) {
 
-        operationMapper.createTable(tablename, tablecomment, tablebody);
+        operationMapper.createTable(tablename, tablecomment, baseColumnModels);
 
     }
 
@@ -31,8 +32,8 @@ public class BaseOperationServiceImpl implements BaseOperationService {
     }
 
     @Override
-    public void addColumn(String tablename, List body) {
-        operationMapper.addColumn(tablename, body);
+    public void addColumn(String tablename, List<BaseColumnModel> baseColumnModels) {
+        operationMapper.addColumn(tablename, baseColumnModels);
     }
 
     @Override
