@@ -8,7 +8,7 @@ public class SysAttributeInformation {
 
     private String objectId;
 
-    private String attributeId;
+    private String attributeCode;
 
     private String attributeName;
 
@@ -40,12 +40,12 @@ public class SysAttributeInformation {
         this.objectId = objectId == null ? null : objectId.trim();
     }
 
-    public String getAttributeId() {
-        return attributeId;
+    public String getAttributeCode() {
+        return attributeCode;
     }
 
-    public void setAttributeId(String attributeId) {
-        this.attributeId = attributeId == null ? null : attributeId.trim();
+    public void setAttributeCode(String attributeCode) {
+        this.attributeCode = attributeCode == null ? null : attributeCode.trim();
     }
 
     public String getAttributeName() {

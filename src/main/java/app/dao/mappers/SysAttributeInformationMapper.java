@@ -2,9 +2,7 @@ package app.dao.mappers;
 
 import app.dao.entities.SysAttributeInformation;
 import app.dao.entities.SysAttributeInformationExample;
-
 import java.util.List;
-
 import org.apache.ibatis.annotations.Param;
 
 public interface SysAttributeInformationMapper {

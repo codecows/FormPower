@@ -3,10 +3,6 @@ package app.system.form.controller;
 import app.base.Result;
 import app.comn.ResponseCode;
 import app.comn.ServiceException;
-import app.system.auto.entities.SysBaseTabEntity;
-import app.system.auto.model.BaseColumnModel;
-import app.system.auto.service.BaseOperationService;
-import app.system.auto.service.BaseTableTmplService;
 import app.system.form.model.DataTableRequest;
 import app.system.form.model.DataTableResponse;
 import app.system.form.model.FieldInfo;
@@ -15,7 +11,6 @@ import app.system.form.service.FormService;
 import app.utils.JsonUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.BeanUtils;
 import org.springframework.util.Base64Utils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
@@ -39,11 +33,7 @@ public class FormController {
     @Resource
     private FormService formService;
 
-    @Resource
-    private BaseOperationService baseOperationService;
 
-    @Resource
-    private BaseTableTmplService baseTableTmplService;
 
     @ApiOperation(value = "获取表单定义列表",
             notes = "分页获取表单列表")
@@ -77,53 +67,51 @@ public class FormController {
 
     @ApiOperation(value = "新增表单定义",
             notes = "新增表单，同时建立基础表")
-    @RequestMapping(path = "addForm", method = POST)
-    public Result<Integer> addForm(@RequestBody Form form) {
+    @RequestMapping(path = "createForm", method = POST)
+    public Result<Integer> createForm(@RequestBody Form form) {
         //向表单定义表中增加数据
         try {
-            formService.addItem(form);
+            formService.createForm(form);
         } catch (ServiceException e) {
             return new Result<>(e.getResponseCode());
         }
-        //新建基础表
-        String tablename = "auto_t_" + form.getFormId();
-        String comment = form.getFormName();
-        List<SysBaseTabEntity> base_tab = baseTableTmplService.getTableBody("base_tab");
 
-        ArrayList<BaseColumnModel> baseColumnModels = new ArrayList<>();
-        for (SysBaseTabEntity sysBaseTabEntity : base_tab) {
-            BaseColumnModel baseColumnModel = new BaseColumnModel();
-            BeanUtils.copyProperties(sysBaseTabEntity, baseColumnModel);
-            baseColumnModels.add(baseColumnModel);
-        }
-
-        baseOperationService.createTable(tablename, comment, baseColumnModels);
         return new Result<>(ResponseCode.Success);
     }
 
     @ApiOperation(value = "删除表单定义",
             notes = "删除表单，同时删除基础表")
-    @RequestMapping(path = "delForm/{formId}", method = DELETE)
-    public Result<Integer> delForm(@PathVariable String formId) {
+    @RequestMapping(path = "dropForm/{formId}", method = DELETE)
+    public Result<Integer> dropForm(@PathVariable String formId) {
         //删除表单定义表中数据
         try {
-            formService.delItem(formId);
+            formService.dropForm(formId);
         } catch (ServiceException e) {
             return new Result<>(e.getResponseCode());
         }
-        //删除基础表
-        String tablename = "auto_t_" + formId;
 
-        baseOperationService.dropTable(tablename);
         return new Result<>(ResponseCode.Success);
     }
 
     @ApiOperation(value = "设计表单",
             notes = "设计表单，插入表单信息表数据，并修改其基础表")
     @RequestMapping(path = "designForm", method = POST)
-    public Result<Integer> designForm(@RequestBody FieldInfo fieldInfo) {
+    public Result<Integer> designForm(@RequestBody List<FieldInfo> fieldInfo) {
 
-        //todo 未完成！
-        return null;
+
+        try {
+            formService.designForm(fieldInfo);
+        } catch (ServiceException e) {
+            return new Result<>(e.getResponseCode());
+        }
+
+        return new Result<>(ResponseCode.Success);
+    }
+
+    @ApiOperation(value = "获取表单设计信息",
+            notes = "根据formid获取表单设计信息")
+    @RequestMapping(path = "fatchFormDesignInformation/{formId}", method = GET)
+    public Result<List<FieldInfo>> fatchFormDesignInformation(@PathVariable String formId) {
+        return new Result<>(ResponseCode.Success, formService.fatchFormDesignInformation(formId));
     }
 }

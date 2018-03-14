@@ -8,6 +8,10 @@ import app.dao.entities.SysFormDefExample;
 import app.dao.entities.SysFormInformation;
 import app.dao.mappers.SysAttributeInformationMapper;
 import app.dao.mappers.SysFormInformationMapper;
+import app.system.auto.entities.SysBaseTabEntity;
+import app.system.auto.model.BaseColumnModel;
+import app.system.auto.service.BaseOperationService;
+import app.system.auto.service.BaseTableTmplService;
 import app.system.form.converter.FormConverter;
 import app.system.form.entities.FieldInfoEntity;
 import app.system.form.mappers.FieldInfoMapper;
@@ -45,6 +49,13 @@ public class FormServiceImpl implements FormService {
     @Resource
     private SysAttributeInformationMapper sysAttributeInformationMapper;
 
+    @Resource
+    private BaseTableTmplService baseTableTmplService;
+
+    @Resource
+    private BaseOperationService baseOperationService;
+
+
 
     @Override
     public List<Form> getItems() {
@@ -62,7 +73,11 @@ public class FormServiceImpl implements FormService {
     }
 
     @Override
-    public void addItem(Form form) throws ServiceException {
+    public void createForm(Form form) throws ServiceException {
+
+        /**
+         * 在formdef表中增加数据
+         * */
         SysFormDefExample sysFormDefExample = new SysFormDefExample();
         sysFormDefExample.createCriteria().andFormIdEqualTo(form.getFormId());
 
@@ -76,10 +91,30 @@ public class FormServiceImpl implements FormService {
         } catch (DataAccessException e) {
             throw new ServiceException(ResponseCode.UnknowSqlException);
         }
+
+        /**
+         * 创建基础表
+         * */
+        String tablename = "auto_t_" + form.getFormId();
+        String comment = form.getFormName();
+        List<SysBaseTabEntity> base_tab = baseTableTmplService.getTableBody("base_tab");
+
+        ArrayList<BaseColumnModel> baseColumnModels = new ArrayList<>();
+        for (SysBaseTabEntity sysBaseTabEntity : base_tab) {
+            BaseColumnModel baseColumnModel = new BaseColumnModel();
+            BeanUtils.copyProperties(sysBaseTabEntity, baseColumnModel);
+            baseColumnModels.add(baseColumnModel);
+        }
+
+        baseOperationService.createTable(tablename, comment, baseColumnModels);
     }
 
     @Override
-    public void delItem(String formId) throws ServiceException {
+    public void dropForm(String formId) throws ServiceException {
+
+        /**
+         * 删除formdef表中的信息
+         * */
         SysFormDefExample sysFormDefExample = new SysFormDefExample();
         sysFormDefExample.createCriteria().andFormIdEqualTo(formId);
 
@@ -93,7 +128,12 @@ public class FormServiceImpl implements FormService {
             throw new ServiceException(ResponseCode.UnknowSqlException);
         }
 
+        /**
+         * 删除数据表
+         * */
+        String tablename = "auto_t_" + formId;
 
+        baseOperationService.dropTable(tablename);
     }
 
     @Override
@@ -118,23 +158,83 @@ public class FormServiceImpl implements FormService {
     }
 
     @Override
-    public void designForm(List<FieldInfo> fieldInfo) {
+    public void designForm(List<FieldInfo> fieldInfo) throws ServiceException {
 
-        /*
-        * 循环把FieldInfo对象Copy到SysFormInformation对象，然后insertSelective
-        * 循环把AttributeModel对象Copy到SysAttributeInformation对象，然后insertSelective
-        * */
+        /**
+         * 循环把FieldInfo对象Copy到SysFormInformation对象，然后insertSelective
+         * 循环把AttributeModel对象Copy到SysAttributeInformation对象，然后insertSelective
+         *修改基础表，增加新字段
+         *  */
+        String tableName = null;
+
+        ArrayList<BaseColumnModel> baseColumnModels = new ArrayList<>();
         for (FieldInfo f : fieldInfo) {
             SysFormInformation sysFormInformation = new SysFormInformation();
             BeanUtils.copyProperties(f, sysFormInformation);
-            sysFormInformationMapper.insertSelective(sysFormInformation);
+            /**
+             * 提取表名
+             * **/
+            if (tableName == null) {
+                tableName = "auto_t_" + f.getFormId();
+            }
+            BaseColumnModel baseColumnModel = new BaseColumnModel();
+
             for (AttributeModel a : f.getAttributeModels()) {
                 SysAttributeInformation sysAttributeInformation = new SysAttributeInformation();
                 BeanUtils.copyProperties(a, sysAttributeInformation);
-                sysAttributeInformationMapper.insertSelective(sysAttributeInformation);
+                try {
+                    sysAttributeInformationMapper.insertSelective(sysAttributeInformation);
+                } catch (DataAccessException e) {
+                    throw new ServiceException(ResponseCode.UnknowSqlException);
+                }
+
+                switch (a.getAttributeCode()) {
+                    case "fieldcode":
+                        baseColumnModel.setTabColumn(a.getAttributeValue());
+                        break;
+                    case "fieldtype":
+                        baseColumnModel.setTabColType(a.getAttributeValue());
+                        break;
+                    case "length":
+                        baseColumnModel.setTabColLength(Integer.valueOf(a.getAttributeValue()));
+                        break;
+                    case "smalllength":
+                        baseColumnModel.setTabColSmall(Integer.valueOf(a.getAttributeValue()));
+                        break;
+                    case "fieldname":
+                        baseColumnModel.setComment(a.getAttributeValue());
+                        break;
+                }
             }
+            try {
+                sysFormInformationMapper.insertSelective(sysFormInformation);
+            } catch (DataAccessException e) {
+                throw new ServiceException(ResponseCode.UnknowSqlException);
+            }
+            baseColumnModels.add(baseColumnModel);
         }
+
+        baseOperationService.addColumn(tableName, baseColumnModels);
     }
 
+    @Override
+    public List<FieldInfo> fatchFormDesignInformation(String formId) {
+        List<FieldInfoEntity> itemsByFormId = fieldInfoMapper.getItemsByFormId(formId);
+
+        ArrayList<FieldInfo> fieldInfos = new ArrayList<>();
+        for (FieldInfoEntity f : itemsByFormId) {
+            FieldInfo fieldInfo = new FieldInfo();
+            BeanUtils.copyProperties(f, fieldInfo);
+            ArrayList<AttributeModel> attributeModels = new ArrayList<>();
+            for (SysAttributeInformation a : f.getSysAttributeInformations()) {
+                AttributeModel attributeModel = new AttributeModel();
+                BeanUtils.copyProperties(a, attributeModel);
+                attributeModels.add(attributeModel);
+            }
+            fieldInfo.setAttributeModels(attributeModels);
+            fieldInfos.add(fieldInfo);
+        }
+        return fieldInfos;
+    }
 
 }

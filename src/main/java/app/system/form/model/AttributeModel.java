@@ -18,8 +18,8 @@ public class AttributeModel {
     @ApiModelProperty("对象ID")
     private String objectId;
 
-    @ApiModelProperty("属性基础ID")
-    private String attributeId;
+    @ApiModelProperty("属性编码")
+    private String attributeCode;
 
     @ApiModelProperty("属性名称")
     private String attributeName;
@@ -58,12 +58,12 @@ public class AttributeModel {
         this.objectId = objectId;
     }
 
-    public String getAttributeId() {
-        return attributeId;
+    public String getAttributeCode() {
+        return attributeCode;
     }
 
-    public void setAttributeId(String attributeId) {
-        this.attributeId = attributeId;
+    public void setAttributeCode(String attributeCode) {
+        this.attributeCode = attributeCode;
     }
 
     public String getAttributeName() {

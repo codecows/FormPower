@@ -908,6 +908,7 @@ COMMENT ON TABLE "public"."sys_exec_func" IS '表单关联函数表';
 CREATE TABLE "public"."sys_form_field_attribute" (
   "id"             VARCHAR(36) COLLATE "pg_catalog"."default" NOT NULL,
   "field_id"       VARCHAR(36) COLLATE "pg_catalog"."default",
+  "attribute_code" VARCHAR(36) COLLATE "pg_catalog"."default",
   "attribute_name" VARCHAR(255) COLLATE "pg_catalog"."default",
   "attribute_type" VARCHAR(255) COLLATE "pg_catalog"."default",
   "default_value"  VARCHAR(255) COLLATE "pg_catalog"."default",
@@ -924,6 +925,8 @@ ALTER TABLE "public"."sys_form_field_attribute"
 COMMENT ON COLUMN "public"."sys_form_field_attribute"."id" IS 'ID';
 
 COMMENT ON COLUMN "public"."sys_form_field_attribute"."field_id" IS '控件ID';
+
+COMMENT ON COLUMN "public"."sys_form_field_attribute"."attribute_code" IS '属性编码';
 
 COMMENT ON COLUMN "public"."sys_form_field_attribute"."attribute_name" IS '属性名称';
 
@@ -991,7 +994,7 @@ COMMENT ON TABLE "public"."sys_form_information" IS '表单信息表';
 CREATE TABLE "public"."sys_attribute_information" (
   "id"                VARCHAR(36) COLLATE "pg_catalog"."default" NOT NULL,
   "object_id"         VARCHAR(36) COLLATE "pg_catalog"."default",
-  "attribute_id"      VARCHAR(36) COLLATE "pg_catalog"."default",
+  "attribute_code"    VARCHAR(36) COLLATE "pg_catalog"."default",
   "attribute_name"    VARCHAR(255) COLLATE "pg_catalog"."default",
   "attribute_value"   TEXT COLLATE "pg_catalog"."default",
   "attribute_type"    VARCHAR(255) COLLATE "pg_catalog"."default",
@@ -1009,7 +1012,7 @@ COMMENT ON COLUMN "public"."sys_attribute_information"."id" IS 'ID';
 
 COMMENT ON COLUMN "public"."sys_attribute_information"."object_id" IS '对象ID';
 
-COMMENT ON COLUMN "public"."sys_attribute_information"."attribute_id" IS '属性id';
+COMMENT ON COLUMN "public"."sys_attribute_information"."attribute_code" IS '属性编码';
 
 COMMENT ON COLUMN "public"."sys_attribute_information"."attribute_name" IS '属性名称';
 

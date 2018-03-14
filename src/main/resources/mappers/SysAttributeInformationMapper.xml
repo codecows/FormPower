@@ -4,7 +4,7 @@
     <resultMap id="BaseResultMap" type="app.dao.entities.SysAttributeInformation">
         <id column="id" jdbcType="VARCHAR" property="id"/>
         <result column="object_id" jdbcType="VARCHAR" property="objectId"/>
-        <result column="attribute_id" jdbcType="VARCHAR" property="attributeId"/>
+        <result column="attribute_code" jdbcType="VARCHAR" property="attributeCode"/>
         <result column="attribute_name" jdbcType="VARCHAR" property="attributeName"/>
         <result column="attribute_value" jdbcType="VARCHAR" property="attributeValue"/>
         <result column="attribute_type" jdbcType="VARCHAR" property="attributeType"/>
@@ -74,7 +74,7 @@
         </where>
     </sql>
     <sql id="Base_Column_List">
-        id, object_id, attribute_id, attribute_name, attribute_value, attribute_type, remark,
+        id, object_id, attribute_code, attribute_name, attribute_value, attribute_type, remark,
         order_num, operation_date, operation_persion
     </sql>
     <select id="selectByExample" parameterType="app.dao.entities.SysAttributeInformationExample"
@@ -109,11 +109,11 @@
         </if>
     </delete>
     <insert id="insert" parameterType="app.dao.entities.SysAttributeInformation">
-        insert into sys_attribute_information (id, object_id, attribute_id,
+        insert into sys_attribute_information (id, object_id, attribute_code,
         attribute_name, attribute_value, attribute_type,
         remark, order_num, operation_date,
         operation_persion)
-        values (#{id,jdbcType=VARCHAR}, #{objectId,jdbcType=VARCHAR}, #{attributeId,jdbcType=VARCHAR},
+        values (#{id,jdbcType=VARCHAR}, #{objectId,jdbcType=VARCHAR}, #{attributeCode,jdbcType=VARCHAR},
         #{attributeName,jdbcType=VARCHAR}, #{attributeValue,jdbcType=VARCHAR}, #{attributeType,jdbcType=VARCHAR},
         #{remark,jdbcType=VARCHAR}, #{orderNum,jdbcType=NUMERIC}, #{operationDate,jdbcType=DATE},
         #{operationPersion,jdbcType=VARCHAR})
@@ -127,8 +127,8 @@
             <if test="objectId != null">
                 object_id,
             </if>
-            <if test="attributeId != null">
-                attribute_id,
+            <if test="attributeCode != null">
+                attribute_code,
             </if>
             <if test="attributeName != null">
                 attribute_name,
@@ -159,8 +159,8 @@
             <if test="objectId != null">
                 #{objectId,jdbcType=VARCHAR},
             </if>
-            <if test="attributeId != null">
-                #{attributeId,jdbcType=VARCHAR},
+            <if test="attributeCode != null">
+                #{attributeCode,jdbcType=VARCHAR},
             </if>
             <if test="attributeName != null">
                 #{attributeName,jdbcType=VARCHAR},
@@ -201,8 +201,8 @@
             <if test="record.objectId != null">
                 object_id = #{record.objectId,jdbcType=VARCHAR},
             </if>
-            <if test="record.attributeId != null">
-                attribute_id = #{record.attributeId,jdbcType=VARCHAR},
+            <if test="record.attributeCode != null">
+                attribute_code = #{record.attributeCode,jdbcType=VARCHAR},
             </if>
             <if test="record.attributeName != null">
                 attribute_name = #{record.attributeName,jdbcType=VARCHAR},
@@ -234,7 +234,7 @@
         update sys_attribute_information
         set id = #{record.id,jdbcType=VARCHAR},
         object_id = #{record.objectId,jdbcType=VARCHAR},
-        attribute_id = #{record.attributeId,jdbcType=VARCHAR},
+        attribute_code = #{record.attributeCode,jdbcType=VARCHAR},
         attribute_name = #{record.attributeName,jdbcType=VARCHAR},
         attribute_value = #{record.attributeValue,jdbcType=VARCHAR},
         attribute_type = #{record.attributeType,jdbcType=VARCHAR},
@@ -252,8 +252,8 @@
             <if test="objectId != null">
                 object_id = #{objectId,jdbcType=VARCHAR},
             </if>
-            <if test="attributeId != null">
-                attribute_id = #{attributeId,jdbcType=VARCHAR},
+            <if test="attributeCode != null">
+                attribute_code = #{attributeCode,jdbcType=VARCHAR},
             </if>
             <if test="attributeName != null">
                 attribute_name = #{attributeName,jdbcType=VARCHAR},
@@ -282,7 +282,7 @@
     <update id="updateByPrimaryKey" parameterType="app.dao.entities.SysAttributeInformation">
         update sys_attribute_information
         set object_id = #{objectId,jdbcType=VARCHAR},
-        attribute_id = #{attributeId,jdbcType=VARCHAR},
+        attribute_code = #{attributeCode,jdbcType=VARCHAR},
         attribute_name = #{attributeName,jdbcType=VARCHAR},
         attribute_value = #{attributeValue,jdbcType=VARCHAR},
         attribute_type = #{attributeType,jdbcType=VARCHAR},

@@ -273,73 +273,73 @@ public class SysAttributeInformationExample {
             return (Criteria) this;
         }
 
-        public Criteria andAttributeIdIsNull() {
-            addCriterion("attribute_id is null");
+        public Criteria andAttributeCodeIsNull() {
+            addCriterion("attribute_code is null");
             return (Criteria) this;
         }
 
-        public Criteria andAttributeIdIsNotNull() {
-            addCriterion("attribute_id is not null");
+        public Criteria andAttributeCodeIsNotNull() {
+            addCriterion("attribute_code is not null");
             return (Criteria) this;
         }
 
-        public Criteria andAttributeIdEqualTo(String value) {
-            addCriterion("attribute_id =", value, "attributeId");
+        public Criteria andAttributeCodeEqualTo(String value) {
+            addCriterion("attribute_code =", value, "attributeCode");
             return (Criteria) this;
         }
 
-        public Criteria andAttributeIdNotEqualTo(String value) {
-            addCriterion("attribute_id <>", value, "attributeId");
+        public Criteria andAttributeCodeNotEqualTo(String value) {
+            addCriterion("attribute_code <>", value, "attributeCode");
             return (Criteria) this;
         }
 
-        public Criteria andAttributeIdGreaterThan(String value) {
-            addCriterion("attribute_id >", value, "attributeId");
+        public Criteria andAttributeCodeGreaterThan(String value) {
+            addCriterion("attribute_code >", value, "attributeCode");
             return (Criteria) this;
         }
 
-        public Criteria andAttributeIdGreaterThanOrEqualTo(String value) {
-            addCriterion("attribute_id >=", value, "attributeId");
+        public Criteria andAttributeCodeGreaterThanOrEqualTo(String value) {
+            addCriterion("attribute_code >=", value, "attributeCode");
             return (Criteria) this;
         }
 
-        public Criteria andAttributeIdLessThan(String value) {
-            addCriterion("attribute_id <", value, "attributeId");
+        public Criteria andAttributeCodeLessThan(String value) {
+            addCriterion("attribute_code <", value, "attributeCode");
             return (Criteria) this;
         }
 
-        public Criteria andAttributeIdLessThanOrEqualTo(String value) {
-            addCriterion("attribute_id <=", value, "attributeId");
+        public Criteria andAttributeCodeLessThanOrEqualTo(String value) {
+            addCriterion("attribute_code <=", value, "attributeCode");
             return (Criteria) this;
         }
 
-        public Criteria andAttributeIdLike(String value) {
-            addCriterion("attribute_id like", value, "attributeId");
+        public Criteria andAttributeCodeLike(String value) {
+            addCriterion("attribute_code like", value, "attributeCode");
             return (Criteria) this;
         }
 
-        public Criteria andAttributeIdNotLike(String value) {
-            addCriterion("attribute_id not like", value, "attributeId");
+        public Criteria andAttributeCodeNotLike(String value) {
+            addCriterion("attribute_code not like", value, "attributeCode");
             return (Criteria) this;
         }
 
-        public Criteria andAttributeIdIn(List<String> values) {
-            addCriterion("attribute_id in", values, "attributeId");
+        public Criteria andAttributeCodeIn(List<String> values) {
+            addCriterion("attribute_code in", values, "attributeCode");
             return (Criteria) this;
         }
 
-        public Criteria andAttributeIdNotIn(List<String> values) {
-            addCriterion("attribute_id not in", values, "attributeId");
+        public Criteria andAttributeCodeNotIn(List<String> values) {
+            addCriterion("attribute_code not in", values, "attributeCode");
             return (Criteria) this;
         }
 
-        public Criteria andAttributeIdBetween(String value1, String value2) {
-            addCriterion("attribute_id between", value1, value2, "attributeId");
+        public Criteria andAttributeCodeBetween(String value1, String value2) {
+            addCriterion("attribute_code between", value1, value2, "attributeCode");
             return (Criteria) this;
         }
 
-        public Criteria andAttributeIdNotBetween(String value1, String value2) {
-            addCriterion("attribute_id not between", value1, value2, "attributeId");
+        public Criteria andAttributeCodeNotBetween(String value1, String value2) {
+            addCriterion("attribute_code not between", value1, value2, "attributeCode");
             return (Criteria) this;
         }
 
