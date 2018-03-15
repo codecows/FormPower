@@ -29,7 +29,6 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @RestController
 @RequestMapping("system/form")
 public class FormController {
-    //todo 需要进一步修改，将业务逻辑添加到service中
     @Resource
     private FormService formService;
 
@@ -97,6 +96,16 @@ public class FormController {
             notes = "设计表单，插入表单信息表数据，并修改其基础表")
     @RequestMapping(path = "designForm", method = POST)
     public Result<Integer> designForm(@RequestBody List<FieldInfo> fieldInfo) {
+        /**
+         * //todo FieldInfo对象为复合对象由fieldmodel加一个attributemodel类型的列表组成
+         * fieldmodel为添加的一个控件，attributemodel是这个控件的属性。
+         * 每一个控件必须至少包含5个属性，这5个属性表一旦创建不可修改。
+         * attribute_code:fieldname,attribute_name:控件名称,attribute_value:"控件的名称比如：部门名称"
+         * attribute_code:fieldcode,attribute_name:控件编码,attribute_value:"列名比如：f0001"
+         * attribute_code:fieldtype,attribute_name:类型,attribute_value:"列类型比如：VARCHAR"
+         * attribute_code:length,attribute_name:长度,attribute_value:"列长度比如：255"
+         * attribute_code:smalllength,attribute_name:小数长度,attribute_value:"小数长度比如：0"
+         **/
 
 
         try {

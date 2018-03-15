@@ -14,7 +14,7 @@
         <collection property="sysAttributeInformations" ofType="app.dao.entities.SysAttributeInformation">
             <id column="aid" jdbcType="VARCHAR" property="id"/>
             <result column="object_id" jdbcType="VARCHAR" property="objectId"/>
-            <result column="attribute_id" jdbcType="VARCHAR" property="attributeCode"/>
+            <result column="attribute_code" jdbcType="VARCHAR" property="attributeCode"/>
             <result column="attribute_name" jdbcType="VARCHAR" property="attributeName"/>
             <result column="attribute_value" jdbcType="VARCHAR" property="attributeValue"/>
             <result column="attribute_type" jdbcType="VARCHAR" property="attributeType"/>

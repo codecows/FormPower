@@ -2,10 +2,7 @@ package app.system.form.service.impl;
 
 import app.comn.ResponseCode;
 import app.comn.ServiceException;
-import app.dao.entities.SysAttributeInformation;
-import app.dao.entities.SysFormDef;
-import app.dao.entities.SysFormDefExample;
-import app.dao.entities.SysFormInformation;
+import app.dao.entities.*;
 import app.dao.mappers.SysAttributeInformationMapper;
 import app.dao.mappers.SysFormInformationMapper;
 import app.system.auto.entities.SysBaseTabEntity;
@@ -23,6 +20,9 @@ import app.system.form.service.FormService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -73,6 +73,7 @@ public class FormServiceImpl implements FormService {
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT, timeout = 60, rollbackFor = ServiceException.class)
     public void createForm(Form form) throws ServiceException {
 
         /**
@@ -110,6 +111,7 @@ public class FormServiceImpl implements FormService {
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT, timeout = 60, rollbackFor = ServiceException.class)
     public void dropForm(String formId) throws ServiceException {
 
         /**
@@ -158,6 +160,7 @@ public class FormServiceImpl implements FormService {
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT, timeout = 60, rollbackFor = ServiceException.class)
     public void designForm(List<FieldInfo> fieldInfo) throws ServiceException {
 
         /**
@@ -182,12 +185,28 @@ public class FormServiceImpl implements FormService {
             for (AttributeModel a : f.getAttributeModels()) {
                 SysAttributeInformation sysAttributeInformation = new SysAttributeInformation();
                 BeanUtils.copyProperties(a, sysAttributeInformation);
-                try {
-                    sysAttributeInformationMapper.insertSelective(sysAttributeInformation);
-                } catch (DataAccessException e) {
-                    throw new ServiceException(ResponseCode.UnknowSqlException);
+                /**
+                 * 判断记录是否存在，如果存在则更新，不存在，则插入新信息。
+                 * **/
+                SysAttributeInformationExample sysAttributeInformationExample = new SysAttributeInformationExample();
+                sysAttributeInformationExample.createCriteria().andIdEqualTo(sysAttributeInformation.getId());
+                if (sysAttributeInformationMapper.countByExample(sysAttributeInformationExample) > 0) {
+                    try {
+                        sysAttributeInformationMapper.updateByPrimaryKeySelective(sysAttributeInformation);
+                    } catch (DataAccessException e) {
+                        throw new ServiceException(ResponseCode.UnknowSqlException);
+                    }
+                } else {
+                    try {
+                        sysAttributeInformationMapper.insertSelective(sysAttributeInformation);
+                    } catch (DataAccessException e) {
+                        throw new ServiceException(ResponseCode.UnknowSqlException);
+                    }
                 }
 
+                /**
+                 * 筛选出属性中，关于建表的属性值，set到columnmodel中
+                 * **/
                 switch (a.getAttributeCode()) {
                     case "fieldcode":
                         baseColumnModel.setTabColumn(a.getAttributeValue());
@@ -206,15 +225,37 @@ public class FormServiceImpl implements FormService {
                         break;
                 }
             }
-            try {
-                sysFormInformationMapper.insertSelective(sysFormInformation);
-            } catch (DataAccessException e) {
-                throw new ServiceException(ResponseCode.UnknowSqlException);
+            /**
+             * 如果列存在则更新，否者新增。
+             * **/
+            SysFormInformationExample sysFormInformationExample = new SysFormInformationExample();
+            sysFormInformationExample.createCriteria().andIdEqualTo(sysFormInformation.getId());
+            if (sysFormInformationMapper.countByExample(sysFormInformationExample) > 0) {
+                try {
+                    sysFormInformationMapper.updateByPrimaryKeySelective(sysFormInformation);
+                } catch (DataAccessException e) {
+                    throw new ServiceException(ResponseCode.UnknowSqlException);
+                }
+            } else {
+                try {
+                    sysFormInformationMapper.insertSelective(sysFormInformation);
+                } catch (DataAccessException e) {
+                    throw new ServiceException(ResponseCode.UnknowSqlException);
+                }
+                /**
+                 * 将列对象插入列表中
+                 * **/
+                baseColumnModels.add(baseColumnModel);
             }
-            baseColumnModels.add(baseColumnModel);
         }
 
-        baseOperationService.addColumn(tableName, baseColumnModels);
+        /**
+         * 列列表不为空使执行插入字段操作
+         * **/
+        if (!baseColumnModels.isEmpty()) {
+            baseOperationService.addColumn(tableName, baseColumnModels);
+        }
+
     }
 
     @Override
