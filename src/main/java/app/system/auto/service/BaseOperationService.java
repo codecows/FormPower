@@ -16,6 +16,8 @@ public interface BaseOperationService {
 
     void addColumn(String tablename, List<BaseColumnModel> baseColumnModels);
 
+    void dropColumn(String tablename, List<BaseColumnModel> baseColumnModels);
+
     void createFunction(BaseFunctionModel baseFunctionModel);
 
     Object execFunction(String funcname, String paralist);

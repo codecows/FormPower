@@ -131,6 +131,23 @@ public class FormServiceImpl implements FormService {
         }
 
         /**
+         * 删除forminformation和attributeinfomation表中的响应表单信息
+         * **/
+        SysFormInformationExample sysFormInformationExample = new SysFormInformationExample();
+        sysFormInformationExample.createCriteria().andFormIdEqualTo(formId);
+        List<SysFormInformation> sysFormInformations = sysFormInformationMapper.selectByExample(sysFormInformationExample);
+        if (!sysFormInformations.isEmpty()) {
+            for (SysFormInformation f : sysFormInformations) {
+                SysAttributeInformationExample sysAttributeInformationExample = new SysAttributeInformationExample();
+                sysAttributeInformationExample.createCriteria().andObjectIdEqualTo(f.getId());
+                sysAttributeInformationMapper.deleteByExample(sysAttributeInformationExample);
+            }
+            sysFormInformationMapper.deleteByExample(sysFormInformationExample);
+        }
+
+
+
+        /**
          * 删除数据表
          * */
         String tablename = "auto_t_" + formId;
@@ -169,9 +186,12 @@ public class FormServiceImpl implements FormService {
          *修改基础表，增加新字段
          *  */
         String tableName = null;
+        String formid = null;
 
         ArrayList<BaseColumnModel> baseColumnModels = new ArrayList<>();
+        ArrayList<String> fieldIdList = new ArrayList<>();
         for (FieldInfo f : fieldInfo) {
+            fieldIdList.add(f.getId());
             SysFormInformation sysFormInformation = new SysFormInformation();
             BeanUtils.copyProperties(f, sysFormInformation);
             /**
@@ -179,6 +199,7 @@ public class FormServiceImpl implements FormService {
              * **/
             if (tableName == null) {
                 tableName = "auto_t_" + f.getFormId();
+                formid = f.getFormId();
             }
             BaseColumnModel baseColumnModel = new BaseColumnModel();
 
@@ -247,6 +268,34 @@ public class FormServiceImpl implements FormService {
                  * **/
                 baseColumnModels.add(baseColumnModel);
             }
+        }
+        /**
+         * 查询forminformation表中字段，如果不再fieldidlist列表中，则说明已删除.
+         * 删除forminformation表和attributeinformation表中信息，同时删除基础表字段。
+         * **/
+
+        SysFormInformationExample fe = new SysFormInformationExample();
+        fe.createCriteria().andFormIdEqualTo(formid);
+        List<SysFormInformation> ff = sysFormInformationMapper.selectByExample(fe);
+        ArrayList<BaseColumnModel> dropcolumnlist = new ArrayList<>();
+        for (SysFormInformation f : ff) {
+            if (!fieldIdList.contains(f.getFormId())) {
+                BaseColumnModel dorpcolumn = new BaseColumnModel();
+                SysAttributeInformationExample dropattrexample = new SysAttributeInformationExample();
+                dropattrexample.createCriteria().andObjectIdEqualTo(f.getId());
+                List<SysAttributeInformation> ais = sysAttributeInformationMapper.selectByExample(dropattrexample);
+                for (SysAttributeInformation a : ais) {
+                    if (a.getAttributeCode() == "fieldcode") {
+                        dorpcolumn.setTabColumn(a.getAttributeValue());
+                    }
+                }
+                sysAttributeInformationMapper.deleteByExample(dropattrexample);
+                sysFormInformationMapper.deleteByPrimaryKey(f.getId());
+                dropcolumnlist.add(dorpcolumn);
+            }
+        }
+        if (!dropcolumnlist.isEmpty()) {
+            baseOperationService.dropColumn(tableName, dropcolumnlist);
         }
 
         /**

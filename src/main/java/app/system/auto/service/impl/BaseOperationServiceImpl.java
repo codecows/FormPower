@@ -37,6 +37,11 @@ public class BaseOperationServiceImpl implements BaseOperationService {
     }
 
     @Override
+    public void dropColumn(String tablename, List<BaseColumnModel> baseColumnModels) {
+        operationMapper.dropColumn(tablename, baseColumnModels);
+    }
+
+    @Override
     public void createFunction(BaseFunctionModel baseFunctionModel) {
         String fBody = baseFunctionModel.getFuncBody().replace("<br/>", "\n");
         baseFunctionModel.setFuncBody(fBody);
