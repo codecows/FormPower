@@ -107,6 +107,9 @@ var FormList = function () {
 
         });
 
+        $("#dataSourceBtn").click(function(){
+            $("#dataSourceModal").modal("show");
+        });
 
         // elHtml = addTabBtn + "&nbsp;" + removeTabContrl +
         //     "<div class='tabbable-line'>" +
