@@ -87,14 +87,36 @@ var FormList = function () {
             }
             $(this).parent().after(clone);
         });
-        designCanvas.on('click', "[type='copyTabBtn']", function (event) {
+        designCanvas.on('click', "[type='addTabBtn']", function (event) {
             event.stopPropagation();
-            var clone = $(this).parent().clone();
-            if (clone.hasClass("control-active")) {
-                clone.removeClass("control-active")
-            }
-            $(this).parent().after(clone);
-        })
+            // var clone = $(this).parent().clone();
+            // if (clone.hasClass("control-active")) {
+            //     clone.removeClass("control-active")
+            // }
+            // $(this).parent().after(clone);
+            var tabId = getTabId();
+            designCanvas.find(".nav-tabs").append(getTabTitleHtml(tabId, false));
+            designCanvas.find(".tab-content").append(getTabPaneHtml(tabId, false));
+
+        });
+        designCanvas.on('click', "[type='editColumnBtn']", function (event) {
+            event.stopPropagation();
+            $("#editColModal").modal("show");
+            var title = designCanvas.find(".nav-tabs li.active a").text();
+            $("#editColModal").find("h4").text("[" + title + "] - 编辑列");
+
+        });
+
+
+        // elHtml = addTabBtn + "&nbsp;" + removeTabContrl +
+        //     "<div class='tabbable-line'>" +
+        //     "    <ul class='nav nav-tabs '>" +
+        //     getTabTitleHtml(tabId, true) +
+        //     "    </ul>" +
+        //     "    <div class='tab-content'>" +
+        //     getTabPaneHtml(tabId, true) +
+        //     "    </div>" +
+        //     "</div> ";
 
 
         //fixme  选中变色
@@ -434,52 +456,28 @@ var FormList = function () {
                     elHtml = "分组标题";
                     break;
                 case "2004":
-                    var copyTabBtn = "<a type='copyTabBtn' href='javascript:;' class='btn btn-xs'><i class='fa fa-copy'></i> 复制子表 </a>";
-                    var delTabBtn = "<a type='delTabBtn' href='javascript:;' class='btn btn-xs'><i class='fa fa-times'></i> 删除子表 </a>";
-                    var delAllTabBtn = "<a type='delAllTabBtn' href='javascript:;' class='btn btn-xs'><i class='fa fa-times'></i> 删除所有子表 </a>";
-                    var tabHtml = "<table width='100%' class='table table-bordered'>" +
-                        "<thead><th>列标题</th><th>列标题</th><th>列标题</th></thead>" +
-                        "<tbody>" +
-                        "<tr>" +
-                        "<td>" +
-                        "<select class='form-control input-sm'>" +
-                        "<option>文本</option>" +
-                        "<option>数字</option>" +
-                        "<option>日期</option>" +
-                        "</select></div>" +
-                        "</td>" +
-                        "<td>" +
-                        "<select class='form-control input-sm'>" +
-                        "<option>文本</option>" +
-                        "<option>数字</option>" +
-                        "<option>日期</option>" +
-                        "</select></div>" +
-                        "</td>" +
-                        "<td>" +
-                        "<select class='form-control input-sm'>" +
-                        "<option>文本</option>" +
-                        "<option>数字</option>" +
-                        "<option>日期</option>" +
-                        "</select></div>" +
-                        "</td>" +
-                        "</tr>" +
-                        "<tr><td><input type='checkbox'>30</td><td><input type='checkbox'>30</td><td><input type='checkbox'>40</td></tr>" +
-                        "<tr><td><input type='checkbox'>合计</td><td><input type='checkbox'>合计</td><td><input type='checkbox'>合计</td></tr>" +
-                        "<tr><td><input type='checkbox'>排序</td><td><input type='checkbox'>排序</td><td><input type='checkbox'>排序</td></tr>" +
-                        "<tr><td><input type='checkbox'>显示</td><td><input type='checkbox'>显示</td><td><input type='checkbox'>显示</td></tr>" +
-                        "</tbody></table>";
-                    var tabId = "tab" + new Date().getTime();
-                    elHtml = "<div class='tabbable-line'>" +
+                    var addTabBtn = "<a type='addTabBtn' href='javascript:;' class='btn btn-xs'><i class='fa fa-copy'></i> 添加子表 </a>";
+                    var removeTabContrl = "<a type='removeTabContrl' href='javascript:;' class='btn btn-xs pull-right'><i class='fa fa-times'></i> </a>";
+
+
+                    // var optionsHtml = "<div class='checkbox-list'>" +
+                    //     "<label><div class='checker'><span><input type='checkbox'></span></div>合计</label>" +
+                    //     "<label><div class='checker'><span><input type='checkbox'></span></div>排序</label>" +
+                    //     "<label><div class='checker'><span><input type='checkbox'></span></div>显示</label>" +
+                    //     "<label><div class='checker'><span><input type='checkbox'></span></div>可用</label>" +
+                    //     "</div>";
+
+                    var tabId = getTabId();
+
+                    elHtml = addTabBtn + "&nbsp;" + removeTabContrl +
+                        "<div class='tabbable-line'>" +
                         "    <ul class='nav nav-tabs '>" +
-                        "        <li class='active'><a href='#" + tabId + "' data-toggle='tab' aria-expanded='true'> 子表标题 </a></li>" +
+                        getTabTitleHtml(tabId, true) +
                         "    </ul>" +
                         "    <div class='tab-content'>" +
-                        "        <div class='tab-pane active' id='" + tabId + "'>" +
-                        tabHtml +
-                        copyTabBtn + "&nbsp;" + delTabBtn + "&nbsp;" + delAllTabBtn
-                    "        </div>" +
-                    "    </div>" +
-                    "</div> ";
+                        getTabPaneHtml(tabId, true) +
+                        "    </div>" +
+                        "</div> ";
 
                     break;
 
@@ -504,6 +502,38 @@ var FormList = function () {
                 jqEl.attr("isReady", "true");
             }
         });
+    }
+
+    function getTabId() {
+        return "tab" + new Date().getTime();
+    }
+
+    function getTabPaneHtml(tabId, active) {
+        var delTabBtn = "<a type='delTabBtn' href='javascript:;' class='btn btn-xs'><i class='fa fa-recycle'></i> 删除子表 </a>";
+        var editColumnBtn = "<a type='editColumnBtn' href='javascript:;' class='btn btn-xs'><i class='fa fa-edit'></i> 编辑列 </a>";
+        var tabHtml = "<table width='100%' class='table table-bordered'>" +
+            "<thead>" +
+            "<th>ID</th>" +
+            "<th>列名</th>" +
+            "<th>类型</th>" +
+            "<th>标题</th>" +
+            "<th>数据源</th>" +
+            "<th>公式</th>" +
+            "<th>合计</th>" +
+            "<th>排序</th>" +
+            "<th>显示</th>" +
+            "<th>可用</th>" +
+            "<th>最大值</th>" +
+            "<th>最小值</th>" +
+            "<th>数据长度</th>" +
+            "</thead>" +
+            "<tbody>" +
+            "</tbody></table>";
+        return "<div class='tab-pane " + (active ? "active" : "") + "' id='" + tabId + "'>" + tabHtml + delTabBtn + "&nbsp;" + editColumnBtn + "</div>";
+    }
+
+    function getTabTitleHtml(tabId, active) {
+        return "<li " + (active ? "class = 'active'" : "") + "><a href='#" + tabId + "' data-toggle='tab' aria-expanded='true'> 子表 </a></li>";
     }
 
     function controlInit() {
@@ -675,14 +705,19 @@ var ControlProperty = function () {
         },
         //FIXME JACK 未编写事件
         showOptions: function (activeControl) {
-            var html = "<div class='form-group'>" +
-                "           <label>选项</label>" +
-                "           <div class='checkbox-list'>" +
-                "               <label><input type='checkbox'>只读 </label>" +
-                "               <label><input type='checkbox'>隐藏 </label>" +
-                "               <label><input type='checkbox'> Disabled </label>" +
-                "           </div>" +
-                "       </div>";
+            // var html = "<div class='form-group'>" +
+            //     "           <label>选项</label>" +
+            //     "           <div class='checkbox-list'>" +
+            //     "               <label><input type='checkbox'>只读 </label>" +
+            //     "               <label><input type='checkbox'>隐藏 </label>" +
+            //     "               <label><input type='checkbox'> Disabled </label>" +
+            //     "           </div>" +
+            //     "       </div>";
+            var html = "<input type='checkbox'><div class='checkbox-list'>" +
+                "<label><div class='checker'><span><input type='checkbox'></span></div>只读</label>" +
+                "<label><div class='checker'><span><input type='checkbox'></span></div>隐藏</label>" +
+                "<label><div class='checker'><span><input type='checkbox'></span></div>可用</label>" +
+                "</div>";
             $("#propertyCanvas").append(html);
         },
         //FIXME JACK 未编写事件
