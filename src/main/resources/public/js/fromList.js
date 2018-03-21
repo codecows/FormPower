@@ -1,6 +1,6 @@
 var FormList = function () {
+    //collapse状态初始化
     var collapseInit = function () {
-        //collapse状态初始化
         $(".collapse").collapse({toggle: false});
         $("#collapseTable").collapse('show');
 
@@ -107,7 +107,7 @@ var FormList = function () {
 
         });
 
-        $("#dataSourceBtn").click(function(){
+        $("#dataSourceBtn").click(function () {
             $("#dataSourceModal").modal("show");
         });
 
@@ -138,30 +138,31 @@ var FormList = function () {
     function showProperty(activeControl) {
         // var the = $(".control-active");
         $("#propertyCanvas").empty();
+        switch (activeControl.attr("controltype")) {
+            case "1001":
+                ControlProperty.showCode(activeControl);
+                ControlProperty.showDesc(activeControl);
+                ControlProperty.showWidth(activeControl);
+                ControlProperty.showPrompt(activeControl);
+                ControlProperty.showFormat(activeControl);
+                ControlProperty.showLength(activeControl);
+                ControlProperty.showDefault(activeControl);
+                ControlProperty.showRegEx(activeControl);
+                ControlProperty.showOptions(activeControl);
 
-        // switch(activeControl.type){
-        //     case "1001":
-        //         ControlProperty.showCode(activeControl);
-        //         ControlProperty.showWidth(activeControl);
-        //         ControlProperty.showFormat(activeControl);
-        //         ControlProperty.showOptions(activeControl);
-        //         ControlProperty.showDataSoucre(activeControl);
-        //         break;
-        //     case "1002":
-        //         ControlProperty.showCode(activeControl);
-        //         ControlProperty.showWidth(activeControl);
-        //         ControlProperty.showFormat(activeControl);
-        //         ControlProperty.showOptions(activeControl);
-        //         ControlProperty.showDataSoucre(activeControl);
-        //         break;
-        // }
-        ControlProperty.showCode(activeControl);
-        ControlProperty.showWidth(activeControl);
-        ControlProperty.showFormat(activeControl);
-        ControlProperty.showOptions(activeControl);
-        ControlProperty.showDataSoucre(activeControl);
+                break;
+            case "1002":
+                ControlProperty.showCode(activeControl);
+                ControlProperty.showWidth(activeControl);
+                ControlProperty.showFormat(activeControl);
+                ControlProperty.showOptions(activeControl);
+                ControlProperty.showDataSoucre(activeControl);
+                break;
+        }
+
     }
 
+    //表格初始化
     function datatableInit() {
         var table = $('#fromListTable');
 
@@ -356,6 +357,7 @@ var FormList = function () {
 
     var drake;
 
+    //拖动初始化
     function drakeInit() {
         var panels = [];
         panels.push(document.getElementById("designCanvas"));
@@ -415,7 +417,7 @@ var FormList = function () {
             var elHtml = "";
             switch (cType) {
                 case "1001":
-                    elHtml = formGroupBuilder("<label' class='control-label'>标签</label>" +
+                    elHtml = formGroupBuilder("<label class='control-label'>标签</label>" +
                         "<div><input type='text' class='form-control input-sm' placeholder='文本'></div>");
                     break;
                 case "1002":
@@ -507,13 +509,15 @@ var FormList = function () {
         });
     }
 
+    //生成子表Tab连接ID
     function getTabId() {
         return "tab" + new Date().getTime();
     }
 
+    //生成子表TAB选项卡
     function getTabPaneHtml(tabId, active) {
         var delTabBtn = "<a type='delTabBtn' href='javascript:;' class='btn btn-xs'><i class='fa fa-recycle'></i> 删除子表 </a>";
-        var editColumnBtn = "<a type='editColumnBtn' href='javascript:;' class='btn btn-xs'><i class='fa fa-edit'></i> 编辑列 </a>";
+        var editColumnBtn = "<a type='editColumnBtn' href='javascript:;' class='btn btn-xs'><i class='fa fa-edit'></i> 添加列 </a>";
         var tabHtml = "<table width='100%' class='table table-bordered'>" +
             "<thead>" +
             "<th>ID</th>" +
@@ -535,10 +539,12 @@ var FormList = function () {
         return "<div class='tab-pane " + (active ? "active" : "") + "' id='" + tabId + "'>" + tabHtml + delTabBtn + "&nbsp;" + editColumnBtn + "</div>";
     }
 
+    //生成子表TAB选项卡标题
     function getTabTitleHtml(tabId, active) {
         return "<li " + (active ? "class = 'active'" : "") + "><a href='#" + tabId + "' data-toggle='tab' aria-expanded='true'> 子表 </a></li>";
     }
 
+    //左侧控件栏初始化
     function controlInit() {
         HttpHelper.ajax(URL.system.widgetInfo.getWidgetInfo, URL.system.widgetInfo.getWidgetInfoType, null,
             function (respose) {
@@ -560,6 +566,7 @@ var FormList = function () {
             });
     }
 
+    //FormList返回值
     return {
         init: function () {
             collapseInit();
@@ -578,6 +585,8 @@ var FormList = function () {
 
     };
 }();
+
+//控件属性HTML模板
 var PropertyHtmlBuilder = function () {
     return {
         buildDivFormGroup: function (attr, name, input) {
@@ -589,6 +598,7 @@ var PropertyHtmlBuilder = function () {
         }
     }
 }();
+
 //属性类型
 var PropertyType = {
     code: "0",
@@ -610,11 +620,11 @@ var PropertyType = {
 //控件属性
 var ControlProperty = function () {
     return {
-        //FIXME JACK 未编写事件
+        //编码 FIXME JACK code需要赋值
         showCode: function (activeControl) {
             $("#propertyCanvas").append(PropertyHtmlBuilder.buildDivFormGroup(
                 PropertyType.code, "控件编码",
-                "<input class='form-control input-sm' type='text'/>"
+                "<input class='form-control input-sm' readonly type='text'/>"
             ));
         },
         //宽度
@@ -625,114 +635,148 @@ var ControlProperty = function () {
                 "type='number' max='12' min='2' placeholder='2-12'" +
                 "value='" + activeControl.attr('colMdValue') + "' />"
             ));
-            $("div[propertyType='" + PropertyType.width + "'] input").on('input propertychange', function () {
+            var _tempInput = $("div[propertyType='" + PropertyType.width + "'] input");
+            _tempInput.unbind();
+            _tempInput.on('input propertychange', function () {
                 activeControl.removeClass("col-md-" + activeControl.attr("colMdValue"));
                 activeControl.addClass("col-md-" + $(this).val());
                 activeControl.attr("colMdValue", $(this).val())
             });
         },
-        //FIXME JACK 未编写事件
+        //提示语
         showPrompt: function (activeControl) {
             $("#propertyCanvas").append(PropertyHtmlBuilder.buildDivFormGroup(
                 PropertyType.prompt, "提示语",
                 "<input class='form-control input-sm' type='text' placeholder='请输入提示语'/>"
             ));
+            var _tempInput = $("div[propertyType='" + PropertyType.prompt + "'] input");
+            _tempInput.unbind();
+            _tempInput.on('input propertychange', function () {
+                activeControl.attr("prompt", _tempInput.val())
+                activeControl.find("input").attr("placeholder", _tempInput.val());
+            });
         },
-        //FIXME JACK 未编写事件
+        //小数位数 FIXME JACK 未编写事件
         showDigits: function (activeControl) {
             $("#propertyCanvas").append(PropertyHtmlBuilder.buildDivFormGroup(
                 PropertyType.digits, "小数位数",
                 "<input class='form-control input-sm' type='number' max='0' min='6' value='0' placeholder='0-6'/>"
             ));
         },
-        //FIXME JACK 未编写事件
+        //格式 FIXME JACK 未编写事件
         showFormat: function (activeControl) {
             var html = "<div class='form-group'>\n" +
-                "        <label>数据源</label>\n" +
+                "        <label>格式</label>\n" +
                 "        <select class='form-control input-sm'>\n" +
-                "        <option>数据1</option>\n" +
-                "        <option>数据2</option>\n" +
-                "        <option>数据3</option>\n" +
+                "        <option>普通</option>\n" +
+                "        <option>邮箱</option>\n" +
+                "        <option>手机</option>\n" +
                 "        </select>\n" +
                 "        </div>";
             $("#propertyCanvas").append(html);
         },
-        //FIXME JACK 未编写事件
+        //正则 FIXME JACK 未编写事件
         showRegEx: function (activeControl) {
             $("#propertyCanvas").append(PropertyHtmlBuilder.buildDivFormGroup(
                 PropertyType.regEx, "正则",
                 "<input class='form-control input-sm' type='text' placeholder='请输入正则表达式'/>"
             ));
         },
-        //FIXME JACK 未编写事件
+        //长度
         showLength: function (activeControl) {
             $("#propertyCanvas").append(PropertyHtmlBuilder.buildDivFormGroup(
                 PropertyType.length, "数据长度",
                 "<input class='form-control input-sm' type='number' placeholder='请输入长度限制'/>"
             ));
+            var _tempInput = $("div[propertyType='" + PropertyType.length + "'] input");
+            _tempInput.unbind();
+            _tempInput.on('input propertychange', function () {
+                activeControl.attr("length", _tempInput.val());
+            });
         },
-        //FIXME JACK 未编写事件
+        //最大值 FIXME JACK 未编写事件
         showMax: function (activeControl) {
             $("#propertyCanvas").append(PropertyHtmlBuilder.buildDivFormGroup(
                 PropertyType.max, "最大值",
                 "<input class='form-control input-sm' type='number' placeholder='请输入最大值'/>"
             ));
         },
-        //FIXME JACK 未编写事件
+        //最小值 FIXME JACK 未编写事件
         showMin: function (activeControl) {
             $("#propertyCanvas").append(PropertyHtmlBuilder.buildDivFormGroup(
                 PropertyType.min, "最小值",
                 "<input class='form-control input-sm' type='number' placeholder='请输入最小值'/>"
             ));
+
         },
-        //FIXME JACK 未编写事件
+        //默认值
         showDefault: function (activeControl) {
             $("#propertyCanvas").append(PropertyHtmlBuilder.buildDivFormGroup(
                 PropertyType.default, "默认值",
                 "<input class='form-control input-sm' type='text' placeholder='请输入默认值'/>"
             ));
+            var _tempInput = $("div[propertyType='" + PropertyType.default + "'] input");
+            _tempInput.unbind();
+            _tempInput.on('input propertychange', function () {
+                activeControl.attr("defaultValue", _tempInput.val());
+            });
         },
-        //FIXME JACK 未编写事件
+        //公式 FIXME JACK 未编写事件
         showFormula: function (activeControl) {
             $("#propertyCanvas").append(PropertyHtmlBuilder.buildDivFormGroup(
                 PropertyType.formula, "公式",
                 "<input class='form-control input-sm' type='text' placeholder='请输入公式'/>"
             ));
         },
-        //FIXME JACK 未编写事件
+        //数据源 FIXME JACK 未编写事件
         showDataSoucre: function (activeControl) {
             $("#propertyCanvas").append(PropertyHtmlBuilder.buildDivFormGroup(
                 PropertyType.dataSource, "数据源",
                 "<input class='form-control input-sm' type='text' placeholder='请输入数据源'/>"
             ));
         },
-        //FIXME JACK 未编写事件
+        //选项 FIXME JACK 未编写事件
         showOptions: function (activeControl) {
-            // var html = "<div class='form-group'>" +
-            //     "           <label>选项</label>" +
-            //     "           <div class='checkbox-list'>" +
-            //     "               <label><input type='checkbox'>只读 </label>" +
-            //     "               <label><input type='checkbox'>隐藏 </label>" +
-            //     "               <label><input type='checkbox'> Disabled </label>" +
-            //     "           </div>" +
-            //     "       </div>";
-            var html = "<input type='checkbox'><div class='checkbox-list'>" +
-                "<label><div class='checker'><span><input type='checkbox'></span></div>只读</label>" +
-                "<label><div class='checker'><span><input type='checkbox'></span></div>隐藏</label>" +
-                "<label><div class='checker'><span><input type='checkbox'></span></div>可用</label>" +
+            var html = " <label>选项</label><div class='checkbox-list'>" +
+                "<label><div class='checker'><span><input name='option' type='checkbox'></span></div>只读</label>" +
+                "<label><div class='checker'><span><input name='option' type='checkbox'></span></div>隐藏</label>" +
+                "<label><div class='checker'><span><input name='option' type='checkbox'></span></div>可用</label>" +
+                "<label><div class='checker'><span><input name='option' type='checkbox'></span></div>合计</label>" +
                 "</div>";
             $("#propertyCanvas").append(html);
+            $("input[name='option']:checkbox").unbind();
+            $("input[name='option']:checkbox").change(function () {
+                var the = $(this);
+                var isChecked = the.is(':checked');
+                if (isChecked) {
+                    if (!the.parent().hasClass("checked")) {
+                        the.parent().addClass("checked");
+                    }
+                } else {
+                    the.parent().removeClass("checked");
+                }
+
+            });
+
         },
-        //FIXME JACK 未编写事件
+        //描述 FIXME JACK 未编写事件
         showDesc: function (activeControl) {
             $("#propertyCanvas").append(PropertyHtmlBuilder.buildDivFormGroup(
                 PropertyType.desc, "描述",
                 "<input class='form-control input-sm' type='text' placeholder='请输入提描述'/>"
             ));
+            var _tempInput = $("div[propertyType='" + PropertyType.desc + "'] input");
+            _tempInput.unbind();
+            _tempInput.on('input propertychange', function () {
+                activeControl.attr("desc", _tempInput.val())
+
+                activeControl.find("label.control-label").text(_tempInput.val());
+            });
         }
 
     };
 }();
+
 //FIXME Jack 控件与表单 编号生成
 var SeqNo = function () {
     return {
