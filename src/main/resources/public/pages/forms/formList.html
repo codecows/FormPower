@@ -93,27 +93,22 @@
         <div class="portlet box blue">
             <div class="portlet-title">
                 <ul class="nav nav-tabs" style="float: left">
-                    <li class="active">
-                        <a href="#portlet_control" data-toggle="tab">
-                            控件 </a>
-                    </li>
-                    <li>
-                        <a href="#portlet_form" data-toggle="tab">
-                            表单 </a>
-                    </li>
-                    <li>
-                        <a href="#portlet_sql" data-toggle="tab">
-                            存储过程 </a>
-                    </li>
+                    <li class="active"><a href="#portlet_form" data-toggle="tab"> 表单 </a></li>
+                    <li><a href="#portlet_control" data-toggle="tab"> 控件 </a></li>
+                    <li><a href="#portlet_script" data-toggle="tab"> 脚本 </a></li>
+                    <li><a href="#portlet_sql" data-toggle="tab"> 存储过程 </a></li>
                 </ul>
                 <div class="actions">
-                    <a href="#" id="btnSaveFormDesign" class="btn btn-default btn-sm">
-                        <i class="fa fa-pencil"></i> 保存 </a>
+                    <a href="#" id="btnSaveFormDesign" class="btn btn-default btn-sm"> <i class="fa fa-pencil"></i> 保存
+                    </a>
                 </div>
             </div>
             <div class="portlet-body">
                 <div class="tab-content">
-                    <!--存储工程页-->
+                    <!--脚本页-->
+                    <div class="tab-pane" id="portlet_script"><textarea id="scriptTextArea"
+                                                                        class="codeTextArea"></textarea></div>
+                    <!--存储过程页-->
                     <div class="tab-pane" id="portlet_sql">
                         <!-- FIXME 存储过程-->
                         <div class="well">
@@ -121,9 +116,8 @@
                             decare @formid varchar(20);
                             decare @formid varchar(20);
                         </div>
-                        <textarea id="sqlTextArea">begin
-                             DO BIZ
-                            end
+                        <textarea id="sqlTextArea" class="codeTextArea">begin
+
                         </textarea>
 
                         <div class="well">
@@ -131,13 +125,15 @@
                         </div>
                     </div>
                     <!--表单属性页-->
-                    <div class="tab-pane" id="portlet_form">
+                    <div class="tab-pane active" id="portlet_form">
                         <form role="form">
                             <div class="form-body">
-
                                 <div class="form-group">
                                     <label class="control-label">表单ID</label>
-                                    <input type="text" class="form-control" readonly placeholder="表单ID">
+                                    <div class="input-group">
+                                        <div id="formPrefix" class="input-group-addon">前缀</div>
+                                        <input type="text" class="form-control" placeholder="表单ID">
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">表单名</label>
@@ -162,7 +158,7 @@
 
                     </div>
                     <!--控件页-->
-                    <div class="tab-pane active" id="portlet_control">
+                    <div class="tab-pane" id="portlet_control">
                         <div class="row">
                             <div class="col-md-2">
                                 <!--控件面板-->

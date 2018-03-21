@@ -69,7 +69,7 @@ a:active {
     border: solid 1px blue;
 }
 
-#sqlTextArea {
+.codeTextArea {
     width: 100%;;
     height: 450px;
 }
@@ -81,7 +81,7 @@ a:active {
 }
 
 .table {
-margin-bottom: 0px;
+    margin-bottom: 0px;
 }
 
 .tabbable-line {

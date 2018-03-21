@@ -24,6 +24,8 @@ var FormList = function () {
         $(".collapse:not(#collapseAddForm)").collapse('hide');
         $("#collapseAddForm").collapse('show');
         toggleProtletFullscreen();
+        $("#formPrefix").text(DbConstant.FormPrefix);
+
     }
 
     //显示查询表格
@@ -206,8 +208,12 @@ var FormList = function () {
             var base64Data = Base64.encode(JSON.stringify(data));
             HttpHelper.ajax(URL.system.form.getFromList + base64Data, "GET", data,
                 function (respose) {
+                    //alert(JSON.stringify(respose.data));
                     callback(respose.data);
-                    appendOperationColumn();
+                    if (respose.data.size() > 0) {
+                        appendOperationColumn();
+                    }
+
                 });
         };
 
@@ -417,6 +423,8 @@ var FormList = function () {
             var elHtml = "";
             switch (cType) {
                 case "1001":
+                    // elHtml = formGroupBuilder("<label class='control-label'>标签</label>" +
+                    //     "<div><input type='text' class='form-control input-sm' placeholder='文本'></div>");
                     elHtml = formGroupBuilder("<label class='control-label'>标签</label>" +
                         "<div><input type='text' class='form-control input-sm' placeholder='文本'></div>");
                     break;
@@ -425,31 +433,29 @@ var FormList = function () {
                         "<div><textarea style='resize: none;' rows='3' class='form-control' placeholder='多行文本'></textarea>");
                     break;
                 case "1003":
-                    elHtml = formGroupBuilder("<label' class='control-label'>日期</label>" +
+                    elHtml = formGroupBuilder("<label class='control-label'>日期</label>" +
                         "<div><input type='date' class='form-control input-sm' placeholder='日期'></div>");
                     break;
                 case "1004":
-                    elHtml = formGroupBuilder("<label' class='control-label'>数字</label>" +
+                    elHtml = formGroupBuilder("<label class='control-label'>数字</label>" +
                         "<div><input type='number' class='form-control input-sm' placeholder='数字'></div>");
                     break;
                 case "1005":
-                    elHtml = formGroupBuilder("<label' class='control-label'>单选框</label>" +
-                        "<div class='radio-list'>" +
-                        "<input type='radio' name='optionsRadios' checked='ture'>选项1" +
-                        "<input type='radio' name='optionsRadios'>               选项2" +
-                        "<input type='radio' name='optionsRadios'>               选项3" +
+                    elHtml = formGroupBuilder("<label>单选按钮</label><div class='radio-list'>" +
+                        "<label class='radio-inline'><div class='radio'><span><input type='radio' name='optionsRadios' value='option1'></span></div>单选1</label>" +
+                        "<label class='radio-inline'><div class='radio'><span><input type='radio' name='optionsRadios' value='option2'></span></div>单选2</label>" +
+                        "<label class='radio-inline'><div class='radio'><span><input type='radio' name='optionsRadios' value='option3'></span></div>单选3</label>" +
                         "</div>");
                     break;
                 case "1006":
-                    elHtml = formGroupBuilder("<label' class='control-label'>多选框</label>" +
-                        "<div class='radio-list'>" +
-                        "<input type='checkbox' checked='ture'>选项1" +
-                        "<input type='checkbox'>               选项2" +
-                        "<input type='checkbox'>               选项3" +
+                    elHtml = formGroupBuilder("<label>选项</label><div class='checkbox-list'>" +
+                        "<label class='checkbox-inline'><div class='checker'><span><input type='checkbox'></span></div>选项1</label>" +
+                        "<label class='checkbox-inline'><div class='checker'><span><input type='checkbox'></span></div>选项2</label>" +
+                        "<label class='checkbox-inline'><div class='checker'><span><input type='checkbox'></span></div>选项3</label>" +
                         "</div>");
                     break;
                 case "1007":
-                    elHtml = formGroupBuilder("<label' class='control-label'>下拉列表</label>" +
+                    elHtml = formGroupBuilder("<label class='control-label'>下拉列表</label>" +
                         "<select class='form-control input-sm'>" +
                         "<option>选项1</option>" +
                         "<option>选项2</option>" +

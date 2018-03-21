@@ -75,8 +75,6 @@ var URL = function () {
         }
     };
 }();
-
-
 var User = function () {
     return {
         setUserInfo: function () {
@@ -110,7 +108,7 @@ var DataTablesSettings = function () {
                     "thousands": ",",
                     "emptyTable": "表格为空",
                     "info": "显示_START_~_END_行/共_TOTAL_行",
-                    "infoEmpty": "共找到 0 条数据",
+                    "infoEmpty": "未找到数据",
                     "infoFiltered": "(filtered from _MAX_ total entries)",
                     "infoPostFix": "",
                     "lengthMenu": "_MENU_行/页",
@@ -139,4 +137,9 @@ var DataTablesSettings = function () {
             };
         }
     }
+}();
+var DbConstant = function () {
+    return {
+        FormPrefix: "cus_t"
+    };
 }();
