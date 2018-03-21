@@ -60,15 +60,15 @@ var FormList = function () {
         // });
 
         $("#btnSaveFormDesign").click(function () {
-            alert("/operation/createFunction/" + $("#sqlTextArea").val().replace(/\n/g, "<br/>"));
+            // alert("/operation/createFunction/" + $("#sqlTextArea").val().replace(/\n/g, "<br/>"));
             //FIXME 未完
             //TODO 测试用
-            var base64Data = Base64.encode($("#sqlTextArea").val().replace(/\n/g, "<br/>"));
-            HttpHelper.ajax("/operation/createFunction/" + base64Data, "GET", null,
-                function (respose) {
-
-
-                });
+            // var base64Data = Base64.encode($("#sqlTextArea").val().replace(/\n/g, "<br/>"));
+            // HttpHelper.ajax("/operation/createFunction/" + base64Data, "GET", null,
+            //     function (respose) {
+            //
+            //
+            //     });
             toggleProtletFullscreen();
             showTableCollapse();
         });
@@ -735,13 +735,13 @@ var ControlProperty = function () {
                 "<input class='form-control input-sm' type='text' placeholder='请输入数据源'/>"
             ));
         },
-        //选项 FIXME JACK 未编写事件
+        //选项
         showOptions: function (activeControl) {
             var html = " <label>选项</label><div class='checkbox-list'>" +
-                "<label><div class='checker'><span><input name='option' type='checkbox'></span></div>只读</label>" +
-                "<label><div class='checker'><span><input name='option' type='checkbox'></span></div>隐藏</label>" +
-                "<label><div class='checker'><span><input name='option' type='checkbox'></span></div>可用</label>" +
-                "<label><div class='checker'><span><input name='option' type='checkbox'></span></div>合计</label>" +
+                "<label><div class='checker'><span><input id='readonlyChecker' name='option' type='checkbox'></span></div>只读</label>" +
+                "<label><div class='checker'><span><input id='hiddenChecker' name='option' type='checkbox'></span></div>隐藏</label>" +
+                "<label><div class='checker'><span><input id='enableChecker' name='option' type='checkbox'></span></div>可用</label>" +
+                "<label><div class='checker'><span><input id='sumChecker' name='option' type='checkbox'></span></div>合计</label>" +
                 "</div>";
             $("#propertyCanvas").append(html);
             $("input[name='option']:checkbox").unbind();
@@ -755,11 +755,14 @@ var ControlProperty = function () {
                 } else {
                     the.parent().removeClass("checked");
                 }
-
+                activeControl.attr("isReadonly", $("#readonlyChecker").is(':checked'));
+                activeControl.attr("isHidden", $("#hiddenChecker").is(':checked'));
+                activeControl.attr("isEnabled", $("#enableChecker").is(':checked'));
+                activeControl.attr("isSum", $("#sumChecker").is(':checked'));
             });
 
         },
-        //描述 FIXME JACK 未编写事件
+        //描述
         showDesc: function (activeControl) {
             $("#propertyCanvas").append(PropertyHtmlBuilder.buildDivFormGroup(
                 PropertyType.desc, "描述",

@@ -27,7 +27,9 @@
 
 </head>
 <body>
+
 <div class="table-toolbar">
+    <!--工具条-->
     <div class="row">
         <div class="col-md-10">
 
@@ -81,10 +83,12 @@
             </div>
         </div>
     </div>
+    <!--查询面板-->
     <div id="collapseSelect" class="collapse">
         <H1>查询条件</H1>
 
     </div>
+    <!--添加面板-->
     <div id="collapseAddForm" class="collapse">
         <div class="portlet box blue">
             <div class="portlet-title">
@@ -109,6 +113,7 @@
             </div>
             <div class="portlet-body">
                 <div class="tab-content">
+                    <!--存储工程页-->
                     <div class="tab-pane" id="portlet_sql">
                         <!-- FIXME 存储过程-->
                         <div class="well">
@@ -125,6 +130,7 @@
                             return 0
                         </div>
                     </div>
+                    <!--表单属性页-->
                     <div class="tab-pane" id="portlet_form">
                         <form role="form">
                             <div class="form-body">
@@ -155,106 +161,24 @@
 
 
                     </div>
+                    <!--控件页-->
                     <div class="tab-pane active" id="portlet_control">
                         <div class="row">
                             <div class="col-md-2">
-                                <ul class="controls">
-                                    <!--<li>-->
-                                    <!--<div><h4>基础控件</h4></div>-->
-                                    <!--<ul class="control">-->
-                                    <!--<li controltype="1">-->
-                                    <!--<a href="javascript:;">-->
-                                    <!--<i class="fa fa-font"></i>-->
-                                    <!--文本框</a>-->
-                                    <!--</li>-->
-                                    <!--<li>-->
-                                    <!--<a href="javascript:;">-->
-                                    <!--<i class="icon-bulb"></i>-->
-                                    <!--初始化</a>-->
-                                    <!--</li>-->
-                                    <!--<li>-->
-                                    <!--<a id="userMenu" href="javascript:;">-->
-                                    <!--<i class="icon-graph"></i>-->
-                                    <!--用户</a>-->
-                                    <!--</li>-->
-                                    <!--</ul>-->
-                                    <!--</li>-->
-                                    <!---->
-                                </ul>
-
+                                <!--控件面板-->
+                                <ul class="controls"></ul>
                             </div>
-                            <div id="designCanvas" class="col-md-8 formDesigner form-body">
-
-                            </div>
-
-                            <div id='propertyCanvas' class='col-md-2 form-body'>
-
-                                <div class="form-group">
-                                    <label>Checkbox List</label>
-                                    <div class="input-group">
-                                        <div class="icheck-list">
-                                            <label class="">
-                                                <div class="icheckbox_minimal-grey checked" style="position: relative;">
-                                                    <input type="checkbox" class="icheck"
-                                                           style="position: absolute; opacity: 0;">
-                                                    <ins class="iCheck-helper"
-                                                         style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
-                                                </div>
-                                                Checkbox 1 </label>
-                                            <label class="">
-                                                <div class="icheckbox_minimal-grey" style="position: relative;"><input
-                                                        type="checkbox" checked="" class="icheck"
-                                                        style="position: absolute; opacity: 0;">
-                                                    <ins class="iCheck-helper"
-                                                         style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
-                                                </div>
-                                                Checkbox 2 </label>
-                                            <label>
-                                                <div class="icheckbox_minimal-grey" style="position: relative;"><input
-                                                        type="checkbox" class="icheck"
-                                                        style="position: absolute; opacity: 0;">
-                                                    <ins class="iCheck-helper"
-                                                         style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
-                                                </div>
-                                                Checkbox 3 </label>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class='form-group'>
-                                    <label>数据源</label>
-                                    <select class='form-control input-sm'>
-                                        <option>数据1</option>
-                                        <option>数据2</option>
-                                        <option>数据3</option>
-                                    </select>
-                                </div>
-
-                                <div class='form-group'>
-                                    <label>选项</label>
-                                    <div class='checkbox-list'>
-                                        <label>
-                                            <input type='checkbox'>只读 </label>
-                                        <label>
-                                            <input type='checkbox'>隐藏 </label>
-                                        <label>
-                                            <input type='checkbox' disabled> Disabled </label>
-                                    </div>
-                                </div>
-
-
-                                <div class='form-group'>
-                                    <label class='control-label'>描述</label>
-                                    <div><input type='text' class='form-control input-sm'></div>
-                                </div>
-                            </div>
-
+                            <!--设计面板-->
+                            <div id="designCanvas" class="col-md-8 formDesigner form-body"></div>
+                            <!--属性面板-->
+                            <div id='propertyCanvas' class='col-md-2 form-body'></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <!--table面板-->
     <div id="collapseTable" class="collapse">
         <table class="table table-striped table-bordered table-hover" id="fromListTable">
             <thead>
@@ -282,7 +206,7 @@
         </table>
     </div>
 </div>
-
+<!--编辑子表列modal-->
 <div id="editColModal" class="modal fade bs-modal-lg" style="z-index:10080" tabindex="-1" data-backdrop="static"
      data-keyboard="false">
     <div class="modal-dialog modal-lg">
@@ -384,6 +308,7 @@
         </div>
     </div>
 </div>
+<!--数据源modal-->
 <div id="dataSourceModal" class="modal fade" style="z-index:10081" tabindex="-1" data-backdrop="static">
     <div class="modal-dialog">
         <div class="modal-content">
