@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>绘图Demo</title>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2">
+            <form>
+                <div class="form-group">
+                    <label for="HInput">台阶高度</label>
+                    <input type="number" class="form-control" id="HInput" placeholder="台阶高度">
+                </div>
+                <div class="form-group">
+                    <label for="DInput">炮孔直径</label>
+                    <input type="number" class="form-control" id="DInput" placeholder="炮孔直径">
+                </div>
+                <div class="form-group">
+                    <label for="lInput">炮孔长度</label>
+                    <input type="number" class="form-control" id="lInput" placeholder="炮孔长度">
+                </div>
+                <div class="form-group">
+                    <label for="tampInput">填塞长度</label>
+                    <input type="number" class="form-control" id="tampInput" placeholder="填塞长度">
+                </div>
+                <div class="form-group">
+                    <label for="lsInput">装药长度</label>
+                    <input type="number" class="form-control" id="lsInput" placeholder="装药长度">
+                </div>
+                <div class="form-group">
+                    <label for="hhInput">超深</label>
+                    <input type="number" class="form-control" id="hhInput" placeholder="超深">
+                </div>
+                <div class="form-group">
+                    <label for="bInput">倾斜角度</label>
+                    <input type="number" class="form-control" id="bInput" placeholder="倾斜角度">
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block active">保存</button>
+            </form>
+
+        </div>
+        <div class="col-md-6">
+            <svg id="holeParamShow" width="300" height="600">
+                <defs>
+                    <!--填塞纹理-->
+                    <pattern id="tile" width="0.2" height="0.2" patternUnits="objectBoundingBox">
+                        <line x1="10" y1="0" x2="0" y2="20" stroke="black" stroke-width="0.5"/>
+                    </pattern>
+                    <!--箭头线帽-->
+                    <marker id="arrowEnd" markerWidth="10" markerHeight="10" refx="0" refy="3" orient="auto"
+                            markerUnits="strokeWidth">
+                        <path d="M0,0 L0,6 L10,3 z" fill="black"/>
+
+                        <line x1="10" y1="0" x2="10" y2="10" stroke="black" stroke-width="2"/>
+                    </marker>
+                    <!--箭头线帽-->
+                    <marker id="arrowStart" markerWidth="10" markerHeight="10" refx="0" refy="3" orient="auto"
+                            markerUnits="strokeWidth">
+                        <path d="M10,0 L10,6 L0,3 z" fill="black"/>
+                        <line x1="0" y1="0" x2="0" y2="20" stroke="black" stroke-width="2"/>
+                    </marker>
+                </defs>
+                <!--地平线-->
+                <line x1="0" y1="50" x2="300" y2="50" stroke="black" stroke-width="2"/>
+                <!--填塞-->
+                <rect len="30" id="tampRect" x="125" y="50" width="50" height="100" fill="url(#tile)" stroke="black"
+                      fill="transparent"
+                      stroke-width="2"/>
+                <!--装药-->
+                <rect len="30" id="lsRect" x="125" y="150" width="50" height="300" fill="transparent" stroke="black"
+                      fill="transparent" stroke-width="2"/>
+                <!--炮孔直径标尺-->
+                <line x1="125" y1="40" x2="165" y2="40" stroke="#000" stroke-dasharray="5,2" stroke-width="1"
+                      marker-start="url(#arrowStart)"
+                      marker-end="url(#arrowEnd)"/>
+                <!--填塞标尺-->
+                <line x1="100" y1="150" x2="100" y2="60" stroke="#000" stroke-dasharray="5,2" stroke-width="1"
+                      marker-start="url(#arrowStart)"
+                      marker-end="url(#arrowEnd)"/>
+                <!--装药标尺-->
+                <line x1="100" y1="450" x2="100" y2="160" stroke="#000" stroke-dasharray="5,2" stroke-width="1"
+                      marker-start="url(#arrowStart)"
+                      marker-end="url(#arrowEnd)"/>
+                <!--台阶高度标尺-->
+                <line x1="200" y1="50" x2="200" y2="340" stroke="#000" stroke-dasharray="5,2" stroke-width="1"
+                      marker-start="url(#arrowStart)"
+                      marker-end="url(#arrowEnd)"/>
+                <!--超深标尺-->
+                <line x1="250" y1="350" x2="250" y2="440" stroke="#000" stroke-dasharray="5,2" stroke-width="1"
+                      marker-start="url(#arrowStart)"
+                      marker-end="url(#arrowEnd)"/>
+                <!--炮孔直径-->
+                <text text-anchor="middle" x="150" y="30">125mm</text>
+                <!--填塞长度-->
+                <text text-anchor="end" x="100" y="110">3.00m &nbsp;</text>
+                <!--装药长度-->
+                <text text-anchor="end" x="100" y="300">17.00m &nbsp;</text>
+                <!--台阶高度-->
+                <text text-anchor="start" x="200" y="300"> &nbsp;15.00m</text>
+                <!--超深-->
+                <text text-anchor="start" x="250" y="400">&nbsp;5.00m</text>
+                <!--地平线-->
+                <line x1="0" y1="350" x2="300" y2="350" stroke="black" stroke-dasharray="2,2" stroke-width="1"/>
+                <!--孔底线-->
+                <line x1="0" y1="450" x2="300" y2="450" stroke="black" stroke-dasharray="2,2" stroke-width="1"/>
+                <!--角度标尺-->
+                <path d="M175 420 A 50 50 0 0 1 200 450" stroke="black" fill="transparent" stroke-dasharray="5,2"
+                      stroke-width="2"/>
+                <!--角度-->
+                <text text-anchor="start" x="190" y="430">90°</text>
+            </svg>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<script type=" text/javascript">
+    //加载
+    $(function () {
+
+
+    });
+
+    $("button").click(function () {
+        alert(22222222);
+        //$("#tamp").triggerHandler("mouseout");
+
+    });
+
+    $('#tampInput').bind('input propertychange', function () {
+        $("#tampRect").attr("stroke", "blue");
+        $("#tampRect").attr("height", $("#tampInput").val());
+    });
+
+    $("rect").on("click mouseover mouseout", function () {
+        if (event.type === "mouseover") {
+            $(this).attr("stroke", "blue");
+        } else if (event.type === "mouseout") {
+            $(this).attr("stroke", "black");
+        } else if (event.type === "click") {
+            $("#tampInput").val($(this).attr("len"));
+        }
+    })
+
+</script>

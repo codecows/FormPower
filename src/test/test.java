@@ -9,8 +9,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.util.FileCopyUtils;
 
 import javax.annotation.Resource;
+import java.io.*;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
@@ -39,5 +41,21 @@ public class test {
     public void test2() {
         UserInformation userInformation = userInformationMapper.selectByPrimaryKey("001");
         assert userInformation != null : "userInformation不能为空";
+    }
+
+    @Test
+    public void test3() {
+
+        try {
+            InputStream in = new FileInputStream("");
+            OutputStream out = new FileOutputStream("");
+            FileCopyUtils.copy(in, out);
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }

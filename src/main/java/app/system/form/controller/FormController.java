@@ -3,10 +3,7 @@ package app.system.form.controller;
 import app.base.Result;
 import app.comn.ResponseCode;
 import app.comn.ServiceException;
-import app.system.form.model.DataTableRequest;
-import app.system.form.model.DataTableResponse;
-import app.system.form.model.FieldInfo;
-import app.system.form.model.Form;
+import app.system.form.model.*;
 import app.system.form.service.FormService;
 import app.utils.JsonUtil;
 import io.swagger.annotations.Api;
@@ -31,7 +28,6 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 public class FormController {
     @Resource
     private FormService formService;
-
 
 
     @ApiOperation(value = "获取表单定义列表",
@@ -122,5 +118,11 @@ public class FormController {
     @RequestMapping(path = "fatchFormDesignInformation/{formId}", method = GET)
     public Result<List<FieldInfo>> fatchFormDesignInformation(@PathVariable String formId) {
         return new Result<>(ResponseCode.Success, formService.fatchFormDesignInformation(formId));
+    }
+
+    @ApiOperation(value = "新建表单", notes = "新建表单")
+    @RequestMapping(path = "addForm", method = POST)
+    public Result<Integer> addForm(@RequestBody String base64FromInfoStr) {
+        return new Result<>(ResponseCode.Success);
     }
 }

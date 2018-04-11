@@ -2,6 +2,8 @@ package app.system.form.model;
 
 import app.base.model.BaseBizModel;
 
+import java.util.List;
+
 /**
  * FIXME 老六 新建表单实体
  * 新建一个表单后 form 表里新增一条记录
@@ -16,7 +18,7 @@ import app.base.model.BaseBizModel;
  * <p>
  * 无返回值
  */
-public class FormAddInfo extends BaseBizModel {
+public class FormInfo extends BaseBizModel {
     //表名
     private String code;
     private String name;
@@ -24,17 +26,18 @@ public class FormAddInfo extends BaseBizModel {
     //js内容
     private String script;
     //函数名
-    private String funcName;
-    //函数
-    private String funcBody;
+    private String sql;
+
     private String status;
 
-    public String getId() {
+    List<FormFiled> fileds;
+
+    public String getCode() {
         return code;
     }
 
-    public void setId(String id) {
-        this.code = id;
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getName() {
@@ -52,4 +55,38 @@ public class FormAddInfo extends BaseBizModel {
     public void setRemark(String remark) {
         this.remark = remark;
     }
+
+    public String getScript() {
+        return script;
+    }
+
+    public void setScript(String script) {
+        this.script = script;
+    }
+
+    public String getSql() {
+        return sql;
+    }
+
+    public void setSql(String sql) {
+        this.sql = sql;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public List<FormFiled> getFileds() {
+        return fileds;
+    }
+
+    public void setFileds(List<FormFiled> fileds) {
+        this.fileds = fileds;
+    }
 }
+
+

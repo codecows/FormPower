@@ -1,4 +1,4 @@
-package app.druid;
+package app.configs;
 
 import com.alibaba.druid.support.http.StatViewServlet;
 import com.alibaba.druid.support.http.WebStatFilter;

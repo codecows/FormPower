@@ -69,7 +69,9 @@ var URL = function () {
             },
             form: {
                 getFromList: _baseUrl + "system/form/getFormList/",
-                getFromListType: HttpMethod.GET
+                getFromListType: HttpMethod.GET,
+                addForm: _baseUrl + "system/form/addForm",
+                addFormType: HttpMethod.POST,
             }
 
         }
